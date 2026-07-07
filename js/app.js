@@ -236,6 +236,7 @@ function renderGame(session) {
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
+  const toolbarEl = screen.querySelector('.game-toolbar');
   const cellEls = [];
 
   for (let r = 0; r < level.gridSize; r++) {
@@ -299,9 +300,12 @@ function renderGame(session) {
   }
 
   function checkLevelComplete() {
-    if (session.placements.every((p) => p.found)) {
-      onLevelFullyFound(session);
-    }
+    if (!session.placements.every((p) => p.found)) return;
+    recordLevelProgress(session);
+    toolbarEl.innerHTML = '';
+    const continueBtn = el('<button type="button" class="btn btn-primary" data-level-continue>కొనసాగించు</button>');
+    continueBtn.addEventListener('click', () => showLevelComplete(level));
+    toolbarEl.appendChild(continueBtn);
   }
 
   attachTracer(gridEl, {
@@ -338,18 +342,16 @@ function renderGame(session) {
   setScreen(screen);
 }
 
-async function onLevelFullyFound(session) {
+function recordLevelProgress(session) {
   const { level } = session;
-  const entriesFound = session.placements.length;
   const progress = {
     category: 'mixed',
     sub_category: null,
     level: level.levelNumber,
-    entries_found: entriesFound,
+    entries_found: session.placements.length,
   };
   recordPuzzleProgressLocal(progress);
   if (state.playerId) syncPuzzleProgress(state.playerId, progress);
-  setTimeout(() => showLevelComplete(level), 500);
 }
 
 function showLevelComplete(level) {
