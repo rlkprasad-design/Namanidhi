@@ -37,7 +37,10 @@ still tracked on-device via `localStorage`.
 - `data/*.json` - content packs, one file per category/stotram. Add more
   entries or a whole new stotram by adding a JSON file in this shape and
   listing it in `DATASET_FILES` in `js/data.js` - no other code changes
-  needed.
+  needed. `data/TEMPLATE.md` shows the exact entry shape per category.
+- `scripts/validate-content.js` - structural validator for `data/*.json`,
+  run automatically on PRs via `.github/workflows/validate-content.yml`.
+  See "Adding new content" below.
 
 ## Setting up Supabase (shared scoreboard)
 
@@ -79,6 +82,30 @@ Four categories ship in `data/`:
 Each level inside a pack declares `gridSize`, `fillerMode`
 (`"random"` or `"curated"`), whether it's a `breather` level, and
 `japamCount` (how many Sri Rama traces the post-level interlude asks for).
+
+### Adding new content
+
+New entries (names, devotees, kshetrams, sacred items) go into the
+relevant `data/*.json` file, on a branch, opened as a pull request - never
+committed straight to `main`. See `data/TEMPLATE.md` for the exact shape
+of an entry in each category before writing new ones by hand.
+
+The automated check (`.github/workflows/validate-content.yml`, running
+`scripts/validate-content.js` on any PR touching `data/**`) catches
+structural problems - malformed JSON, missing fields, a word too short
+to be real content, a word that can't fit the level's grid, duplicate
+words - but it **cannot verify religious/factual accuracy**. Before
+merging, a human who knows the source material (Sahasranamam, the
+relevant stotram, or the item's actual devotional use) should read
+through the new entries' Telugu text and meanings. This app's users are
+trusting the content to be correct, so this review step isn't optional,
+even for small batches.
+
+To run the check yourself before opening a PR:
+
+```
+node scripts/validate-content.js
+```
 
 ## What's not built yet
 
