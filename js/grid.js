@@ -22,11 +22,13 @@ function randomPool() {
   return BASE_POOL[Math.floor(Math.random() * BASE_POOL.length)];
 }
 
-// Picks `count` entries at random from the combined content pool, mixing
-// across categories, restricted to words that can fit in gridSize.
-export function sampleEntries(pool, gridSize, count) {
-  const eligible = pool.filter((e) => graphemes(e.word).length <= gridSize);
-  return shuffle(eligible).slice(0, count);
+// Picks `count` entries at random from the pool entries matching this
+// level's difficulty tier, restricted to words that can fit in gridSize.
+export function sampleEntries(pool, level) {
+  const eligible = pool.filter(
+    (e) => e.difficulty === level.difficulty && graphemes(e.word).length <= level.gridSize
+  );
+  return shuffle(eligible).slice(0, level.entryCount);
 }
 
 // Try every (direction, start) combo for a word, shuffled, and return the

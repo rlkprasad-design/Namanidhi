@@ -21,6 +21,8 @@ const JAPAM_NAMES = [
 ];
 const INTERLUDE_WORD = 'శ్రీరామ';
 
+const DIFFICULTY_LABELS = { easy: 'సులభం', medium: 'మధ్యస్థం', difficult: 'కష్టం' };
+
 const state = {
   playerName: null,
   playerId: null,
@@ -160,7 +162,7 @@ async function showLevelSelect() {
   for (const level of levels) {
     const card = el(`
       <button type="button" class="card">
-        <div class="card-title">స్థాయి ${level.levelNumber}</div>
+        <div class="card-title">స్థాయి ${level.levelNumber} · ${DIFFICULTY_LABELS[level.difficulty] || level.difficulty}</div>
         <div class="card-sub">${level.entryCount} నామాలు · ${level.gridSize}×${level.gridSize} గ్రిడ్</div>
         ${level.breather ? '<span class="badge">సులభ విరామం</span>' : ''}
       </button>
@@ -182,7 +184,7 @@ async function startLevel(level) {
 }
 
 function buildSession(level, pool) {
-  const entries = sampleEntries(pool, level.gridSize, level.entryCount);
+  const entries = sampleEntries(pool, level);
   const { grid, placements } = generateGrid({
     size: level.gridSize,
     entries,
@@ -324,7 +326,7 @@ function renderGame(session) {
 function recordLevelProgress(session) {
   const { level } = session;
   const progress = {
-    category: 'mixed',
+    category: level.difficulty,
     sub_category: null,
     level: level.levelNumber,
     entries_found: session.placements.length,

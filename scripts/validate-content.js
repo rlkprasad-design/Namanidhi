@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-// Validates every data/*.json content pack plus data/levels.json against
-// the schema the app actually reads (js/data.js + js/grid.js). Run before
-// any content PR merges - see README.md "Adding new content". No
-// dependencies.
+// Validates data/questions.json (the single content pool) and
+// data/levels.json (the level ladder) against the schema the app actually
+// reads (js/data.js + js/grid.js). Run before any content PR merges - see
+// README.md "Adding new content". No dependencies.
 //
 // Usage: node scripts/validate-content.js [dir]   (defaults to "data")
 
@@ -10,10 +10,12 @@ const fs = require('fs');
 const path = require('path');
 
 const MEANING_WARN_LENGTH = 120;
+const DIFFICULTIES = ['easy', 'medium', 'difficult'];
 const segmenter = new Intl.Segmenter('te', { granularity: 'grapheme' });
 const graphemeLength = (str) => Array.from(segmenter.segment(str)).length;
 
 const targetDir = process.argv[2] || 'data';
+const QUESTIONS_FILE = 'questions.json';
 const LEVELS_FILE = 'levels.json';
 
 function isNonEmptyString(v) {
@@ -23,19 +25,19 @@ function isPositiveInt(v) {
   return typeof v === 'number' && Number.isInteger(v) && v > 0;
 }
 
-// Validates one already-parsed content-pack file. Returns entries (for the
-// cross-file duplicate check) plus { errors, warnings }.
-function validateContentFile(data) {
+// Validates the questions file. Returns entries (for cross-checks with
+// levels.json) plus { errors, warnings }.
+function validateQuestions(data) {
   const errors = [];
   const warnings = [];
   const entries = [];
 
-  if (!isNonEmptyString(data.categoryGroup)) errors.push('categoryGroup must be a non-empty string');
-  if (!isNonEmptyString(data.categoryGroupLabel)) errors.push('categoryGroupLabel must be a non-empty string');
   if (!Array.isArray(data.entries) || data.entries.length === 0) {
     errors.push('entries must be a non-empty array');
     return { entries, errors, warnings };
   }
+
+  const wordLocations = new Map(); // word -> count seen
 
   data.entries.forEach((entry, ei) => {
     const where = `entries[${ei}]`;
@@ -47,7 +49,8 @@ function validateContentFile(data) {
       if (len < 2) {
         errors.push(`${where}: word "${entry.word}" is only ${len} grapheme cluster(s) - looks like junk/empty content`);
       }
-      entries.push({ word: entry.word, len });
+      wordLocations.set(entry.word, (wordLocations.get(entry.word) || 0) + 1);
+      entries.push({ word: entry.word, len, difficulty: entry.difficulty });
     }
 
     if (!isNonEmptyString(entry.meaning)) {
@@ -56,15 +59,23 @@ function validateContentFile(data) {
       warnings.push(`${where}: meaning for "${entry.word}" is ${entry.meaning.length} chars - probably too long for the hints panel (soft limit ${MEANING_WARN_LENGTH})`);
     }
 
+    if (!DIFFICULTIES.includes(entry.difficulty)) {
+      errors.push(`${where}: difficulty must be one of ${DIFFICULTIES.join('/')}, got ${JSON.stringify(entry.difficulty)}`);
+    }
+
     if ('era' in entry && entry.era !== null && typeof entry.era !== 'string') {
       errors.push(`${where}: era must be a string when present`);
     }
   });
 
+  for (const [word, count] of wordLocations) {
+    if (count > 1) errors.push(`Duplicate word "${word}" appears ${count} times`);
+  }
+
   return { entries, errors, warnings };
 }
 
-function validateLevelsFile(levels) {
+function validateLevels(levels) {
   const errors = [];
   if (!Array.isArray(levels) || levels.length === 0) {
     return ['levels.json must be a non-empty array'];
@@ -80,6 +91,9 @@ function validateLevelsFile(levels) {
     } else {
       seen.add(level.levelNumber);
     }
+    if (!DIFFICULTIES.includes(level.difficulty)) {
+      errors.push(`${where}: difficulty must be one of ${DIFFICULTIES.join('/')}, got ${JSON.stringify(level.difficulty)}`);
+    }
     if (!isPositiveInt(level.gridSize)) errors.push(`${where}: gridSize must be a positive integer`);
     if (level.fillerMode !== 'random' && level.fillerMode !== 'curated') {
       errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(level.fillerMode)}`);
@@ -92,8 +106,7 @@ function validateLevelsFile(levels) {
 }
 
 function parseJsonFile(full) {
-  const raw = fs.readFileSync(full, 'utf8');
-  return JSON.parse(raw);
+  return JSON.parse(fs.readFileSync(full, 'utf8'));
 }
 
 function main() {
@@ -113,8 +126,7 @@ function main() {
 
   let anyFailed = false;
   let totalWarnings = 0;
-  const wordLocations = new Map(); // word -> [file, file, ...] across the whole pool
-  const allPoolEntries = []; // { word, len } across every content file
+  let poolEntries = null;
   let levels = null;
 
   for (const file of files) {
@@ -130,7 +142,7 @@ function main() {
     }
 
     if (file === LEVELS_FILE) {
-      const errors = validateLevelsFile(data);
+      const errors = validateLevels(data);
       if (errors.length === 0) {
         console.log(`\n✓ ${file}`);
         levels = data;
@@ -142,50 +154,51 @@ function main() {
       continue;
     }
 
-    const { entries, errors, warnings } = validateContentFile(data);
-    totalWarnings += warnings.length;
-    for (const e of entries) {
-      allPoolEntries.push(e);
-      if (!wordLocations.has(e.word)) wordLocations.set(e.word, []);
-      wordLocations.get(e.word).push(file);
+    if (file === QUESTIONS_FILE) {
+      const { entries, errors, warnings } = validateQuestions(data);
+      totalWarnings += warnings.length;
+      if (errors.length === 0) {
+        console.log(`\n✓ ${file}${warnings.length ? ` (${warnings.length} warning${warnings.length > 1 ? 's' : ''})` : ''}`);
+        poolEntries = entries;
+      } else {
+        console.log(`\n✗ ${file}`);
+        anyFailed = true;
+      }
+      for (const e of errors) console.log(`  ✗ ${e}`);
+      for (const w of warnings) console.log(`  ⚠ ${w}`);
+      continue;
     }
 
-    if (errors.length === 0) {
-      console.log(`\n✓ ${file}${warnings.length ? ` (${warnings.length} warning${warnings.length > 1 ? 's' : ''})` : ''}`);
-    } else {
-      console.log(`\n✗ ${file}`);
-      anyFailed = true;
-    }
-    for (const e of errors) console.log(`  ✗ ${e}`);
-    for (const w of warnings) console.log(`  ⚠ ${w}`);
+    console.log(`\n· ${file} (unrecognized file, skipped - only questions.json and levels.json are validated)`);
   }
 
-  const dupeErrors = [];
-  for (const [word, locations] of wordLocations) {
-    if (locations.length > 1) {
-      dupeErrors.push(`Duplicate word "${word}" appears in: ${locations.join(', ')} (every puzzle pools all content files together, so this word would collide with itself)`);
+  if (levels && poolEntries) {
+    const maxGridSizeByDifficulty = {};
+    for (const level of levels) {
+      maxGridSizeByDifficulty[level.difficulty] = Math.max(maxGridSizeByDifficulty[level.difficulty] || 0, level.gridSize);
     }
-  }
-  if (dupeErrors.length) {
-    console.log(`\n✗ cross-file duplicates`);
-    dupeErrors.forEach((e) => console.log(`  ✗ ${e}`));
-    anyFailed = true;
-  }
 
-  if (levels && allPoolEntries.length) {
-    const maxGridSize = Math.max(...levels.map((l) => l.gridSize));
-    const tooLong = allPoolEntries.filter((e) => e.len > maxGridSize);
+    const tooLong = poolEntries.filter((e) => {
+      const maxGrid = maxGridSizeByDifficulty[e.difficulty];
+      return maxGrid !== undefined && e.len > maxGrid;
+    });
     if (tooLong.length) {
-      console.log(`\n✗ words too long for any configured level (max gridSize is ${maxGridSize})`);
-      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" is ${e.len} letters - can never appear in any puzzle, raise a level's gridSize or shorten it`));
+      console.log(`\n✗ words too long for any level at their difficulty`);
+      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" (${e.difficulty}, ${e.len} letters) can't fit any "${e.difficulty}" level's grid - raise that level's gridSize or shorten the word`));
       anyFailed = true;
+    }
+
+    const orphaned = poolEntries.filter((e) => !(e.difficulty in maxGridSizeByDifficulty));
+    if (orphaned.length) {
+      console.log(`\n⚠ entries with no matching level`);
+      orphaned.forEach((e) => { console.log(`  ⚠ "${e.word}" is tagged difficulty="${e.difficulty}" but no level in levels.json uses that difficulty - it will never appear in a puzzle`); totalWarnings += 1; });
     }
 
     const poolWarnings = [];
     for (const level of levels) {
-      const eligible = allPoolEntries.filter((e) => e.len <= level.gridSize).length;
+      const eligible = poolEntries.filter((e) => e.difficulty === level.difficulty && e.len <= level.gridSize).length;
       if (eligible < level.entryCount) {
-        poolWarnings.push(`స్థాయి ${level.levelNumber}: needs ${level.entryCount} entries but only ${eligible} in the pool fit an ${level.gridSize}x${level.gridSize} grid - puzzles will show fewer words than intended`);
+        poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}): needs ${level.entryCount} entries but only ${eligible} fit an ${level.gridSize}x${level.gridSize} grid - puzzles will show fewer words than intended`);
       }
     }
     if (poolWarnings.length) {
@@ -195,7 +208,7 @@ function main() {
   }
 
   console.log(`\n${'-'.repeat(40)}`);
-  console.log(anyFailed ? 'FAILED: fix the ✗ items above before merging.' : `PASSED: ${files.length} file(s) OK${totalWarnings ? `, ${totalWarnings} warning(s) to look at` : ''}.`);
+  console.log(anyFailed ? 'FAILED: fix the ✗ items above before merging.' : `PASSED${totalWarnings ? ` with ${totalWarnings} warning(s) to look at` : ''}.`);
 
   process.exitCode = anyFailed ? 1 : 0;
 }

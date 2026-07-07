@@ -29,24 +29,27 @@ still tracked on-device via `localStorage`.
 - `js/trace.js` - the shared pointer-based straight-line tracing engine.
   Used both by the grid (Nama Nidhi) and the single-row tracing surface
   (Likhita Japam) - same mechanics, two DOM layouts.
-- `js/data.js` - loads the content pool (`data/*.json`, flattened into one
-  list) and the level ladder (`data/levels.json`).
+- `js/data.js` - loads the content pool (`data/questions.json`) and the
+  level ladder (`data/levels.json`).
 - `js/storage.js` - player identity + local score fallback (`localStorage`).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
 - `js/app.js` - screens and app state (Home, level select, Game, Likhita
   Japam, Level complete, Scoreboard). There's no category picker: every
-  puzzle samples entries from the combined pool of all content files, and
-  the hint/meaning line is the only clue to what each hidden word is.
-- `data/*.json` - content packs, one file per source (deity names,
-  devotees, kshetrams, sacred items) - each just a flat `entries` list.
-  `data/levels.json` is the shared level ladder (grid size, filler mode,
-  breather pacing, how many entries each puzzle draws). Add a new entry
-  by dropping it into the right file's `entries` array - it's in the
-  rotation immediately, no level to wire it into. `data/TEMPLATE.md` shows
-  the exact shape.
-- `scripts/validate-content.js` - structural validator for `data/*.json`
-  and `data/levels.json`, run automatically on PRs via
-  `.github/workflows/validate-content.yml`. See "Adding new content" below.
+  puzzle samples entries from whichever difficulty tier that level names,
+  and the hint/meaning line is the only clue to what each hidden word is.
+- `data/questions.json` - every entry (deity names, devotees, kshetrams,
+  sacred items, all mixed together with no category of their own), each
+  tagged only with a `difficulty` (`"easy"`/`"medium"`/`"difficult"`).
+  `data/levels.json` is the shared level ladder - each level names the
+  difficulty tier it draws from, plus grid size, filler mode, breather
+  pacing, and how many entries that puzzle samples. Add a new entry by
+  dropping it into `questions.json`'s `entries` array - it's in rotation
+  immediately, no level to wire it into. `data/TEMPLATE.md` shows the
+  exact shape.
+- `scripts/validate-content.js` - structural validator for
+  `data/questions.json` and `data/levels.json`, run automatically on PRs
+  via `.github/workflows/validate-content.yml`. See "Adding new content"
+  below.
 
 ## Setting up Supabase (shared scoreboard)
 
@@ -77,43 +80,43 @@ fine manual fallback while a policy gets sorted out.
 
 ## Content pool
 
-Four content files ship in `data/`, pooled together at runtime - there is
-no category picker in the app, and every puzzle can mix a deity name, a
-devotee, a place, and a sacred item in the same grid. The hint/meaning
-line is the only clue to what each hidden word is:
+Everything lives in one file, `data/questions.json` - deity names,
+devotees, kshetrams, sacred items, all mixed together with no category of
+their own. There is no category picker in the app, and every puzzle can
+mix a deity name, a devotee, a place, and a sacred item in the same grid;
+the hint/meaning line is the only clue to what each hidden word is.
 
-- **దైవనామాలు** (deity names) - starts with Vishnu Sahasranamam.
-- **భక్తులు** (devotees) - itihasa/purana and bhakti-era saints as one
-  list; each entry's meaning line says who/when.
-- **క్షేత్రాలు** (sacred places/kshetrams).
-- **పూజా సామగ్రి** (sacred items & symbols of worship).
+The one thing that does sort entries is `difficulty`: `"easy"`,
+`"medium"`, or `"difficult"`, assigned by whoever writes the entry - there's
+no formula, just judgement about how well-known or obscure something is.
 
-`data/levels.json` is the shared level ladder: each level declares
-`gridSize`, `fillerMode` (`"random"` or `"curated"`), whether it's a
-`breather` level, `japamCount` (how many Sri Rama traces the post-level
-interlude asks for), and `entryCount` (how many entries that puzzle
-samples from the pool - a fresh random selection every time you play or
-hit "కొత్త పజిల్").
+`data/levels.json` is the shared level ladder: each level names the
+`difficulty` tier it draws from, plus `gridSize`, `fillerMode` (`"random"`
+or `"curated"`), whether it's a `breather` level, `japamCount` (how many
+Sri Rama traces the post-level interlude asks for), and `entryCount` (how
+many entries that puzzle samples from its tier - a fresh random selection
+every time you play or hit "కొత్త పజిల్"). You can have more than one
+level per difficulty if you want extra pacing variety.
 
 ### Adding new content
 
-New entries (names, devotees, kshetrams, sacred items) go into the
-relevant `data/*.json` file's `entries` array, on a branch, opened as a
-pull request - never committed straight to `main`. There's no level to
-wire a new entry into; as soon as it's in the file, it's part of the pool
-every puzzle draws from. See `data/TEMPLATE.md` for the exact shape of an
-entry in each category before writing new ones by hand.
+New entries go straight into `data/questions.json`'s `entries` array, on
+a branch, opened as a pull request - never committed straight to `main`.
+There's no level to wire a new entry into; as soon as it's in the file
+and tagged with a difficulty, it's part of the pool every puzzle at that
+tier draws from. See `data/TEMPLATE.md` for the exact shape before
+writing new ones by hand.
 
 The automated check (`.github/workflows/validate-content.yml`, running
 `scripts/validate-content.js` on any PR touching `data/**`) catches
-structural problems - malformed JSON, missing fields, a word too short to
-be real content, a word too long for any configured level, duplicate
-words anywhere in the pool - but it **cannot verify religious/factual
-accuracy**. Before merging, a human who knows the source material
-(Sahasranamam, the relevant stotram, or the item's actual devotional use)
-should read through the new entries' Telugu text and meanings. This app's
-users are trusting the content to be correct, so this review step isn't
-optional, even for small batches.
+structural problems - malformed JSON, missing fields, an invalid
+difficulty value, a word too short to be real content, a word too long
+for any level at its difficulty, duplicate words - but it **cannot
+verify religious/factual accuracy**. Before merging, a human who knows
+the source material (Sahasranamam, the relevant stotram, or the item's
+actual devotional use) should read through the new entries' Telugu text
+and meanings. This app's users are trusting the content to be correct, so
+this review step isn't optional, even for small batches.
 
 To run the check yourself before opening a PR:
 
@@ -123,7 +126,9 @@ node scripts/validate-content.js
 
 ## What's not built yet
 
-- Only one deity-names stotram (Vishnu Sahasranamam) is seeded so far.
+- Content depth is still thin, especially at the "difficult" tier (9
+  entries) - the pool grows as more entries are added to
+  `data/questions.json`.
 - The "sarvadharma" pack (other traditions' devotional figures) is
   explicitly backlog, per the design brief.
 - A fully-offline, no-leaderboard variant was flagged as a separate,

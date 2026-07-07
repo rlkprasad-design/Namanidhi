@@ -1,16 +1,11 @@
-// Data-driven content: one JSON file per source (deity names, devotees,
-// kshetrams, sacred items), each just a flat list of { word, meaning }
-// entries - no levels, no category picker. Every puzzle draws from the
-// combined pool of all of them, so adding a new entry to any file makes
-// it available in rotation immediately, no other wiring required.
+// Data-driven content: every entry (deity names, devotees, kshetrams,
+// sacred items - no more distinction between them) lives in one file,
+// data/questions.json, tagged only by difficulty ("easy"/"medium"/
+// "difficult"). Each level in data/levels.json names the difficulty tier
+// it draws from. Adding a new entry to questions.json makes it available
+// in rotation immediately, no other wiring required.
 
-export const POOL_FILES = [
-  'data/deity-names-vishnu-sahasranamam.json',
-  'data/devotees.json',
-  'data/kshetrams.json',
-  'data/sacred-items.json',
-];
-
+const QUESTIONS_FILE = 'data/questions.json';
 const LEVELS_FILE = 'data/levels.json';
 
 let poolPromise = null;
@@ -22,17 +17,16 @@ async function fetchJson(file) {
   return res.json();
 }
 
-// Flat array of { word, meaning, era?, category } pooled from every content file.
+// Flat array of { word, meaning, difficulty, era? } - the whole question bank.
 export function loadEntryPool() {
   if (!poolPromise) {
-    poolPromise = Promise.all(POOL_FILES.map(fetchJson)).then((datasets) =>
-      datasets.flatMap((ds) => ds.entries.map((e) => ({ ...e, category: ds.categoryGroup })))
-    );
+    poolPromise = fetchJson(QUESTIONS_FILE).then((data) => data.entries);
   }
   return poolPromise;
 }
 
-// The shared level ladder (grid size, filler mode, breather pacing, entry count).
+// The shared level ladder (each level names a difficulty tier, grid size,
+// filler mode, breather pacing, entry count).
 export function loadLevels() {
   if (!levelsPromise) levelsPromise = fetchJson(LEVELS_FILE);
   return levelsPromise;

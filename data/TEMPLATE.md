@@ -1,106 +1,70 @@
-# Content entry shapes
+# Content entry shape
 
-There is no category picker in the app - every puzzle mixes entries from
-all four content files together, and the hint/meaning line is the only
-clue to what each hidden word is. Each `data/*.json` content file (except
-`levels.json`) is just a flat list:
+All content lives in one file, `data/questions.json` - deity names,
+devotees, kshetrams, sacred items, all mixed together with no category of
+their own. Every puzzle draws from this pool, and the hint/meaning line is
+the only clue to what each hidden word is. The one thing that does sort
+entries is **difficulty**: `"easy"`, `"medium"`, or `"difficult"` - each
+level in `data/levels.json` names the tier it draws from.
 
 ```json
 {
-  "categoryGroup": "devotees",
-  "categoryGroupLabel": "భక్తులు",
   "entries": [ /* entry objects go here - see below */ ]
 }
 ```
 
-`categoryGroup`/`categoryGroupLabel` are kept for internal record-keeping
-(e.g. what shows in `puzzle_progress` later, or if a filter is ever added
-back) - they're not shown to players.
-
-To add a brand new entry: copy the "empty template" for its category
-below, fill it in, and add it to that file's `entries` array. That's the
-whole process - there's no level to wire it into. As soon as it's in the
-file, it's part of the pool every puzzle draws from. Then run
-`node scripts/validate-content.js` before opening a PR.
-
-## దైవనామాలు (deity names) - `data/deity-names-*.json`
+## Adding a new entry
 
 Filled example:
 
 ```json
-{ "word": "గోవింద", "meaning": "గోవులను, భూమిని రక్షించువాడు" }
+{ "word": "గోవింద", "meaning": "గోవులను, భూమిని రక్షించువాడు", "difficulty": "easy" }
 ```
 
 Empty template:
 
 ```json
-{ "word": "", "meaning": "" }
+{ "word": "", "meaning": "", "difficulty": "easy" }
 ```
 
-## భక్తులు (devotees) - `data/devotees.json`
+- `word` - the Telugu text to hide in the grid / trace in Likhita Japam.
+- `meaning` - one short line a player sees as a hint before they've found
+  the word. Keep it under ~120 characters (the validator will warn if it's
+  longer).
+- `difficulty` - `"easy"`, `"medium"`, or `"difficult"`. This is entirely
+  up to your judgement when you write the entry - there's no formula,
+  just pick whichever tier feels right (a very well-known name can be
+  "easy" even if it's a bit longer; an obscure term can be "difficult"
+  even if it's short).
+- `era` (optional) - only meaningful for devotee-type entries
+  (`"itihasa"`, `"purana"`, or `"bhakti"`). Not shown to players, just
+  kept for your own reference. Leave it out for anything else.
 
-Devotees additionally carry an internal `era` tag (`"itihasa"`,
-`"purana"`, or `"bhakti"`) - it's not shown as a filter in the app, just
-used for organizing content; the `meaning` line is what actually tells
-players who the person is and roughly when they lived.
-
-Filled example:
-
-```json
-{ "word": "శబరి", "era": "itihasa", "meaning": "రామభక్తురాలు, ఎంగిలి పండ్లు స్వీకరించిన భక్తి ప్రతీక" }
-```
-
-Empty template:
-
-```json
-{ "word": "", "era": "", "meaning": "" }
-```
-
-## క్షేత్రాలు (kshetrams) - `data/kshetrams.json`
-
-Filled example:
-
-```json
-{ "word": "తిరుమల", "meaning": "వేంకటేశ్వరుని నివాసం, ఆంధ్రప్రదేశ్‌లోని ప్రసిద్ధ క్షేత్రం" }
-```
-
-Empty template:
-
-```json
-{ "word": "", "meaning": "" }
-```
-
-## పూజా సామగ్రి (sacred items) - `data/sacred-items.json`
-
-Filled example:
-
-```json
-{ "word": "విభూతి", "meaning": "శివారాధనలో నుదుటిపై ధరించే పవిత్ర భస్మం" }
-```
-
-Empty template:
-
-```json
-{ "word": "", "meaning": "" }
-```
+Add the entry to `entries` in `data/questions.json`, then run
+`node scripts/validate-content.js` before opening a PR - it checks for
+things like a missing field, a duplicate word, or a word too long to
+ever fit its difficulty's grid.
 
 ## The level ladder - `data/levels.json`
 
-This is separate from content - it's the shape of each puzzle, shared
-across the whole pool:
+Separate from content - this is the shape of each puzzle:
 
 ```json
-{ "levelNumber": 1, "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 5 }
+{ "levelNumber": 1, "difficulty": "easy", "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 6 }
 ```
 
+- `difficulty` - which tier of `questions.json` entries this level draws
+  from.
 - `gridSize` - the grid is `gridSize x gridSize`; must be big enough to
-  fit the longest word you expect to draw (the validator checks the whole
-  pool against every level's `gridSize`).
+  fit the longest word at that difficulty (the validator checks this).
 - `fillerMode` - `"random"` (easy) or `"curated"` (fillers echo the
   puzzle's own letters, harder to scan).
-- `breather` - marks an easier level sprinkled between harder ones.
+- `breather` - marks an easier level, for pacing.
 - `japamCount` - how many Sri Rama traces the post-level interlude asks
   for.
-- `entryCount` - how many entries this level's puzzle draws from the pool
-  each time (a new random selection every time you play or hit "కొత్త
-  పజిల్").
+- `entryCount` - how many entries this level's puzzle draws from its
+  difficulty tier each time (a fresh random selection every time you play
+  or hit "కొత్త పజిల్").
+
+You can add more than one level per difficulty (e.g. a second "medium"
+level with a bigger grid) - just give it a unique `levelNumber`.
