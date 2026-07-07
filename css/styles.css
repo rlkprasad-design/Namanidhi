@@ -1,34 +1,34 @@
 :root {
+  --cream: #fbf3e1;
   --maroon: #7a1f2b;
-  --maroon-dark: #551520;
-  --gold: #c99a3f;
-  --gold-light: #e7c877;
-  --cream: #fdf6e6;
-  --cream-deep: #f5e8c6;
-  --ink: #2c1810;
-  --ink-soft: #5a3d2b;
-  --good: #2e6b3e;
-  --bad: #a3313f;
+  --deep-maroon: #4e1219;
+  --gold: #c9962e;
+  --gold-light: #f0d28b;
+  --sandal: #8b5e3c;
+  --found: #3e7a4b;
+  --wrong: #b23a2e;
   --radius: 18px;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--cream);
-  color: var(--ink);
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 0%, #8f2532 0%, var(--deep-maroon) 60%);
+  color: var(--cream);
   font-family: 'Noto Sans Telugu', sans-serif;
   font-size: 19px;
   line-height: 1.5;
-  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 h1, h2, h3, .display {
   font-family: 'Noto Serif Telugu', serif;
-  color: var(--maroon);
+  color: var(--gold-light);
   margin: 0 0 0.4em;
+  letter-spacing: 0.3px;
 }
 
 #app {
@@ -48,7 +48,7 @@ h1, h2, h3, .display {
 
 .top-bar .player {
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  color: var(--gold);
 }
 
 .title-block {
@@ -56,8 +56,8 @@ h1, h2, h3, .display {
   margin-bottom: 28px;
 }
 
-.title-block .tagline {
-  color: var(--ink-soft);
+.title-block .tagline, .tagline {
+  color: var(--gold);
   font-size: 0.95rem;
 }
 
@@ -69,12 +69,12 @@ h1, h2, h3, .display {
   justify-content: center;
   gap: 8px;
   min-height: 56px;
-  padding: 12px 24px;
-  border-radius: 14px;
+  padding: 12px 26px;
+  border-radius: 999px;
   border: 2px solid transparent;
   font-family: 'Noto Sans Telugu', sans-serif;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   text-align: center;
   transition: transform 0.08s ease, background 0.15s ease;
@@ -82,21 +82,21 @@ h1, h2, h3, .display {
 .btn:active { transform: scale(0.97); }
 
 .btn-primary {
-  background: var(--maroon);
-  color: var(--cream);
+  background: var(--gold);
+  color: var(--deep-maroon);
 }
-.btn-primary:hover { background: var(--maroon-dark); }
+.btn-primary:hover { background: var(--gold-light); }
 
 .btn-secondary {
-  background: var(--cream-deep);
-  color: var(--maroon);
+  background: transparent;
+  color: var(--gold-light);
   border-color: var(--gold);
 }
 
 .btn-link {
   background: none;
   border: none;
-  color: var(--maroon);
+  color: var(--gold-light);
   text-decoration: underline;
   min-height: auto;
   padding: 4px 8px;
@@ -117,8 +117,8 @@ h1, h2, h3, .display {
   min-width: 40px;
   border-radius: 50%;
   border: 2px solid var(--gold);
-  background: var(--cream-deep);
-  color: var(--maroon);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--gold-light);
   font-size: 1.1rem;
   cursor: pointer;
   padding: 0;
@@ -136,35 +136,38 @@ h1, h2, h3, .display {
   display: block;
   width: 100%;
   text-align: right;
-  background: white;
-  border: 2px solid var(--gold-light);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.15));
+  border: 2px solid var(--gold);
   border-radius: var(--radius);
   padding: 20px;
   cursor: pointer;
   font-family: inherit;
-  color: var(--ink);
+  color: var(--cream);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 .card:active { transform: scale(0.98); }
 
 .card .card-title {
   font-family: 'Noto Serif Telugu', serif;
   font-size: 1.3rem;
-  color: var(--maroon);
+  color: var(--gold-light);
   margin-bottom: 6px;
 }
 .card .card-sub {
-  color: var(--ink-soft);
+  color: var(--cream);
+  opacity: 0.8;
   font-size: 0.9rem;
 }
 
 .badge {
   display: inline-block;
   background: var(--gold-light);
-  color: var(--maroon-dark);
+  color: var(--deep-maroon);
   border-radius: 999px;
   padding: 2px 12px;
   font-size: 0.8rem;
   margin-top: 8px;
+  font-weight: 700;
 }
 
 .mode-choice {
@@ -175,12 +178,14 @@ h1, h2, h3, .display {
   padding: 32px 20px;
   border-radius: 24px;
   border: 3px solid var(--gold);
-  background: linear-gradient(180deg, #fff, var(--cream-deep));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(0, 0, 0, 0.15));
+  box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.12), 0 12px 30px rgba(0, 0, 0, 0.35);
   cursor: pointer;
   text-align: center;
+  color: var(--cream);
 }
-.mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; }
-.mode-btn .sub { color: var(--ink-soft); }
+.mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; color: var(--gold-light); }
+.mode-btn .sub { color: var(--cream); opacity: 0.85; }
 
 /* Name gate ------------------------------------------------------------ */
 
@@ -199,18 +204,20 @@ h1, h2, h3, .display {
   display: block;
   font-family: 'Noto Sans Telugu', sans-serif;
   text-align: center;
+  background: var(--cream);
+  color: var(--deep-maroon);
 }
 
 /* Grid / temple-arch frame --------------------------------------------- */
 
 .grid-frame {
-  border: 6px solid var(--gold);
-  border-radius: 120px 120px 22px 22px;
-  background: var(--cream-deep);
-  padding: 22px 16px 16px;
+  border: 3px solid var(--gold);
+  border-radius: 24px 24px 10px 10px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.15));
+  padding: 16px;
   margin: 0 auto 20px;
   max-width: 560px;
-  box-shadow: inset 0 0 0 3px var(--cream);
+  box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.15), 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 .grid {
@@ -227,17 +234,17 @@ h1, h2, h3, .display {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: white;
+  background: var(--cream);
   border-radius: 8px;
   font-weight: 700;
   font-size: clamp(0.75rem, 3vw, 1.15rem);
-  color: var(--ink);
-  border: 1px solid #e8dcb8;
+  color: var(--deep-maroon);
+  transition: background 0.15s, color 0.15s, transform 0.1s;
 }
 
 .cell.selected { background: var(--gold-light); }
-.cell.found { background: #dff0e2; color: var(--good); border-color: var(--good); }
-.cell.wrong { background: #f6d6da; color: var(--bad); border-color: var(--bad); }
+.cell.found { background: var(--found); color: #fff; }
+.cell.wrong { background: var(--wrong); color: #fff; }
 .cell.nudge { background: var(--gold-light); box-shadow: 0 0 0 3px var(--gold); animation: glow 1.2s ease-in-out infinite alternate; }
 
 @keyframes glow {
@@ -248,30 +255,38 @@ h1, h2, h3, .display {
 /* Hints panel ------------------------------------------------------------ */
 
 .hints-panel {
-  background: white;
-  border: 2px solid var(--gold-light);
-  border-radius: var(--radius);
-  padding: 16px 18px;
+  background: transparent;
+  padding: 0;
 }
-.hints-panel h3 { font-size: 1.05rem; }
+.hints-panel h3 {
+  font-size: 1.05rem;
+  color: var(--gold-light);
+  border-bottom: 1px solid rgba(240, 210, 139, 0.35);
+  padding-bottom: 6px;
+}
 .hint-item {
   display: flex;
   align-items: baseline;
-  gap: 8px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--cream-deep);
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 8px;
 }
-.hint-item:last-child { border-bottom: none; }
 .hint-item .hint-word {
   font-family: 'Noto Serif Telugu', serif;
   font-weight: 700;
-  color: var(--maroon);
-  min-width: 2ch;
+  color: var(--gold-light);
+  min-width: 3ch;
 }
-.hint-item.pending .hint-word { visibility: hidden; }
-.hint-item .hint-meaning { color: var(--ink-soft); font-size: 0.92rem; }
-.hint-item.found { opacity: 1; }
-.hint-item.pending { opacity: 0.9; }
+.hint-item.pending .hint-word {
+  color: transparent;
+  text-shadow: 0 0 8px rgba(240, 210, 139, 0.5);
+  background: rgba(240, 210, 139, 0.15);
+  border-radius: 6px;
+}
+.hint-item .hint-meaning { color: var(--cream); opacity: 0.85; font-size: 0.92rem; }
+.hint-item.found { background: rgba(62, 122, 75, 0.35); }
 
 .game-toolbar {
   display: flex;
@@ -287,7 +302,7 @@ h1, h2, h3, .display {
   text-align: center;
   font-family: 'Noto Serif Telugu', serif;
   font-size: 2.2rem;
-  color: var(--maroon);
+  color: var(--gold-light);
   margin: 12px 0 20px;
 }
 
@@ -318,7 +333,7 @@ h1, h2, h3, .display {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--cream-deep);
+  background: rgba(255, 255, 255, 0.06);
   border: 2px solid var(--gold);
 }
 .bead.filled { background: var(--gold); }
@@ -326,7 +341,7 @@ h1, h2, h3, .display {
 .completion-beat {
   text-align: center;
   padding: 32px 12px;
-  color: var(--maroon);
+  color: var(--gold-light);
   font-family: 'Noto Serif Telugu', serif;
   font-size: 1.3rem;
 }
@@ -337,31 +352,33 @@ h1, h2, h3, .display {
 .score-table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: rgba(255, 255, 255, 0.04);
   border-radius: var(--radius);
   overflow: hidden;
-  border: 2px solid var(--gold-light);
+  border: 2px solid var(--gold);
 }
 .score-table th, .score-table td {
   padding: 10px 14px;
   text-align: right;
-  border-bottom: 1px solid var(--cream-deep);
+  border-bottom: 1px solid rgba(240, 210, 139, 0.2);
+  color: var(--cream);
 }
-.score-table th { background: var(--cream-deep); color: var(--maroon); }
-.score-note { color: var(--ink-soft); font-size: 0.85rem; margin-top: 8px; }
+.score-table th { background: rgba(0, 0, 0, 0.2); color: var(--gold-light); }
+.score-note { color: var(--gold); opacity: 0.9; font-size: 0.85rem; margin-top: 8px; }
 
 /* Level complete ----------------------------------------------------------- */
 
 .complete-screen {
   text-align: center;
   padding: 8vh 12px;
+  color: var(--gold-light);
 }
-.complete-screen .glow {
+.complete-screen .glow, .completion-beat .glow {
   font-size: 3rem;
   margin-bottom: 16px;
 }
 
 @media (max-width: 420px) {
   html, body { font-size: 17px; }
-  .grid-frame { border-radius: 80px 80px 18px 18px; padding: 16px 8px 10px; }
+  .grid-frame { border-radius: 18px 18px 8px 8px; padding: 12px; }
 }

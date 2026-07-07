@@ -294,7 +294,7 @@ function renderGame(session) {
     for (const p of session.placements) {
       const item = el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
-          <span class="hint-word">${p.found ? p.letters.join('') : '•••'}</span>
+          <span class="hint-word">${p.letters.join('')}</span>
           <span class="hint-meaning">${p.entry.meaning}</span>
           ${p.found && canSpeak ? speakButton(p.entry.word) : ''}
         </div>
@@ -400,9 +400,9 @@ async function onLevelFullyFound(session) {
 function showLevelComplete(dataset, level) {
   const screen = el(`
     <div class="complete-screen">
-      <div class="glow">✦</div>
-      <h2>స్థాయి పూర్తయింది</h2>
-      <p>అన్ని నామాలు దొరికాయి. చాలా బాగుంది.</p>
+      <div class="glow">🙏</div>
+      <h2>అభినందనలు!</h2>
+      <p>అన్ని నామాలు దొరికాయి.</p>
       <div class="btn-row" style="margin-top:24px;">
         <button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>
       </div>
@@ -552,7 +552,7 @@ function showJapamSessionSummary(session) {
 function showJapamCompletion(session) {
   const screen = el(`
     <div class="completion-beat">
-      <div class="glow">✦</div>
+      <div class="glow">🙏</div>
       <p>నామజపం పూర్తయింది.</p>
       <div class="btn-row" style="margin-top:20px;">
         <button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>
