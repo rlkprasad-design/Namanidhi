@@ -1,39 +1,39 @@
-// Data-driven content: one JSON file per category/stotram. Adding more
-// content later (a new stotram, more devotees) never touches this code -
-// just add a file here and drop the JSON in data/.
+// Data-driven content: one JSON file per source (deity names, devotees,
+// kshetrams, sacred items), each just a flat list of { word, meaning }
+// entries - no levels, no category picker. Every puzzle draws from the
+// combined pool of all of them, so adding a new entry to any file makes
+// it available in rotation immediately, no other wiring required.
 
-export const DATASET_FILES = [
+export const POOL_FILES = [
   'data/deity-names-vishnu-sahasranamam.json',
   'data/devotees.json',
   'data/kshetrams.json',
   'data/sacred-items.json',
 ];
 
-const cache = new Map();
+const LEVELS_FILE = 'data/levels.json';
 
-export async function loadDataset(file) {
-  if (cache.has(file)) return cache.get(file);
+let poolPromise = null;
+let levelsPromise = null;
+
+async function fetchJson(file) {
   const res = await fetch(file);
   if (!res.ok) throw new Error(`Failed to load ${file}: ${res.status}`);
-  const json = await res.json();
-  cache.set(file, json);
-  return json;
+  return res.json();
 }
 
-export async function loadAllDatasets() {
-  return Promise.all(DATASET_FILES.map(loadDataset));
-}
-
-// Groups datasets by categoryGroup (దైవనామాలు / భక్తులు / క్షేత్రాలు / పూజా సామగ్రి)
-// for the Home screen's first-level choice.
-export async function loadCategoryGroups() {
-  const all = await loadAllDatasets();
-  const groups = new Map();
-  for (const ds of all) {
-    if (!groups.has(ds.categoryGroup)) {
-      groups.set(ds.categoryGroup, { id: ds.categoryGroup, label: ds.categoryGroupLabel, datasets: [] });
-    }
-    groups.get(ds.categoryGroup).datasets.push(ds);
+// Flat array of { word, meaning, era?, category } pooled from every content file.
+export function loadEntryPool() {
+  if (!poolPromise) {
+    poolPromise = Promise.all(POOL_FILES.map(fetchJson)).then((datasets) =>
+      datasets.flatMap((ds) => ds.entries.map((e) => ({ ...e, category: ds.categoryGroup })))
+    );
   }
-  return Array.from(groups.values());
+  return poolPromise;
+}
+
+// The shared level ladder (grid size, filler mode, breather pacing, entry count).
+export function loadLevels() {
+  if (!levelsPromise) levelsPromise = fetchJson(LEVELS_FILE);
+  return levelsPromise;
 }

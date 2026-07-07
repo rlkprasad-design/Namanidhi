@@ -22,6 +22,13 @@ function randomPool() {
   return BASE_POOL[Math.floor(Math.random() * BASE_POOL.length)];
 }
 
+// Picks `count` entries at random from the combined content pool, mixing
+// across categories, restricted to words that can fit in gridSize.
+export function sampleEntries(pool, gridSize, count) {
+  const eligible = pool.filter((e) => graphemes(e.word).length <= gridSize);
+  return shuffle(eligible).slice(0, count);
+}
+
 // Try every (direction, start) combo for a word, shuffled, and return the
 // first one whose path is empty or matches existing graphemes (crossing OK).
 function findPlacement(grid, size, letters) {

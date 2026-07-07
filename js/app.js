@@ -1,7 +1,7 @@
 import { graphemes } from './segmenter.js';
-import { generateGrid } from './grid.js';
+import { generateGrid, sampleEntries } from './grid.js';
 import { attachTracer, pathToStrings } from './trace.js';
-import { loadCategoryGroups } from './data.js';
+import { loadEntryPool, loadLevels } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
   recordPuzzleProgressLocal, recordJapamLocal,
@@ -148,85 +148,43 @@ function showHome() {
     </div>
   `);
   screen.prepend(topBar());
-  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showCategoryGroups);
+  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showLevelSelect);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   setScreen(screen);
 }
 
 // ---------------------------------------------------------------------
-// Nama Nidhi: category -> (sub-group) -> level -> game
+// Nama Nidhi: level -> game
+// Every puzzle mixes entries from all content packs (deity names,
+// devotees, kshetrams, sacred items) - no category picker. The hint
+// line is the only clue to what each hidden word is.
 // ---------------------------------------------------------------------
 
-async function showCategoryGroups() {
-  const groups = await loadCategoryGroups();
+async function showLevelSelect() {
   const screen = el(`
     <div>
-      <h2>ఏ నిధిని అన్వేషిద్దాం?</h2>
-      <div class="card-grid" data-groups></div>
-    </div>
-  `);
-  screen.prepend(topBar({ backAction: showHome }));
-  const container = screen.querySelector('[data-groups]');
-  for (const group of groups) {
-    const card = el(`
-      <button type="button" class="card">
-        <div class="card-title">${group.label}</div>
-        <div class="card-sub">${group.datasets.length} విభాగం</div>
-      </button>
-    `);
-    card.addEventListener('click', () => {
-      if (group.datasets.length > 1) showSubGroupPicker(group);
-      else showLevelSelect(group.datasets[0]);
-    });
-    container.appendChild(card);
-  }
-  setScreen(screen);
-}
-
-function showSubGroupPicker(group) {
-  const screen = el(`
-    <div>
-      <h2>${group.label}</h2>
-      <div class="card-grid" data-subgroups></div>
-    </div>
-  `);
-  screen.prepend(topBar({ backAction: showCategoryGroups }));
-  const container = screen.querySelector('[data-subgroups]');
-  for (const dataset of group.datasets) {
-    const card = el(`
-      <button type="button" class="card">
-        <div class="card-title">${dataset.subGroupLabel}</div>
-      </button>
-    `);
-    card.addEventListener('click', () => showLevelSelect(dataset));
-    container.appendChild(card);
-  }
-  setScreen(screen);
-}
-
-function showLevelSelect(dataset) {
-  const screen = el(`
-    <div>
-      <h2>${dataset.subGroupLabel || dataset.categoryGroupLabel}</h2>
-      <p class="tagline">స్థాయిని ఎంచుకోండి</p>
+      <h2 style="text-align:center;">నామ నిధి</h2>
+      <p class="tagline" style="text-align:center;">స్థాయిని ఎంచుకోండి</p>
       <div class="card-grid" data-levels></div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showCategoryGroups }));
+  screen.prepend(topBar({ backAction: showHome }));
+  setScreen(screen);
+
+  const [levels] = await Promise.all([loadLevels(), loadEntryPool()]);
   const container = screen.querySelector('[data-levels]');
-  for (const level of dataset.levels) {
+  for (const level of levels) {
     const card = el(`
       <button type="button" class="card">
         <div class="card-title">స్థాయి ${level.levelNumber}</div>
-        <div class="card-sub">${level.entries.length} నామాలు · ${level.gridSize}×${level.gridSize} గ్రిడ్</div>
+        <div class="card-sub">${level.entryCount} నామాలు · ${level.gridSize}×${level.gridSize} గ్రిడ్</div>
         ${level.breather ? '<span class="badge">సులభ విరామం</span>' : ''}
       </button>
     `);
-    card.addEventListener('click', () => startLevel(dataset, level));
+    card.addEventListener('click', () => startLevel(level));
     container.appendChild(card);
   }
-  setScreen(screen);
 }
 
 // ---------------------------------------------------------------------
@@ -235,20 +193,21 @@ function showLevelSelect(dataset) {
 
 const WRONG_TRIES_FOR_NUDGE = 4;
 
-function startLevel(dataset, level) {
-  const session = buildSession(dataset, level);
-  renderGame(session);
+async function startLevel(level) {
+  const pool = await loadEntryPool();
+  renderGame(buildSession(level, pool));
 }
 
-function buildSession(dataset, level) {
+function buildSession(level, pool) {
+  const entries = sampleEntries(pool, level.gridSize, level.entryCount);
   const { grid, placements } = generateGrid({
     size: level.gridSize,
-    entries: level.entries,
+    entries,
     fillerMode: level.fillerMode,
   });
   return {
-    dataset,
     level,
+    pool,
     grid,
     placements: placements.map((p) => ({ ...p, found: false })),
     wrongAttempts: 0,
@@ -256,10 +215,10 @@ function buildSession(dataset, level) {
 }
 
 function renderGame(session) {
-  const { dataset, level } = session;
+  const { level } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">${dataset.subGroupLabel || dataset.categoryGroupLabel} · స్థాయి ${level.levelNumber}</h2>
+      <h2 style="text-align:center;">స్థాయి ${level.levelNumber}</h2>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr);"></div>
       </div>
@@ -273,7 +232,7 @@ function renderGame(session) {
       </div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: () => showLevelSelect(dataset) }));
+  screen.prepend(topBar({ backAction: showLevelSelect }));
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
@@ -306,10 +265,6 @@ function renderGame(session) {
     });
   }
   renderHints();
-
-  function clearCellClasses(cls) {
-    cellEls.flat().forEach((cellEl) => cellEl.classList.remove(cls));
-  }
 
   let lastSelected = [];
   function highlightSelection(path) {
@@ -373,7 +328,7 @@ function renderGame(session) {
   });
 
   screen.querySelector('[data-new-puzzle]').addEventListener('click', () => {
-    renderGame(buildSession(dataset, level));
+    renderGame(buildSession(level, session.pool));
   });
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
@@ -384,20 +339,20 @@ function renderGame(session) {
 }
 
 async function onLevelFullyFound(session) {
-  const { dataset, level } = session;
+  const { level } = session;
   const entriesFound = session.placements.length;
   const progress = {
-    category: dataset.categoryGroup,
-    sub_category: dataset.subGroupId,
+    category: 'mixed',
+    sub_category: null,
     level: level.levelNumber,
     entries_found: entriesFound,
   };
   recordPuzzleProgressLocal(progress);
   if (state.playerId) syncPuzzleProgress(state.playerId, progress);
-  setTimeout(() => showLevelComplete(dataset, level), 500);
+  setTimeout(() => showLevelComplete(level), 500);
 }
 
-function showLevelComplete(dataset, level) {
+function showLevelComplete(level) {
   const screen = el(`
     <div class="complete-screen">
       <div class="glow">🙏</div>
@@ -413,7 +368,7 @@ function showLevelComplete(dataset, level) {
       mode: 'interlude',
       word: INTERLUDE_WORD,
       target: level.japamCount,
-      onExit: () => showLevelSelect(dataset),
+      onExit: showLevelSelect,
     });
   });
   setScreen(screen);

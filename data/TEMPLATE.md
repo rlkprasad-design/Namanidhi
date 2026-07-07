@@ -1,41 +1,26 @@
 # Content entry shapes
 
-Every file in `data/*.json` follows this same top-level shape:
+There is no category picker in the app - every puzzle mixes entries from
+all four content files together, and the hint/meaning line is the only
+clue to what each hidden word is. Each `data/*.json` content file (except
+`levels.json`) is just a flat list:
 
 ```json
 {
   "categoryGroup": "devotees",
   "categoryGroupLabel": "భక్తులు",
-  "subGroupId": null,
-  "subGroupLabel": null,
-  "levels": [
-    {
-      "levelNumber": 1,
-      "gridSize": 8,
-      "fillerMode": "random",
-      "breather": true,
-      "japamCount": 3,
-      "entries": [ /* entry objects go here - see below */ ]
-    }
-  ]
+  "entries": [ /* entry objects go here - see below */ ]
 }
 ```
 
-- `subGroupId`/`subGroupLabel` are only non-null when a category has a real
-  sub-group to pick between (e.g. a specific stotram for deity names).
-  Use `null` for both when there isn't one.
-- `fillerMode` is `"random"` or `"curated"` - random for easier/breather
-  levels, curated (fillers drawn from the puzzle's own letters) for harder
-  ones.
-- `japamCount` is how many Sri Rama traces the post-level interlude asks
-  for after that level - small for breather levels, larger for hard ones.
-- New `levelNumber`s must be unique within the file and roughly increase
-  in difficulty; `gridSize` must be big enough to fit every entry's word
-  (the validator checks this).
+`categoryGroup`/`categoryGroupLabel` are kept for internal record-keeping
+(e.g. what shows in `puzzle_progress` later, or if a filter is ever added
+back) - they're not shown to players.
 
-To add a brand new entry, copy the "empty template" for its category
-below, fill it in, and add it to the `entries` array of the right level
-(or a new level, following the shape above). Then run
+To add a brand new entry: copy the "empty template" for its category
+below, fill it in, and add it to that file's `entries` array. That's the
+whole process - there's no level to wire it into. As soon as it's in the
+file, it's part of the pool every puzzle draws from. Then run
 `node scripts/validate-content.js` before opening a PR.
 
 ## దైవనామాలు (deity names) - `data/deity-names-*.json`
@@ -98,3 +83,24 @@ Empty template:
 ```json
 { "word": "", "meaning": "" }
 ```
+
+## The level ladder - `data/levels.json`
+
+This is separate from content - it's the shape of each puzzle, shared
+across the whole pool:
+
+```json
+{ "levelNumber": 1, "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 5 }
+```
+
+- `gridSize` - the grid is `gridSize x gridSize`; must be big enough to
+  fit the longest word you expect to draw (the validator checks the whole
+  pool against every level's `gridSize`).
+- `fillerMode` - `"random"` (easy) or `"curated"` (fillers echo the
+  puzzle's own letters, harder to scan).
+- `breather` - marks an easier level sprinkled between harder ones.
+- `japamCount` - how many Sri Rama traces the post-level interlude asks
+  for.
+- `entryCount` - how many entries this level's puzzle draws from the pool
+  each time (a new random selection every time you play or hit "కొత్త
+  పజిల్").

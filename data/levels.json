@@ -1,0 +1,7 @@
+[
+  { "levelNumber": 1, "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 5 },
+  { "levelNumber": 2, "gridSize": 9, "fillerMode": "random", "breather": false, "japamCount": 4, "entryCount": 6 },
+  { "levelNumber": 3, "gridSize": 10, "fillerMode": "curated", "breather": false, "japamCount": 5, "entryCount": 7 },
+  { "levelNumber": 4, "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 5 },
+  { "levelNumber": 5, "gridSize": 11, "fillerMode": "curated", "breather": false, "japamCount": 7, "entryCount": 8 }
+]
