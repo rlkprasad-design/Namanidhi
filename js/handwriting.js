@@ -171,11 +171,20 @@ export async function buildDotTrace(word) {
   return result;
 }
 
+// A trace counts as done once this fraction of dots has been touched -
+// left deliberately short of 100% so an almost-complete trace (a stray
+// dot or two, imprecise touch input) still counts, matching the app's
+// no-penalty tone.
+const COMPLETE_THRESHOLD = 0.95;
+
 // Attaches drag-to-fill interaction to a canvas already sized to match
 // dotTrace.width/height. Calls onChange() whenever a new dot fills, and
-// onComplete() once every dot has been touched.
+// onComplete() once COMPLETE_THRESHOLD of the dots have been touched
+// (called exactly once).
 export function attachDotTracer(canvas, dots, filled, { onChange, onComplete }) {
   let dragging = false;
+  let completed = false;
+  const threshold = Math.ceil(dots.length * COMPLETE_THRESHOLD);
 
   function pointFromEvent(e) {
     const rect = canvas.getBoundingClientRect();
@@ -197,7 +206,10 @@ export function attachDotTracer(canvas, dots, filled, { onChange, onComplete }) 
     });
     if (changed) {
       onChange();
-      if (filled.size === dots.length) onComplete();
+      if (!completed && filled.size >= threshold) {
+        completed = true;
+        onComplete();
+      }
     }
   }
 

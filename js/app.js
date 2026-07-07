@@ -80,7 +80,7 @@ function showNameGate() {
       <h1 class="display">నామ నిధి</h1>
       <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
       <p>ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి</p>
-      <input type="text" maxlength="40" placeholder="మీ పేరు" data-name-input />
+      <input type="text" class="text-input" maxlength="40" placeholder="మీ పేరు" data-name-input />
       <div class="btn-row">
         <button type="button" class="btn btn-primary" data-begin>ప్రారంభించండి</button>
       </div>
@@ -366,6 +366,13 @@ function showJapamNamePicker() {
     <div>
       <h2>ఏ నామాన్ని రాద్దాం?</h2>
       <div class="card-grid" data-names></div>
+      <div class="custom-word-block">
+        <p class="tagline" style="text-align:center;">లేదా మీ స్వంత నామాన్ని రాయండి</p>
+        <input type="text" class="text-input" maxlength="60" placeholder="ఇక్కడ రాయండి" data-custom-word />
+        <div class="btn-row">
+          <button type="button" class="btn btn-primary" data-custom-start>ప్రారంభించండి</button>
+        </div>
+      </div>
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
@@ -382,6 +389,16 @@ function showJapamNamePicker() {
     });
     container.appendChild(card);
   });
+
+  const customInput = screen.querySelector('[data-custom-word]');
+  const startCustom = () => {
+    const word = customInput.value.trim();
+    if (!word) { customInput.focus(); return; }
+    startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
+  };
+  screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);
+  customInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') startCustom(); });
+
   setScreen(screen);
 }
 

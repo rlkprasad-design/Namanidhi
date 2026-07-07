@@ -181,7 +181,8 @@ h1, h2, h3, .display {
   text-align: center;
   padding-top: 10vh;
 }
-.name-gate input {
+
+.text-input {
   font-size: 1.2rem;
   padding: 14px 16px;
   border-radius: 12px;
@@ -194,6 +195,12 @@ h1, h2, h3, .display {
   text-align: center;
   background: var(--cream);
   color: var(--deep-maroon);
+}
+
+.custom-word-block {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(240, 210, 139, 0.25);
 }
 
 /* Grid / temple-arch frame --------------------------------------------- */
