@@ -112,18 +112,6 @@ h1, h2, h3, .display {
   justify-content: center;
 }
 
-.speak-btn {
-  min-height: 40px;
-  min-width: 40px;
-  border-radius: 50%;
-  border: 2px solid var(--gold);
-  background: rgba(255, 255, 255, 0.06);
-  color: var(--gold-light);
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 0;
-}
-
 /* Cards -------------------------------------------------------------- */
 
 .card-grid {

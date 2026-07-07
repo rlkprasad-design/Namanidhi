@@ -13,7 +13,6 @@ import {
 } from './supabase-client.js';
 
 const root = document.getElementById('app');
-const canSpeak = 'speechSynthesis' in window;
 
 const JAPAM_NAMES = [
   { word: 'శ్రీరామ', label: 'శ్రీరామ' },
@@ -26,19 +25,6 @@ const state = {
   playerName: null,
   playerId: null,
 };
-
-function speak(text) {
-  if (!canSpeak) return;
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'te-IN';
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
-}
-
-function speakButton(text) {
-  if (!canSpeak) return '';
-  return `<button type="button" class="speak-btn" data-speak="${escapeAttr(text)}" aria-label="వినండి">🔊</button>`;
-}
 
 function escapeAttr(s) {
   return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
@@ -53,9 +39,6 @@ function el(html) {
 function setScreen(node) {
   root.innerHTML = '';
   root.appendChild(node);
-  root.querySelectorAll('[data-speak]').forEach((b) => {
-    b.addEventListener('click', () => speak(b.dataset.speak));
-  });
 }
 
 function topBar({ backAction, title } = {}) {
@@ -256,14 +239,10 @@ function renderGame(session) {
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           <span class="hint-meaning">${p.entry.meaning}</span>
-          ${p.found && canSpeak ? speakButton(p.entry.word) : ''}
         </div>
       `);
       hintsEl.appendChild(item);
     }
-    hintsEl.querySelectorAll('[data-speak]').forEach((b) => {
-      b.addEventListener('click', () => speak(b.dataset.speak));
-    });
   }
   renderHints();
 
@@ -414,7 +393,7 @@ async function renderJapamTrace(session) {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">లిఖిత జపం</h2>
-      <div class="japam-word">${session.word} ${canSpeak ? speakButton(session.word) : ''}</div>
+      <div class="japam-word">${session.word}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface-frame">
         <canvas data-canvas></canvas>
