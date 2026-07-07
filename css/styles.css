@@ -306,20 +306,22 @@ h1, h2, h3, .display {
   margin: 12px 0 20px;
 }
 
-.japam-surface {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  flex-wrap: wrap;
+.japam-surface-frame {
+  border: 3px solid var(--gold);
+  border-radius: 24px 24px 10px 10px;
+  background: var(--cream);
+  padding: 12px;
+  margin: 0 auto 24px;
+  max-width: 560px;
+  box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.15), 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+.japam-surface-frame canvas {
+  display: block;
+  width: 100%;
+  height: auto;
   touch-action: none;
   user-select: none;
-  margin-bottom: 24px;
-}
-.japam-surface .cell {
-  width: clamp(36px, 9vw, 56px);
-  aspect-ratio: 1;
-  border-radius: 10px;
-  font-size: clamp(1rem, 4vw, 1.4rem);
+  border-radius: 12px;
 }
 
 .mala {

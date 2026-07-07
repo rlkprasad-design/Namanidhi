@@ -11,10 +11,16 @@ async function getClient() {
   if (!isBackendConfigured()) return null;
   if (client) return client;
   if (!clientPromise) {
-    clientPromise = import('https://esm.sh/@supabase/supabase-js@2').then(({ createClient }) => {
-      client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      return client;
-    });
+    clientPromise = import('https://esm.sh/@supabase/supabase-js@2')
+      .then(({ createClient }) => {
+        client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        return client;
+      })
+      .catch((err) => {
+        console.warn('Supabase client unavailable, staying local-only:', err);
+        clientPromise = null; // allow a retry on the next call instead of failing forever
+        return null;
+      });
   }
   return clientPromise;
 }

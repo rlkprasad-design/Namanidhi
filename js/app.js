@@ -1,6 +1,6 @@
-import { graphemes } from './segmenter.js';
 import { generateGrid, sampleEntries } from './grid.js';
 import { attachTracer, pathToStrings } from './trace.js';
+import { buildDotTrace, attachDotTracer } from './handwriting.js';
 import { loadEntryPool, loadLevels } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
@@ -409,15 +409,16 @@ function startJapamSession(config) {
   renderJapamTrace(session);
 }
 
-function renderJapamTrace(session) {
-  const letters = graphemes(session.word);
+async function renderJapamTrace(session) {
   const isStandalone = !session.target;
   const screen = el(`
     <div>
       <h2 style="text-align:center;">లిఖిత జపం</h2>
       <div class="japam-word">${session.word} ${canSpeak ? speakButton(session.word) : ''}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
-      <div class="japam-surface" data-surface></div>
+      <div class="japam-surface-frame">
+        <canvas data-canvas></canvas>
+      </div>
       ${isStandalone ? '<div class="btn-row"><button type="button" class="btn btn-secondary" data-exit>ముగించు</button></div>' : ''}
     </div>
   `);
@@ -434,44 +435,38 @@ function renderJapamTrace(session) {
     screen.querySelector('[data-count]').textContent = `ఈ సెషన్‌లో: ${session.count} సార్లు`;
   }
 
-  const surface = screen.querySelector('[data-surface]');
-  const cellEls = letters.map((letter, i) => {
-    const cellEl = el(`<div class="cell" data-r="0" data-c="${i}">${letter}</div>`);
-    surface.appendChild(cellEl);
-    return cellEl;
-  });
-
   setScreen(screen);
 
-  let lastSelected = [];
-  function highlight(path) {
-    lastSelected.forEach(({ c }) => cellEls[c].classList.remove('selected'));
-    path.forEach(({ c }) => cellEls[c].classList.add('selected'));
-    lastSelected = path;
-  }
-  function flashWrong(path) {
-    path.forEach(({ c }) => cellEls[c].classList.add('wrong'));
-    setTimeout(() => path.forEach(({ c }) => cellEls[c].classList.remove('wrong')), 400);
-  }
+  const canvas = screen.querySelector('[data-canvas]');
+  const { dots, width, height } = await buildDotTrace(session.word);
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  const filled = new Set();
 
-  attachTracer(surface, {
-    onDragStart: highlight,
-    onDragUpdate: highlight,
-    onDragEnd: (path) => {
-      highlight([]);
-      if (path.length !== letters.length) {
-        if (path.length > 1) flashWrong(path);
-        return;
-      }
-      const grid1row = [letters];
-      const { forward, reversed } = pathToStrings(path, grid1row);
-      const word = letters.join('');
-      if (forward === word || reversed === word) {
-        onJapamSuccess(session);
-      } else {
-        flashWrong(path);
-      }
-    },
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.strokeStyle = 'rgba(240, 210, 139, 0.35)';
+    ctx.lineWidth = 1;
+    const ruleGap = height / 4;
+    for (let i = 1; i <= 3; i++) {
+      ctx.beginPath();
+      ctx.moveTo(0, ruleGap * i);
+      ctx.lineTo(width, ruleGap * i);
+      ctx.stroke();
+    }
+    dots.forEach((d, i) => {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, filled.has(i) ? 4.5 : 3.5, 0, Math.PI * 2);
+      ctx.fillStyle = filled.has(i) ? '#c9962e' : '#4e1219';
+      ctx.fill();
+    });
+  }
+  draw();
+
+  attachDotTracer(canvas, dots, filled, {
+    onChange: draw,
+    onComplete: () => onJapamSuccess(session),
   });
 }
 
