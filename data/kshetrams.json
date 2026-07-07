@@ -1,0 +1,36 @@
+{
+  "categoryGroup": "kshetrams",
+  "categoryGroupLabel": "క్షేత్రాలు",
+  "subGroupId": null,
+  "subGroupLabel": null,
+  "levels": [
+    {
+      "levelNumber": 1,
+      "gridSize": 8,
+      "fillerMode": "random",
+      "breather": true,
+      "japamCount": 3,
+      "entries": [
+        { "word": "తిరుమల", "meaning": "వేంకటేశ్వరుని నివాసం, ఆంధ్రప్రదేశ్‌లోని ప్రసిద్ధ క్షేత్రం" },
+        { "word": "కాశీ", "meaning": "శివుని పుణ్యక్షేత్రం, మోక్షపురి" },
+        { "word": "పూరి", "meaning": "జగన్నాథుని క్షేత్రం, ఒరిస్సా రాష్ట్రం" },
+        { "word": "ద్వారక", "meaning": "శ్రీకృష్ణుని రాజధాని, ద్వాదశ జ్యోతిర్లింగాలలో సమీపం" },
+        { "word": "శ్రీశైలం", "meaning": "మల్లికార్జున జ్యోతిర్లింగ క్షేత్రం" }
+      ]
+    },
+    {
+      "levelNumber": 2,
+      "gridSize": 10,
+      "fillerMode": "curated",
+      "breather": false,
+      "japamCount": 5,
+      "entries": [
+        { "word": "భద్రాచలం", "meaning": "సీతారాముల ఆలయం, గోదావరి తీరాన" },
+        { "word": "పంఢర్పూర్", "meaning": "విఠోబా క్షేత్రం, వార్కరీ భక్తుల పుణ్యస్థలం" },
+        { "word": "రామేశ్వరం", "meaning": "శివలింగ ప్రతిష్ఠను రాముడు చేసిన క్షేత్రం" },
+        { "word": "అయోధ్య", "meaning": "శ్రీరాముని జన్మభూమి" },
+        { "word": "బృందావనం", "meaning": "శ్రీకృష్ణుని బాల్యలీలల భూమి" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "categoryGroup": "devotees",
+  "categoryGroupLabel": "భక్తులు",
+  "subGroupId": null,
+  "subGroupLabel": null,
+  "levels": [
+    {
+      "levelNumber": 1,
+      "gridSize": 8,
+      "fillerMode": "random",
+      "breather": true,
+      "japamCount": 3,
+      "entries": [
+        { "word": "ద్రౌపది", "era": "itihasa", "meaning": "పాండవుల పత్ని, ధర్మనిష్ఠకు ప్రతీక" },
+        { "word": "శబరి", "era": "itihasa", "meaning": "రామభక్తురాలు, ఎంగిలి పండ్లు స్వీకరించిన భక్తి ప్రతీక" },
+        { "word": "ప్రహ్లాద", "era": "purana", "meaning": "విష్ణుభక్తుడు, తండ్రి దుష్ప్రభావాన్ని ధిక్కరించినవాడు" },
+        { "word": "విభీషణ", "era": "itihasa", "meaning": "రావణ సోదరుడు, ధర్మం కోసం రాముని పక్షం చేరినవాడు" },
+        { "word": "హనుమ", "era": "itihasa", "meaning": "రామభక్తుడు, శక్తి భక్తులకు ప్రతీక" }
+      ]
+    },
+    {
+      "levelNumber": 2,
+      "gridSize": 10,
+      "fillerMode": "curated",
+      "breather": false,
+      "japamCount": 5,
+      "entries": [
+        { "word": "మీరాబాయి", "era": "bhakti", "meaning": "కృష్ణభక్తురాలు, భజనలు రచించిన సాధ్వి" },
+        { "word": "నామదేవ్", "era": "bhakti", "meaning": "వార్కరీ సంప్రదాయ భక్త కవి, పాండురంగని ఆరాధకుడు" },
+        { "word": "తుకారాం", "era": "bhakti", "meaning": "అభంగాలు రచించిన మహారాష్ట్ర భక్తకవి" },
+        { "word": "ఆండాళ్", "era": "bhakti", "meaning": "ఆళ్వార్ భక్తురాలు, తిరుప్పావై రచయిత్రి" },
+        { "word": "అంబరీష", "era": "purana", "meaning": "విష్ణుభక్తి పరాయణుడైన చక్రవర్తి" }
+      ]
+    }
+  ]
+}

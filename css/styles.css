@@ -1,0 +1,367 @@
+:root {
+  --maroon: #7a1f2b;
+  --maroon-dark: #551520;
+  --gold: #c99a3f;
+  --gold-light: #e7c877;
+  --cream: #fdf6e6;
+  --cream-deep: #f5e8c6;
+  --ink: #2c1810;
+  --ink-soft: #5a3d2b;
+  --good: #2e6b3e;
+  --bad: #a3313f;
+  --radius: 18px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Sans Telugu', sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Noto Serif Telugu', serif;
+  color: var(--maroon);
+  margin: 0 0 0.4em;
+}
+
+#app {
+  max-width: 720px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 20px 16px 48px;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.top-bar .player {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.title-block {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.title-block .tagline {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Buttons ---------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  font-family: 'Noto Sans Telugu', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.08s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--maroon);
+  color: var(--cream);
+}
+.btn-primary:hover { background: var(--maroon-dark); }
+
+.btn-secondary {
+  background: var(--cream-deep);
+  color: var(--maroon);
+  border-color: var(--gold);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: var(--maroon);
+  text-decoration: underline;
+  min-height: auto;
+  padding: 4px 8px;
+  font-size: 0.95rem;
+}
+
+.btn-block { display: flex; width: 100%; }
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.speak-btn {
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--cream-deep);
+  color: var(--maroon);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Cards -------------------------------------------------------------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  text-align: right;
+  background: white;
+  border: 2px solid var(--gold-light);
+  border-radius: var(--radius);
+  padding: 20px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--ink);
+}
+.card:active { transform: scale(0.98); }
+
+.card .card-title {
+  font-family: 'Noto Serif Telugu', serif;
+  font-size: 1.3rem;
+  color: var(--maroon);
+  margin-bottom: 6px;
+}
+.card .card-sub {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--maroon-dark);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.8rem;
+  margin-top: 8px;
+}
+
+.mode-choice {
+  display: grid;
+  gap: 20px;
+}
+.mode-btn {
+  padding: 32px 20px;
+  border-radius: 24px;
+  border: 3px solid var(--gold);
+  background: linear-gradient(180deg, #fff, var(--cream-deep));
+  cursor: pointer;
+  text-align: center;
+}
+.mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; }
+.mode-btn .sub { color: var(--ink-soft); }
+
+/* Name gate ------------------------------------------------------------ */
+
+.name-gate {
+  text-align: center;
+  padding-top: 10vh;
+}
+.name-gate input {
+  font-size: 1.2rem;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 2px solid var(--gold);
+  width: 100%;
+  max-width: 320px;
+  margin: 20px auto;
+  display: block;
+  font-family: 'Noto Sans Telugu', sans-serif;
+  text-align: center;
+}
+
+/* Grid / temple-arch frame --------------------------------------------- */
+
+.grid-frame {
+  border: 6px solid var(--gold);
+  border-radius: 120px 120px 22px 22px;
+  background: var(--cream-deep);
+  padding: 22px 16px 16px;
+  margin: 0 auto 20px;
+  max-width: 560px;
+  box-shadow: inset 0 0 0 3px var(--cream);
+}
+
+.grid {
+  display: grid;
+  gap: 4px;
+  touch-action: none;
+  user-select: none;
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+.cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: clamp(0.75rem, 3vw, 1.15rem);
+  color: var(--ink);
+  border: 1px solid #e8dcb8;
+}
+
+.cell.selected { background: var(--gold-light); }
+.cell.found { background: #dff0e2; color: var(--good); border-color: var(--good); }
+.cell.wrong { background: #f6d6da; color: var(--bad); border-color: var(--bad); }
+.cell.nudge { background: var(--gold-light); box-shadow: 0 0 0 3px var(--gold); animation: glow 1.2s ease-in-out infinite alternate; }
+
+@keyframes glow {
+  from { box-shadow: 0 0 0 2px var(--gold); }
+  to { box-shadow: 0 0 10px 4px var(--gold); }
+}
+
+/* Hints panel ------------------------------------------------------------ */
+
+.hints-panel {
+  background: white;
+  border: 2px solid var(--gold-light);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.hints-panel h3 { font-size: 1.05rem; }
+.hint-item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--cream-deep);
+}
+.hint-item:last-child { border-bottom: none; }
+.hint-item .hint-word {
+  font-family: 'Noto Serif Telugu', serif;
+  font-weight: 700;
+  color: var(--maroon);
+  min-width: 2ch;
+}
+.hint-item.pending .hint-word { visibility: hidden; }
+.hint-item .hint-meaning { color: var(--ink-soft); font-size: 0.92rem; }
+.hint-item.found { opacity: 1; }
+.hint-item.pending { opacity: 0.9; }
+
+.game-toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+
+/* Japam ------------------------------------------------------------------ */
+
+.japam-word {
+  text-align: center;
+  font-family: 'Noto Serif Telugu', serif;
+  font-size: 2.2rem;
+  color: var(--maroon);
+  margin: 12px 0 20px;
+}
+
+.japam-surface {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  touch-action: none;
+  user-select: none;
+  margin-bottom: 24px;
+}
+.japam-surface .cell {
+  width: clamp(36px, 9vw, 56px);
+  aspect-ratio: 1;
+  border-radius: 10px;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+}
+
+.mala {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 16px 0 24px;
+}
+.bead {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--cream-deep);
+  border: 2px solid var(--gold);
+}
+.bead.filled { background: var(--gold); }
+
+.completion-beat {
+  text-align: center;
+  padding: 32px 12px;
+  color: var(--maroon);
+  font-family: 'Noto Serif Telugu', serif;
+  font-size: 1.3rem;
+}
+
+/* Scoreboard --------------------------------------------------------------- */
+
+.score-section { margin-bottom: 28px; }
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 2px solid var(--gold-light);
+}
+.score-table th, .score-table td {
+  padding: 10px 14px;
+  text-align: right;
+  border-bottom: 1px solid var(--cream-deep);
+}
+.score-table th { background: var(--cream-deep); color: var(--maroon); }
+.score-note { color: var(--ink-soft); font-size: 0.85rem; margin-top: 8px; }
+
+/* Level complete ----------------------------------------------------------- */
+
+.complete-screen {
+  text-align: center;
+  padding: 8vh 12px;
+}
+.complete-screen .glow {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 420px) {
+  html, body { font-size: 17px; }
+  .grid-frame { border-radius: 80px 80px 18px 18px; padding: 16px 8px 10px; }
+}
