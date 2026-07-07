@@ -454,15 +454,19 @@ function startJapamSession(config) {
 
 function renderJapamTrace(session) {
   const letters = graphemes(session.word);
+  const isStandalone = !session.target;
   const screen = el(`
     <div>
       <h2 style="text-align:center;">లిఖిత జపం</h2>
       <div class="japam-word">${session.word} ${canSpeak ? speakButton(session.word) : ''}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface" data-surface></div>
+      ${isStandalone ? '<div class="btn-row"><button type="button" class="btn btn-secondary" data-exit>ముగించు</button></div>' : ''}
     </div>
   `);
-  screen.prepend(topBar({ backAction: session.onExit }));
+  const exitAction = isStandalone ? () => showJapamSessionSummary(session) : session.onExit;
+  screen.prepend(topBar({ backAction: exitAction }));
+  if (isStandalone) screen.querySelector('[data-exit]').addEventListener('click', exitAction);
 
   if (session.target) {
     const mala = screen.querySelector('[data-mala]');
@@ -524,31 +528,11 @@ function onJapamSuccess(session) {
   recordJapamLocal(entry);
   if (state.playerId) syncJapamLog(state.playerId, entry);
 
-  if (session.mode === 'interlude') {
-    if (session.count >= session.target) {
-      showJapamCompletion(session);
-    } else {
-      renderJapamTrace(session);
-    }
+  if (session.mode === 'interlude' && session.count >= session.target) {
+    showJapamCompletion(session);
   } else {
-    showJapamContinueChoice(session);
+    renderJapamTrace(session);
   }
-}
-
-function showJapamContinueChoice(session) {
-  const screen = el(`
-    <div class="completion-beat">
-      <div class="glow">✦</div>
-      <p>చక్కగా రాశారు.</p>
-      <div class="btn-row" style="margin-top:20px;">
-        <button type="button" class="btn btn-primary" data-again>మళ్ళీ</button>
-        <button type="button" class="btn btn-secondary" data-exit>ముగించు</button>
-      </div>
-    </div>
-  `);
-  screen.querySelector('[data-again]').addEventListener('click', () => renderJapamTrace(session));
-  screen.querySelector('[data-exit]').addEventListener('click', () => showJapamSessionSummary(session));
-  setScreen(screen);
 }
 
 function showJapamSessionSummary(session) {
