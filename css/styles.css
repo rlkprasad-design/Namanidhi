@@ -310,9 +310,9 @@ h1, h2, h3, .display {
   border: 3px solid var(--gold);
   border-radius: 24px 24px 10px 10px;
   background: var(--cream);
-  padding: 12px;
+  padding: 8px;
   margin: 0 auto 24px;
-  max-width: 560px;
+  max-width: 640px;
   box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.15), 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 .japam-surface-frame canvas {

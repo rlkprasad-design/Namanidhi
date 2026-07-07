@@ -438,7 +438,7 @@ async function renderJapamTrace(session) {
   setScreen(screen);
 
   const canvas = screen.querySelector('[data-canvas]');
-  const { dots, width, height } = await buildDotTrace(session.word);
+  const { dots, width, height, baselineY } = await buildDotTrace(session.word);
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
@@ -446,15 +446,12 @@ async function renderJapamTrace(session) {
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(240, 210, 139, 0.35)';
+    ctx.strokeStyle = 'rgba(240, 210, 139, 0.45)';
     ctx.lineWidth = 1;
-    const ruleGap = height / 4;
-    for (let i = 1; i <= 3; i++) {
-      ctx.beginPath();
-      ctx.moveTo(0, ruleGap * i);
-      ctx.lineTo(width, ruleGap * i);
-      ctx.stroke();
-    }
+    ctx.beginPath();
+    ctx.moveTo(0, baselineY);
+    ctx.lineTo(width, baselineY);
+    ctx.stroke();
     dots.forEach((d, i) => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, filled.has(i) ? 4.5 : 3.5, 0, Math.PI * 2);

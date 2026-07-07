@@ -2,13 +2,16 @@
 // handwriting-practice worksheet, not a word-search. A word is rendered to
 // an offscreen canvas, its ink is reduced to connected blobs (glyph
 // strokes), each blob's outer boundary is walked and resampled into evenly
-// spaced dots. The visible canvas draws faint ruled-paper lines plus those
+// spaced dots. The visible canvas draws a ruled-paper baseline plus those
 // dots; dragging a finger/mouse near a dot fills it in.
 
-const FONT_PX = 110;
-const DOT_SPACING = 9; // px between dots along a stroke's outline
-const MIN_BLOB_PIXELS = 12; // ignore anti-aliasing specks
-export const HIT_RADIUS = 17; // px, how close a drag has to pass to fill a dot
+import { graphemes } from './segmenter.js';
+
+const FONT_PX = 170;
+const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between each letter
+const DOT_SPACING = 12; // px between dots along a stroke's outline
+const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
+export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
 
 const cache = new Map();
 
@@ -18,14 +21,27 @@ async function ensureFontReady() {
   }
 }
 
+const isSpace = (ch) => /\s/.test(ch);
+
 function renderInkMask(word) {
+  const letters = graphemes(word);
   const measure = document.createElement('canvas').getContext('2d');
   measure.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
-  const m = measure.measureText(word);
-  const padding = FONT_PX * 0.35;
-  const ascent = m.actualBoundingBoxAscent || FONT_PX * 0.8;
-  const descent = m.actualBoundingBoxDescent || FONT_PX * 0.25;
-  const width = Math.ceil(m.width + padding * 2);
+
+  let ascent = FONT_PX * 0.8;
+  let descent = FONT_PX * 0.25;
+  let textWidth = 0;
+  const letterWidths = letters.map((letter, i) => {
+    const m = measure.measureText(letter);
+    ascent = Math.max(ascent, m.actualBoundingBoxAscent || 0);
+    descent = Math.max(descent, m.actualBoundingBoxDescent || 0);
+    textWidth += m.width;
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) textWidth += LETTER_GAP;
+    return m.width;
+  });
+
+  const padding = FONT_PX * 0.08;
+  const width = Math.ceil(textWidth + padding * 2);
   const height = Math.ceil(ascent + descent + padding * 2);
 
   const canvas = document.createElement('canvas');
@@ -35,12 +51,19 @@ function renderInkMask(word) {
   ctx.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'alphabetic';
-  ctx.fillText(word, padding, padding + ascent);
+
+  const baselineY = padding + ascent;
+  let x = padding;
+  letters.forEach((letter, i) => {
+    ctx.fillText(letter, x, baselineY);
+    x += letterWidths[i];
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) x += LETTER_GAP;
+  });
 
   const { data } = ctx.getImageData(0, 0, width, height);
   const ink = new Uint8Array(width * height);
   for (let i = 0; i < width * height; i++) ink[i] = data[i * 4 + 3] > 128 ? 1 : 0;
-  return { ink, width, height };
+  return { ink, width, height, baselineY };
 }
 
 function findComponents(ink, width, height) {
@@ -126,12 +149,13 @@ function resampleByArcLength(points, spacing) {
   return dots;
 }
 
-// Builds (and caches) the dot outline for a word: { dots: [{x,y}], width, height }.
+// Builds (and caches) the dot outline for a word:
+// { dots: [{x,y}], width, height, baselineY }.
 export async function buildDotTrace(word) {
   if (cache.has(word)) return cache.get(word);
   await ensureFontReady();
 
-  const { ink, width, height } = renderInkMask(word);
+  const { ink, width, height, baselineY } = renderInkMask(word);
   const components = findComponents(ink, width, height);
 
   const blobs = components.map((pixels) => {
@@ -142,7 +166,7 @@ export async function buildDotTrace(word) {
   });
   blobs.sort((a, b) => a.centroidX - b.centroidX);
 
-  const result = { dots: blobs.flatMap((b) => b.dots), width, height };
+  const result = { dots: blobs.flatMap((b) => b.dots), width, height, baselineY };
   cache.set(word, result);
   return result;
 }
