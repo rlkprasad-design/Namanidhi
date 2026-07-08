@@ -1,6 +1,7 @@
 import { generateGrid, sampleEntries } from './grid.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
+import { looksLikeLatin, transliterate } from './transliterate.js';
 import { loadEntryPool, loadLevels } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
@@ -375,7 +376,7 @@ function showJapamNamePicker() {
       <div class="card-grid" data-names></div>
       <div class="custom-word-block">
         <p class="tagline" style="text-align:center;">లేదా మీకు నచ్చిన నామాన్ని రాయండి</p>
-        <input type="text" class="text-input" maxlength="60" placeholder="ఇక్కడ రాయండి" data-custom-word />
+        <input type="text" class="text-input" maxlength="60" placeholder="తెలుగులో లేదా English లో రాయండి" data-custom-word />
         <div class="btn-row">
           <button type="button" class="btn btn-primary" data-custom-start>ప్రారంభించండి</button>
         </div>
@@ -399,8 +400,9 @@ function showJapamNamePicker() {
 
   const customInput = screen.querySelector('[data-custom-word]');
   const startCustom = () => {
-    const word = customInput.value.trim();
-    if (!word) { customInput.focus(); return; }
+    const typed = customInput.value.trim();
+    if (!typed) { customInput.focus(); return; }
+    const word = looksLikeLatin(typed) ? transliterate(typed) : typed;
     startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
   };
   screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);
