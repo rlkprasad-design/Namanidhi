@@ -22,13 +22,35 @@ function randomPool() {
   return BASE_POOL[Math.floor(Math.random() * BASE_POOL.length)];
 }
 
-// Picks `count` entries at random from the pool entries matching this
-// level's difficulty tier, restricted to words that can fit in gridSize.
+// Per-difficulty draw queues, so puzzles cycle through every eligible word
+// once before any word repeats - independent random draws each time would
+// still be "random" but would frequently repeat words by chance, especially
+// for small pools (e.g. drawing 6 of 9 "difficult" words twice in a row
+// shares ~4 words on average). Reset on page reload.
+const drawQueues = new Map();
+
+function refillQueue(queue, eligible, count) {
+  while (queue.length < count) {
+    const queuedWords = new Set(queue.map((e) => e.word));
+    const unseen = eligible.filter((e) => !queuedWords.has(e.word));
+    queue.push(...shuffle(unseen.length ? unseen : eligible));
+  }
+  return queue;
+}
+
+// Picks `count` entries from the pool entries matching this level's
+// difficulty tier, restricted to words that can fit in gridSize - drawn
+// from a shuffled rotation so nothing repeats until the tier cycles.
 export function sampleEntries(pool, level) {
   const eligible = pool.filter(
     (e) => e.difficulty === level.difficulty && graphemes(e.word).length <= level.gridSize
   );
-  return shuffle(eligible).slice(0, level.entryCount);
+  if (!eligible.length) return [];
+
+  const queue = refillQueue(drawQueues.get(level.difficulty) || [], eligible, level.entryCount);
+  const drawn = queue.slice(0, level.entryCount);
+  drawQueues.set(level.difficulty, queue.slice(level.entryCount));
+  return drawn;
 }
 
 // Try every (direction, start) combo for a word, shuffled, and return the
