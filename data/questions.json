@@ -1,20 +1,115 @@
 {
   "entries": [
-    {
-      "word": "హరి",
-      "meaning": "పాపాలను హరించువాడు, విష్ణువు యొక్క సుందర నామం",
-      "difficulty": "easy"
-    },
-    {
-      "word": "నారాయణ",
-      "meaning": "సమస్త జీవులకు నిలయమైనవాడు",
-      "difficulty": "easy"
-    },
-    {
-      "word": "గోవింద",
-      "meaning": "గోవులను, భూమిని రక్షించువాడు",
-      "difficulty": "easy"
-    },
+    { "word": "రాముడు", "meaning": "అయోధ్య రాజు, విష్ణువు అవతారం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "సీత", "meaning": "రాముని పత్ని, జానకి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "లక్ష్మణుడు", "meaning": "రాముని సోదరుడు, నిత్య సేవకుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "భరతుడు", "meaning": "రాముని సోదరుడు, రాజ్యాన్ని త్యజించినవాడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "శత్రుఘ్నుడు", "meaning": "రాముని సోదరుడు, లక్ష్మణుని కవలవాడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "హనుమంతుడు", "meaning": "రామభక్తుడు, వాయుపుత్రుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "రావణుడు", "meaning": "లంకాధిపతి, సీతను అపహరించినవాడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "కుంభకర్ణుడు", "meaning": "రావణుని సోదరుడు, ఆరు నెలలు నిద్రించువాడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "సుగ్రీవుడు", "meaning": "వానర రాజు, రాముని మిత్రుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "వాలి", "meaning": "సుగ్రీవుని సోదరుడు, కిష్కింధ రాజు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "జటాయువు", "meaning": "సీతను రక్షించడానికి రావణునితో పోరాడిన గ్రద్ద", "difficulty": "easy", "source": "ramayana" },
+    { "word": "అహల్య", "meaning": "శాపగ్రస్తురాలు, రాముని పాదస్పర్శచే ముక్తి పొందినది", "difficulty": "easy", "source": "ramayana" },
+    { "word": "కైకేయి", "meaning": "దశరథుని భార్య, భరతుని తల్లి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "కౌసల్య", "meaning": "దశరథుని భార్య, రాముని తల్లి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "సుమిత్ర", "meaning": "దశరథుని భార్య, లక్ష్మణ శత్రుఘ్నుల తల్లి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "దశరథుడు", "meaning": "అయోధ్య రాజు, రాముని తండ్రి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "విశ్వామిత్రుడు", "meaning": "రామలక్ష్మణులకు విద్యనేర్పిన మహర్షి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "వసిష్ఠుడు", "meaning": "సూర్యవంశ రాజగురువు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "అంగదుడు", "meaning": "వాలి కుమారుడు, వానర వీరుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "మారీచుడు", "meaning": "బంగారు లేడి రూపందాల్చిన రాక్షసుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "శూర్పణఖ", "meaning": "రావణుని సోదరి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "మండోదరి", "meaning": "రావణుని పత్ని", "difficulty": "easy", "source": "ramayana" },
+    { "word": "ఇంద్రజిత్తు", "meaning": "రావణుని కుమారుడు, మేఘనాథుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "లంక", "meaning": "రావణుని రాజ్యం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "కిష్కింధ", "meaning": "వానర రాజ్యం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "చిత్రకూటం", "meaning": "రాముడు వనవాసంలో నివసించిన కొండ", "difficulty": "easy", "source": "ramayana" },
+    { "word": "పంచవటి", "meaning": "రామసీతాలక్ష్మణులు నివసించిన ప్రదేశం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "దండకారణ్యం", "meaning": "రాముడు సంచరించిన అరణ్యం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "సేతుబంధనం", "meaning": "రాముడు లంకకు నిర్మించిన వారధి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "అశోకవనం", "meaning": "సీత బంధించబడిన ఉద్యానవనం", "difficulty": "easy", "source": "ramayana" },
+    { "word": "గుహుడు", "meaning": "నిషాద రాజు, రాముని మిత్రుడు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "లవకుశులు", "meaning": "రామసీతల కుమారులు", "difficulty": "easy", "source": "ramayana" },
+    { "word": "వాల్మీకి", "meaning": "రామాయణ రచయిత", "difficulty": "easy", "source": "ramayana" },
+    { "word": "తాటకి", "meaning": "విశ్వామిత్రుని యజ్ఞాన్ని భంగపరచిన రాక్షసి", "difficulty": "easy", "source": "ramayana" },
+    { "word": "సంపాతి", "meaning": "జటాయువు సోదరుడు, సీత జాడ తెలిపిన గ్రద్ద", "difficulty": "easy", "source": "ramayana" },
+    { "word": "త్రిజట", "meaning": "అశోకవనంలో సీతను కాపాడిన దయగల రాక్షస స్త్రీ", "difficulty": "easy", "source": "ramayana" },
+
+    { "word": "ధర్మరాజు", "meaning": "పాండవులలో పెద్దవాడు, ధర్మమూర్తి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "భీముడు", "meaning": "పాండవులలో బలవంతుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "అర్జునుడు", "meaning": "పాండవులలో మధ్యముడు, గాండీవధారి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "నకులుడు", "meaning": "పాండవుడు, అశ్వవిద్యా నిపుణుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "సహదేవుడు", "meaning": "పాండవుడు, జ్యోతిష్య నిపుణుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "కుంతి", "meaning": "పాండవుల తల్లి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "మాద్రి", "meaning": "నకుల సహదేవుల తల్లి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "దుర్యోధనుడు", "meaning": "కౌరవులలో పెద్దవాడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "దుశ్శాసనుడు", "meaning": "దుర్యోధనుని సోదరుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "శకుని", "meaning": "గాంధార రాజు, కుటిల బుద్ధిశాలి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "కర్ణుడు", "meaning": "కుంతి పుత్రుడు, దాతృత్వానికి ప్రసిద్ధుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "భీష్ముడు", "meaning": "కురువంశ పితామహుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ద్రోణాచార్యుడు", "meaning": "కౌరవ పాండవుల గురువు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "కృపాచార్యుడు", "meaning": "కురు రాజగురువు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "అశ్వత్థామ", "meaning": "ద్రోణుని కుమారుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "అభిమన్యుడు", "meaning": "అర్జునుని కుమారుడు, చక్రవ్యూహంలో మరణించినవాడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ఘటోత్కచుడు", "meaning": "భీముని కుమారుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ధృతరాష్ట్రుడు", "meaning": "అంధ కురు రాజు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "గాంధారి", "meaning": "ధృతరాష్ట్రుని పత్ని", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "విదురుడు", "meaning": "కురు మంత్రి, నీతిమంతుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "సంజయుడు", "meaning": "ధృతరాష్ట్రునికి యుద్ధవార్తలు తెలిపినవాడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "బలరాముడు", "meaning": "కృష్ణుని సోదరుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "సుభద్ర", "meaning": "కృష్ణుని సోదరి, అర్జునుని పత్ని", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ఏకలవ్యుడు", "meaning": "నిషాద రాకుమారుడు, గురుభక్తికి ప్రతీక", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ద్రుపదుడు", "meaning": "పాంచాల రాజు, ద్రౌపది తండ్రి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ధృష్టద్యుమ్నుడు", "meaning": "ద్రౌపది సోదరుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "కురుక్షేత్రం", "meaning": "మహాభారత యుద్ధభూమి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "హస్తినాపురం", "meaning": "కురు రాజధాని", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ఇంద్రప్రస్థం", "meaning": "పాండవుల రాజధాని", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "భగవద్గీత", "meaning": "కృష్ణుడు అర్జునునికి బోధించిన గీత", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "జయద్రథుడు", "meaning": "సింధు రాజు, అభిమన్యుని మరణానికి కారకుడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "వ్యాసుడు", "meaning": "మహాభారత రచయిత", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "శిఖండి", "meaning": "భీష్ముని మరణానికి కారణమైనవాడు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "ఉత్తర", "meaning": "అభిమన్యుని పత్ని, పరీక్షిత్తు తల్లి", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "విరాటరాజు", "meaning": "పాండవులకు అజ్ఞాతవాసంలో ఆశ్రయమిచ్చిన రాజు", "difficulty": "easy", "source": "mahabharata" },
+    { "word": "బృహన్నల", "meaning": "అజ్ఞాతవాసంలో అర్జునుడు ధరించిన మారువేషం", "difficulty": "easy", "source": "mahabharata" },
+
+    { "word": "దేవకి", "meaning": "కృష్ణుని తల్లి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "వసుదేవుడు", "meaning": "కృష్ణుని తండ్రి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "యశోద", "meaning": "కృష్ణుని పెంపుడు తల్లి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "నందుడు", "meaning": "కృష్ణుని పెంపుడు తండ్రి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "కంసుడు", "meaning": "మథురా రాజు, కృష్ణుని మేనమామ, దుష్టుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "రాధ", "meaning": "కృష్ణుని ప్రియురాలు, భక్తి ప్రతీక", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "రుక్మిణి", "meaning": "కృష్ణుని పట్టపు రాణి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "సత్యభామ", "meaning": "కృష్ణుని పత్ని", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "ధ్రువుడు", "meaning": "బాలభక్తుడు, నక్షత్రపదవి పొందినవాడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "గజేంద్రుడు", "meaning": "మొసలి బారినుండి విష్ణువుచే రక్షింపబడిన గజరాజు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "శుకమహర్షి", "meaning": "భాగవతాన్ని పరీక్షిత్తుకు బోధించినవాడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "పరీక్షిత్తు", "meaning": "భాగవతం వినిన రాజు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "బలిచక్రవర్తి", "meaning": "వామనునికి దానమిచ్చిన దానశీలి రాజు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "పూతన", "meaning": "కృష్ణుని చంపడానికి వచ్చిన రాక్షసి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "కాళియుడు", "meaning": "యమునా నదిలో కృష్ణునిచే అణచివేయబడిన సర్పం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "శిశుపాలుడు", "meaning": "కృష్ణునిచే వధించబడిన రాజు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "నారదుడు", "meaning": "దేవర్షి, భక్తి ప్రచారకుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "మార్కండేయుడు", "meaning": "చిరంజీవి మహర్షి", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "మత్స్యావతారం", "meaning": "విష్ణువు మొదటి అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "కూర్మావతారం", "meaning": "విష్ణువు తాబేలు అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "వరాహావతారం", "meaning": "విష్ణువు వరాహ అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "నరసింహావతారం", "meaning": "విష్ణువు నరసింహ అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "పరశురాముడు", "meaning": "విష్ణువు గొడ్డలి ధరించిన అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "బుద్ధావతారం", "meaning": "విష్ణువు బుద్ధ అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "కల్క్యావతారం", "meaning": "విష్ణువు భవిష్యత్ అవతారం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "మథుర", "meaning": "కృష్ణుని జన్మస్థలం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "గోకులం", "meaning": "కృష్ణుని బాల్య నివాసం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "గోవర్ధనగిరి", "meaning": "కృష్ణుడు వేలితో ఎత్తిన పర్వతం", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "అక్రూరుడు", "meaning": "కృష్ణుని బంధువు, భక్తుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "ఉద్ధవుడు", "meaning": "కృష్ణుని ప్రియ మిత్రుడు, భక్తుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "జాంబవంతుడు", "meaning": "భల్లూక రాజు, కృష్ణునితో పోరాడి కుమార్తెనిచ్చినవాడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "సుదాముడు", "meaning": "కృష్ణుని బాల్య మిత్రుడు, పేద బ్రాహ్మణుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "కుబ్జ", "meaning": "కృష్ణుని అనుగ్రహంతో వంపు తీరిన స్త్రీ", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "ప్రద్యుమ్నుడు", "meaning": "కృష్ణుని కుమారుడు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "బాణాసురుడు", "meaning": "వేయి బాహువులు గల రాక్షస రాజు", "difficulty": "easy", "source": "bhagavatam" },
+    { "word": "ఉష", "meaning": "బాణాసురుని కుమార్తె, అనిరుద్ధుని పత్ని", "difficulty": "easy", "source": "bhagavatam" },    
     {
       "word": "మాధవ",
       "meaning": "లక్ష్మీదేవి పతి",
@@ -66,11 +161,6 @@
       "difficulty": "medium"
     },
     {
-      "word": "అచ్యుత",
-      "meaning": "ఎన్నడూ పతనం చెందనివాడు",
-      "difficulty": "easy"
-    },
-    {
       "word": "అనిరుద్ధ",
       "meaning": "ఎవరిచేత అడ్డగింపబడనివాడు",
       "difficulty": "medium"
@@ -79,16 +169,6 @@
       "word": "సంకర్షణ",
       "meaning": "ప్రళయకాలంలో సమస్తమును తనయందు లీనం చేసుకొనువాడు",
       "difficulty": "difficult"
-    },
-    {
-      "word": "వామన",
-      "meaning": "వటువు రూపంలో అవతరించినవాడు",
-      "difficulty": "easy"
-    },
-    {
-      "word": "శ్రీకృష్ణ",
-      "meaning": "సర్వాకర్షకుడు, భగవద్గీత బోధించినవాడు",
-      "difficulty": "easy"
     },
     {
       "word": "త్రిలోకేశ",
@@ -104,36 +184,6 @@
       "word": "పరమాత్మ",
       "meaning": "సమస్త జీవులలో అంతర్యామిగా నిండినవాడు",
       "difficulty": "medium"
-    },
-    {
-      "word": "ద్రౌపది",
-      "meaning": "పాండవుల పత్ని, ధర్మనిష్ఠకు ప్రతీక",
-      "difficulty": "easy",
-      "era": "itihasa"
-    },
-    {
-      "word": "శబరి",
-      "meaning": "రామభక్తురాలు, ఎంగిలి పండ్లు స్వీకరించిన భక్తి ప్రతీక",
-      "difficulty": "easy",
-      "era": "itihasa"
-    },
-    {
-      "word": "ప్రహ్లాద",
-      "meaning": "విష్ణుభక్తుడు, తండ్రి దుష్ప్రభావాన్ని ధిక్కరించినవాడు",
-      "difficulty": "easy",
-      "era": "purana"
-    },
-    {
-      "word": "విభీషణ",
-      "meaning": "రావణ సోదరుడు, ధర్మం కోసం రాముని పక్షం చేరినవాడు",
-      "difficulty": "easy",
-      "era": "itihasa"
-    },
-    {
-      "word": "హనుమ",
-      "meaning": "రామభక్తుడు, శక్తి భక్తులకు ప్రతీక",
-      "difficulty": "easy",
-      "era": "itihasa"
     },
     {
       "word": "మీరాబాయి",
@@ -164,11 +214,6 @@
       "meaning": "విష్ణుభక్తి పరాయణుడైన చక్రవర్తి",
       "difficulty": "difficult",
       "era": "purana"
-    },
-    {
-      "word": "తిరుమల",
-      "meaning": "వేంకటేశ్వరుని నివాసం, ఆంధ్రప్రదేశ్‌లోని ప్రసిద్ధ క్షేత్రం",
-      "difficulty": "easy"
     },
     {
       "word": "కాశీ",
@@ -216,31 +261,6 @@
       "difficulty": "medium"
     },
     {
-      "word": "విభూతి",
-      "meaning": "శివారాధనలో నుదుటిపై ధరించే పవిత్ర భస్మం",
-      "difficulty": "easy"
-    },
-    {
-      "word": "కుంకుమ",
-      "meaning": "దేవి ఆరాధనలో ఉపయోగించే ఎర్రని పవిత్ర చూర్ణం",
-      "difficulty": "easy"
-    },
-    {
-      "word": "శంఖం",
-      "meaning": "పూజలో ఊదే పవిత్ర శంఖం, విష్ణువు చేతిలో ఉండేది",
-      "difficulty": "easy"
-    },
-    {
-      "word": "ఘంట",
-      "meaning": "పూజా సమయంలో మోగించే పవిత్ర గంట",
-      "difficulty": "easy"
-    },
-    {
-      "word": "దీపం",
-      "meaning": "పూజలో వెలిగించే జ్యోతి, అజ్ఞానాన్ని పోగొట్టే సంకేతం",
-      "difficulty": "easy"
-    },
-    {
       "word": "తులసిమాల",
       "meaning": "తులసి కాండాలతో చేసిన జపమాల, విష్ణు భక్తులు ధరిస్తారు",
       "difficulty": "medium"
@@ -274,18 +294,6 @@
     {
       "word": "ఆదిత్యుడు",
       "meaning": "సూర్యమండలమధ్యలో ప్రకాశించువాడు",
-      "difficulty": "easy",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాబలుడు",
-      "meaning": "మిక్కిలి బలవంతుడు",
-      "difficulty": "easy",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అరవిందాక్షుడు",
-      "meaning": "పద్మములవంటి కన్నులు కలవాడు",
       "difficulty": "easy",
       "source": "vishnu_sahasranama"
     },
