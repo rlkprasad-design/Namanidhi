@@ -2,7 +2,7 @@ import { generateGrid, sampleEntries } from './grid.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
 import { looksLikeLatin, transliterate } from './transliterate.js';
-import { loadEntryPool, loadLevels } from './data.js';
+import { loadEntryPool, loadLevels, loadStotrams } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
   recordPuzzleProgressLocal, recordJapamLocal,
@@ -174,12 +174,17 @@ function showHome() {
       <p class="tagline" style="text-align:center;">మీకు నచ్చిన విధానాన్ని ఎంచుకోండి</p>
       <div class="mode-choice">
         <button type="button" class="mode-btn" data-mode="nama-nidhi">
-          <div class="display">నామ నిధి</div>
+          <div class="display">నామ గుప్త నిధి</div>
           <div class="sub">నామాలు దాగిన పజిల్ ఆడండి</div>
         </button>
         <button type="button" class="mode-btn" data-mode="likhita-japam">
           <div class="display">లిఖిత జపం</div>
           <div class="sub">నామాన్ని ప్రశాంతంగా రాయండి</div>
+        </button>
+        <button type="button" class="mode-btn new" data-mode="stotra-pariksha">
+          <div class="new-tag">కొత్తది</div>
+          <div class="display">స్తోత్ర పరీక్ష</div>
+          <div class="sub">మీ అవగాహనను పరీక్షించుకోండి</div>
         </button>
       </div>
       <div class="btn-row" style="margin-top:28px;">
@@ -191,6 +196,7 @@ function showHome() {
   screen.prepend(topBar());
   screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showLevelSelect);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
+  screen.querySelector('[data-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
@@ -206,7 +212,7 @@ function showHome() {
 async function showLevelSelect() {
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">నామ నిధి</h2>
+      <h2 style="text-align:center;">నామ గుప్త నిధి</h2>
       <p class="tagline" style="text-align:center;">స్థాయిని ఎంచుకోండి</p>
       <div class="card-grid" data-levels></div>
     </div>
@@ -448,6 +454,219 @@ function showLevelComplete(level) {
 }
 
 // ---------------------------------------------------------------------
+// Stotra Pariksha: one curated puzzle per stotram, testing recall of
+// names from that specific stotram's own text - every entry appears
+// every time (no sampling/difficulty tiers, unlike Nama Gupta Nidhi
+// above).
+// ---------------------------------------------------------------------
+
+async function showStotramList() {
+  const screen = el(`
+    <div>
+      <h2 style="text-align:center;">స్తోత్ర పరీక్ష</h2>
+      <p class="tagline" style="text-align:center;">మీ అవగాహనను పరీక్షించుకోండి</p>
+      <div class="card-grid" data-stotrams style="margin-top:20px;"></div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction: showHome }));
+  setScreen(screen);
+
+  const stotrams = await loadStotrams();
+  const container = screen.querySelector('[data-stotrams]');
+  for (const stotram of stotrams) {
+    if (stotram.status !== 'active') {
+      container.appendChild(el(`
+        <div class="card locked">
+          <div class="card-title">${stotram.title}</div>
+          <div class="card-sub">త్వరలో వస్తుంది</div>
+          <span class="badge soon">త్వరలో</span>
+        </div>
+      `));
+      continue;
+    }
+    const card = el(`
+      <button type="button" class="card">
+        <div class="card-title">${stotram.title}</div>
+        <div class="card-sub">${stotram.entries.length} పేర్లు · ${stotram.gridSize}×${stotram.gridSize} గ్రిడ్</div>
+        <span class="badge">ఆడవచ్చు</span>
+      </button>
+    `);
+    card.addEventListener('click', () => startStotram(stotram));
+    container.appendChild(card);
+  }
+}
+
+function buildStotramSession(stotram) {
+  const { grid, placements } = generateGrid({
+    size: stotram.gridSize,
+    entries: stotram.entries,
+    fillerMode: stotram.fillerMode,
+  });
+  return { stotram, grid, placements: placements.map((p) => ({ ...p, found: false })), wrongAttempts: 0 };
+}
+
+function startStotram(stotram) {
+  renderStotramGame(buildStotramSession(stotram));
+}
+
+function renderStotramGame(session) {
+  const { stotram } = session;
+  const screen = el(`
+    <div>
+      <h2 style="text-align:center;">${stotram.title}</h2>
+      <p class="tagline" style="text-align:center;">మీ అవగాహనను పరీక్షించుకోండి</p>
+      <div class="grid-frame">
+        <div class="grid" data-grid style="grid-template-columns:repeat(${stotram.gridSize}, 1fr); --cell-font-size:${cellFontSize(stotram.gridSize)};"></div>
+      </div>
+      <div class="game-toolbar">
+        <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
+        <button type="button" class="btn btn-secondary" data-show-answer>సమాధానం చూపు</button>
+      </div>
+      <div class="hints-panel">
+        <h3>సూచనలు</h3>
+        <div data-hints></div>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction: showStotramList }));
+
+  const gridEl = screen.querySelector('[data-grid]');
+  const hintsEl = screen.querySelector('[data-hints]');
+  const toolbarEl = screen.querySelector('.game-toolbar');
+  const cellEls = [];
+
+  for (let r = 0; r < stotram.gridSize; r++) {
+    const row = [];
+    for (let c = 0; c < stotram.gridSize; c++) {
+      const cellEl = el(`<div class="cell" data-r="${r}" data-c="${c}">${session.grid[r][c]}</div>`);
+      gridEl.appendChild(cellEl);
+      row.push(cellEl);
+    }
+    cellEls.push(row);
+  }
+
+  function renderHints() {
+    hintsEl.innerHTML = '';
+    for (const p of session.placements) {
+      hintsEl.appendChild(el(`
+        <div class="hint-item ${p.found ? 'found' : 'pending'}">
+          <span class="hint-word">${p.letters.join('')}</span>
+          <span class="hint-meaning">${p.entry.meaning}</span>
+        </div>
+      `));
+    }
+  }
+  renderHints();
+
+  let lastSelected = [];
+  function highlightSelection(path) {
+    lastSelected.forEach(({ r, c }) => cellEls[r][c].classList.remove('selected'));
+    path.forEach(({ r, c }) => cellEls[r][c].classList.add('selected'));
+    lastSelected = path;
+  }
+
+  let lastHinted = [];
+  function updateDirectionHint(path) {
+    const next = [];
+    if (path.length) {
+      for (const p of session.placements) {
+        if (p.found) continue;
+        for (const cells of [p.cells, p.cells.slice().reverse()]) {
+          if (path.length >= cells.length) continue;
+          const matches = path.every(({ r, c }, i) => cells[i][0] === r && cells[i][1] === c);
+          if (matches) next.push(cells[path.length]);
+        }
+      }
+    }
+    lastHinted.forEach(([r, c]) => cellEls[r][c].classList.remove('direction-hint'));
+    next.forEach(([r, c]) => cellEls[r][c].classList.add('direction-hint'));
+    lastHinted = next;
+  }
+
+  function markFound(placement) {
+    placement.found = true;
+    placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
+    renderHints();
+    checkComplete();
+  }
+
+  function flashWrong(path) {
+    path.forEach(({ r, c }) => cellEls[r][c].classList.add('wrong'));
+    setTimeout(() => path.forEach(({ r, c }) => cellEls[r][c].classList.remove('wrong')), 400);
+  }
+
+  function maybeNudge() {
+    if (session.wrongAttempts < WRONG_TRIES_FOR_NUDGE) return;
+    const target = session.placements.find((p) => !p.found);
+    if (!target) return;
+    session.wrongAttempts = 0;
+    target.cells.forEach(([r, c]) => cellEls[r][c].classList.add('nudge'));
+    setTimeout(() => target.cells.forEach(([r, c]) => cellEls[r][c].classList.remove('nudge')), 2500);
+  }
+
+  function checkComplete() {
+    if (!session.placements.every((p) => p.found)) return;
+    recordStotramProgress(session);
+    toolbarEl.innerHTML = '';
+    const btn = el('<button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>');
+    btn.addEventListener('click', () => showStotramComplete(stotram));
+    toolbarEl.appendChild(btn);
+  }
+
+  attachTracer(gridEl, {
+    onDragStart: (path) => { highlightSelection(path); updateDirectionHint(path); },
+    onDragUpdate: (path) => { highlightSelection(path); updateDirectionHint(path); },
+    onDragEnd: (path) => {
+      highlightSelection([]); updateDirectionHint([]);
+      if (path.length < 2) return;
+      const { forward, reversed } = pathToStrings(path, session.grid);
+      const match = session.placements.find((p) => !p.found && (p.letters.join('') === forward || p.letters.join('') === reversed));
+      if (match) { session.wrongAttempts = 0; markFound(match); }
+      else { session.wrongAttempts += 1; flashWrong(path); maybeNudge(); }
+    },
+  });
+
+  screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderStotramGame(buildStotramSession(stotram)));
+  screen.querySelector('[data-show-answer]').addEventListener('click', () => {
+    const target = session.placements.find((p) => !p.found);
+    if (target) markFound(target);
+  });
+
+  setScreen(screen);
+}
+
+function recordStotramProgress(session) {
+  const progress = {
+    category: 'stotram',
+    sub_category: session.stotram.id,
+    level: 1,
+    entries_found: session.placements.length,
+  };
+  recordPuzzleProgressLocal(progress);
+  if (state.playerId) syncPuzzleProgress(state.playerId, progress);
+}
+
+function showStotramComplete(stotram) {
+  const screen = el(`
+    <div class="complete-screen">
+      <div class="glow">🙏</div>
+      <h2>అభినందనలు!</h2>
+      <p>${stotram.title}లోని అన్ని నామాలను మీరు కనుగొన్నారు.</p>
+      <div class="about-box">
+        <strong>${stotram.title}</strong> గురించి: ${stotram.about}
+      </div>
+      <div class="btn-row" style="margin-top:12px;">
+        <button type="button" class="btn btn-secondary" data-again>మళ్ళీ ఆడండి</button>
+        <button type="button" class="btn btn-primary" data-list>ముగించు</button>
+      </div>
+    </div>
+  `);
+  screen.querySelector('[data-again]').addEventListener('click', () => startStotram(stotram));
+  screen.querySelector('[data-list]').addEventListener('click', showStotramList);
+  setScreen(screen);
+}
+
+// ---------------------------------------------------------------------
 // Likhita Japam (standalone + interlude share this engine)
 // ---------------------------------------------------------------------
 
@@ -612,7 +831,7 @@ async function showScoreboard() {
       <h2 style="text-align:center;">స్కోరు బోర్డు</h2>
       <p class="tagline" style="text-align:center;">మీరు, మీ కుటుంబ సభ్యులు ఇప్పటివరకు సాధించిన ప్రగతి ఇక్కడ చూడవచ్చు</p>
       <div class="score-section">
-        <h3>నామ నిధి స్కోరు బోర్డు</h3>
+        <h3>నామ గుప్త నిధి స్కోరు బోర్డు</h3>
         <div data-puzzle-board>లోడ్ అవుతోంది...</div>
       </div>
       <div class="score-section">

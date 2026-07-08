@@ -17,6 +17,7 @@ const graphemeLength = (str) => Array.from(segmenter.segment(str)).length;
 const targetDir = process.argv[2] || 'data';
 const QUESTIONS_FILE = 'questions.json';
 const LEVELS_FILE = 'levels.json';
+const STOTRAMS_FILE = 'stotrams.json';
 
 function isNonEmptyString(v) {
   return typeof v === 'string' && v.trim().length > 0;
@@ -115,6 +116,68 @@ function validateLevels(levels) {
   return errors;
 }
 
+const STOTRAM_STATUSES = ['active', 'soon'];
+
+// Validates data/stotrams.json - the "స్తోత్ర పరీక్ష" sub-section's content.
+// Unlike questions.json's pooled/sampled entries, each stotram's entries are
+// a fixed curated set (every entry appears every time), so there's no
+// difficulty tier or cross-file level ladder to check against - just that
+// each stotram is internally consistent and its words fit its own grid.
+function validateStotrams(stotrams) {
+  const errors = [];
+  if (!Array.isArray(stotrams) || stotrams.length === 0) {
+    return ['stotrams.json must be a non-empty array'];
+  }
+
+  const seenIds = new Set();
+  stotrams.forEach((stotram, si) => {
+    const where = `stotrams[${si}]`;
+    if (!isNonEmptyString(stotram.id)) {
+      errors.push(`${where}: id must be a non-empty string`);
+    } else if (seenIds.has(stotram.id)) {
+      errors.push(`${where}: duplicate id "${stotram.id}"`);
+    } else {
+      seenIds.add(stotram.id);
+    }
+    if (!isNonEmptyString(stotram.title)) errors.push(`${where}: title must be a non-empty string`);
+    if (!STOTRAM_STATUSES.includes(stotram.status)) {
+      errors.push(`${where}: status must be one of ${STOTRAM_STATUSES.join('/')}, got ${JSON.stringify(stotram.status)}`);
+    }
+    if (stotram.status !== 'active') return; // "soon" entries are placeholders - nothing else to check
+
+    if (!isPositiveInt(stotram.gridSize)) errors.push(`${where}: gridSize must be a positive integer`);
+    if (stotram.fillerMode !== 'random' && stotram.fillerMode !== 'curated') {
+      errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(stotram.fillerMode)}`);
+    }
+    if (!isNonEmptyString(stotram.about)) errors.push(`${where}: about must be a non-empty string`);
+
+    if (!Array.isArray(stotram.entries) || stotram.entries.length === 0) {
+      errors.push(`${where}: entries must be a non-empty array`);
+      return;
+    }
+    const wordCounts = new Map();
+    stotram.entries.forEach((entry, ei) => {
+      const entryWhere = `${where}.entries[${ei}]`;
+      if (!isNonEmptyString(entry.word)) {
+        errors.push(`${entryWhere}: word must be a non-empty string`);
+        return;
+      }
+      const len = graphemeLength(entry.word);
+      if (len < 2) errors.push(`${entryWhere}: word "${entry.word}" is only ${len} grapheme cluster(s) - looks like junk/empty content`);
+      if (isPositiveInt(stotram.gridSize) && len > stotram.gridSize) {
+        errors.push(`${entryWhere}: word "${entry.word}" (${len} letters) can't fit a ${stotram.gridSize}x${stotram.gridSize} grid - raise gridSize or shorten the word`);
+      }
+      wordCounts.set(entry.word, (wordCounts.get(entry.word) || 0) + 1);
+      if (!isNonEmptyString(entry.meaning)) errors.push(`${entryWhere}: meaning must be a non-empty string`);
+    });
+    for (const [word, count] of wordCounts) {
+      if (count > 1) errors.push(`${where}: duplicate word "${word}" appears ${count} times`);
+    }
+  });
+
+  return errors;
+}
+
 function parseJsonFile(full) {
   return JSON.parse(fs.readFileSync(full, 'utf8'));
 }
@@ -179,7 +242,19 @@ function main() {
       continue;
     }
 
-    console.log(`\n· ${file} (unrecognized file, skipped - only questions.json and levels.json are validated)`);
+    if (file === STOTRAMS_FILE) {
+      const errors = validateStotrams(data);
+      if (errors.length === 0) {
+        console.log(`\n✓ ${file}`);
+      } else {
+        console.log(`\n✗ ${file}`);
+        errors.forEach((e) => console.log(`  ✗ ${e}`));
+        anyFailed = true;
+      }
+      continue;
+    }
+
+    console.log(`\n· ${file} (unrecognized file, skipped - only questions.json, levels.json, and stotrams.json are validated)`);
   }
 
   if (levels && poolEntries) {

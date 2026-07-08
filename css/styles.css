@@ -166,6 +166,9 @@ h1, h2, h3, .display {
   margin-top: 8px;
   font-weight: 700;
 }
+.badge.soon { background: rgba(240, 210, 139, 0.25); color: var(--gold-light); }
+
+.card.locked { opacity: 0.5; cursor: not-allowed; }
 
 .mode-choice {
   display: grid;
@@ -183,6 +186,17 @@ h1, h2, h3, .display {
 }
 .mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; color: var(--gold-light); }
 .mode-btn .sub { color: var(--cream); opacity: 0.85; }
+.mode-btn.new { box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.22), 0 12px 30px rgba(0, 0, 0, 0.35); }
+.mode-btn .new-tag {
+  display: inline-block;
+  background: var(--gold-light);
+  color: var(--deep-maroon);
+  border-radius: 999px;
+  padding: 2px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
 
 /* Intro ------------------------------------------------------------------ */
 
@@ -409,6 +423,18 @@ h1, h2, h3, .display {
 .complete-screen .glow, .completion-beat .glow {
   font-size: 3rem;
   margin-bottom: 16px;
+}
+.complete-screen .about-box {
+  text-align: right;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(240, 210, 139, 0.3);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 22px auto;
+  max-width: 520px;
+  font-size: 0.95rem;
+  color: var(--cream);
+  line-height: 1.7;
 }
 
 @media (max-width: 420px) {

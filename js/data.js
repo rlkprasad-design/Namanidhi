@@ -7,9 +7,11 @@
 
 const QUESTIONS_FILE = 'data/questions.json';
 const LEVELS_FILE = 'data/levels.json';
+const STOTRAMS_FILE = 'data/stotrams.json';
 
 let poolPromise = null;
 let levelsPromise = null;
+let stotramsPromise = null;
 
 async function fetchJson(file) {
   const res = await fetch(file);
@@ -30,4 +32,12 @@ export function loadEntryPool() {
 export function loadLevels() {
   if (!levelsPromise) levelsPromise = fetchJson(LEVELS_FILE);
   return levelsPromise;
+}
+
+// The "స్తోత్ర పరీక్ష" sub-section's stotram list. Unlike questions.json's
+// pooled entries, each stotram here is a fixed curated set - every entry
+// appears every time, nothing is sampled.
+export function loadStotrams() {
+  if (!stotramsPromise) stotramsPromise = fetchJson(STOTRAMS_FILE);
+  return stotramsPromise;
 }

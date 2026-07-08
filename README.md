@@ -46,10 +46,18 @@ still tracked on-device via `localStorage`.
   dropping it into `questions.json`'s `entries` array - it's in rotation
   immediately, no level to wire it into. `data/TEMPLATE.md` shows the
   exact shape.
+- `data/stotrams.json` - the "స్తోత్ర పరీక్ష" (Stotra Pariksha) sub-section:
+  one curated word-search per stotram, testing recall of names from that
+  specific stotram's own text. Unlike `questions.json`'s pooled/sampled
+  entries, every entry in an `active` stotram appears every time - nothing
+  is drawn at random. A `"soon"` status entry only needs `id`, `title`,
+  and `status` - it renders as a locked/coming-soon card. See the `active`
+  `rama-raksha` entry for the full shape an active stotram needs
+  (`gridSize`, `fillerMode`, `about`, `entries`).
 - `scripts/validate-content.js` - structural validator for
-  `data/questions.json` and `data/levels.json`, run automatically on PRs
-  via `.github/workflows/validate-content.yml`. See "Adding new content"
-  below.
+  `data/questions.json`, `data/levels.json`, and `data/stotrams.json`, run
+  automatically on PRs via `.github/workflows/validate-content.yml`. See
+  "Adding new content" below.
 
 ## Setting up Supabase (shared scoreboard)
 
@@ -128,6 +136,14 @@ actual devotional use) should read through the new entries' Telugu text
 and meanings. This app's users are trusting the content to be correct, so
 this review step isn't optional, even for small batches.
 
+The same review requirement applies to `data/stotrams.json` - each active
+stotram's word list is a stronger factual claim than the general pool
+("this word appears in *this specific* stotram"), so it needs the same
+human check against the actual source text. The current `rama-raksha`
+entry's word list was reconstructed from memory rather than the source
+text and should get that review pass - checked against the actual
+stotram - before being treated as final content.
+
 To run the check yourself before opening a PR:
 
 ```
@@ -144,3 +160,7 @@ node scripts/validate-content.js
 - A fully-offline, no-leaderboard variant was flagged as a separate,
   simpler build if ever wanted - this repo is the shared-leaderboard
   version.
+- Stotra Pariksha only has one active stotram (Rama Raksha Stotram) so
+  far - Lakshmi Ashtottaram and Vishnu Sahasranamam are listed as
+  `"soon"` placeholders in `data/stotrams.json`, waiting on their word
+  lists being written and reviewed.
