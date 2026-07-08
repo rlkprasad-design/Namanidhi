@@ -7,6 +7,7 @@ import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
   recordPuzzleProgressLocal, recordJapamLocal,
   getLocalPuzzleTotals, getLocalJapamTotals,
+  hasSeenIntro, markIntroSeen,
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
@@ -62,6 +63,14 @@ function topBar({ backAction, title } = {}) {
 // ---------------------------------------------------------------------
 
 async function boot() {
+  if (!hasSeenIntro()) {
+    showIntro(() => { markIntroSeen(); continueBoot(); });
+    return;
+  }
+  continueBoot();
+}
+
+async function continueBoot() {
   state.playerName = getPlayerName();
   state.playerId = getPlayerId();
   if (!state.playerName) {
@@ -73,6 +82,24 @@ async function boot() {
     if (state.playerId) setPlayerId(state.playerId);
   }
   showHome();
+}
+
+function showIntro(onContinue) {
+  const screen = el(`
+    <div class="intro-screen">
+      <h1 class="display" style="text-align:center;">నామ నిధి కి స్వాగతం</h1>
+      <p>ఇది ఒక ఆటవిడుపు లాంటి సాధన. మీరు రెండు మార్గాలు ఎంచుకోవచ్చు. మొదటిది ఇచ్చిన అక్షరాల సమూహంలో భగవంతుని లేదా ఆ సంబంధించిన వ్యక్తుల లేదా వస్తువుల పేర్లను గుర్తించడం ('ఈనాడు' పదవినోదం లాగా ).</p>
+      <p>రెండవది, తెల్సిన నామాన్ని ప్రశాంతంగా పెన్ తో పేపర్ మీద రాస్తున్నట్లు గా స్క్రీన్ మీద వ్రాయడం. దీన్ని లిఖిత జపం అంటారు. మీకు నచ్చిన పేర్లను కూడా మీరు వ్రాయవచ్చు.</p>
+      <p>స్కోర్ బోర్డు లో మీ ప్రగతి ని చూడగలరు. మన ఇతర కుటుంబ సభ్యుల ప్రగతి కూడా అక్కడ ఉంటుంది.</p>
+      <p>ఇది చెయ్యటానికి ముఖ్య కారణం, మన phone ద్వారా మనం చాల సేపు మనం సమాచార సేకరణ యంత్రాలుగా ఉంటున్నాం. కొంచెం సేపు దానికి విరామం అవసరం అనిపించి వేరే ఎదో పని బదులు ఇది పురుషార్థం గా కూడా పనికి వస్తుంది అన్న భావం తో దీనికి పూనుకున్నా.</p>
+      <p class="intro-signature">Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.</p>
+      <div class="btn-row" style="margin-top:24px;">
+        <button type="button" class="btn btn-primary" data-intro-continue>ప్రారంభించండి</button>
+      </div>
+    </div>
+  `);
+  screen.querySelector('[data-intro-continue]').addEventListener('click', onContinue);
+  setScreen(screen);
 }
 
 function showNameGate() {
@@ -118,6 +145,7 @@ function showHome() {
         <h1 class="display">నామ నిధి</h1>
         <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
       </div>
+      <p class="tagline" style="text-align:center;">మీకు నచ్చిన విధానాన్ని ఎంచుకోండి</p>
       <div class="mode-choice">
         <button type="button" class="mode-btn" data-mode="nama-nidhi">
           <div class="display">నామ నిధి</div>
@@ -130,6 +158,7 @@ function showHome() {
       </div>
       <div class="btn-row" style="margin-top:28px;">
         <button type="button" class="btn btn-secondary" data-scoreboard>స్కోరు బోర్డు</button>
+        <button type="button" class="btn btn-secondary" data-about>ఈ యాప్ గురించి</button>
       </div>
     </div>
   `);
@@ -137,6 +166,7 @@ function showHome() {
   screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showLevelSelect);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
+  screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
 }
 
@@ -212,6 +242,7 @@ function renderGame(session) {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</h2>
+      <p class="tagline" style="text-align:center;">కింద సూచనల్లో ఉన్న నామాలను అక్షరాల్లో వేలితో గీసి కనుగొనండి</p>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr); --cell-font-size:${cellFontSize(level.gridSize)};"></div>
       </div>
@@ -446,6 +477,7 @@ async function renderJapamTrace(session) {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">లిఖిత జపం</h2>
+      <p class="tagline" style="text-align:center;">కింద చుక్కలను అనుసరిస్తూ వేలితో గీయండి</p>
       <div class="japam-word">${session.word}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface-frame">
@@ -552,6 +584,7 @@ async function showScoreboard() {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">మన కుటుంబం నామ సంఖ్య</h2>
+      <p class="tagline" style="text-align:center;">మీరు, మీ కుటుంబ సభ్యులు ఇప్పటివరకు సాధించిన ప్రగతి ఇక్కడ చూడవచ్చు</p>
       <div class="score-section">
         <h3>నామ నిధి స్కోరు బోర్డు</h3>
         <div data-puzzle-board>లోడ్ అవుతోంది...</div>

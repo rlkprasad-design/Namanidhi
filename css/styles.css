@@ -175,6 +175,26 @@ h1, h2, h3, .display {
 .mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; color: var(--gold-light); }
 .mode-btn .sub { color: var(--cream); opacity: 0.85; }
 
+/* Intro ------------------------------------------------------------------ */
+
+.intro-screen {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 4vh 4px 2vh;
+}
+.intro-screen p {
+  margin: 0 0 16px;
+  line-height: 1.7;
+}
+.intro-screen .intro-signature {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240, 210, 139, 0.25);
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.9;
+}
+
 /* Name gate ------------------------------------------------------------ */
 
 .name-gate {

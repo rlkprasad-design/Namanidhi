@@ -6,6 +6,15 @@ const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';
 const PUZZLE_LOG_KEY = 'namanidhi.puzzleLog';
 const JAPAM_LOG_KEY = 'namanidhi.japamLog';
+const INTRO_SEEN_KEY = 'namanidhi.introSeen';
+
+export function hasSeenIntro() {
+  return localStorage.getItem(INTRO_SEEN_KEY) === '1';
+}
+
+export function markIntroSeen() {
+  localStorage.setItem(INTRO_SEEN_KEY, '1');
+}
 
 export function getPlayerName() {
   return localStorage.getItem(PLAYER_NAME_KEY);
