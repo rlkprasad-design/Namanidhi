@@ -178,6 +178,13 @@ async function showLevelSelect() {
 
 const WRONG_TRIES_FOR_NUDGE = 4;
 
+// Smaller grids have more room per cell - scale the letter up to use it,
+// instead of a flat size that leaves the 4x4 grid's big cells half-empty.
+function cellFontSize(gridSize) {
+  const rem = Math.min(2.3, Math.max(0.85, 9.2 / gridSize));
+  return `${rem.toFixed(2)}rem`;
+}
+
 async function startLevel(level) {
   const pool = await loadEntryPool();
   renderGame(buildSession(level, pool));
@@ -205,7 +212,7 @@ function renderGame(session) {
     <div>
       <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</h2>
       <div class="grid-frame">
-        <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr);"></div>
+        <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr); --cell-font-size:${cellFontSize(level.gridSize)};"></div>
       </div>
       <div class="game-toolbar">
         <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
@@ -367,7 +374,7 @@ function showJapamNamePicker() {
       <h2>ఏ నామాన్ని రాద్దాం?</h2>
       <div class="card-grid" data-names></div>
       <div class="custom-word-block">
-        <p class="tagline" style="text-align:center;">లేదా మీ స్వంత నామాన్ని రాయండి</p>
+        <p class="tagline" style="text-align:center;">లేదా మీకు నచ్చిన నామాన్ని రాయండి</p>
         <input type="text" class="text-input" maxlength="60" placeholder="ఇక్కడ రాయండి" data-custom-word />
         <div class="btn-row">
           <button type="button" class="btn btn-primary" data-custom-start>ప్రారంభించండి</button>
