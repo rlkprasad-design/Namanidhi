@@ -603,8 +603,10 @@ async function showScoreboard() {
 
   if (isBackendConfigured()) {
     const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(), fetchJapamLeaderboard()]);
-    puzzleBoardEl.replaceWith(renderLeaderboardTable(puzzleRows, ['display_name', 'total_entries_found', 'levels_completed'], ['పేరు', 'సంపాదించిన రత్నాలు', 'పూర్తయిన స్థాయిలు'], 'data-puzzle-board'));
-    japamBoardEl.replaceWith(renderLeaderboardTable(japamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
+    const activePuzzleRows = (puzzleRows || []).filter((row) => (row.total_entries_found ?? 0) > 0 || (row.levels_completed ?? 0) > 0);
+    const activeJapamRows = (japamRows || []).filter((row) => (row.total_count ?? 0) > 0);
+    puzzleBoardEl.replaceWith(renderLeaderboardTable(activePuzzleRows, ['display_name', 'total_entries_found', 'levels_completed'], ['పేరు', 'సంపాదించిన రత్నాలు', 'పూర్తయిన స్థాయిలు'], 'data-puzzle-board'));
+    japamBoardEl.replaceWith(renderLeaderboardTable(activeJapamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
   } else {
     const puzzleTotals = getLocalPuzzleTotals();
     const japamTotals = getLocalJapamTotals();
