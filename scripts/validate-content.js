@@ -37,7 +37,13 @@ function validateQuestions(data) {
     return { entries, errors, warnings };
   }
 
-  const wordLocations = new Map(); // word -> count seen
+  // word+difficulty -> count seen. Scoped to difficulty, not global: a
+  // puzzle only ever draws entries from a single difficulty tier
+  // (js/grid.js's sampleEntries filters by level.difficulty), so the same
+  // word can never be drawn into the same grid twice unless the duplicate
+  // is within one tier - that's the only case that could actually show two
+  // hints for one grid word in the same puzzle.
+  const wordLocations = new Map();
 
   data.entries.forEach((entry, ei) => {
     const where = `entries[${ei}]`;
@@ -49,7 +55,8 @@ function validateQuestions(data) {
       if (len < 2) {
         errors.push(`${where}: word "${entry.word}" is only ${len} grapheme cluster(s) - looks like junk/empty content`);
       }
-      wordLocations.set(entry.word, (wordLocations.get(entry.word) || 0) + 1);
+      const key = `${entry.word}::${entry.difficulty}`;
+      wordLocations.set(key, (wordLocations.get(key) || 0) + 1);
       entries.push({ word: entry.word, len, difficulty: entry.difficulty });
     }
 
@@ -68,8 +75,11 @@ function validateQuestions(data) {
     }
   });
 
-  for (const [word, count] of wordLocations) {
-    if (count > 1) errors.push(`Duplicate word "${word}" appears ${count} times`);
+  for (const [key, count] of wordLocations) {
+    if (count > 1) {
+      const [word, difficulty] = key.split('::');
+      errors.push(`Duplicate word "${word}" appears ${count} times at difficulty "${difficulty}"`);
+    }
   }
 
   return { entries, errors, warnings };
