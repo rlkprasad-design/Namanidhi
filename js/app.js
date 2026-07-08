@@ -162,8 +162,8 @@ async function showLevelSelect() {
   for (const level of levels) {
     const card = el(`
       <button type="button" class="card">
-        <div class="card-title">స్థాయి ${level.levelNumber} · ${DIFFICULTY_LABELS[level.difficulty] || level.difficulty}</div>
-        <div class="card-sub">${level.entryCount} నామాలు · ${level.gridSize}×${level.gridSize} గ్రిడ్</div>
+        <div class="card-title">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</div>
+        <div class="card-sub">${level.entryCount} నామాలు</div>
         ${level.breather ? '<span class="badge">సులభ విరామం</span>' : ''}
       </button>
     `);
@@ -203,7 +203,7 @@ function renderGame(session) {
   const { level } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">స్థాయి ${level.levelNumber}</h2>
+      <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</h2>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr);"></div>
       </div>

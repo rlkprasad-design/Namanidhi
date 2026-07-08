@@ -1,5 +1,7 @@
 [
-  { "levelNumber": 1, "difficulty": "easy", "gridSize": 8, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 6 },
-  { "levelNumber": 2, "difficulty": "medium", "gridSize": 9, "fillerMode": "random", "breather": false, "japamCount": 5, "entryCount": 6 },
-  { "levelNumber": 3, "difficulty": "difficult", "gridSize": 10, "fillerMode": "curated", "breather": false, "japamCount": 7, "entryCount": 6 }
+  { "levelNumber": 1, "difficulty": "easy", "gridSize": 4, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 2 },
+  { "levelNumber": 2, "difficulty": "easy", "gridSize": 6, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 5 },
+  { "levelNumber": 3, "difficulty": "easy", "gridSize": 7, "fillerMode": "random", "breather": true, "japamCount": 3, "entryCount": 6 },
+  { "levelNumber": 4, "difficulty": "medium", "gridSize": 9, "fillerMode": "random", "breather": false, "japamCount": 5, "entryCount": 6 },
+  { "levelNumber": 5, "difficulty": "difficult", "gridSize": 10, "fillerMode": "curated", "breather": false, "japamCount": 7, "entryCount": 6 }
 ]
