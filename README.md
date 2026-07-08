@@ -78,6 +78,16 @@ auth only if abuse becomes a concern" design. If the Supabase dashboard's
 SQL editor ever refuses an insert unexpectedly, the Table Editor UI is a
 fine manual fallback while a policy gets sorted out.
 
+If you're planning to share the app beyond a small trusted circle (e.g.
+family who might forward the link onward), also run
+`supabase/harden-rls.sql` once in the SQL editor - it stops the raw
+`puzzle_progress`/`japam_log` tables from being directly readable by
+anyone with the public anon key (only the aggregated leaderboard views
+stay readable, which is all the app itself ever reads) and adds sanity
+bounds on submitted values. It changes nothing about how the app
+behaves - just what a stranger with the URL could read or spam directly
+against the database.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,
