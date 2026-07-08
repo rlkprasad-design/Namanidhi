@@ -263,6 +263,30 @@ function renderGame(session) {
     lastSelected = path;
   }
 
+  // As soon as a drag's cells-so-far exactly match the start of some
+  // not-yet-found word (read from either end, since crossing words can be
+  // traced in either direction), light up the next cell along that word -
+  // updates as the drag continues, so a correct drag gets guided the
+  // whole way, especially useful for diagonal words that are harder to
+  // follow by eye.
+  let lastHinted = [];
+  function updateDirectionHint(path) {
+    const next = [];
+    if (path.length) {
+      for (const p of session.placements) {
+        if (p.found) continue;
+        for (const cells of [p.cells, p.cells.slice().reverse()]) {
+          if (path.length >= cells.length) continue;
+          const matches = path.every(({ r, c }, i) => cells[i][0] === r && cells[i][1] === c);
+          if (matches) next.push(cells[path.length]);
+        }
+      }
+    }
+    lastHinted.forEach(([r, c]) => cellEls[r][c].classList.remove('direction-hint'));
+    next.forEach(([r, c]) => cellEls[r][c].classList.add('direction-hint'));
+    lastHinted = next;
+  }
+
   function markFound(placement) {
     placement.found = true;
     placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
@@ -298,10 +322,11 @@ function renderGame(session) {
   }
 
   attachTracer(gridEl, {
-    onDragStart: highlightSelection,
-    onDragUpdate: highlightSelection,
+    onDragStart: (path) => { highlightSelection(path); updateDirectionHint(path); },
+    onDragUpdate: (path) => { highlightSelection(path); updateDirectionHint(path); },
     onDragEnd: (path) => {
       highlightSelection([]);
+      updateDirectionHint([]);
       if (path.length < 2) return;
       const { forward, reversed } = pathToStrings(path, session.grid);
       const match = session.placements.find((p) => {
