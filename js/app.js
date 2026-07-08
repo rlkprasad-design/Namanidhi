@@ -167,6 +167,7 @@ function showHome() {
   const screen = el(`
     <div>
       <div class="title-block">
+        <img src="icons/aum-180.png" alt="" class="home-logo" width="88" height="88" />
         <h1 class="display">నామ నిధి</h1>
         <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
       </div>
