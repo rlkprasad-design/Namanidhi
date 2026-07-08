@@ -566,7 +566,7 @@ function showJapamCompletion(session) {
   const screen = el(`
     <div class="completion-beat">
       <div class="glow">🙏</div>
-      <p>నామజపం పూర్తయింది.</p>
+      <p>లిఖిత జపం పూర్తయింది.</p>
       <div class="btn-row" style="margin-top:20px;">
         <button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>
       </div>
@@ -583,7 +583,7 @@ function showJapamCompletion(session) {
 async function showScoreboard() {
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">మన కుటుంబం నామ సంఖ్య</h2>
+      <h2 style="text-align:center;">స్కోరు బోర్డు</h2>
       <p class="tagline" style="text-align:center;">మీరు, మీ కుటుంబ సభ్యులు ఇప్పటివరకు సాధించిన ప్రగతి ఇక్కడ చూడవచ్చు</p>
       <div class="score-section">
         <h3>నామ నిధి స్కోరు బోర్డు</h3>
@@ -603,14 +603,14 @@ async function showScoreboard() {
 
   if (isBackendConfigured()) {
     const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(), fetchJapamLeaderboard()]);
-    puzzleBoardEl.replaceWith(renderLeaderboardTable(puzzleRows, ['display_name', 'total_entries_found', 'levels_completed'], ['పేరు', 'దొరికిన నామాలు', 'పూర్తయిన స్థాయిలు'], 'data-puzzle-board'));
+    puzzleBoardEl.replaceWith(renderLeaderboardTable(puzzleRows, ['display_name', 'total_entries_found', 'levels_completed'], ['పేరు', 'సంపాదించిన రత్నాలు', 'పూర్తయిన స్థాయిలు'], 'data-puzzle-board'));
     japamBoardEl.replaceWith(renderLeaderboardTable(japamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
   } else {
     const puzzleTotals = getLocalPuzzleTotals();
     const japamTotals = getLocalJapamTotals();
     puzzleBoardEl.outerHTML = `
       <div data-puzzle-board>
-        <p>మీరు ఇప్పటివరకు కనుగొన్న నామాలు: <strong>${puzzleTotals.entriesFound}</strong></p>
+        <p>మీరు ఇప్పటివరకు సంపాదించిన రత్నాలు: <strong>${puzzleTotals.entriesFound}</strong></p>
         <p>పూర్తయిన స్థాయిలు: <strong>${puzzleTotals.levelsCompleted}</strong></p>
         <p class="score-note">ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.</p>
       </div>`;
