@@ -25,29 +25,43 @@ async function getClient() {
   return clientPromise;
 }
 
-// Finds a player row by display name, creating one if needed. Returns the
-// player id, or null if the backend isn't configured / reachable.
-export async function ensurePlayer(name) {
+// Finds a player row by display name, creating one if needed. `knownPlayerId`
+// is this device's already-saved player id (if any) - when the found row's id
+// matches it, the name belongs to the device asking for it, so it's a normal
+// resume rather than a conflict.
+//
+// Returns { id, status } where status is 'ok' (created or resumed),
+// 'taken' (another player already owns this name), 'offline' (backend not
+// reachable), or 'error' (unexpected failure - caller should stay local-only).
+export async function ensurePlayer(name, knownPlayerId = null) {
   const sb = await getClient();
-  if (!sb) return null;
+  if (!sb) return { id: null, status: 'offline' };
   try {
     const { data: existing } = await sb
       .from('players')
       .select('id')
       .eq('display_name', name)
       .maybeSingle();
-    if (existing) return existing.id;
+    if (existing) {
+      if (knownPlayerId && existing.id === knownPlayerId) {
+        return { id: existing.id, status: 'ok' };
+      }
+      return { id: null, status: 'taken' };
+    }
 
     const { data, error } = await sb
       .from('players')
       .insert({ display_name: name })
       .select('id')
       .single();
-    if (error) throw error;
-    return data.id;
+    if (error) {
+      if (error.code === '23505') return { id: null, status: 'taken' }; // unique_violation: lost a race
+      throw error;
+    }
+    return { id: data.id, status: 'ok' };
   } catch (err) {
     console.warn('ensurePlayer failed, staying local-only:', err);
-    return null;
+    return { id: null, status: 'error' };
   }
 }
 

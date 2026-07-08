@@ -78,8 +78,15 @@ async function continueBoot() {
     return;
   }
   if (!state.playerId && isBackendConfigured()) {
-    state.playerId = await ensurePlayer(state.playerName);
-    if (state.playerId) setPlayerId(state.playerId);
+    // Boot-time resume: if the saved name now conflicts with someone else's
+    // (e.g. two devices settled on the same name before this device ever
+    // synced), just stay local-only for this session rather than blocking
+    // the app - the player can pick a distinct name via "మార్చు" later.
+    const result = await ensurePlayer(state.playerName, state.playerId);
+    if (result.id) {
+      state.playerId = result.id;
+      setPlayerId(result.id);
+    }
   }
   showHome();
 }
@@ -109,23 +116,41 @@ function showNameGate() {
       <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
       <p>ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి</p>
       <input type="text" class="text-input" maxlength="40" placeholder="మీ పేరు" data-name-input />
+      <p class="field-error" data-name-error style="display:none;"></p>
       <div class="btn-row">
         <button type="button" class="btn btn-primary" data-begin>ప్రారంభించండి</button>
       </div>
     </div>
   `);
   const input = screen.querySelector('[data-name-input]');
+  const errorEl = screen.querySelector('[data-name-error]');
+  const beginBtn = screen.querySelector('[data-begin]');
   if (state.playerName) input.value = state.playerName;
   const submit = async () => {
     const name = input.value.trim();
     if (!name) { input.focus(); return; }
+    errorEl.style.display = 'none';
+    beginBtn.disabled = true;
+    let playerId = null;
+    if (isBackendConfigured()) {
+      // Only carry over this device's own player id if the name is unchanged -
+      // otherwise a brand-new name must not silently inherit someone else's id.
+      const knownPlayerId = name === state.playerName ? state.playerId : null;
+      const result = await ensurePlayer(name, knownPlayerId);
+      if (result.status === 'taken') {
+        errorEl.textContent = 'ఈ పేరు ఇప్పటికే వాడుకలో ఉంది. దయచేసి వేరే పేరు లేదా ఇంటిపేరు జోడించి రాయండి.';
+        errorEl.style.display = 'block';
+        beginBtn.disabled = false;
+        input.focus();
+        return;
+      }
+      playerId = result.id;
+    }
     setPlayerName(name);
     state.playerName = name;
-    state.playerId = null;
-    if (isBackendConfigured()) {
-      state.playerId = await ensurePlayer(name);
-      if (state.playerId) setPlayerId(state.playerId);
-    }
+    state.playerId = playerId;
+    setPlayerId(playerId);
+    beginBtn.disabled = false;
     showHome();
   };
   screen.querySelector('[data-begin]').addEventListener('click', submit);

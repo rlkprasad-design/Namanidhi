@@ -388,6 +388,7 @@ h1, h2, h3, .display {
 }
 .score-table th { background: rgba(0, 0, 0, 0.2); color: var(--gold-light); }
 .score-note { color: var(--gold); opacity: 0.9; font-size: 0.85rem; margin-top: 8px; }
+.field-error { color: var(--wrong); font-size: 0.9rem; margin-top: 6px; }
 
 /* Level complete ----------------------------------------------------------- */
 
