@@ -116,6 +116,23 @@ three counter columns to `puzzle_progress` and rebuilds
 now reads. A brand-new project created from the current `schema.sql`
 already has these, so this step is only for existing projects.
 
+Puzzles completed *before* that migration will show `0` pearls/gems/
+diamonds even though `entries_found`/`puzzles_completed` are correct -
+the columns just didn't exist yet to record them. Run
+`supabase/backfill-legacy-gems.sql` once, any time after
+`add-gem-tracking.sql`, to recover most of that history: before the gem
+system, a puzzle was always one difficulty tier end to end
+(`category` was literally `'easy'`/`'medium'`/`'difficult'`), so an old
+row's `entries_found` really is that whole gem type's count - this
+copies it into the matching column rather than leaving it stranded.
+Rows from `'mixed'` (today's mixed-difficulty puzzles) or `'stotram'`
+can't be backfilled this way, since those puzzles were never single-
+tier - if one of those shows `0` gems with a real `entries_found`, it's
+either from before that mode's own gem tracking shipped, or every word
+was revealed via "సమాధానం చూపు" (which legitimately earns nothing).
+Safe to re-run; each `UPDATE` only touches rows it hasn't already
+touched.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,
