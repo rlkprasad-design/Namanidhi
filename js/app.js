@@ -519,7 +519,7 @@ function buildStotramSession(stotram) {
   const gridSize = randomInt(stotram.gridSizeMin, stotram.gridSizeMax);
   const entries = drawStotramRound(stotram, gridSize);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode });
-  return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false })), wrongAttempts: 0 };
+  return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
 }
 
 function startStotram(stotram) {
@@ -568,6 +568,7 @@ function renderStotramGame(session) {
       hintsEl.appendChild(el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
+          <span class="gem-badge gem-${p.entry.difficulty}">${GEM_LABELS[p.entry.difficulty] || ''}</span>
           <span class="hint-meaning">${p.entry.meaning}</span>
         </div>
       `));
@@ -599,8 +600,9 @@ function renderStotramGame(session) {
     pointerCell.classList.add('direction-pointer');
   }
 
-  function markFound(placement) {
+  function markFound(placement, viaHint) {
     placement.found = true;
+    placement.earnedGem = !viaHint;
     placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
     renderHints();
     checkComplete();
@@ -645,18 +647,25 @@ function renderStotramGame(session) {
   screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderStotramGame(buildStotramSession(stotram)));
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
-    if (target) markFound(target);
+    if (target) markFound(target, true);
   });
 
   setScreen(screen);
 }
 
 function recordStotramProgress(session) {
+  const gemCounts = { easy: 0, medium: 0, difficult: 0 };
+  for (const p of session.placements) {
+    if (p.earnedGem) gemCounts[p.entry.difficulty] = (gemCounts[p.entry.difficulty] || 0) + 1;
+  }
   const progress = {
     category: 'stotram',
     sub_category: session.stotram.id,
     level: 1,
     entries_found: session.placements.length,
+    pearls_found: gemCounts.easy,
+    gems_found: gemCounts.medium,
+    diamonds_found: gemCounts.difficult,
   };
   recordPuzzleProgressLocal(progress);
   if (state.playerId) syncPuzzleProgress(state.playerId, progress);
