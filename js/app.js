@@ -25,10 +25,22 @@ const JAPAM_NAMES = [
 const INTERLUDE_WORD = 'శ్రీరామ';
 
 // What a found word of each difficulty is "worth" - shown as a small
-// badge on its hint row, and tallied separately on the scoreboard.
-// Revealing a word via "సమాధానం చూపు" still completes the puzzle but
-// does not earn its gem (see markFound's viaHint handling below).
+// symbol on its hint row (GEM_ICONS), with GEM_LABELS kept only for
+// accessibility (title/aria-label) - and tallied separately on the
+// scoreboard. Revealing a word via "సమాధానం చూపు" still completes the
+// puzzle but does not earn its gem (see markFound's viaHint handling
+// below).
 const GEM_LABELS = { easy: 'ముత్యం', medium: 'రత్నం', difficult: 'వజ్రం' };
+
+const GEM_ICONS = {
+  easy: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/><circle cx="6" cy="6" r="1.3" fill="#fff" opacity="0.55"/></svg>`,
+  medium: `<svg viewBox="0 0 16 16"><polygon points="8,1 15,8 8,15 1,8" fill="currentColor" stroke="#4e1219" stroke-width="0.6"/></svg>`,
+  difficult: `<svg viewBox="0 0 16 16"><polygon points="4,3 12,3 15,7 8,15 1,7" fill="currentColor" stroke="#4e1219" stroke-width="0.6"/><path d="M4,3 L8,15 M12,3 L8,15 M1,7 L15,7" stroke="#4e1219" stroke-width="0.4" opacity="0.5" fill="none"/></svg>`,
+};
+
+function gemBadge(difficulty) {
+  return `<span class="gem-icon gem-${difficulty}" role="img" aria-label="${GEM_LABELS[difficulty] || ''}" title="${GEM_LABELS[difficulty] || ''}">${GEM_ICONS[difficulty] || ''}</span>`;
+}
 
 const state = {
   playerName: null,
@@ -294,7 +306,7 @@ function renderGame(session) {
       const item = el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
-          <span class="gem-badge gem-${p.entry.difficulty}">${GEM_LABELS[p.entry.difficulty] || ''}</span>
+          ${gemBadge(p.entry.difficulty)}
           <span class="hint-meaning">${p.entry.meaning}</span>
         </div>
       `);
@@ -568,7 +580,7 @@ function renderStotramGame(session) {
       hintsEl.appendChild(el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
-          <span class="gem-badge gem-${p.entry.difficulty}">${GEM_LABELS[p.entry.difficulty] || ''}</span>
+          ${gemBadge(p.entry.difficulty)}
           <span class="hint-meaning">${p.entry.meaning}</span>
         </div>
       `));
