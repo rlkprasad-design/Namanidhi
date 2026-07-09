@@ -102,9 +102,6 @@ function validateLevels(levels) {
     } else {
       seen.add(level.levelNumber);
     }
-    if (!DIFFICULTIES.includes(level.difficulty)) {
-      errors.push(`${where}: difficulty must be one of ${DIFFICULTIES.join('/')}, got ${JSON.stringify(level.difficulty)}`);
-    }
     if (!isPositiveInt(level.gridSizeMin)) errors.push(`${where}: gridSizeMin must be a positive integer`);
     if (!isPositiveInt(level.gridSizeMax)) errors.push(`${where}: gridSizeMax must be a positive integer`);
     if (isPositiveInt(level.gridSizeMin) && isPositiveInt(level.gridSizeMax) && level.gridSizeMin > level.gridSizeMax) {
@@ -113,17 +110,9 @@ function validateLevels(levels) {
     if (level.fillerMode !== 'random' && level.fillerMode !== 'curated') {
       errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(level.fillerMode)}`);
     }
-    if (typeof level.breather !== 'boolean') errors.push(`${where}: breather must be a boolean`);
     if (!isPositiveInt(level.japamCount)) errors.push(`${where}: japamCount must be a positive integer`);
   });
   return errors;
-}
-
-// Must produce the same result as entryCountForGridSize in js/grid.js -
-// duplicated here since this script is plain CommonJS and grid.js is an
-// ES module. Only used below to sanity-check pool size against it.
-function entryCountForGridSize(gridSize) {
-  return Math.max(2, Math.round(gridSize * 0.7));
 }
 
 const STOTRAM_STATUSES = ['active', 'soon'];
@@ -282,40 +271,32 @@ function main() {
   }
 
   if (levels && poolEntries) {
-    const maxGridSizeByDifficulty = {};
-    for (const level of levels) {
-      maxGridSizeByDifficulty[level.difficulty] = Math.max(maxGridSizeByDifficulty[level.difficulty] || 0, level.gridSizeMax);
-    }
+    // Every level now mixes all three difficulties in one grid (no more
+    // per-level difficulty), so one shared ceiling applies to all of them:
+    // a word just needs to fit under *some* level's largest possible roll.
+    const maxGridSizeOverall = Math.max(...levels.map((l) => l.gridSizeMax));
 
-    const tooLong = poolEntries.filter((e) => {
-      const maxGrid = maxGridSizeByDifficulty[e.difficulty];
-      return maxGrid !== undefined && e.len > maxGrid;
-    });
+    const tooLong = poolEntries.filter((e) => e.len > maxGridSizeOverall);
     if (tooLong.length) {
-      console.log(`\n✗ words too long for any level at their difficulty`);
-      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" (${e.difficulty}, ${e.len} letters) can't fit any "${e.difficulty}" level's largest grid - raise that level's gridSizeMax or shorten the word`));
+      console.log(`\n✗ words too long for any level's largest possible grid`);
+      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" (${e.difficulty}, ${e.len} letters) can't fit any level's largest grid (max ${maxGridSizeOverall}x${maxGridSizeOverall}) - raise a level's gridSizeMax or shorten the word`));
       anyFailed = true;
     }
 
-    const orphaned = poolEntries.filter((e) => !(e.difficulty in maxGridSizeByDifficulty));
-    if (orphaned.length) {
-      console.log(`\n⚠ entries with no matching level`);
-      orphaned.forEach((e) => { console.log(`  ⚠ "${e.word}" is tagged difficulty="${e.difficulty}" but no level in levels.json uses that difficulty - it will never appear in a puzzle`); totalWarnings += 1; });
-    }
-
-    // A puzzle's actual entryCount is derived from whatever size it rolls
-    // (entryCountForGridSize) and clamped to however many words are
-    // eligible at that size, so a shortfall there degrades gracefully -
-    // the only genuinely bad case is a rolled size with fewer than 2
-    // eligible words, which would make a nearly-empty puzzle.
+    // A puzzle's actual entry count per difficulty is derived from
+    // whatever size it rolls (entryCountForGridSize, split three ways)
+    // and clamped to however many words are eligible at that size, so a
+    // shortfall degrades gracefully - the only genuinely bad case is a
+    // rolled size with fewer than 2 eligible words for some tier, which
+    // would leave that tier essentially unrepresented in the mix.
     const poolWarnings = [];
     for (const level of levels) {
       for (let size = level.gridSizeMin; size <= level.gridSizeMax; size++) {
-        const eligible = poolEntries.filter((e) => e.difficulty === level.difficulty && e.len <= size).length;
-        if (eligible < 2) {
-          poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}) at ${size}x${size}: only ${eligible} entries fit - that size would produce a nearly-empty puzzle`);
-        } else if (eligible < entryCountForGridSize(size)) {
-          poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}) at ${size}x${size}: would ideally draw ${entryCountForGridSize(size)} entries but only ${eligible} fit - that size's puzzles will show fewer words than usual`);
+        for (const difficulty of DIFFICULTIES) {
+          const eligible = poolEntries.filter((e) => e.difficulty === difficulty && e.len <= size).length;
+          if (eligible < 2) {
+            poolWarnings.push(`స్థాయి ${level.levelNumber} at ${size}x${size}: only ${eligible} "${difficulty}" entries fit - that tier would be nearly absent from puzzles at this size`);
+          }
         }
       }
     }

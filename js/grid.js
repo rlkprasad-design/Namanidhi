@@ -51,27 +51,49 @@ function refillQueue(queue, eligible, count) {
   return queue;
 }
 
+export const DIFFICULTIES = ['easy', 'medium', 'difficult'];
+
+// Splits `total` roughly evenly across the three difficulty tiers, so a
+// mixed puzzle almost always has at least one of each - which tier gets
+// the "extra" slot from an uneven split is shuffled each time rather than
+// always landing on the same one.
+function splitAcrossDifficulties(total) {
+  const base = Math.floor(total / DIFFICULTIES.length);
+  let remainder = total - base * DIFFICULTIES.length;
+  const counts = Object.fromEntries(DIFFICULTIES.map((d) => [d, base]));
+  for (const d of shuffle(DIFFICULTIES)) {
+    if (remainder <= 0) break;
+    counts[d] += 1;
+    remainder -= 1;
+  }
+  return counts;
+}
+
 // Each call rolls its own grid size within the level's range, then draws
-// however many entries suit that size from a shuffled per-difficulty
-// rotation (so nothing repeats until the tier cycles). Because the rolled
-// size changes which words fit, the existing queue is first trimmed to
-// only currently-eligible words before topping it back up - a word that's
-// briefly too long for a small roll just re-enters rotation next time a
-// bigger size comes up, rather than the whole queue resetting.
-export function sampleEntries(pool, level) {
+// a mix of easy/medium/difficult entries sized to fit that roll - every
+// puzzle blends all three tiers (so a hint's word can turn out to be a
+// ముత్యం, రత్నం, or వజ్రం) rather than being one difficulty end to end.
+// Each tier is still drawn from its own shuffled rotation queue, trimmed
+// to whatever's eligible at the rolled size before topping back up, so
+// nothing repeats until that tier cycles - same idea as before, just
+// running once per tier per puzzle instead of once for a single tier.
+export function sampleMixedEntries(pool, level) {
   const gridSize = randomInt(level.gridSizeMin, level.gridSizeMax);
-  const eligible = pool.filter(
-    (e) => e.difficulty === level.difficulty && graphemes(e.word).length <= gridSize
-  );
-  if (!eligible.length) return { gridSize, entries: [] };
+  const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize));
 
-  const eligibleWords = new Set(eligible.map((e) => e.word));
-  const trimmedQueue = (drawQueues.get(level.difficulty) || []).filter((e) => eligibleWords.has(e.word));
-  const count = Math.min(entryCountForGridSize(gridSize), eligible.length);
+  const entries = [];
+  for (const difficulty of DIFFICULTIES) {
+    const eligible = pool.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize);
+    if (!eligible.length) continue;
 
-  const queue = refillQueue(trimmedQueue, eligible, count);
-  const entries = queue.slice(0, count);
-  drawQueues.set(level.difficulty, queue.slice(count));
+    const eligibleWords = new Set(eligible.map((e) => e.word));
+    const trimmedQueue = (drawQueues.get(difficulty) || []).filter((e) => eligibleWords.has(e.word));
+    const count = Math.min(targetCounts[difficulty], eligible.length);
+
+    const queue = refillQueue(trimmedQueue, eligible, count);
+    entries.push(...queue.slice(0, count));
+    drawQueues.set(difficulty, queue.slice(count));
+  }
   return { gridSize, entries };
 }
 

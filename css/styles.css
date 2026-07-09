@@ -8,6 +8,9 @@
   --found: #3e7a4b;
   --wrong: #b23a2e;
   --radius: 18px;
+  --pearl: #f2ead9;
+  --gem: #c9962e;
+  --diamond: #bfe3f0;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -347,6 +350,18 @@ h1, h2, h3, .display {
 }
 .hint-item .hint-meaning { color: var(--cream); opacity: 0.85; font-size: 0.92rem; }
 .hint-item.found { background: rgba(62, 122, 75, 0.35); }
+
+.gem-badge {
+  flex: none;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  color: var(--deep-maroon);
+}
+.gem-badge.gem-easy { background: var(--pearl); }
+.gem-badge.gem-medium { background: var(--gem); }
+.gem-badge.gem-difficult { background: var(--diamond); }
 
 .game-toolbar {
   display: flex;

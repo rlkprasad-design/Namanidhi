@@ -15,6 +15,9 @@ create table if not exists puzzle_progress (
   sub_category text,
   level int not null,
   entries_found int not null default 0,
+  pearls_found int not null default 0,
+  gems_found int not null default 0,
+  diamonds_found int not null default 0,
   completed_at timestamptz not null default now()
 );
 
@@ -62,11 +65,14 @@ create or replace view puzzle_leaderboard as
 select
   p.display_name,
   coalesce(sum(pp.entries_found), 0) as total_entries_found,
-  count(pp.id) as levels_completed
+  coalesce(sum(pp.pearls_found), 0) as total_pearls,
+  coalesce(sum(pp.gems_found), 0) as total_gems,
+  coalesce(sum(pp.diamonds_found), 0) as total_diamonds,
+  count(pp.id) as puzzles_completed
 from players p
 left join puzzle_progress pp on pp.player_id = p.id
 group by p.display_name
-order by total_entries_found desc;
+order by total_pearls + total_gems + total_diamonds desc;
 
 create or replace view japam_leaderboard as
 select

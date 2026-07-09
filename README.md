@@ -33,19 +33,23 @@ still tracked on-device via `localStorage`.
   level ladder (`data/levels.json`).
 - `js/storage.js` - player identity + local score fallback (`localStorage`).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
-- `js/app.js` - screens and app state (Home, level select, Game, Likhita
-  Japam, Level complete, Scoreboard). There's no category picker: every
-  puzzle samples entries from whichever difficulty tier that level names,
-  and the hint/meaning line is the only clue to what each hidden word is.
+- `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
+  complete, Scoreboard). There's no category picker and, as of this
+  writing, no difficulty picker either: tapping "నామ గుప్త నిధి" on Home
+  goes straight into a puzzle. Every puzzle mixes entries from all three
+  difficulty tiers in the same grid - each hint row shows a gem badge
+  (ముత్యం/రత్నం/వజ్రం for easy/medium/difficult) alongside its meaning, so
+  the difficulty of each specific word is visible without the player ever
+  choosing a tier up front.
 - `data/questions.json` - every entry (deity names, devotees, kshetrams,
   sacred items, all mixed together with no category of their own), each
-  tagged only with a `difficulty` (`"easy"`/`"medium"`/`"difficult"`).
-  `data/levels.json` is the shared level ladder - each level names the
-  difficulty tier it draws from, plus grid size, filler mode, breather
-  pacing, and how many entries that puzzle samples. Add a new entry by
-  dropping it into `questions.json`'s `entries` array - it's in rotation
-  immediately, no level to wire it into. `data/TEMPLATE.md` shows the
-  exact shape.
+  tagged only with a `difficulty` (`"easy"`/`"medium"`/`"difficult"`) -
+  this is what decides its gem type, not a level. `data/levels.json` names
+  a `gridSizeMin`/`gridSizeMax` range (see below); `sampleMixedEntries` in
+  `js/grid.js` rolls a size, then draws a roughly even split of easy/
+  medium/difficult entries sized to fit it. Add a new entry by dropping it
+  into `questions.json`'s `entries` array - it's in rotation immediately,
+  no level to wire it into. `data/TEMPLATE.md` shows the exact shape.
 - `data/stotrams.json` - the "స్తోత్ర పరీక్ష" (Stotra Pariksha) sub-section:
   one curated word-search per stotram, testing recall of names from that
   specific stotram's own text. Same flexible-grid model as the main pool
@@ -105,6 +109,13 @@ bounds on submitted values. It changes nothing about how the app
 behaves - just what a stranger with the URL could read or spam directly
 against the database.
 
+If your project predates the ముత్యం/రత్నం/వజ్రం (pearl/gem/diamond) gem
+tracking, also run `supabase/add-gem-tracking.sql` once - it adds the
+three counter columns to `puzzle_progress` and rebuilds
+`puzzle_leaderboard` to expose the per-gem totals the Scoreboard screen
+now reads. A brand-new project created from the current `schema.sql`
+already has these, so this step is only for existing projects.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,
@@ -116,24 +127,32 @@ the hint/meaning line is the only clue to what each hidden word is.
 The one thing that does sort entries is `difficulty`: `"easy"`,
 `"medium"`, or `"difficult"`, assigned by whoever writes the entry - there's
 no formula, just judgement about how well-known or obscure something is.
+This is also what a found word is "worth": easy → ముత్యం (pearl), medium →
+రత్నం (gem), difficult → వజ్రం (diamond). A word revealed via "సమాధానం
+చూపు" still lets the puzzle complete but doesn't earn its gem - only a
+word the player actually finds themselves counts (`markFound`'s `viaHint`
+parameter in `js/app.js`, tallied per-difficulty in `recordLevelProgress`
+and shown on the Scoreboard).
 
-`data/levels.json` is the shared level ladder: each level names the
-`difficulty` tier it draws from, plus `gridSizeMin`/`gridSizeMax`,
-`fillerMode` (`"random"` or `"curated"`), whether it's a `breather` level,
-and `japamCount` (how many Sri Rama traces the post-level interlude asks
-for). Grid size is not fixed - every time you play a level or hit "కొత్త
-పజిల్", `sampleEntries` in `js/grid.js` rolls a random size within that
-range, then derives how many entries to draw from the size itself
-(`entryCountForGridSize` - roughly `gridSize * 0.7`, clamped to at least 2
-and to however many eligible words actually exist). This was a deliberate
-choice over a fixed size per level: a puzzle that's the same shape every
-time starts to feel rote, and varying the grid (and therefore the
-question count) keeps it a little unpredictable in the way real recall
-practice is. Placement itself goes through `generateGridReliable`, which
-retries a fresh random layout (up to 15 times) if the first one can't fit
-every drawn word - empirically near-0% failure against this app's
-content. You can still have more than one level per difficulty if you
-want extra pacing variety.
+`data/levels.json` names a `gridSizeMin`/`gridSizeMax` range, a
+`fillerMode` (`"random"` or `"curated"`), and `japamCount` (how many Sri
+Rama traces the post-puzzle interlude asks for) - there's no `difficulty`
+on a level anymore, since every puzzle mixes all three tiers in one grid
+rather than being one difficulty end to end. Grid size is not fixed -
+every time you play or hit "కొత్త పజిల్", `sampleMixedEntries` in
+`js/grid.js` rolls a random size within that range, then draws a roughly
+even split of easy/medium/difficult entries sized to fit it
+(`entryCountForGridSize`, split three ways - see `splitAcrossDifficulties`).
+This was a deliberate choice over a fixed size and a difficulty picker: a
+puzzle that's the same shape and tier every time starts to feel rote, and
+mixing the grid, the size, and the difficulty keeps it a little
+unpredictable in the way real recall practice is. Placement itself goes
+through `generateGridReliable`, which retries a fresh random layout (up
+to 15 times) if the first one can't fit every drawn word - empirically
+near-0% failure against this app's content. `data/levels.json` is still
+an array (currently with one entry) so more than one puzzle "shape" (a
+quicker round vs. a longer one, say) could be added later without a
+schema change.
 
 ### Adding new content
 

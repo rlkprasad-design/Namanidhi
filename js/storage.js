@@ -58,7 +58,10 @@ export function getLocalPuzzleTotals() {
   const list = readLog(PUZZLE_LOG_KEY);
   return {
     entriesFound: list.reduce((sum, e) => sum + (e.entries_found || 0), 0),
-    levelsCompleted: list.length,
+    pearls: list.reduce((sum, e) => sum + (e.pearls_found || 0), 0),
+    gems: list.reduce((sum, e) => sum + (e.gems_found || 0), 0),
+    diamonds: list.reduce((sum, e) => sum + (e.diamonds_found || 0), 0),
+    puzzlesCompleted: list.length,
   };
 }
 

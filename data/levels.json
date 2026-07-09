@@ -1,5 +1,3 @@
 [
-  { "levelNumber": 1, "difficulty": "easy", "gridSizeMin": 4, "gridSizeMax": 7, "fillerMode": "random", "breather": true, "japamCount": 3 },
-  { "levelNumber": 2, "difficulty": "medium", "gridSizeMin": 6, "gridSizeMax": 9, "fillerMode": "random", "breather": false, "japamCount": 5 },
-  { "levelNumber": 3, "difficulty": "difficult", "gridSizeMin": 8, "gridSizeMax": 10, "fillerMode": "curated", "breather": false, "japamCount": 7 }
+  { "levelNumber": 1, "gridSizeMin": 5, "gridSizeMax": 10, "fillerMode": "curated", "japamCount": 5 }
 ]

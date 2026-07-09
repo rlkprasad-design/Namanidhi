@@ -1,4 +1,4 @@
-import { generateGridReliable, sampleEntries, entryCountForGridSize, randomInt } from './grid.js';
+import { generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
@@ -24,7 +24,11 @@ const JAPAM_NAMES = [
 ];
 const INTERLUDE_WORD = 'శ్రీరామ';
 
-const DIFFICULTY_LABELS = { easy: 'సులభం', medium: 'మధ్యస్థం', difficult: 'కష్టం' };
+// What a found word of each difficulty is "worth" - shown as a small
+// badge on its hint row, and tallied separately on the scoreboard.
+// Revealing a word via "సమాధానం చూపు" still completes the puzzle but
+// does not earn its gem (see markFound's viaHint handling below).
+const GEM_LABELS = { easy: 'ముత్యం', medium: 'రత్నం', difficult: 'వజ్రం' };
 
 const state = {
   playerName: null,
@@ -195,7 +199,7 @@ function showHome() {
     </div>
   `);
   screen.prepend(topBar());
-  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showLevelSelect);
+  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', startNamaGuptaNidhi);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
   screen.querySelector('[data-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
@@ -204,43 +208,10 @@ function showHome() {
 }
 
 // ---------------------------------------------------------------------
-// Nama Nidhi: level -> game
-// Every puzzle mixes entries from all content packs (deity names,
-// devotees, kshetrams, sacred items) - no category picker. The hint
-// line is the only clue to what each hidden word is.
-// ---------------------------------------------------------------------
-
-async function showLevelSelect() {
-  const screen = el(`
-    <div>
-      <h2 style="text-align:center;">నామ గుప్త నిధి</h2>
-      <p class="tagline" style="text-align:center;">స్థాయిని ఎంచుకోండి</p>
-      <div class="card-grid" data-levels></div>
-    </div>
-  `);
-  screen.prepend(topBar({ backAction: showHome }));
-  setScreen(screen);
-
-  const [levels] = await Promise.all([loadLevels(), loadEntryPool()]);
-  const container = screen.querySelector('[data-levels]');
-  for (const level of levels) {
-    const sizeLabel = level.gridSizeMin === level.gridSizeMax
-      ? `${level.gridSizeMin}×${level.gridSizeMin}`
-      : `${level.gridSizeMin}×${level.gridSizeMin} - ${level.gridSizeMax}×${level.gridSizeMax}`;
-    const card = el(`
-      <button type="button" class="card">
-        <div class="card-title">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty}</div>
-        <div class="card-sub">గ్రిడ్ సైజు: ${sizeLabel} (ప్రతిసారి మారుతుంది)</div>
-        ${level.breather ? '<span class="badge">సులభ విరామం</span>' : ''}
-      </button>
-    `);
-    card.addEventListener('click', () => startLevel(level));
-    container.appendChild(card);
-  }
-}
-
-// ---------------------------------------------------------------------
-// Game screen
+// Nama Gupta Nidhi: straight into a puzzle, no category or difficulty
+// picker. Every puzzle mixes entries from all content packs AND all
+// three difficulty tiers together - the hint line is the only clue to
+// what each hidden word is, and to what it's worth (ముత్యం/రత్నం/వజ్రం).
 // ---------------------------------------------------------------------
 
 const WRONG_TRIES_FOR_NUDGE = 4;
@@ -259,13 +230,13 @@ function cellFontSize(gridSize) {
   return `${rem.toFixed(2)}rem`;
 }
 
-async function startLevel(level) {
-  const pool = await loadEntryPool();
-  renderGame(buildSession(level, pool));
+async function startNamaGuptaNidhi() {
+  const [levels, pool] = await Promise.all([loadLevels(), loadEntryPool()]);
+  renderGame(buildSession(levels[0], pool));
 }
 
 function buildSession(level, pool) {
-  const { gridSize, entries } = sampleEntries(pool, level);
+  const { gridSize, entries } = sampleMixedEntries(pool, level);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -276,7 +247,7 @@ function buildSession(level, pool) {
     pool,
     gridSize,
     grid,
-    placements: placements.map((p) => ({ ...p, found: false })),
+    placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })),
     wrongAttempts: 0,
   };
 }
@@ -285,7 +256,7 @@ function renderGame(session) {
   const { level, gridSize } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${gridSize}×${gridSize}</h2>
+      <h2 style="text-align:center;">నామ గుప్త నిధి · ${gridSize}×${gridSize}</h2>
       <p class="tagline" style="text-align:center;">కింద సూచనల్లో ఉన్న నామాలను అక్షరాల్లో వేలితో గీసి కనుగొనండి</p>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
@@ -300,7 +271,7 @@ function renderGame(session) {
       </div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showLevelSelect }));
+  screen.prepend(topBar({ backAction: showHome }));
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
@@ -323,6 +294,7 @@ function renderGame(session) {
       const item = el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
+          <span class="gem-badge gem-${p.entry.difficulty}">${GEM_LABELS[p.entry.difficulty] || ''}</span>
           <span class="hint-meaning">${p.entry.meaning}</span>
         </div>
       `);
@@ -359,8 +331,9 @@ function renderGame(session) {
     pointerCell.classList.add('direction-pointer');
   }
 
-  function markFound(placement) {
+  function markFound(placement, viaHint) {
     placement.found = true;
+    placement.earnedGem = !viaHint;
     placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
     renderHints();
     checkLevelComplete();
@@ -422,7 +395,7 @@ function renderGame(session) {
   });
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
-    if (target) markFound(target);
+    if (target) markFound(target, true);
   });
 
   setScreen(screen);
@@ -430,11 +403,18 @@ function renderGame(session) {
 
 function recordLevelProgress(session) {
   const { level } = session;
+  const gemCounts = { easy: 0, medium: 0, difficult: 0 };
+  for (const p of session.placements) {
+    if (p.earnedGem) gemCounts[p.entry.difficulty] = (gemCounts[p.entry.difficulty] || 0) + 1;
+  }
   const progress = {
-    category: level.difficulty,
+    category: 'mixed',
     sub_category: null,
     level: level.levelNumber,
     entries_found: session.placements.length,
+    pearls_found: gemCounts.easy,
+    gems_found: gemCounts.medium,
+    diamonds_found: gemCounts.difficult,
   };
   recordPuzzleProgressLocal(progress);
   if (state.playerId) syncPuzzleProgress(state.playerId, progress);
@@ -456,7 +436,7 @@ function showLevelComplete(level) {
       mode: 'interlude',
       word: INTERLUDE_WORD,
       target: level.japamCount,
-      onExit: showLevelSelect,
+      onExit: showHome,
     });
   });
   setScreen(screen);
@@ -511,7 +491,7 @@ async function showStotramList() {
 // each time. Each call also rolls its own grid size within the stotram's
 // range, which changes which words are eligible - so the existing queue
 // is first trimmed to only currently-eligible words before topping it
-// back up, same approach as sampleEntries in grid.js.
+// back up, same approach as sampleMixedEntries in grid.js.
 const stotramDrawQueues = new Map();
 
 function drawStotramRound(stotram, gridSize) {
@@ -884,17 +864,24 @@ async function showScoreboard() {
 
   if (isBackendConfigured()) {
     const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(), fetchJapamLeaderboard()]);
-    const activePuzzleRows = (puzzleRows || []).filter((row) => (row.total_entries_found ?? 0) > 0 || (row.levels_completed ?? 0) > 0);
+    const activePuzzleRows = (puzzleRows || []).filter((row) =>
+      (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
+    );
     const activeJapamRows = (japamRows || []).filter((row) => (row.total_count ?? 0) > 0);
-    puzzleBoardEl.replaceWith(renderLeaderboardTable(activePuzzleRows, ['display_name', 'total_entries_found', 'levels_completed'], ['పేరు', 'సంపాదించిన రత్నాలు', 'పూర్తయిన స్థాయిలు'], 'data-puzzle-board'));
+    puzzleBoardEl.replaceWith(renderLeaderboardTable(
+      activePuzzleRows,
+      ['display_name', 'total_pearls', 'total_gems', 'total_diamonds', 'puzzles_completed'],
+      ['పేరు', 'ముత్యాలు', 'రత్నాలు', 'వజ్రాలు', 'పూర్తయిన పజిల్స్'],
+      'data-puzzle-board'
+    ));
     japamBoardEl.replaceWith(renderLeaderboardTable(activeJapamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
   } else {
     const puzzleTotals = getLocalPuzzleTotals();
     const japamTotals = getLocalJapamTotals();
     puzzleBoardEl.outerHTML = `
       <div data-puzzle-board>
-        <p>మీరు ఇప్పటివరకు సంపాదించిన రత్నాలు: <strong>${puzzleTotals.entriesFound}</strong></p>
-        <p>పూర్తయిన స్థాయిలు: <strong>${puzzleTotals.levelsCompleted}</strong></p>
+        <p>ముత్యాలు: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; రత్నాలు: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; వజ్రాలు: <strong>${puzzleTotals.diamonds}</strong></p>
+        <p>పూర్తయిన పజిల్స్: <strong>${puzzleTotals.puzzlesCompleted}</strong></p>
         <p class="score-note">ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.</p>
       </div>`;
     japamBoardEl.outerHTML = `
