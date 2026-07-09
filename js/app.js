@@ -892,7 +892,7 @@ async function showScoreboard() {
     puzzleBoardEl.replaceWith(renderLeaderboardTable(
       activePuzzleRows,
       ['display_name', 'total_pearls', 'total_gems', 'total_diamonds', 'puzzles_completed'],
-      ['పేరు', 'ముత్యాలు', 'రత్నాలు', 'వజ్రాలు', 'పూర్తయిన పజిల్స్'],
+      ['పేరు', `${gemBadge('easy')} ముత్యాలు`, `${gemBadge('medium')} రత్నాలు`, `${gemBadge('difficult')} వజ్రాలు`, 'పూర్తయిన పజిల్స్'],
       'data-puzzle-board'
     ));
     japamBoardEl.replaceWith(renderLeaderboardTable(activeJapamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
@@ -901,7 +901,7 @@ async function showScoreboard() {
     const japamTotals = getLocalJapamTotals();
     puzzleBoardEl.outerHTML = `
       <div data-puzzle-board>
-        <p>ముత్యాలు: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; రత్నాలు: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; వజ్రాలు: <strong>${puzzleTotals.diamonds}</strong></p>
+        <p>${gemBadge('easy')} ముత్యాలు: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; ${gemBadge('medium')} రత్నాలు: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; ${gemBadge('difficult')} వజ్రాలు: <strong>${puzzleTotals.diamonds}</strong></p>
         <p>పూర్తయిన పజిల్స్: <strong>${puzzleTotals.puzzlesCompleted}</strong></p>
         <p class="score-note">ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.</p>
       </div>`;

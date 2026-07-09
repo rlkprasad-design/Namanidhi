@@ -358,6 +358,7 @@ h1, h2, h3, .display {
   flex: none;
   width: 1.15em;
   height: 1.15em;
+  vertical-align: -0.2em;
 }
 .gem-icon svg { display: block; width: 100%; height: 100%; }
 .gem-icon.gem-easy { color: var(--pearl); }
