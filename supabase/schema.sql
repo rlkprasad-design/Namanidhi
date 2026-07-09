@@ -72,7 +72,7 @@ select
 from players p
 left join puzzle_progress pp on pp.player_id = p.id
 group by p.display_name
-order by total_pearls + total_gems + total_diamonds desc;
+order by coalesce(sum(pp.pearls_found), 0) + coalesce(sum(pp.gems_found), 0) + coalesce(sum(pp.diamonds_found), 0) desc;
 
 create or replace view japam_leaderboard as
 select
