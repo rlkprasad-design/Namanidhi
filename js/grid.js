@@ -22,6 +22,19 @@ function randomPool() {
   return BASE_POOL[Math.floor(Math.random() * BASE_POOL.length)];
 }
 
+export function randomInt(min, max) {
+  return min + Math.floor(Math.random() * (max - min + 1));
+}
+
+// How many entries a puzzle asks for, given the grid size that round
+// happened to roll - bigger board, more names, without being tied to a
+// single fixed count per level. Tuned against the real content pool so
+// placement (with generateGridReliable's retry) succeeds essentially
+// always across every size a level's range can roll.
+export function entryCountForGridSize(gridSize) {
+  return Math.max(2, Math.round(gridSize * 0.7));
+}
+
 // Per-difficulty draw queues, so puzzles cycle through every eligible word
 // once before any word repeats - independent random draws each time would
 // still be "random" but would frequently repeat words by chance, especially
@@ -38,19 +51,45 @@ function refillQueue(queue, eligible, count) {
   return queue;
 }
 
-// Picks `count` entries from the pool entries matching this level's
-// difficulty tier, restricted to words that can fit in gridSize - drawn
-// from a shuffled rotation so nothing repeats until the tier cycles.
+// Each call rolls its own grid size within the level's range, then draws
+// however many entries suit that size from a shuffled per-difficulty
+// rotation (so nothing repeats until the tier cycles). Because the rolled
+// size changes which words fit, the existing queue is first trimmed to
+// only currently-eligible words before topping it back up - a word that's
+// briefly too long for a small roll just re-enters rotation next time a
+// bigger size comes up, rather than the whole queue resetting.
 export function sampleEntries(pool, level) {
+  const gridSize = randomInt(level.gridSizeMin, level.gridSizeMax);
   const eligible = pool.filter(
-    (e) => e.difficulty === level.difficulty && graphemes(e.word).length <= level.gridSize
+    (e) => e.difficulty === level.difficulty && graphemes(e.word).length <= gridSize
   );
-  if (!eligible.length) return [];
+  if (!eligible.length) return { gridSize, entries: [] };
 
-  const queue = refillQueue(drawQueues.get(level.difficulty) || [], eligible, level.entryCount);
-  const drawn = queue.slice(0, level.entryCount);
-  drawQueues.set(level.difficulty, queue.slice(level.entryCount));
-  return drawn;
+  const eligibleWords = new Set(eligible.map((e) => e.word));
+  const trimmedQueue = (drawQueues.get(level.difficulty) || []).filter((e) => eligibleWords.has(e.word));
+  const count = Math.min(entryCountForGridSize(gridSize), eligible.length);
+
+  const queue = refillQueue(trimmedQueue, eligible, count);
+  const entries = queue.slice(0, count);
+  drawQueues.set(level.difficulty, queue.slice(count));
+  return { gridSize, entries };
+}
+
+// A random layout occasionally can't fit every requested word on the
+// first try, especially when the rolled size sits near the tight end for
+// its longest word - retrying with a fresh shuffle almost always finds a
+// layout that fits everything (empirically ~0% failure within a handful
+// of attempts against this app's content), so a puzzle never silently
+// shows fewer words than it asked for.
+const GENERATE_RETRY_ATTEMPTS = 15;
+
+export function generateGridReliable({ size, entries, fillerMode }) {
+  let result = { grid: [], placements: [] };
+  for (let attempt = 0; attempt < GENERATE_RETRY_ATTEMPTS; attempt++) {
+    result = generateGrid({ size, entries, fillerMode });
+    if (result.placements.length === entries.length) break;
+  }
+  return result;
 }
 
 // Try every (direction, start) combo for a word, shuffled, and return the

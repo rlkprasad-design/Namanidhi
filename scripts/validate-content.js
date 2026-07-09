@@ -105,15 +105,25 @@ function validateLevels(levels) {
     if (!DIFFICULTIES.includes(level.difficulty)) {
       errors.push(`${where}: difficulty must be one of ${DIFFICULTIES.join('/')}, got ${JSON.stringify(level.difficulty)}`);
     }
-    if (!isPositiveInt(level.gridSize)) errors.push(`${where}: gridSize must be a positive integer`);
+    if (!isPositiveInt(level.gridSizeMin)) errors.push(`${where}: gridSizeMin must be a positive integer`);
+    if (!isPositiveInt(level.gridSizeMax)) errors.push(`${where}: gridSizeMax must be a positive integer`);
+    if (isPositiveInt(level.gridSizeMin) && isPositiveInt(level.gridSizeMax) && level.gridSizeMin > level.gridSizeMax) {
+      errors.push(`${where}: gridSizeMin (${level.gridSizeMin}) must be <= gridSizeMax (${level.gridSizeMax})`);
+    }
     if (level.fillerMode !== 'random' && level.fillerMode !== 'curated') {
       errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(level.fillerMode)}`);
     }
     if (typeof level.breather !== 'boolean') errors.push(`${where}: breather must be a boolean`);
     if (!isPositiveInt(level.japamCount)) errors.push(`${where}: japamCount must be a positive integer`);
-    if (!isPositiveInt(level.entryCount)) errors.push(`${where}: entryCount must be a positive integer`);
   });
   return errors;
+}
+
+// Must produce the same result as entryCountForGridSize in js/grid.js -
+// duplicated here since this script is plain CommonJS and grid.js is an
+// ES module. Only used below to sanity-check pool size against it.
+function entryCountForGridSize(gridSize) {
+  return Math.max(2, Math.round(gridSize * 0.7));
 }
 
 const STOTRAM_STATUSES = ['active', 'soon'];
@@ -145,19 +155,19 @@ function validateStotrams(stotrams) {
     }
     if (stotram.status !== 'active') return; // "soon" entries are placeholders - nothing else to check
 
-    if (!isPositiveInt(stotram.gridSize)) errors.push(`${where}: gridSize must be a positive integer`);
+    if (!isPositiveInt(stotram.gridSizeMin)) errors.push(`${where}: gridSizeMin must be a positive integer`);
+    if (!isPositiveInt(stotram.gridSizeMax)) errors.push(`${where}: gridSizeMax must be a positive integer`);
+    if (isPositiveInt(stotram.gridSizeMin) && isPositiveInt(stotram.gridSizeMax) && stotram.gridSizeMin > stotram.gridSizeMax) {
+      errors.push(`${where}: gridSizeMin (${stotram.gridSizeMin}) must be <= gridSizeMax (${stotram.gridSizeMax})`);
+    }
     if (stotram.fillerMode !== 'random' && stotram.fillerMode !== 'curated') {
       errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(stotram.fillerMode)}`);
     }
     if (!isNonEmptyString(stotram.about)) errors.push(`${where}: about must be a non-empty string`);
-    if (!isPositiveInt(stotram.roundSize)) errors.push(`${where}: roundSize must be a positive integer`);
 
     if (!Array.isArray(stotram.entries) || stotram.entries.length === 0) {
       errors.push(`${where}: entries must be a non-empty array`);
       return;
-    }
-    if (isPositiveInt(stotram.roundSize) && stotram.roundSize > stotram.entries.length) {
-      errors.push(`${where}: roundSize (${stotram.roundSize}) is larger than entries.length (${stotram.entries.length}) - a round could never draw enough entries`);
     }
     const wordCounts = new Map();
     stotram.entries.forEach((entry, ei) => {
@@ -168,8 +178,8 @@ function validateStotrams(stotrams) {
       }
       const len = graphemeLength(entry.word);
       if (len < 2) errors.push(`${entryWhere}: word "${entry.word}" is only ${len} grapheme cluster(s) - looks like junk/empty content`);
-      if (isPositiveInt(stotram.gridSize) && len > stotram.gridSize) {
-        errors.push(`${entryWhere}: word "${entry.word}" (${len} letters) can't fit a ${stotram.gridSize}x${stotram.gridSize} grid - raise gridSize or shorten the word`);
+      if (isPositiveInt(stotram.gridSizeMax) && len > stotram.gridSizeMax) {
+        errors.push(`${entryWhere}: word "${entry.word}" (${len} letters) can't fit even the largest grid (${stotram.gridSizeMax}x${stotram.gridSizeMax}) - raise gridSizeMax or shorten the word`);
       }
       wordCounts.set(entry.word, (wordCounts.get(entry.word) || 0) + 1);
       if (!isNonEmptyString(entry.meaning)) errors.push(`${entryWhere}: meaning must be a non-empty string`);
@@ -179,6 +189,13 @@ function validateStotrams(stotrams) {
     });
     for (const [word, count] of wordCounts) {
       if (count > 1) errors.push(`${where}: duplicate word "${word}" appears ${count} times`);
+    }
+
+    if (isPositiveInt(stotram.gridSizeMin)) {
+      const eligibleAtMin = stotram.entries.filter((e) => isNonEmptyString(e.word) && graphemeLength(e.word) <= stotram.gridSizeMin).length;
+      if (eligibleAtMin < 2) {
+        errors.push(`${where}: only ${eligibleAtMin} entries fit the smallest grid (${stotram.gridSizeMin}x${stotram.gridSizeMin}) - a round there would be nearly empty; raise gridSizeMin, add shorter entries, or shorten existing ones`);
+      }
     }
   });
 
@@ -267,7 +284,7 @@ function main() {
   if (levels && poolEntries) {
     const maxGridSizeByDifficulty = {};
     for (const level of levels) {
-      maxGridSizeByDifficulty[level.difficulty] = Math.max(maxGridSizeByDifficulty[level.difficulty] || 0, level.gridSize);
+      maxGridSizeByDifficulty[level.difficulty] = Math.max(maxGridSizeByDifficulty[level.difficulty] || 0, level.gridSizeMax);
     }
 
     const tooLong = poolEntries.filter((e) => {
@@ -276,7 +293,7 @@ function main() {
     });
     if (tooLong.length) {
       console.log(`\n✗ words too long for any level at their difficulty`);
-      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" (${e.difficulty}, ${e.len} letters) can't fit any "${e.difficulty}" level's grid - raise that level's gridSize or shorten the word`));
+      tooLong.forEach((e) => console.log(`  ✗ "${e.word}" (${e.difficulty}, ${e.len} letters) can't fit any "${e.difficulty}" level's largest grid - raise that level's gridSizeMax or shorten the word`));
       anyFailed = true;
     }
 
@@ -286,15 +303,24 @@ function main() {
       orphaned.forEach((e) => { console.log(`  ⚠ "${e.word}" is tagged difficulty="${e.difficulty}" but no level in levels.json uses that difficulty - it will never appear in a puzzle`); totalWarnings += 1; });
     }
 
+    // A puzzle's actual entryCount is derived from whatever size it rolls
+    // (entryCountForGridSize) and clamped to however many words are
+    // eligible at that size, so a shortfall there degrades gracefully -
+    // the only genuinely bad case is a rolled size with fewer than 2
+    // eligible words, which would make a nearly-empty puzzle.
     const poolWarnings = [];
     for (const level of levels) {
-      const eligible = poolEntries.filter((e) => e.difficulty === level.difficulty && e.len <= level.gridSize).length;
-      if (eligible < level.entryCount) {
-        poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}): needs ${level.entryCount} entries but only ${eligible} fit an ${level.gridSize}x${level.gridSize} grid - puzzles will show fewer words than intended`);
+      for (let size = level.gridSizeMin; size <= level.gridSizeMax; size++) {
+        const eligible = poolEntries.filter((e) => e.difficulty === level.difficulty && e.len <= size).length;
+        if (eligible < 2) {
+          poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}) at ${size}x${size}: only ${eligible} entries fit - that size would produce a nearly-empty puzzle`);
+        } else if (eligible < entryCountForGridSize(size)) {
+          poolWarnings.push(`స్థాయి ${level.levelNumber} (${level.difficulty}) at ${size}x${size}: would ideally draw ${entryCountForGridSize(size)} entries but only ${eligible} fit - that size's puzzles will show fewer words than usual`);
+        }
       }
     }
     if (poolWarnings.length) {
-      console.log(`\n⚠ pool size vs level entryCount`);
+      console.log(`\n⚠ pool size vs a level's possible rolled grid sizes`);
       poolWarnings.forEach((w) => { console.log(`  ⚠ ${w}`); totalWarnings += 1; });
     }
   }

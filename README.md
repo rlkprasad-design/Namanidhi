@@ -48,18 +48,21 @@ still tracked on-device via `localStorage`.
   exact shape.
 - `data/stotrams.json` - the "స్తోత్ర పరీక్ష" (Stotra Pariksha) sub-section:
   one curated word-search per stotram, testing recall of names from that
-  specific stotram's own text. Each active stotram has a fixed `gridSize`
-  (currently always 6) and draws `roundSize` entries per puzzle (currently
-  5) from its own `entries` list via a shuffled rotation queue - same
-  repeat-avoidance idea as the main pool's per-difficulty queues in
-  `js/grid.js`, just scoped per stotram (`stotramDrawQueues` in
-  `js/app.js`). Each entry also carries a `difficulty`
-  (`"easy"`/`"medium"`/`"difficult"`) for now-metadata, later-filtering
-  purposes - a round currently mixes all difficulties rather than gating
-  by tier. A `"soon"` status entry only needs `id`, `title`, and `status` -
-  it renders as a locked/coming-soon card. See the `active` `rama-raksha`
-  entry for the full shape an active stotram needs (`gridSize`,
-  `roundSize`, `fillerMode`, `about`, `entries`).
+  specific stotram's own text. Same flexible-grid model as the main pool
+  (see `data/levels.json` below): each active stotram has a
+  `gridSizeMin`/`gridSizeMax` range instead of one fixed size, rolled
+  fresh every puzzle, with the round's entry count derived from whichever
+  size comes up. Entries are drawn from the stotram's own `entries` list
+  via a shuffled rotation queue scoped per stotram (`stotramDrawQueues` in
+  `js/app.js`), trimmed to whatever's eligible at the rolled size before
+  refilling - same idea as `js/grid.js`'s per-difficulty queues. Each
+  entry also carries a `difficulty` (`"easy"`/`"medium"`/`"difficult"`)
+  for now-metadata, later-filtering purposes - a round currently mixes all
+  difficulties rather than gating by tier. A `"soon"` status entry only
+  needs `id`, `title`, and `status` - it renders as a locked/coming-soon
+  card. See the `active` `rama-raksha` entry for the full shape an active
+  stotram needs (`gridSizeMin`, `gridSizeMax`, `fillerMode`, `about`,
+  `entries`).
 - `scripts/validate-content.js` - structural validator for
   `data/questions.json`, `data/levels.json`, and `data/stotrams.json`, run
   automatically on PRs via `.github/workflows/validate-content.yml`. See
@@ -115,12 +118,22 @@ The one thing that does sort entries is `difficulty`: `"easy"`,
 no formula, just judgement about how well-known or obscure something is.
 
 `data/levels.json` is the shared level ladder: each level names the
-`difficulty` tier it draws from, plus `gridSize`, `fillerMode` (`"random"`
-or `"curated"`), whether it's a `breather` level, `japamCount` (how many
-Sri Rama traces the post-level interlude asks for), and `entryCount` (how
-many entries that puzzle samples from its tier - a fresh random selection
-every time you play or hit "కొత్త పజిల్"). You can have more than one
-level per difficulty if you want extra pacing variety.
+`difficulty` tier it draws from, plus `gridSizeMin`/`gridSizeMax`,
+`fillerMode` (`"random"` or `"curated"`), whether it's a `breather` level,
+and `japamCount` (how many Sri Rama traces the post-level interlude asks
+for). Grid size is not fixed - every time you play a level or hit "కొత్త
+పజిల్", `sampleEntries` in `js/grid.js` rolls a random size within that
+range, then derives how many entries to draw from the size itself
+(`entryCountForGridSize` - roughly `gridSize * 0.7`, clamped to at least 2
+and to however many eligible words actually exist). This was a deliberate
+choice over a fixed size per level: a puzzle that's the same shape every
+time starts to feel rote, and varying the grid (and therefore the
+question count) keeps it a little unpredictable in the way real recall
+practice is. Placement itself goes through `generateGridReliable`, which
+retries a fresh random layout (up to 15 times) if the first one can't fit
+every drawn word - empirically near-0% failure against this app's
+content. You can still have more than one level per difficulty if you
+want extra pacing variety.
 
 ### Adding new content
 

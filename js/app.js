@@ -1,4 +1,5 @@
-import { generateGrid, sampleEntries } from './grid.js';
+import { generateGridReliable, sampleEntries, entryCountForGridSize, randomInt } from './grid.js';
+import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
 import { looksLikeLatin, transliterate } from './transliterate.js';
@@ -223,10 +224,13 @@ async function showLevelSelect() {
   const [levels] = await Promise.all([loadLevels(), loadEntryPool()]);
   const container = screen.querySelector('[data-levels]');
   for (const level of levels) {
+    const sizeLabel = level.gridSizeMin === level.gridSizeMax
+      ? `${level.gridSizeMin}×${level.gridSizeMin}`
+      : `${level.gridSizeMin}×${level.gridSizeMin} - ${level.gridSizeMax}×${level.gridSizeMax}`;
     const card = el(`
       <button type="button" class="card">
-        <div class="card-title">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</div>
-        <div class="card-sub">${level.entryCount} నామాలు</div>
+        <div class="card-title">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty}</div>
+        <div class="card-sub">గ్రిడ్ సైజు: ${sizeLabel} (ప్రతిసారి మారుతుంది)</div>
         ${level.breather ? '<span class="badge">సులభ విరామం</span>' : ''}
       </button>
     `);
@@ -261,15 +265,16 @@ async function startLevel(level) {
 }
 
 function buildSession(level, pool) {
-  const entries = sampleEntries(pool, level);
-  const { grid, placements } = generateGrid({
-    size: level.gridSize,
+  const { gridSize, entries } = sampleEntries(pool, level);
+  const { grid, placements } = generateGridReliable({
+    size: gridSize,
     entries,
     fillerMode: level.fillerMode,
   });
   return {
     level,
     pool,
+    gridSize,
     grid,
     placements: placements.map((p) => ({ ...p, found: false })),
     wrongAttempts: 0,
@@ -277,13 +282,13 @@ function buildSession(level, pool) {
 }
 
 function renderGame(session) {
-  const { level } = session;
+  const { level, gridSize } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${level.gridSize}×${level.gridSize}</h2>
+      <h2 style="text-align:center;">${DIFFICULTY_LABELS[level.difficulty] || level.difficulty} · ${gridSize}×${gridSize}</h2>
       <p class="tagline" style="text-align:center;">కింద సూచనల్లో ఉన్న నామాలను అక్షరాల్లో వేలితో గీసి కనుగొనండి</p>
       <div class="grid-frame">
-        <div class="grid" data-grid style="grid-template-columns:repeat(${level.gridSize}, 1fr); --cell-font-size:${cellFontSize(level.gridSize)};"></div>
+        <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
       </div>
       <div class="game-toolbar">
         <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
@@ -302,9 +307,9 @@ function renderGame(session) {
   const toolbarEl = screen.querySelector('.game-toolbar');
   const cellEls = [];
 
-  for (let r = 0; r < level.gridSize; r++) {
+  for (let r = 0; r < gridSize; r++) {
     const row = [];
-    for (let c = 0; c < level.gridSize; c++) {
+    for (let c = 0; c < gridSize; c++) {
       const cellEl = el(`<div class="cell" data-r="${r}" data-c="${c}">${session.grid[r][c]}</div>`);
       gridEl.appendChild(cellEl);
       row.push(cellEl);
@@ -491,7 +496,7 @@ async function showStotramList() {
     const card = el(`
       <button type="button" class="card">
         <div class="card-title">${stotram.title}</div>
-        <div class="card-sub">మొత్తం ${stotram.entries.length} పేర్లు · ప్రతిసారి ${stotram.roundSize} · ${stotram.gridSize}×${stotram.gridSize} గ్రిడ్</div>
+        <div class="card-sub">మొత్తం ${stotram.entries.length} పేర్లు · గ్రిడ్ సైజు, ప్రశ్నల సంఖ్య ప్రతిసారి మారుతుంది</div>
         <span class="badge">ఆడవచ్చు</span>
       </button>
     `);
@@ -501,45 +506,40 @@ async function showStotramList() {
 }
 
 // Per-stotram shuffled draw queue - same rotation idea as grid.js's
-// per-difficulty queues, so a round of `roundSize` entries cycles through
-// the whole word list before anything repeats, instead of drawing
-// independently at random each time.
+// per-difficulty queues, so rounds cycle through the whole word list
+// before anything repeats, instead of drawing independently at random
+// each time. Each call also rolls its own grid size within the stotram's
+// range, which changes which words are eligible - so the existing queue
+// is first trimmed to only currently-eligible words before topping it
+// back up, same approach as sampleEntries in grid.js.
 const stotramDrawQueues = new Map();
 
-function drawStotramRound(stotram) {
-  let queue = stotramDrawQueues.get(stotram.id) || [];
-  while (queue.length < stotram.roundSize) {
+function drawStotramRound(stotram, gridSize) {
+  const eligible = stotram.entries.filter((e) => graphemes(e.word).length <= gridSize);
+  const eligibleWords = new Set(eligible.map((e) => e.word));
+  let queue = (stotramDrawQueues.get(stotram.id) || []).filter((e) => eligibleWords.has(e.word));
+  const count = Math.min(entryCountForGridSize(gridSize), eligible.length);
+
+  while (queue.length < count) {
     const queuedWords = new Set(queue.map((e) => e.word));
-    const unseen = stotram.entries.filter((e) => !queuedWords.has(e.word));
-    const shuffled = (unseen.length ? unseen : stotram.entries).slice();
+    const unseen = eligible.filter((e) => !queuedWords.has(e.word));
+    const shuffled = (unseen.length ? unseen : eligible).slice();
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
     queue = queue.concat(shuffled);
   }
-  const drawn = queue.slice(0, stotram.roundSize);
-  stotramDrawQueues.set(stotram.id, queue.slice(stotram.roundSize));
+  const drawn = queue.slice(0, count);
+  stotramDrawQueues.set(stotram.id, queue.slice(count));
   return drawn;
 }
 
-// A 6x6 grid asked to fit several near-max-length words at once
-// occasionally can't on the first random layout (empirically ~5-6% of the
-// time with this word list) - retrying with a fresh shuffle almost always
-// finds a layout that fits all of them, so a puzzle never silently shows
-// fewer than roundSize words.
-const STOTRAM_PLACEMENT_ATTEMPTS = 15;
-
 function buildStotramSession(stotram) {
-  const entries = drawStotramRound(stotram);
-  let grid, placements;
-  for (let attempt = 0; attempt < STOTRAM_PLACEMENT_ATTEMPTS; attempt++) {
-    const result = generateGrid({ size: stotram.gridSize, entries, fillerMode: stotram.fillerMode });
-    grid = result.grid;
-    placements = result.placements;
-    if (placements.length === entries.length) break;
-  }
-  return { stotram, grid, placements: placements.map((p) => ({ ...p, found: false })), wrongAttempts: 0 };
+  const gridSize = randomInt(stotram.gridSizeMin, stotram.gridSizeMax);
+  const entries = drawStotramRound(stotram, gridSize);
+  const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode });
+  return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false })), wrongAttempts: 0 };
 }
 
 function startStotram(stotram) {
@@ -547,13 +547,13 @@ function startStotram(stotram) {
 }
 
 function renderStotramGame(session) {
-  const { stotram } = session;
+  const { stotram, gridSize } = session;
   const screen = el(`
     <div>
       <h2 style="text-align:center;">${stotram.title}</h2>
       <p class="tagline" style="text-align:center;">మీ అవగాహనను పరీక్షించుకోండి</p>
       <div class="grid-frame">
-        <div class="grid" data-grid style="grid-template-columns:repeat(${stotram.gridSize}, 1fr); --cell-font-size:${cellFontSize(stotram.gridSize)};"></div>
+        <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
       </div>
       <div class="game-toolbar">
         <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
@@ -572,9 +572,9 @@ function renderStotramGame(session) {
   const toolbarEl = screen.querySelector('.game-toolbar');
   const cellEls = [];
 
-  for (let r = 0; r < stotram.gridSize; r++) {
+  for (let r = 0; r < gridSize; r++) {
     const row = [];
-    for (let c = 0; c < stotram.gridSize; c++) {
+    for (let c = 0; c < gridSize; c++) {
       const cellEl = el(`<div class="cell" data-r="${r}" data-c="${c}">${session.grid[r][c]}</div>`);
       gridEl.appendChild(cellEl);
       row.push(cellEl);
