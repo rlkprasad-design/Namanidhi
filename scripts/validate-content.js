@@ -150,10 +150,14 @@ function validateStotrams(stotrams) {
       errors.push(`${where}: fillerMode must be "random" or "curated", got ${JSON.stringify(stotram.fillerMode)}`);
     }
     if (!isNonEmptyString(stotram.about)) errors.push(`${where}: about must be a non-empty string`);
+    if (!isPositiveInt(stotram.roundSize)) errors.push(`${where}: roundSize must be a positive integer`);
 
     if (!Array.isArray(stotram.entries) || stotram.entries.length === 0) {
       errors.push(`${where}: entries must be a non-empty array`);
       return;
+    }
+    if (isPositiveInt(stotram.roundSize) && stotram.roundSize > stotram.entries.length) {
+      errors.push(`${where}: roundSize (${stotram.roundSize}) is larger than entries.length (${stotram.entries.length}) - a round could never draw enough entries`);
     }
     const wordCounts = new Map();
     stotram.entries.forEach((entry, ei) => {
@@ -169,6 +173,9 @@ function validateStotrams(stotrams) {
       }
       wordCounts.set(entry.word, (wordCounts.get(entry.word) || 0) + 1);
       if (!isNonEmptyString(entry.meaning)) errors.push(`${entryWhere}: meaning must be a non-empty string`);
+      if (!DIFFICULTIES.includes(entry.difficulty)) {
+        errors.push(`${entryWhere}: difficulty must be one of ${DIFFICULTIES.join('/')}, got ${JSON.stringify(entry.difficulty)}`);
+      }
     });
     for (const [word, count] of wordCounts) {
       if (count > 1) errors.push(`${where}: duplicate word "${word}" appears ${count} times`);

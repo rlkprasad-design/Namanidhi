@@ -48,12 +48,18 @@ still tracked on-device via `localStorage`.
   exact shape.
 - `data/stotrams.json` - the "స్తోత్ర పరీక్ష" (Stotra Pariksha) sub-section:
   one curated word-search per stotram, testing recall of names from that
-  specific stotram's own text. Unlike `questions.json`'s pooled/sampled
-  entries, every entry in an `active` stotram appears every time - nothing
-  is drawn at random. A `"soon"` status entry only needs `id`, `title`,
-  and `status` - it renders as a locked/coming-soon card. See the `active`
-  `rama-raksha` entry for the full shape an active stotram needs
-  (`gridSize`, `fillerMode`, `about`, `entries`).
+  specific stotram's own text. Each active stotram has a fixed `gridSize`
+  (currently always 6) and draws `roundSize` entries per puzzle (currently
+  5) from its own `entries` list via a shuffled rotation queue - same
+  repeat-avoidance idea as the main pool's per-difficulty queues in
+  `js/grid.js`, just scoped per stotram (`stotramDrawQueues` in
+  `js/app.js`). Each entry also carries a `difficulty`
+  (`"easy"`/`"medium"`/`"difficult"`) for now-metadata, later-filtering
+  purposes - a round currently mixes all difficulties rather than gating
+  by tier. A `"soon"` status entry only needs `id`, `title`, and `status` -
+  it renders as a locked/coming-soon card. See the `active` `rama-raksha`
+  entry for the full shape an active stotram needs (`gridSize`,
+  `roundSize`, `fillerMode`, `about`, `entries`).
 - `scripts/validate-content.js` - structural validator for
   `data/questions.json`, `data/levels.json`, and `data/stotrams.json`, run
   automatically on PRs via `.github/workflows/validate-content.yml`. See

@@ -268,6 +268,7 @@ h1, h2, h3, .display {
 }
 
 .cell {
+  position: relative;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -284,11 +285,26 @@ h1, h2, h3, .display {
 .cell.found { background: var(--found); color: #fff; }
 .cell.wrong { background: var(--wrong); color: #fff; }
 .cell.nudge { background: var(--gold-light); box-shadow: 0 0 0 3px var(--gold); animation: glow 1.2s ease-in-out infinite alternate; }
-.cell.direction-hint { box-shadow: 0 0 0 3px var(--found); animation: glow-green 0.8s ease-in-out infinite alternate; }
 
-@keyframes glow-green {
-  from { box-shadow: 0 0 0 2px var(--found); }
-  to { box-shadow: 0 0 8px 3px var(--found); }
+/* A small arrow badge showing which way the current drag is heading -
+   purely the geometry of the drag, not a hint toward any answer. */
+.cell.direction-pointer::after {
+  content: "➤";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 0.5em;
+  line-height: 1;
+  color: var(--deep-maroon);
+  background: var(--gold);
+  border-radius: 50%;
+  width: 1.5em;
+  height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(var(--pointer-angle, 0deg));
+  pointer-events: none;
 }
 
 @keyframes glow {

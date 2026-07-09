@@ -241,6 +241,13 @@ async function showLevelSelect() {
 
 const WRONG_TRIES_FOR_NUDGE = 4;
 
+// Degrees to rotate a "points right" arrow glyph so it points along
+// (dr, dc) - purely the geometry of the drag itself, no knowledge of
+// where any word actually is.
+function pointerAngleDeg(dr, dc) {
+  return (Math.atan2(dr, dc) * 180) / Math.PI;
+}
+
 // Smaller grids have more room per cell - scale the letter up to use it,
 // instead of a flat size that leaves the 4x4 grid's big cells half-empty.
 function cellFontSize(gridSize) {
@@ -326,28 +333,25 @@ function renderGame(session) {
     lastSelected = path;
   }
 
-  // As soon as a drag's cells-so-far exactly match the start of some
-  // not-yet-found word (read from either end, since crossing words can be
-  // traced in either direction), light up the next cell along that word -
-  // updates as the drag continues, so a correct drag gets guided the
-  // whole way, especially useful for diagonal words that are harder to
-  // follow by eye.
-  let lastHinted = [];
-  function updateDirectionHint(path) {
-    const next = [];
-    if (path.length) {
-      for (const p of session.placements) {
-        if (p.found) continue;
-        for (const cells of [p.cells, p.cells.slice().reverse()]) {
-          if (path.length >= cells.length) continue;
-          const matches = path.every(({ r, c }, i) => cells[i][0] === r && cells[i][1] === c);
-          if (matches) next.push(cells[path.length]);
-        }
-      }
+  // A small arrow on the last-selected cell showing which way the drag
+  // is currently heading - purely the geometry of path[0]->path[1], not
+  // a peek at session.placements. Helps keep a diagonal drag straight
+  // without revealing which word (if any) is actually along that line.
+  let pointerCell = null;
+  function updateDirectionPointer(path) {
+    if (pointerCell) {
+      pointerCell.classList.remove('direction-pointer');
+      pointerCell.style.removeProperty('--pointer-angle');
+      pointerCell = null;
     }
-    lastHinted.forEach(([r, c]) => cellEls[r][c].classList.remove('direction-hint'));
-    next.forEach(([r, c]) => cellEls[r][c].classList.add('direction-hint'));
-    lastHinted = next;
+    if (path.length < 2) return;
+    const [a, b] = path;
+    const dr = Math.sign(b.r - a.r);
+    const dc = Math.sign(b.c - a.c);
+    const last = path[path.length - 1];
+    pointerCell = cellEls[last.r][last.c];
+    pointerCell.style.setProperty('--pointer-angle', `${pointerAngleDeg(dr, dc)}deg`);
+    pointerCell.classList.add('direction-pointer');
   }
 
   function markFound(placement) {
@@ -385,11 +389,11 @@ function renderGame(session) {
   }
 
   attachTracer(gridEl, {
-    onDragStart: (path) => { highlightSelection(path); updateDirectionHint(path); },
-    onDragUpdate: (path) => { highlightSelection(path); updateDirectionHint(path); },
+    onDragStart: (path) => { highlightSelection(path); updateDirectionPointer(path); },
+    onDragUpdate: (path) => { highlightSelection(path); updateDirectionPointer(path); },
     onDragEnd: (path) => {
       highlightSelection([]);
-      updateDirectionHint([]);
+      updateDirectionPointer([]);
       if (path.length < 2) return;
       const { forward, reversed } = pathToStrings(path, session.grid);
       const match = session.placements.find((p) => {
@@ -487,7 +491,7 @@ async function showStotramList() {
     const card = el(`
       <button type="button" class="card">
         <div class="card-title">${stotram.title}</div>
-        <div class="card-sub">${stotram.entries.length} పేర్లు · ${stotram.gridSize}×${stotram.gridSize} గ్రిడ్</div>
+        <div class="card-sub">మొత్తం ${stotram.entries.length} పేర్లు · ప్రతిసారి ${stotram.roundSize} · ${stotram.gridSize}×${stotram.gridSize} గ్రిడ్</div>
         <span class="badge">ఆడవచ్చు</span>
       </button>
     `);
@@ -496,12 +500,45 @@ async function showStotramList() {
   }
 }
 
+// Per-stotram shuffled draw queue - same rotation idea as grid.js's
+// per-difficulty queues, so a round of `roundSize` entries cycles through
+// the whole word list before anything repeats, instead of drawing
+// independently at random each time.
+const stotramDrawQueues = new Map();
+
+function drawStotramRound(stotram) {
+  let queue = stotramDrawQueues.get(stotram.id) || [];
+  while (queue.length < stotram.roundSize) {
+    const queuedWords = new Set(queue.map((e) => e.word));
+    const unseen = stotram.entries.filter((e) => !queuedWords.has(e.word));
+    const shuffled = (unseen.length ? unseen : stotram.entries).slice();
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    queue = queue.concat(shuffled);
+  }
+  const drawn = queue.slice(0, stotram.roundSize);
+  stotramDrawQueues.set(stotram.id, queue.slice(stotram.roundSize));
+  return drawn;
+}
+
+// A 6x6 grid asked to fit several near-max-length words at once
+// occasionally can't on the first random layout (empirically ~5-6% of the
+// time with this word list) - retrying with a fresh shuffle almost always
+// finds a layout that fits all of them, so a puzzle never silently shows
+// fewer than roundSize words.
+const STOTRAM_PLACEMENT_ATTEMPTS = 15;
+
 function buildStotramSession(stotram) {
-  const { grid, placements } = generateGrid({
-    size: stotram.gridSize,
-    entries: stotram.entries,
-    fillerMode: stotram.fillerMode,
-  });
+  const entries = drawStotramRound(stotram);
+  let grid, placements;
+  for (let attempt = 0; attempt < STOTRAM_PLACEMENT_ATTEMPTS; attempt++) {
+    const result = generateGrid({ size: stotram.gridSize, entries, fillerMode: stotram.fillerMode });
+    grid = result.grid;
+    placements = result.placements;
+    if (placements.length === entries.length) break;
+  }
   return { stotram, grid, placements: placements.map((p) => ({ ...p, found: false })), wrongAttempts: 0 };
 }
 
@@ -565,22 +602,21 @@ function renderStotramGame(session) {
     lastSelected = path;
   }
 
-  let lastHinted = [];
-  function updateDirectionHint(path) {
-    const next = [];
-    if (path.length) {
-      for (const p of session.placements) {
-        if (p.found) continue;
-        for (const cells of [p.cells, p.cells.slice().reverse()]) {
-          if (path.length >= cells.length) continue;
-          const matches = path.every(({ r, c }, i) => cells[i][0] === r && cells[i][1] === c);
-          if (matches) next.push(cells[path.length]);
-        }
-      }
+  let pointerCell = null;
+  function updateDirectionPointer(path) {
+    if (pointerCell) {
+      pointerCell.classList.remove('direction-pointer');
+      pointerCell.style.removeProperty('--pointer-angle');
+      pointerCell = null;
     }
-    lastHinted.forEach(([r, c]) => cellEls[r][c].classList.remove('direction-hint'));
-    next.forEach(([r, c]) => cellEls[r][c].classList.add('direction-hint'));
-    lastHinted = next;
+    if (path.length < 2) return;
+    const [a, b] = path;
+    const dr = Math.sign(b.r - a.r);
+    const dc = Math.sign(b.c - a.c);
+    const last = path[path.length - 1];
+    pointerCell = cellEls[last.r][last.c];
+    pointerCell.style.setProperty('--pointer-angle', `${pointerAngleDeg(dr, dc)}deg`);
+    pointerCell.classList.add('direction-pointer');
   }
 
   function markFound(placement) {
@@ -614,10 +650,10 @@ function renderStotramGame(session) {
   }
 
   attachTracer(gridEl, {
-    onDragStart: (path) => { highlightSelection(path); updateDirectionHint(path); },
-    onDragUpdate: (path) => { highlightSelection(path); updateDirectionHint(path); },
+    onDragStart: (path) => { highlightSelection(path); updateDirectionPointer(path); },
+    onDragUpdate: (path) => { highlightSelection(path); updateDirectionPointer(path); },
     onDragEnd: (path) => {
-      highlightSelection([]); updateDirectionHint([]);
+      highlightSelection([]); updateDirectionPointer([]);
       if (path.length < 2) return;
       const { forward, reversed } = pathToStrings(path, session.grid);
       const match = session.placements.find((p) => !p.found && (p.letters.join('') === forward || p.letters.join('') === reversed));
