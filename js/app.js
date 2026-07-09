@@ -888,14 +888,13 @@ async function showScoreboard() {
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
     );
-    const activeJapamRows = (japamRows || []).filter((row) => (row.total_count ?? 0) > 0);
     puzzleBoardEl.replaceWith(renderLeaderboardTable(
       activePuzzleRows,
       ['display_name', 'total_pearls', 'total_gems', 'total_diamonds', 'puzzles_completed'],
       ['పేరు', `${gemBadge('easy')} ముత్యాలు`, `${gemBadge('medium')} రత్నాలు`, `${gemBadge('difficult')} వజ్రాలు`, 'పూర్తయిన పజిల్స్'],
       'data-puzzle-board'
     ));
-    japamBoardEl.replaceWith(renderLeaderboardTable(activeJapamRows, ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
+    japamBoardEl.replaceWith(renderLeaderboardTable(japamRows || [], ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
   } else {
     const puzzleTotals = getLocalPuzzleTotals();
     const japamTotals = getLocalJapamTotals();
