@@ -199,7 +199,6 @@ function showHome() {
           <div class="sub">నామాన్ని ప్రశాంతంగా రాయండి</div>
         </button>
         <button type="button" class="mode-btn new" data-mode="stotra-pariksha">
-          <div class="new-tag">కొత్తది</div>
           <div class="display">స్తోత్ర పరీక్ష</div>
           <div class="sub">మీ అవగాహనను పరీక్షించుకోండి</div>
         </button>
