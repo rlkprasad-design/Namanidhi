@@ -53,18 +53,36 @@ function refillQueue(queue, eligible, count) {
 
 export const DIFFICULTIES = ['easy', 'medium', 'difficult'];
 
-// Splits `total` roughly evenly across the three difficulty tiers, so a
-// mixed puzzle almost always has at least one of each - which tier gets
-// the "extra" slot from an uneven split is shuffled each time rather than
-// always landing on the same one.
-function splitAcrossDifficulties(total) {
-  const base = Math.floor(total / DIFFICULTIES.length);
-  let remainder = total - base * DIFFICULTIES.length;
-  const counts = Object.fromEntries(DIFFICULTIES.map((d) => [d, base]));
-  for (const d of shuffle(DIFFICULTIES)) {
-    if (remainder <= 0) break;
-    counts[d] += 1;
-    remainder -= 1;
+const EVEN_WEIGHTS = { easy: 1 / 3, medium: 1 / 3, difficult: 1 / 3 };
+
+// Ramps a beginner's mix from all-easy up to a settled, still-approachable
+// blend by their 30th completed puzzle (Nama Gupta Nidhi and Stotra
+// Pariksha combined, since that's what puzzlesCompleted already counts) -
+// it never gets harder than that plateau, so the game stays welcoming for
+// an elderly audience long after the "new player" stage too.
+export function difficultyWeightsForExperience(puzzlesCompleted) {
+  const t = Math.min(1, Math.max(0, puzzlesCompleted) / 30);
+  return {
+    easy: 0.70 - 0.50 * t,
+    medium: 0.30 + 0.10 * t,
+    difficult: 0.40 * t,
+  };
+}
+
+// Splits `total` across the three difficulty tiers proportional to
+// `weights` (an even split by default), using largest-remainder
+// apportionment so the counts always sum to exactly `total` while still
+// respecting the requested proportions as closely as whole numbers allow.
+export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
+  const raw = DIFFICULTIES.map((d) => [d, (weights[d] ?? 0) * total]);
+  const floors = raw.map(([d, v]) => [d, Math.floor(v)]);
+  const counts = Object.fromEntries(floors);
+  let remainder = total - floors.reduce((sum, [, v]) => sum + v, 0);
+  const byFraction = raw
+    .map(([d, v], i) => [d, v - floors[i][1]])
+    .sort((a, b) => b[1] - a[1]);
+  for (let i = 0; remainder > 0 && i < byFraction.length; i++, remainder--) {
+    counts[byFraction[i][0]] += 1;
   }
   return counts;
 }
@@ -73,13 +91,14 @@ function splitAcrossDifficulties(total) {
 // a mix of easy/medium/difficult entries sized to fit that roll - every
 // puzzle blends all three tiers (so a hint's word can turn out to be a
 // ముత్యం, రత్నం, or వజ్రం) rather than being one difficulty end to end.
-// Each tier is still drawn from its own shuffled rotation queue, trimmed
-// to whatever's eligible at the rolled size before topping back up, so
-// nothing repeats until that tier cycles - same idea as before, just
-// running once per tier per puzzle instead of once for a single tier.
-export function sampleMixedEntries(pool, level) {
+// `weights` (see difficultyWeightsForExperience) skews that mix toward
+// easier tiers for a newer/lower-scoring player instead of always an
+// even split. Each tier is still drawn from its own shuffled rotation
+// queue, trimmed to whatever's eligible at the rolled size before
+// topping back up, so nothing repeats until that tier cycles.
+export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS) {
   const gridSize = randomInt(level.gridSizeMin, level.gridSizeMax);
-  const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize));
+  const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
 
   const entries = [];
   for (const difficulty of DIFFICULTIES) {

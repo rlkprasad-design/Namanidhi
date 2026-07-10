@@ -1,4 +1,7 @@
-import { generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt } from './grid.js';
+import {
+  generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
+  splitAcrossDifficulties, difficultyWeightsForExperience, DIFFICULTIES,
+} from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
@@ -247,7 +250,8 @@ async function startNamaGuptaNidhi() {
 }
 
 function buildSession(level, pool) {
-  const { gridSize, entries } = sampleMixedEntries(pool, level);
+  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals().puzzlesCompleted);
+  const { gridSize, entries } = sampleMixedEntries(pool, level, weights);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -496,39 +500,53 @@ async function showStotramList() {
   }
 }
 
-// Per-stotram shuffled draw queue - same rotation idea as grid.js's
-// per-difficulty queues, so rounds cycle through the whole word list
-// before anything repeats, instead of drawing independently at random
-// each time. Each call also rolls its own grid size within the stotram's
-// range, which changes which words are eligible - so the existing queue
-// is first trimmed to only currently-eligible words before topping it
-// back up, same approach as sampleMixedEntries in grid.js.
+function shuffleLocal(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Per-stotram, per-difficulty shuffled draw queues - same rotation idea as
+// grid.js's per-difficulty queues, so rounds cycle through each tier's
+// whole word list before anything repeats, instead of drawing
+// independently at random each time. `weights` (see
+// difficultyWeightsForExperience) skews how many of each tier a round
+// asks for, same as the main pool. Each call also rolls its own grid
+// size within the stotram's range, which changes which words are
+// eligible - so the existing per-tier queue is first trimmed to only
+// currently-eligible words before topping it back up.
 const stotramDrawQueues = new Map();
 
-function drawStotramRound(stotram, gridSize) {
-  const eligible = stotram.entries.filter((e) => graphemes(e.word).length <= gridSize);
-  const eligibleWords = new Set(eligible.map((e) => e.word));
-  let queue = (stotramDrawQueues.get(stotram.id) || []).filter((e) => eligibleWords.has(e.word));
-  const count = Math.min(entryCountForGridSize(gridSize), eligible.length);
+function drawStotramRound(stotram, gridSize, weights) {
+  const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
+  const drawn = [];
+  for (const difficulty of DIFFICULTIES) {
+    const eligible = stotram.entries.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize);
+    if (!eligible.length) continue;
 
-  while (queue.length < count) {
-    const queuedWords = new Set(queue.map((e) => e.word));
-    const unseen = eligible.filter((e) => !queuedWords.has(e.word));
-    const shuffled = (unseen.length ? unseen : eligible).slice();
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    const eligibleWords = new Set(eligible.map((e) => e.word));
+    const key = `${stotram.id}::${difficulty}`;
+    let queue = (stotramDrawQueues.get(key) || []).filter((e) => eligibleWords.has(e.word));
+    const count = Math.min(targetCounts[difficulty], eligible.length);
+
+    while (queue.length < count) {
+      const queuedWords = new Set(queue.map((e) => e.word));
+      const unseen = eligible.filter((e) => !queuedWords.has(e.word));
+      queue = queue.concat(shuffleLocal(unseen.length ? unseen : eligible));
     }
-    queue = queue.concat(shuffled);
+    drawn.push(...queue.slice(0, count));
+    stotramDrawQueues.set(key, queue.slice(count));
   }
-  const drawn = queue.slice(0, count);
-  stotramDrawQueues.set(stotram.id, queue.slice(count));
   return drawn;
 }
 
 function buildStotramSession(stotram) {
   const gridSize = randomInt(stotram.gridSizeMin, stotram.gridSizeMax);
-  const entries = drawStotramRound(stotram, gridSize);
+  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals().puzzlesCompleted);
+  const entries = drawStotramRound(stotram, gridSize, weights);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode });
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
 }

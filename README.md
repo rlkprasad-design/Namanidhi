@@ -157,16 +157,31 @@ Rama traces the post-puzzle interlude asks for) - there's no `difficulty`
 on a level anymore, since every puzzle mixes all three tiers in one grid
 rather than being one difficulty end to end. Grid size is not fixed -
 every time you play or hit "కొత్త పజిల్", `sampleMixedEntries` in
-`js/grid.js` rolls a random size within that range, then draws a roughly
-even split of easy/medium/difficult entries sized to fit it
-(`entryCountForGridSize`, split three ways - see `splitAcrossDifficulties`).
-This was a deliberate choice over a fixed size and a difficulty picker: a
-puzzle that's the same shape and tier every time starts to feel rote, and
-mixing the grid, the size, and the difficulty keeps it a little
-unpredictable in the way real recall practice is. Placement itself goes
-through `generateGridReliable`, which retries a fresh random layout (up
-to 15 times) if the first one can't fit every drawn word - empirically
-near-0% failure against this app's content. `data/levels.json` is still
+`js/grid.js` rolls a random size within that range, then draws a mix of
+easy/medium/difficult entries sized to fit it (`entryCountForGridSize`,
+split across tiers by `splitAcrossDifficulties`). This was a deliberate
+choice over a fixed size and a difficulty picker: a puzzle that's the
+same shape and tier every time starts to feel rote, and mixing the grid,
+the size, and the difficulty keeps it a little unpredictable in the way
+real recall practice is. Placement itself goes through
+`generateGridReliable`, which retries a fresh random layout (up to 15
+times) if the first one can't fit every drawn word - empirically near-0%
+failure against this app's content.
+
+The tier split isn't a flat even mix, though - `difficultyWeightsForExperience`
+in `js/grid.js` reads the player's device-local `puzzlesCompleted` (Nama
+Gupta Nidhi and Stotra Pariksha combined) and skews the weights: a brand
+new player (0 completed) gets roughly 70% easy / 30% medium / 0%
+difficult, ramping smoothly to a settled 20% / 40% / 40% mix by their
+30th completed puzzle - and it stays there rather than continuing to get
+harder, so the game doesn't outgrow an elderly audience over time.
+`splitAcrossDifficulties` turns those weights into whole-number counts
+via largest-remainder apportionment, so they always sum to exactly the
+puzzle's entry count. Stotra Pariksha's `drawStotramRound` in `js/app.js`
+uses the same weights and per-tier rotation-queue approach (one queue per
+`stotram.id + difficulty`, mirroring `js/grid.js`'s per-difficulty
+queues) rather than drawing from one combined pool, so the same
+easy-first ramp applies there too. `data/levels.json` is still
 an array (currently with one entry) so more than one puzzle "shape" (a
 quicker round vs. a longer one, say) could be added later without a
 schema change.
