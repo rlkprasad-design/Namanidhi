@@ -866,7 +866,7 @@ async function showScoreboard() {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">స్కోరు బోర్డు</h2>
-      <p class="tagline" style="text-align:center;">మీరు, మీ కుటుంబ సభ్యులు ఇప్పటివరకు సాధించిన ప్రగతి ఇక్కడ చూడవచ్చు</p>
+      <p class="tagline" style="text-align:center;">మన బృందం సాధించిన ప్రగతి</p>
       <div class="score-section">
         <h3>నామ గుప్త నిధి స్కోరు బోర్డు</h3>
         <div data-puzzle-board>లోడ్ అవుతోంది...</div>
