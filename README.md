@@ -230,7 +230,10 @@ node scripts/validate-content.js
 - A fully-offline, no-leaderboard variant was flagged as a separate,
   simpler build if ever wanted - this repo is the shared-leaderboard
   version.
-- Stotra Pariksha only has one active stotram (Rama Raksha Stotram) so
-  far - Lakshmi Ashtottaram and Vishnu Sahasranamam are listed as
-  `"soon"` placeholders in `data/stotrams.json`, waiting on their word
-  lists being written and reviewed.
+- Stotra Pariksha has two active stotrams (Rama Raksha Stotram, Lakshmi
+  Ashtottaram) - Vishnu Sahasranamam is still a `"soon"` placeholder in
+  `data/stotrams.json`, waiting on its word list being written and
+  reviewed. Lakshmi Ashtottaram's 88 entries are a first pass
+  reconstructed from memory (same caveat as Rama Raksha originally had)
+  and haven't been checked against the source text yet - see "Adding new
+  content" above.
