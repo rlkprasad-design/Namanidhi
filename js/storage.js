@@ -1,12 +1,25 @@
 // Local-device state: player identity (name-only, no login) and a
 // local fallback tally so the app still works fully offline / before a
 // Supabase project is configured.
+//
+// Puzzle/Japam logs are namespaced per language (see LANGUAGE_KEY) - by
+// design, English-mode play tracks separately from Telugu-mode play and
+// never syncs to the shared Supabase scoreboard (see isBackendConfigured
+// callers in app.js), so switching languages must not mix or lose either
+// language's local tally.
 
 const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';
-const PUZZLE_LOG_KEY = 'namanidhi.puzzleLog';
-const JAPAM_LOG_KEY = 'namanidhi.japamLog';
 const INTRO_SEEN_KEY = 'namanidhi.introSeen';
+const LANGUAGE_KEY = 'namanidhi.language';
+
+function puzzleLogKey(lang) {
+  return lang === 'te' ? 'namanidhi.puzzleLog' : `namanidhi.puzzleLog.${lang}`;
+}
+
+function japamLogKey(lang) {
+  return lang === 'te' ? 'namanidhi.japamLog' : `namanidhi.japamLog.${lang}`;
+}
 
 export function hasSeenIntro() {
   return localStorage.getItem(INTRO_SEEN_KEY) === '1';
@@ -14,6 +27,14 @@ export function hasSeenIntro() {
 
 export function markIntroSeen() {
   localStorage.setItem(INTRO_SEEN_KEY, '1');
+}
+
+export function getLanguage() {
+  return localStorage.getItem(LANGUAGE_KEY);
+}
+
+export function setLanguage(lang) {
+  localStorage.setItem(LANGUAGE_KEY, lang);
 }
 
 export function getPlayerName() {
@@ -46,16 +67,16 @@ function appendLog(key, entry) {
   localStorage.setItem(key, JSON.stringify(list));
 }
 
-export function recordPuzzleProgressLocal(entry) {
-  appendLog(PUZZLE_LOG_KEY, { ...entry, completed_at: new Date().toISOString() });
+export function recordPuzzleProgressLocal(entry, lang = 'te') {
+  appendLog(puzzleLogKey(lang), { ...entry, completed_at: new Date().toISOString() });
 }
 
-export function recordJapamLocal(entry) {
-  appendLog(JAPAM_LOG_KEY, { ...entry, occurred_at: new Date().toISOString() });
+export function recordJapamLocal(entry, lang = 'te') {
+  appendLog(japamLogKey(lang), { ...entry, occurred_at: new Date().toISOString() });
 }
 
-export function getLocalPuzzleTotals() {
-  const list = readLog(PUZZLE_LOG_KEY);
+export function getLocalPuzzleTotals(lang = 'te') {
+  const list = readLog(puzzleLogKey(lang));
   return {
     entriesFound: list.reduce((sum, e) => sum + (e.entries_found || 0), 0),
     pearls: list.reduce((sum, e) => sum + (e.pearls_found || 0), 0),
@@ -65,8 +86,8 @@ export function getLocalPuzzleTotals() {
   };
 }
 
-export function getLocalJapamTotals() {
-  const list = readLog(JAPAM_LOG_KEY);
+export function getLocalJapamTotals(lang = 'te') {
+  const list = readLog(japamLogKey(lang));
   const today = new Date().toDateString();
   return {
     total: list.reduce((sum, e) => sum + (e.count || 0), 0),

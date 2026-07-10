@@ -4,6 +4,11 @@ const CONSONANTS = ['క','ఖ','గ','ఘ','ఙ','చ','ఛ','జ','ఝ','ఞ',
 const VOWEL_SIGNS = ['', 'ా', 'ి', 'ీ', 'ు', 'ూ', 'ె', 'ే', 'ై', 'ొ', 'ో', 'ౌ', 'ం'];
 const BASE_POOL = CONSONANTS.flatMap((c) => VOWEL_SIGNS.map((v) => c + v));
 
+// English-mode filler pool - plain A-Z, since a Latin grid has no
+// grapheme-cluster concept to imitate the way Telugu's consonant+vowel-sign
+// pool does.
+export const LATIN_POOL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 const DIRECTIONS = [
   [0, 1], [0, -1], [1, 0], [-1, 0],
   [1, 1], [1, -1], [-1, 1], [-1, -1],
@@ -18,8 +23,8 @@ function shuffle(arr) {
   return a;
 }
 
-function randomPool() {
-  return BASE_POOL[Math.floor(Math.random() * BASE_POOL.length)];
+function randomPool(fillerPool) {
+  return fillerPool[Math.floor(Math.random() * fillerPool.length)];
 }
 
 export function randomInt(min, max) {
@@ -124,10 +129,10 @@ export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS) {
 // shows fewer words than it asked for.
 const GENERATE_RETRY_ATTEMPTS = 15;
 
-export function generateGridReliable({ size, entries, fillerMode }) {
+export function generateGridReliable({ size, entries, fillerMode, fillerPool = BASE_POOL }) {
   let result = { grid: [], placements: [] };
   for (let attempt = 0; attempt < GENERATE_RETRY_ATTEMPTS; attempt++) {
-    result = generateGrid({ size, entries, fillerMode });
+    result = generateGrid({ size, entries, fillerMode, fillerPool });
     if (result.placements.length === entries.length) break;
   }
   return result;
@@ -171,7 +176,7 @@ function findPlacement(grid, size, letters) {
 
 // Builds a size x size grid with every entry hidden in a straight line
 // (any of 8 directions), allowing entries to legitimately cross/share a cell.
-export function generateGrid({ size, entries, fillerMode }) {
+export function generateGrid({ size, entries, fillerMode, fillerPool = BASE_POOL }) {
   const grid = Array.from({ length: size }, () => Array(size).fill(null));
 
   const withLetters = entries
@@ -198,12 +203,12 @@ export function generateGrid({ size, entries, fillerMode }) {
     console.warn('Could not place entries (grid too small):', unplaced);
   }
 
-  fillEmptyCells(grid, size, fillerMode);
+  fillEmptyCells(grid, size, fillerMode, fillerPool);
 
   return { grid, placements };
 }
 
-function fillEmptyCells(grid, size, fillerMode) {
+function fillEmptyCells(grid, size, fillerMode, fillerPool) {
   const usedGraphemes = [];
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
@@ -217,7 +222,7 @@ function fillEmptyCells(grid, size, fillerMode) {
       if (fillerMode === 'curated' && usedGraphemes.length && Math.random() < 0.7) {
         grid[r][c] = usedGraphemes[Math.floor(Math.random() * usedGraphemes.length)];
       } else {
-        grid[r][c] = randomPool();
+        grid[r][c] = randomPool(fillerPool);
       }
     }
   }
