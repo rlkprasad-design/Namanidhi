@@ -22,7 +22,6 @@ const root = document.getElementById('app');
 
 const JAPAM_NAMES = [
   { word: 'శ్రీరామ', label: 'శ్రీరామ' },
-  { word: 'ఓం నమః శివాయ', label: 'ఓం నమః శివాయ' },
   { word: 'గోవింద', label: 'గోవింద' },
 ];
 const INTERLUDE_WORD = 'శ్రీరామ';
