@@ -307,7 +307,7 @@ function renderGame(session) {
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
-          <span class="hint-meaning">${p.entry.meaning}</span>
+          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">(${p.letters.length} అక్షరాలు)</span></span>
         </div>
       `);
       hintsEl.appendChild(item);
@@ -581,7 +581,7 @@ function renderStotramGame(session) {
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
-          <span class="hint-meaning">${p.entry.meaning}</span>
+          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">(${p.letters.length} అక్షరాలు)</span></span>
         </div>
       `));
     }

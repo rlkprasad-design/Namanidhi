@@ -349,6 +349,7 @@ h1, h2, h3, .display {
   border-radius: 6px;
 }
 .hint-item .hint-meaning { color: var(--cream); opacity: 0.85; font-size: 0.92rem; }
+.hint-item .hint-count { color: var(--gold); opacity: 0.8; font-size: 0.85rem; white-space: nowrap; }
 .hint-item.found { background: rgba(62, 122, 75, 0.35); }
 
 .gem-icon {
