@@ -247,6 +247,14 @@ h1, h2, h3, .display {
   text-decoration: underline;
   opacity: 1;
 }
+.intro-screen .install-guide-link {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.intro-screen .install-guide-link a {
+  color: var(--gold-light);
+  text-decoration: underline;
+}
 .intro-screen .intro-signature {
   margin-top: 20px;
   padding-top: 16px;

@@ -185,6 +185,7 @@ function showIntro(onContinue) {
       <p>${t('introBody3')}</p>
       <p>${t('introBody4')}</p>
       <p class="intro-privacy-note">${t('introPrivacyNote')}</p>
+      <p class="install-guide-link"><a href="install.html">${t('installGuideLink')}</a></p>
       <p class="intro-signature">${t('introSignature')}</p>
       <div class="btn-row" style="margin-top:24px;">
         <button type="button" class="btn btn-primary" data-intro-continue>${t('continueBtn')}</button>

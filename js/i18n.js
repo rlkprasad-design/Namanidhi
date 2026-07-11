@@ -31,6 +31,10 @@ const STRINGS = {
     te: 'మీ భద్రత గురించి: ఇది కేవలం ఒక వ్యక్తిగత సాధన కోసం రూపొందించిన యాప్ - యాడ్‌లు గానీ, ట్రాకింగ్ గానీ ఉండవు. మీరిచ్చే పేరు (అసలు పేరు కానక్కర్లేదు, ముద్దుపేరు చాలు) మరియు మీ ఆట పురోగతి తప్ప వేరే ఏ వ్యక్తిగత సమాచారం సేకరించబడదు. ఇది మన బృందం లోపలే ఉంటుంది - ఎక్కడికీ అమ్మబడదు, ఎవరికీ ఇవ్వబడదు. మీ విలువైన అభిప్రాయం, సలహా లేదా సూచనలను దయచేసి <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>కి తెలియజేయండి.',
     en: 'On your safety: This is purely a personal sadhana app - no ads, no tracking. Beyond the name you enter (a nickname is completely fine, it doesn\'t need to be your real name) and your own play progress, nothing else about you is collected. Everything stays within our own network - never sold, never handed to anyone outside it. Please share your valuable feedback, advice, or suggestions at <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>.',
   },
+  installGuideLink: {
+    te: 'యాప్‌గా ఇన్‌స్టాల్ చేసుకోవడం ఎలా? →',
+    en: 'How to install this as an app →',
+  },
   introSignature: {
     te: 'Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.',
     en: 'Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.',
