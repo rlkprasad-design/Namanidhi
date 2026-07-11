@@ -877,14 +877,14 @@ async function renderJapamTrace(session) {
   const isStandalone = !session.target;
   const screen = el(`
     <div>
+      <div class="japam-surface-frame">
+        <canvas data-canvas></canvas>
+      </div>
       <h2 style="text-align:center;">${t('likhitaJapamHeading')}</h2>
       <p class="tagline" style="text-align:center;">${t('japamTraceInstructions')}</p>
       <p class="landscape-hint">${t('japamLandscapeHint')}</p>
       <div class="japam-word">${escapeHtml(session.word)}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
-      <div class="japam-surface-frame">
-        <canvas data-canvas></canvas>
-      </div>
       ${isStandalone ? `<div class="btn-row"><button type="button" class="btn btn-secondary" data-exit>${t('finishBtn')}</button></div>` : ''}
     </div>
   `);

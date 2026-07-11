@@ -109,8 +109,8 @@ const STRINGS = {
 
   likhitaJapamHeading: { te: 'లిఖిత జపం', en: 'Likhita Japam' },
   japamTraceInstructions: {
-    te: 'కింద చుక్కలను అనుసరిస్తూ వేలితో గీయండి',
-    en: 'Trace the dots below with your finger',
+    te: 'చుక్కలను అనుసరిస్తూ వేలితో గీయండి',
+    en: 'Trace the dots with your finger',
   },
   japamLandscapeHint: {
     te: '📱 ఫోన్‌ను అడ్డంగా (ల్యాండ్‌స్కేప్) తిప్పితే రాయడం మరింత సులభంగా ఉంటుంది',
