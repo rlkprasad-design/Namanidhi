@@ -824,372 +824,6 @@
       "difficulty": "medium"
     },
     {
-      "word": "విశ్వం",
-      "meaning": "విశ్వమంతా తానే అయినవాడు",
-      "difficulty": "easy",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "ఆదిత్యుడు",
-      "meaning": "సూర్యమండలమధ్యలో ప్రకాశించువాడు",
-      "difficulty": "easy",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "గరుడధ్వజుడు",
-      "meaning": "గరుడ చిహ్నముగల పతాక కలవాడు",
-      "difficulty": "easy",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "వషట్కారుడు",
-      "meaning": "వేదస్వరూపుడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "భూతభవ్యభవత్ప్రభువు",
-      "meaning": "భూత భవిష్యత్ వర్తమానములకు ప్రభువు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "భూతకృత్తు",
-      "meaning": "జీవులను సృష్టించినవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "భూతభృత్తు",
-      "meaning": "జీవులను పోషించువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "భూతాత్మ",
-      "meaning": "సర్వ జీవులలో అంతర్యామిగా ఉండువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "భూతభావనుడు",
-      "meaning": "జీవులు జన్మించి పెరుగుటకు కారణమైనవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "ముక్తానాం పరమాగతిః",
-      "meaning": "మోక్షము పొందినవారికి పరమగమ్యమైనవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మధువు",
-      "meaning": "భక్తులకు మధురమైనవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహోత్సాహుడు",
-      "meaning": "ఉత్సాహవంతుడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాబుద్ధి",
-      "meaning": "బుద్ధిమంతులలో శ్రేష్ఠుడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహావీర్యుడు",
-      "meaning": "సృష్టిస్థితిలయలు చేయగల శక్తిమంతుడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "వృషపర్వుడు",
-      "meaning": "ధర్మమనే మెట్లద్వారా చేరదగినవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "వృషోదరుడు",
-      "meaning": "ధర్మమును తన ఉదరమున ధరించినవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అసంఖ్యేయుడు",
-      "meaning": "లెక్కకు అందని గుణములు కలవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అప్రమేయాత్మ",
-      "meaning": "కొలవశక్యము కాని స్వరూపము కలవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "విశిష్టుడు",
-      "meaning": "అందరికంటే అధికుడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "నివృత్తాత్మ",
-      "meaning": "సంసారబంధములకు అతీతుడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "సంవృతుడు",
-      "meaning": "అజ్ఞానులకు కానరానివాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "యుగావర్తుడు",
-      "meaning": "యుగములను నడిపించువాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "నైకమాయుడు",
-      "meaning": "అనేక రూపములు ధరించువాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాశనుడు",
-      "meaning": "సమస్తమును తనయందు లయం చేసుకొనువాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అదృశ్యుడు",
-      "meaning": "కంటికి కానరానివాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "వ్యక్తరూపుడు",
-      "meaning": "భక్తుల హృదయాలలో స్పష్టముగా గోచరించువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "సహస్రజిత్తు",
-      "meaning": "వేలకొలది శత్రువులను జయించినవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అనంతజిత్తు",
-      "meaning": "ఎల్లప్పుడూ జయించువాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "పద్మగర్భుడు",
-      "meaning": "పద్మము నుండి బ్రహ్మను సృష్టించినవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "శరీరభృత్తు",
-      "meaning": "ప్రాణుల శరీరములను పోషించువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహార్ధి",
-      "meaning": "గొప్ప ఐశ్వర్యము కలవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "వృద్ధాత్మ",
-      "meaning": "సృష్టికి పూర్వమే ఉన్నవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాక్షుడు",
-      "meaning": "విశాలమైన నేత్రములు కలవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అతులుడు",
-      "meaning": "సాటిలేనివాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "విరతుడు",
-      "meaning": "విషయవాంఛలు లేనివాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "నేయుడు",
-      "meaning": "జ్ఞానము ద్వారా జీవులను నడిపించువాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాకోశుడు",
-      "meaning": "పంచకోశములచే ఆవరించినవాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహాభాగుడు",
-      "meaning": "గొప్ప భోగము కలవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "అనిర్విణ్ణుడు",
-      "meaning": "వేదన లేనివాడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహామఖుడు",
-      "meaning": "యజ్ఞస్వరూపుడు",
-      "difficulty": "difficult",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "మహార్హుడు",
-      "meaning": "విశేష పూజకు తగినవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "జితమిత్రుడు",
-      "meaning": "శత్రువులను జయించినవాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "ప్రమోదనుడు",
-      "meaning": "సదా ఆనందముతో ఉండువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "నందనుడు",
-      "meaning": "అందరికీ ఆనందము కలిగించువాడు",
-      "difficulty": "medium",
-      "source": "vishnu_sahasranama"
-    },
-    {
-      "word": "స్థిరుడు",
-      "meaning": "అన్నికాలములందు నిలకడగా ఉండువాడు",
-      "difficulty": "easy",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "ప్రభువు",
-      "meaning": "సమస్తమునకు అధిపతి",
-      "difficulty": "easy",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "వరదుడు",
-      "meaning": "వరములు ఇచ్చువాడు",
-      "difficulty": "easy",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "తపస్వి",
-      "meaning": "తపస్సు చేయువాడు",
-      "difficulty": "easy",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "త్రినేత్రుడు",
-      "meaning": "మూడు కన్నులు కలవాడు",
-      "difficulty": "easy",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "స్థాణువు",
-      "meaning": "చలనము లేక అంతటా వ్యాపించినవాడు",
-      "difficulty": "medium",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "ప్రవరుడు",
-      "meaning": "సర్వశ్రేష్ఠుడు",
-      "difficulty": "medium",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "అభివాద్యుడు",
-      "meaning": "నమస్కరింపదగినవాడు",
-      "difficulty": "medium",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "మహారూపుడు",
-      "meaning": "గొప్ప ఆకారము కలవాడు",
-      "difficulty": "medium",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "సర్వాత్మ",
-      "meaning": "సమస్త ఆత్మలు తానే అయినవాడు",
-      "difficulty": "difficult",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "అర్దనుడు",
-      "meaning": "భక్తులను తనలో ఐక్యం చేసుకొనువాడు",
-      "difficulty": "difficult",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "అక్షుడు",
-      "meaning": "సృష్టిచక్రమునకు ఇరుసు వంటివాడు",
-      "difficulty": "difficult",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "రథయోగి",
-      "meaning": "రథమును కూర్చువాడు",
-      "difficulty": "difficult",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "శ్వేతపింగళుడు",
-      "meaning": "శరీరంలో సగం తెలుపు, సగం ఎరుపు రంగు కలవాడు (అర్ధనారీశ్వర రూపం)",
-      "difficulty": "difficult",
-      "source": "shiva_sahasranama"
-    },
-    {
-      "word": "మూలాధారైక నిలయ",
-      "meaning": "మూలాధార చక్రమే నివాసముగా గలది",
-      "difficulty": "difficult",
-      "source": "lalitha_sahasranama"
-    },
-    {
-      "word": "సహస్రారాంబుజారూఢ",
-      "meaning": "వెయ్యి రేకుల పద్మమును అధిష్ఠించినది",
-      "difficulty": "difficult",
-      "source": "lalitha_sahasranama"
-    },
-    {
-      "word": "సుధాసారాభివర్షిణి",
-      "meaning": "అమృతధారను కురిపించునది",
-      "difficulty": "difficult",
-      "source": "lalitha_sahasranama"
-    },
-    {
       "word": "గణేశుడు",
       "meaning": "విఘ్నాలను తొలగించే దేవుడు, పార్వతీపరమేశ్వరుల కుమారుడు",
       "difficulty": "easy",
@@ -2016,6 +1650,126 @@
       "meaning": "విష్ణువు నివాసం",
       "difficulty": "medium",
       "source": "bhagavatam"
+    },
+    {
+      "word": "ప్రహ్లాదుడు",
+      "meaning": "హిరణ్యకశిపుని కుమారుడు, బాల విష్ణుభక్తుడు",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "వామనావతారం",
+      "meaning": "బలిచక్రవర్తిని అణచిన విష్ణువు పొట్టి బ్రాహ్మణ అవతారం",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "తారకాసురుడు",
+      "meaning": "కార్తికేయునిచే సంహరింపబడిన రాక్షసుడు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "మహిషాసురుడు",
+      "meaning": "దుర్గాదేవిచే సంహరింపబడిన మహిష రూప రాక్షసుడు",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "రక్తబీజుడు",
+      "meaning": "తన రక్తపు బొట్టు నుండి కొత్త రాక్షసులు పుట్టే వరము గల రాక్షసుడు",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "శుంభుడు",
+      "meaning": "నిశుంభుని సోదరుడు, దుర్గాదేవిచే సంహరింపబడిన రాక్షసరాజు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "నిశుంభుడు",
+      "meaning": "శుంభుని సోదరుడు, దుర్గాదేవిచే సంహరింపబడిన రాక్షసుడు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "చండముండులు",
+      "meaning": "శుంభనిశుంభుల సేనానులు, కాళీదేవిచే సంహరింపబడినవారు",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ధూమ్రలోచనుడు",
+      "meaning": "శుంభుని దూత, దుర్గాదేవిచే సంహరింపబడిన రాక్షసుడు",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ధన్వంతరి",
+      "meaning": "సముద్రమథనమున అమృత కలశముతో ఆవిర్భవించిన ఆయుర్వేద దేవత",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "వాసుకి",
+      "meaning": "సముద్రమథనమున త్రాడుగా ఉపయోగించబడిన సర్పరాజు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ఐరావతం",
+      "meaning": "సముద్రమథనమున ఆవిర్భవించిన ఇంద్రుని తెల్ల ఏనుగు",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ఉచ్చైశ్రవం",
+      "meaning": "సముద్రమథనమున ఆవిర్భవించిన తెల్లని దివ్య అశ్వం",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "కామధేనువు",
+      "meaning": "సముద్రమథనమున ఆవిర్భవించిన కోరిన కోర్కెలు తీర్చు గోవు",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "మందరపర్వతం",
+      "meaning": "సముద్రమథనమునకు కవ్వముగా ఉపయోగించిన పర్వతం",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "నీలకంఠుడు",
+      "meaning": "సముద్రమథనమున పుట్టిన హాలాహల విషమును మింగి కంఠమున నిలిపిన శివుని నామం",
+      "difficulty": "easy",
+      "source": "shiva_family"
+    },
+    {
+      "word": "ఋష్యశృంగుడు",
+      "meaning": "దశరథుని పుత్రకామేష్టి యాగం నిర్వహించిన మహర్షి",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "మోహిని",
+      "meaning": "సముద్రమథన సమయమున అమృతమును పంచుటకు విష్ణువు ధరించిన స్త్రీ రూపం",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "కశ్యపప్రజాపతి",
+      "meaning": "దేవతలు, రాక్షసులు మొదలగు అందరికి తండ్రియైన ప్రజాపతి",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "అదితి",
+      "meaning": "దేవతల తల్లి, కశ్యప ప్రజాపతి భార్య",
+      "difficulty": "easy",
+      "source": "purana"
     }
   ]
 }

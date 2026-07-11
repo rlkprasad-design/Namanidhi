@@ -251,7 +251,6 @@ h1, h2, h3, .display {
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid rgba(240, 210, 139, 0.25);
-  font-style: italic;
   color: var(--gold);
   opacity: 0.9;
 }

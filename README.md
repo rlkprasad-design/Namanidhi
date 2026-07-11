@@ -149,6 +149,26 @@ their own. There is no category picker in the app, and every puzzle can
 mix a deity name, a devotee, a place, and a sacred item in the same grid;
 the hint/meaning line is the only clue to what each hidden word is.
 
+`questions.json` (300 entries) is scoped to itihasa/purana narrative
+content - Ramayana, Mahabharata, Bhagavatam, and other puranas (deity
+names, devotees, demons/antagonists, kshetrams, sacred items - anything
+that's part of a *story*). Names drawn from a specific sahasranama/
+ashtottara-style "1000 (or 108) names" text belong to Stotra Pariksha
+instead, as their own stotram entry, not here - that's a stronger,
+narrower claim ("this word is one of *these specific* thousand names")
+than "this is a name connected to this itihasa/purana," so it gets its
+own reviewed, curated set rather than blending into the general pool.
+This is why `vishnu-sahasranamam`, `shiva-sahasranamam`, and
+`lalita-sahasranamam` in `data/stotrams.json` currently carry a
+`draft_entries` array (not `entries`) alongside `"status": "soon"` -
+words that were previously (mistakenly) mixed into the general pool,
+pulled back out and parked here until each gets built into a proper
+active stotram (larger word list, `about` text, grid-size range,
+sourced/reviewed against the actual text) - `draft_entries` is
+deliberately not `entries` so nothing accidentally goes live unreviewed;
+promoting one is a manual rename plus the same review pass every other
+active stotram got.
+
 The one thing that does sort entries is `difficulty`: `"easy"`,
 `"medium"`, or `"difficult"`, assigned by whoever writes the entry - there's
 no formula, just judgement about how well-known or obscure something is.
@@ -277,7 +297,7 @@ content.
 
 The English content pool (`data/en/questions.json`, 80 entries) and Rama
 Raksha translation (`data/en/stotrams.json`) are a first-pass starter
-set, smaller than the Telugu pool (341 entries) - same "grows over time,
+set, smaller than the Telugu pool (300 entries) - same "grows over time,
 human-reviewed before merging" model as Telugu, see "Adding new content"
 below (the validator also runs against `data/en` in CI, see
 `.github/workflows/validate-content.yml`).
