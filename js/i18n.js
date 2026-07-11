@@ -28,8 +28,8 @@ const STRINGS = {
     en: "Why I made this: our phones keep us glued to them, endlessly gathering information we don't really need. It felt like this could be a nice little break from that - a few minutes spent on something worthwhile instead.",
   },
   introPrivacyNote: {
-    te: 'ఇది కేవలం ఒక వ్యక్తిగత సాధన కోసం రూపొందించిన యాప్ - యాడ్‌లు గానీ, ట్రాకింగ్ గానీ ఉండవు. మీరిచ్చే పేరు, మీ ఆట పురోగతి తప్ప వేరే ఏ వ్యక్తిగత సమాచారం సేకరించబడదు, ఎక్కడికీ పంపబడదు.',
-    en: "This is purely a personal sadhana app - no ads, no tracking. Nothing about you is collected beyond the name you enter and your own play progress, and none of it goes anywhere beyond that.",
+    te: 'మీ భద్రత గురించి: ఇది కేవలం ఒక వ్యక్తిగత సాధన కోసం రూపొందించిన యాప్ - యాడ్‌లు గానీ, ట్రాకింగ్ గానీ ఉండవు. మీరిచ్చే పేరు (అసలు పేరు కానక్కర్లేదు, ముద్దుపేరు చాలు) మరియు మీ ఆట పురోగతి తప్ప వేరే ఏ వ్యక్తిగత సమాచారం సేకరించబడదు. ఇది మన బృందం లోపలే ఉంటుంది - ఎక్కడికీ అమ్మబడదు, ఎవరికీ ఇవ్వబడదు. ఏదైనా సందేహం అనిపిస్తే, నిస్సంకోచంగా రాయప్రోలు L K ప్రసాద్‌ని <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a> ద్వారా సంప్రదించండి.',
+    en: 'On your safety: This is purely a personal sadhana app - no ads, no tracking. Beyond the name you enter (a nickname is completely fine, it doesn\'t need to be your real name) and your own play progress, nothing else about you is collected. Everything stays within our own network - never sold, never handed to anyone outside it. If anything ever feels off, please reach out to Rayaprolu L K Prasad at <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>.',
   },
   introSignature: {
     te: 'Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.',
