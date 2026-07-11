@@ -1,0 +1,233 @@
+[
+  {
+    "id": "rama-raksha",
+    "title": "Sri Rama Raksha Stotram",
+    "status": "active",
+    "gridSizeMin": 8,
+    "gridSizeMax": 16,
+    "fillerMode": "curated",
+    "about": "Composed by the sage Budhakaushika, this stotram calls on Rama's names for protection. Its kavacha (armor) section names a different epithet of Rama for each part of the body. Daily recitation is believed to dispel fear and bring peace of mind.",
+    "entries": [
+      {
+        "word": "Rama",
+        "difficulty": "easy",
+        "meaning": "The central name of the whole stotram; protects the entire body in the kavacha"
+      },
+      {
+        "word": "Sita",
+        "difficulty": "easy",
+        "meaning": "Rama's wife, Janaki"
+      },
+      {
+        "word": "Raghava",
+        "difficulty": "easy",
+        "meaning": "Born in the Raghu dynasty; protects the head in the kavacha"
+      },
+      {
+        "word": "Dasharathi",
+        "difficulty": "easy",
+        "meaning": "Son of Dasharatha"
+      },
+      {
+        "word": "Sitapati",
+        "difficulty": "easy",
+        "meaning": "Sita's husband; protects the hands in the kavacha"
+      },
+      {
+        "word": "Sugriva",
+        "difficulty": "easy",
+        "meaning": "The monkey king, Rama's ally, named in the 'Jayatyatibalo Ramo' verse"
+      },
+      {
+        "word": "Shatrughna",
+        "difficulty": "easy",
+        "meaning": "Dasharatha's fourth son, Rama's brother"
+      },
+      {
+        "word": "Budhakaushika",
+        "difficulty": "easy",
+        "meaning": "The sage who composed this stotram; named as its rishi"
+      },
+      {
+        "word": "Hanuman",
+        "difficulty": "easy",
+        "meaning": "Son of the wind god, devoted to Rama; named the 'kilaka' (key) of the stotram"
+      },
+      {
+        "word": "Lakshmana",
+        "difficulty": "easy",
+        "meaning": "Dasharatha's son, Rama's brother, son of Sumitra"
+      },
+      {
+        "word": "Janaki",
+        "difficulty": "easy",
+        "meaning": "Daughter of King Janaka, Sita"
+      },
+      {
+        "word": "Ramachandra",
+        "difficulty": "medium",
+        "meaning": "The serene one, named in the meditation verse"
+      },
+      {
+        "word": "Kausaleya",
+        "difficulty": "medium",
+        "meaning": "Son of Kausalya; protects the eyes in the kavacha"
+      },
+      {
+        "word": "Janakivallabha",
+        "difficulty": "medium",
+        "meaning": "Beloved of Janaki (Sita)"
+      },
+      {
+        "word": "Raghunandana",
+        "difficulty": "medium",
+        "meaning": "Joy of the Raghu dynasty"
+      },
+      {
+        "word": "Bharatagraja",
+        "difficulty": "medium",
+        "meaning": "Elder brother of Bharata"
+      },
+      {
+        "word": "Ranakarkasha",
+        "difficulty": "medium",
+        "meaning": "Formidable in battle"
+      },
+      {
+        "word": "Dasharathatmaja",
+        "difficulty": "medium",
+        "meaning": "Son of Dasharatha; protects the forehead in the kavacha"
+      },
+      {
+        "word": "Bharatavandita",
+        "difficulty": "medium",
+        "meaning": "Honored by Bharata; protects the throat in the kavacha"
+      },
+      {
+        "word": "Raghuttama",
+        "difficulty": "medium",
+        "meaning": "Best of the Raghu dynasty; protects the thighs in the kavacha"
+      },
+      {
+        "word": "Setukrit",
+        "difficulty": "medium",
+        "meaning": "Builder of the bridge across the ocean; protects the knees in the kavacha"
+      },
+      {
+        "word": "Makhatrata",
+        "difficulty": "medium",
+        "meaning": "Protector of the sacrifice; protects the nose in the kavacha"
+      },
+      {
+        "word": "Vidyanidhi",
+        "difficulty": "medium",
+        "meaning": "A treasure of learning; protects the tongue in the kavacha"
+      },
+      {
+        "word": "Divyayudha",
+        "difficulty": "medium",
+        "meaning": "Bearer of divine weapons; protects the shoulders in the kavacha"
+      },
+      {
+        "word": "Sugriveesha",
+        "difficulty": "medium",
+        "meaning": "Lord of Sugriva; protects the waist in the kavacha"
+      },
+      {
+        "word": "Mahabala",
+        "difficulty": "medium",
+        "meaning": "The greatly strong one - Lakshmana's epithet in the 'Jayatyatibalo Ramo' verse"
+      },
+      {
+        "word": "Kosalendra",
+        "difficulty": "medium",
+        "meaning": "Lord of the Kosala kingdom (Rama)"
+      },
+      {
+        "word": "Vibhishana",
+        "difficulty": "medium",
+        "meaning": "Ravana's brother, the Lanka king who took refuge with Rama"
+      },
+      {
+        "word": "Vajrapanjara",
+        "difficulty": "medium",
+        "meaning": "The name the stotram itself gives its armor - a cage of thunderbolts"
+      },
+      {
+        "word": "Anushtup",
+        "difficulty": "medium",
+        "meaning": "The meter in which this stotram is composed"
+      },
+      {
+        "word": "Ramabhadra",
+        "difficulty": "medium",
+        "meaning": "The auspicious, gentle Rama"
+      },
+      {
+        "word": "Shatakoti",
+        "difficulty": "medium",
+        "meaning": "A number-name meaning Raghava's story spans a hundred crore verses"
+      },
+      {
+        "word": "Vishvamitrapriya",
+        "difficulty": "difficult",
+        "meaning": "Dear to sage Vishvamitra; protects the ears in the kavacha"
+      },
+      {
+        "word": "Saumitrivatsala",
+        "difficulty": "difficult",
+        "meaning": "Affectionate toward Lakshmana, son of Sumitra; protects the face in the kavacha"
+      },
+      {
+        "word": "Bhagneshakarmuka",
+        "difficulty": "difficult",
+        "meaning": "Breaker of Shiva's bow; protects the arms in the kavacha"
+      },
+      {
+        "word": "Jamadagnyajit",
+        "difficulty": "difficult",
+        "meaning": "Conqueror of Parashurama; protects the heart in the kavacha"
+      },
+      {
+        "word": "Kharadhvamsi",
+        "difficulty": "difficult",
+        "meaning": "Destroyer of the demon Khara; protects the midsection in the kavacha"
+      },
+      {
+        "word": "Jambavadashraya",
+        "difficulty": "difficult",
+        "meaning": "Refuge of Jambavan; protects the navel in the kavacha"
+      },
+      {
+        "word": "Hanumatprabhu",
+        "difficulty": "difficult",
+        "meaning": "Lord of Hanuman; protects the knee joints in the kavacha"
+      },
+      {
+        "word": "Dashamukhantaka",
+        "difficulty": "difficult",
+        "meaning": "Ender of the ten-headed Ravana; protects the calves in the kavacha"
+      },
+      {
+        "word": "Vibhishanashrida",
+        "difficulty": "difficult",
+        "meaning": "Granter of kingship to Vibhishana; protects the feet in the kavacha"
+      },
+      {
+        "word": "Ashvamedha",
+        "difficulty": "difficult",
+        "meaning": "The sacrifice equal in merit to reciting this stotram, per the phala shruti"
+      }
+    ]
+  },
+  {
+    "id": "lakshmi-ashtottaram",
+    "title": "Sri Lakshmi Ashtottaram",
+    "status": "soon"
+  },
+  {
+    "id": "vishnu-sahasranamam",
+    "title": "Sri Vishnu Sahasranamam",
+    "status": "soon"
+  }
+]

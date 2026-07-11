@@ -54,6 +54,31 @@ h1, h2, h3, .display {
   color: var(--gold);
 }
 
+.lang-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.lang-pill {
+  border: 1px solid rgba(240, 210, 139, 0.35);
+  background: transparent;
+  color: var(--gold-light);
+  border-radius: 999px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  min-height: auto;
+  cursor: pointer;
+}
+
+.lang-pill.active {
+  background: var(--gold);
+  color: var(--deep-maroon);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
 .title-block {
   text-align: center;
   margin-bottom: 28px;
@@ -211,6 +236,11 @@ h1, h2, h3, .display {
 .intro-screen p {
   margin: 0 0 16px;
   line-height: 1.7;
+}
+.intro-screen .intro-privacy-note {
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  opacity: 0.8;
 }
 .intro-screen .intro-signature {
   margin-top: 20px;
@@ -375,6 +405,20 @@ h1, h2, h3, .display {
 }
 
 /* Japam ------------------------------------------------------------------ */
+
+.landscape-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  opacity: 0.75;
+  margin: 0 0 8px;
+}
+
+@media (orientation: landscape) {
+  .landscape-hint {
+    display: none;
+  }
+}
 
 .japam-word {
   text-align: center;

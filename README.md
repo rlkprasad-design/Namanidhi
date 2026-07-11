@@ -32,13 +32,21 @@ still tracked on-device via `localStorage`.
 - `js/data.js` - loads the content pool (`data/questions.json`) and the
   level ladder (`data/levels.json`).
 - `js/storage.js` - player identity + local score fallback (`localStorage`).
+  Puzzle/Japam logs are namespaced per language (see "Languages" below).
+- `js/i18n.js` - the UI chrome string table (`te`/`en`) and `t(key)`
+  lookup helper - covers screen labels, buttons, and messages, not
+  content data (which lives per-language in `data/` - see below).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
 - `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
-  complete, Scoreboard). There's no category picker and, as of this
-  writing, no difficulty picker either: tapping "నామ గుప్త నిధి" on Home
-  goes straight into a puzzle. Every puzzle mixes entries from all three
-  difficulty tiers in the same grid - each hint row shows a gem badge
-  (ముత్యం/రత్నం/వజ్రం for easy/medium/difficult) alongside its meaning, so
+  complete, Scoreboard). Home has two independent top-level modes:
+  "నామ గుప్త నిధి" and "లిఖిత జపం". నామ గుప్త నిధి isn't itself one puzzle -
+  tapping it opens a small hub (`showNamaGuptaNidhiHub`) with two
+  structurally-identical puzzle types under it: "సాధారణ" (General, the
+  original mixed-pool puzzle) and "స్తోత్ర పరీక్ష" (Stotra Pariksha). There's
+  no category or difficulty picker within the general puzzle - every
+  puzzle mixes entries from all three difficulty tiers in the same grid -
+  each hint row shows a gem badge (ముత్యం/రత్నం/వజ్రం for easy/medium/
+  difficult) alongside its meaning, so
   the difficulty of each specific word is visible without the player ever
   choosing a tier up front.
 - `data/questions.json` - every entry (deity names, devotees, kshetrams,
@@ -220,6 +228,64 @@ To run the check yourself before opening a PR:
 node scripts/validate-content.js
 ```
 
+## Languages
+
+Telugu (`te`) is the default and still the deepest/best-reviewed
+language. An English (`en`) mode covers Nama Gupta Nidhi, Stotra
+Pariksha (Rama Raksha only so far), and Likhita Japam - a pill switcher
+(`languageToggle` in `js/app.js`) on the intro, name-gate, and Home
+screens flips between them, persisted via `getLanguage`/`setLanguage` in
+`js/storage.js`.
+
+Content is per-language, not translated on the fly: Telugu content stays
+at `data/*.json` (unchanged paths, for backward compatibility), English
+content lives at `data/en/*.json` with the same schema. `js/data.js`'s
+loaders (`loadEntryPool`/`loadLevels`/`loadStotrams`) all take a `lang`
+argument and cache per language. Adding a third language means adding a
+`data/<lang>/` directory with the same three files, an entry in
+`js/i18n.js`'s `LANGUAGES` array and `STRINGS` table, and (if the script
+isn't a simple a-stem/consonant alphabet like Telugu's) a filler pool in
+`js/grid.js` alongside `LATIN_POOL`.
+
+English-mode scores are intentionally **not** shared with the family
+Supabase scoreboard - `syncsToBackend()` in `js/app.js` gates every sync/
+fetch call on `getLang() === 'te'`, so English play only ever writes to
+this device's `localStorage` (namespaced separately per language in
+`js/storage.js`, so switching languages can't mix or clobber either
+language's local tally) and its Scoreboard screen always shows the
+local-only view, even when Supabase is configured. Player identity
+(name) is shared across languages - only the score data is split.
+
+`js/segmenter.js`'s `Intl.Segmenter('te', ...)` is reused for English
+text too rather than adding a second segmenter - grapheme-cluster
+boundaries are effectively locale-independent for plain Latin text (no
+combining marks in the English content), so this is safe. `js/grid.js`'s
+filler-cell alphabet is *not* locale-independent - English mode passes
+`LATIN_POOL` (plain A-Z) via `generateGridReliable`'s `fillerPool`
+option instead of Telugu's default consonant+vowel-sign pool.
+
+One structural difference worth knowing before writing English content:
+Telugu graphemes cluster a consonant and its vowel sign into one
+"letter," so Telugu words tend to run 4-8 graphemes; English has no such
+clustering, so the same name can run noticeably longer in Latin
+characters (e.g. "విశ్వామిత్రప్రియః" is 7 Telugu graphemes but
+"Vishvamitrapriya" is 16 Latin characters). English-mode `levels.json`/
+`stotrams.json` therefore use larger `gridSizeMin`/`gridSizeMax` ranges
+than their Telugu counterparts - check actual word lengths (not "does it
+look short in Telugu") before picking a grid size range for new English
+content.
+
+The English content pool (`data/en/questions.json`, 80 entries) and Rama
+Raksha translation (`data/en/stotrams.json`) are a first-pass starter
+set, smaller than the Telugu pool (341 entries) - same "grows over time,
+human-reviewed before merging" model as Telugu, see "Adding new content"
+below (the validator also runs against `data/en` in CI, see
+`.github/workflows/validate-content.yml`).
+
+Lakshmi Ashtottaram and Vishnu Sahasranamam aren't in English yet -
+`data/en/stotrams.json` lists them as `"soon"` placeholders, same as
+Vishnu Sahasranamam still is in Telugu.
+
 ## What's not built yet
 
 - Content depth is still thin, especially at the "difficult" tier (9
@@ -230,7 +296,10 @@ node scripts/validate-content.js
 - A fully-offline, no-leaderboard variant was flagged as a separate,
   simpler build if ever wanted - this repo is the shared-leaderboard
   version.
-- Stotra Pariksha only has one active stotram (Rama Raksha Stotram) so
-  far - Lakshmi Ashtottaram and Vishnu Sahasranamam are listed as
-  `"soon"` placeholders in `data/stotrams.json`, waiting on their word
-  lists being written and reviewed.
+- Stotra Pariksha has two active stotrams (Rama Raksha Stotram, Lakshmi
+  Ashtottaram) - Vishnu Sahasranamam is still a `"soon"` placeholder in
+  `data/stotrams.json`, waiting on its word list being written and
+  reviewed. Lakshmi Ashtottaram's 88 entries are a first pass
+  reconstructed from memory (same caveat as Rama Raksha originally had)
+  and haven't been checked against the source text yet - see "Adding new
+  content" above.

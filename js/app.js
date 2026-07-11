@@ -1,6 +1,6 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
-  splitAcrossDifficulties, difficultyWeightsForExperience, DIFFICULTIES,
+  splitAcrossDifficulties, difficultyWeightsForExperience, DIFFICULTIES, LATIN_POOL,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
@@ -12,37 +12,61 @@ import {
   recordPuzzleProgressLocal, recordJapamLocal,
   getLocalPuzzleTotals, getLocalJapamTotals,
   hasSeenIntro, markIntroSeen,
+  getLanguage, setLanguage,
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
   fetchPuzzleLeaderboard, fetchJapamLeaderboard,
 } from './supabase-client.js';
+import { t, getLang, setLang, LANGUAGES } from './i18n.js';
 
 const root = document.getElementById('app');
 
-const JAPAM_NAMES = [
-  { word: 'శ్రీరామ', label: 'శ్రీరామ' },
-  { word: 'ఓం నమః శివాయ', label: 'ఓం నమః శివాయ' },
-  { word: 'గోవింద', label: 'గోవింద' },
-];
-const INTERLUDE_WORD = 'శ్రీరామ';
+// Likhita Japam's suggested names and the post-puzzle interlude word are
+// content, not chrome, so they live per-language here rather than in
+// i18n.js's STRINGS table.
+function japamNames() {
+  return getLang() === 'en'
+    ? [{ word: 'Sri Rama', label: 'Sri Rama' }, { word: 'Govinda', label: 'Govinda' }]
+    : [{ word: 'శ్రీరామ', label: 'శ్రీరామ' }, { word: 'గోవింద', label: 'గోవింద' }];
+}
+function interludeWord() {
+  return getLang() === 'en' ? 'Sri Rama' : 'శ్రీరామ';
+}
+
+// English words are plain Latin (A-Z), so the grid's filler cells should
+// draw from the same alphabet instead of Telugu's consonant+vowel-sign
+// pool - grid.js defaults to the Telugu pool when this is omitted.
+function fillerPool() {
+  return getLang() === 'en' ? LATIN_POOL : undefined;
+}
+
+// Only Telugu-mode play syncs to the shared family Supabase scoreboard -
+// English-mode scores stay local-only per device (see README), so every
+// sync/fetch call below is gated on the current language, not just on
+// whether a backend happens to be configured.
+function syncsToBackend() {
+  return getLang() === 'te' && isBackendConfigured();
+}
 
 // What a found word of each difficulty is "worth" - shown as a small
-// symbol on its hint row (GEM_ICONS), with GEM_LABELS kept only for
-// accessibility (title/aria-label) - and tallied separately on the
-// scoreboard. Revealing a word via "సమాధానం చూపు" still completes the
-// puzzle but does not earn its gem (see markFound's viaHint handling
-// below).
-const GEM_LABELS = { easy: 'ముత్యం', medium: 'రత్నం', difficult: 'వజ్రం' };
-
+// symbol on its hint row (GEM_ICONS) - and tallied separately on the
+// scoreboard. Revealing a word via the "show answer" button still
+// completes the puzzle but does not earn its gem (see markFound's
+// viaHint handling below).
 const GEM_ICONS = {
   easy: `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="currentColor"/><circle cx="6" cy="6" r="1.3" fill="#fff" opacity="0.55"/></svg>`,
   medium: `<svg viewBox="0 0 16 16"><polygon points="8,1 15,8 8,15 1,8" fill="currentColor" stroke="#4e1219" stroke-width="0.6"/></svg>`,
   difficult: `<svg viewBox="0 0 16 16"><polygon points="4,3 12,3 15,7 8,15 1,7" fill="currentColor" stroke="#4e1219" stroke-width="0.6"/><path d="M4,3 L8,15 M12,3 L8,15 M1,7 L15,7" stroke="#4e1219" stroke-width="0.4" opacity="0.5" fill="none"/></svg>`,
 };
 
+function gemLabel(difficulty) {
+  return { easy: t('gemEasy'), medium: t('gemMedium'), difficult: t('gemDifficult') }[difficulty] || '';
+}
+
 function gemBadge(difficulty) {
-  return `<span class="gem-icon gem-${difficulty}" role="img" aria-label="${GEM_LABELS[difficulty] || ''}" title="${GEM_LABELS[difficulty] || ''}">${GEM_ICONS[difficulty] || ''}</span>`;
+  const label = gemLabel(difficulty);
+  return `<span class="gem-icon gem-${difficulty}" role="img" aria-label="${label}" title="${label}">${GEM_ICONS[difficulty] || ''}</span>`;
 }
 
 const state = {
@@ -55,21 +79,22 @@ function escapeAttr(s) {
 }
 
 function el(html) {
-  const t = document.createElement('template');
-  t.innerHTML = html.trim();
-  return t.content.firstElementChild;
+  const tpl = document.createElement('template');
+  tpl.innerHTML = html.trim();
+  return tpl.content.firstElementChild;
 }
 
 function setScreen(node) {
   root.innerHTML = '';
   root.appendChild(node);
+  document.documentElement.lang = getLang();
 }
 
-function topBar({ backAction, title } = {}) {
+function topBar({ backAction } = {}) {
   const bar = el(`
     <div class="top-bar">
-      <div>${backAction ? '<button type="button" class="btn btn-link" data-back>← వెనుకకు</button>' : ''}</div>
-      <div class="player">${state.playerName ? `${escapeAttr(state.playerName)} · <button type="button" class="btn-link" data-change-name style="min-height:auto;padding:0;">మార్చు</button>` : ''}</div>
+      <div>${backAction ? `<button type="button" class="btn btn-link" data-back>${t('back')}</button>` : ''}</div>
+      <div class="player">${state.playerName ? `${escapeAttr(state.playerName)} · <button type="button" class="btn-link" data-change-name style="min-height:auto;padding:0;">${t('changeName')}</button>` : ''}</div>
     </div>
   `);
   if (backAction) bar.querySelector('[data-back]').addEventListener('click', backAction);
@@ -78,11 +103,38 @@ function topBar({ backAction, title } = {}) {
   return bar;
 }
 
+// A small pill for switching between Telugu and English. Switching
+// re-renders whichever screen is passed as `onSwitch` (always a
+// re-entrant screen function, e.g. showHome) rather than trying to
+// patch the current DOM in place.
+function languageToggle(onSwitch) {
+  const wrap = el(`
+    <div class="lang-toggle" data-lang-toggle>
+      ${LANGUAGES.map((lang) => `
+        <button type="button" class="lang-pill${getLang() === lang ? ' active' : ''}" data-lang="${lang}">
+          ${lang === 'te' ? t('languageTelugu') : t('languageEnglish')}
+        </button>
+      `).join('')}
+    </div>
+  `);
+  wrap.querySelectorAll('[data-lang]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const lang = btn.getAttribute('data-lang');
+      if (lang === getLang()) return;
+      setLang(lang);
+      setLanguage(lang);
+      onSwitch();
+    });
+  });
+  return wrap;
+}
+
 // ---------------------------------------------------------------------
 // Boot + identity
 // ---------------------------------------------------------------------
 
 async function boot() {
+  setLang(getLanguage());
   if (!hasSeenIntro()) {
     showIntro(() => { markIntroSeen(); continueBoot(); });
     return;
@@ -97,11 +149,11 @@ async function continueBoot() {
     showNameGate();
     return;
   }
-  if (!state.playerId && isBackendConfigured()) {
+  if (!state.playerId && syncsToBackend()) {
     // Boot-time resume: if the saved name now conflicts with someone else's
     // (e.g. two devices settled on the same name before this device ever
     // synced), just stay local-only for this session rather than blocking
-    // the app - the player can pick a distinct name via "మార్చు" later.
+    // the app - the player can pick a distinct name via "మార్చు"/"Change" later.
     const result = await ensurePlayer(state.playerName, state.playerId);
     if (result.id) {
       state.playerId = result.id;
@@ -114,17 +166,19 @@ async function continueBoot() {
 function showIntro(onContinue) {
   const screen = el(`
     <div class="intro-screen">
-      <h1 class="display" style="text-align:center;">నామ నిధి కి స్వాగతం</h1>
-      <p>ఇది ఒక ఆటవిడుపు లాంటి సాధన. మీరు రెండు మార్గాలు ఎంచుకోవచ్చు. మొదటిది ఇచ్చిన అక్షరాల సమూహంలో భగవంతుని లేదా ఆ సంబంధించిన వ్యక్తుల లేదా వస్తువుల పేర్లను గుర్తించడం ('ఈనాడు' పదవినోదం లాగా ).</p>
-      <p>రెండవది, తెల్సిన నామాన్ని ప్రశాంతంగా పెన్ తో పేపర్ మీద రాస్తున్నట్లు గా స్క్రీన్ మీద వ్రాయడం. దీన్ని లిఖిత జపం అంటారు. మీకు నచ్చిన పేర్లను కూడా మీరు వ్రాయవచ్చు.</p>
-      <p>స్కోర్ బోర్డు లో మీ ప్రగతి ని చూడగలరు. మన ఇతర కుటుంబ సభ్యుల ప్రగతి కూడా అక్కడ ఉంటుంది.</p>
-      <p>ఇది చెయ్యటానికి ముఖ్య కారణం, మన phone ద్వారా మనం చాల సేపు మనం సమాచార సేకరణ యంత్రాలుగా ఉంటున్నాం. కొంచెం సేపు దానికి విరామం అవసరం అనిపించి వేరే ఎదో పని బదులు ఇది పురుషార్థం గా కూడా పనికి వస్తుంది అన్న భావం తో దీనికి పూనుకున్నా.</p>
-      <p class="intro-signature">Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.</p>
+      <h1 class="display" style="text-align:center;">${t('introTitle')}</h1>
+      <p>${t('introBody1')}</p>
+      <p>${t('introBody2')}</p>
+      <p>${t('introBody3')}</p>
+      <p>${t('introBody4')}</p>
+      <p class="intro-privacy-note">${t('introPrivacyNote')}</p>
+      <p class="intro-signature">${t('introSignature')}</p>
       <div class="btn-row" style="margin-top:24px;">
-        <button type="button" class="btn btn-primary" data-intro-continue>ప్రారంభించండి</button>
+        <button type="button" class="btn btn-primary" data-intro-continue>${t('continueBtn')}</button>
       </div>
     </div>
   `);
+  screen.prepend(languageToggle(() => showIntro(onContinue)));
   screen.querySelector('[data-intro-continue]').addEventListener('click', onContinue);
   setScreen(screen);
 }
@@ -132,16 +186,17 @@ function showIntro(onContinue) {
 function showNameGate() {
   const screen = el(`
     <div class="name-gate">
-      <h1 class="display">నామ నిధి</h1>
-      <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
-      <p>ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి</p>
-      <input type="text" class="text-input" maxlength="40" placeholder="మీ పేరు" data-name-input />
+      <h1 class="display">${t('appTitle')}</h1>
+      <p class="tagline">${t('appTagline')}</p>
+      <p>${t('nameGatePrompt')}</p>
+      <input type="text" class="text-input" maxlength="40" placeholder="${t('namePlaceholder')}" data-name-input />
       <p class="field-error" data-name-error style="display:none;"></p>
       <div class="btn-row">
-        <button type="button" class="btn btn-primary" data-begin>ప్రారంభించండి</button>
+        <button type="button" class="btn btn-primary" data-begin>${t('beginBtn')}</button>
       </div>
     </div>
   `);
+  screen.prepend(languageToggle(showNameGate));
   const input = screen.querySelector('[data-name-input]');
   const errorEl = screen.querySelector('[data-name-error]');
   const beginBtn = screen.querySelector('[data-begin]');
@@ -152,13 +207,13 @@ function showNameGate() {
     errorEl.style.display = 'none';
     beginBtn.disabled = true;
     let playerId = null;
-    if (isBackendConfigured()) {
+    if (syncsToBackend()) {
       // Only carry over this device's own player id if the name is unchanged -
       // otherwise a brand-new name must not silently inherit someone else's id.
       const knownPlayerId = name === state.playerName ? state.playerId : null;
       const result = await ensurePlayer(name, knownPlayerId);
       if (result.status === 'taken') {
-        errorEl.textContent = 'ఈ పేరు ఇప్పటికే వాడుకలో ఉంది. దయచేసి వేరే పేరు లేదా ఇంటిపేరు జోడించి రాయండి.';
+        errorEl.textContent = t('nameTakenError');
         errorEl.style.display = 'block';
         beginBtn.disabled = false;
         input.focus();
@@ -188,44 +243,69 @@ function showHome() {
     <div>
       <div class="title-block">
         <img src="icons/aum-180.png" alt="" class="home-logo" width="88" height="88" />
-        <h1 class="display">నామ నిధి</h1>
-        <p class="tagline">నామాల్లో దాగిన రత్నాలు</p>
+        <h1 class="display">${t('appTitle')}</h1>
+        <p class="tagline">${t('appTagline')}</p>
       </div>
-      <p class="tagline" style="text-align:center;">మీకు నచ్చిన విధానాన్ని ఎంచుకోండి</p>
+      <p class="tagline" style="text-align:center;">${t('chooseModePrompt')}</p>
       <div class="mode-choice">
         <button type="button" class="mode-btn" data-mode="nama-nidhi">
-          <div class="display">నామ గుప్త నిధి</div>
-          <div class="sub">నామాలు దాగిన పజిల్ ఆడండి</div>
+          <div class="display">${t('namaGuptaNidhiTitle')}</div>
+          <div class="sub">${t('namaGuptaNidhiSub')}</div>
         </button>
         <button type="button" class="mode-btn" data-mode="likhita-japam">
-          <div class="display">లిఖిత జపం</div>
-          <div class="sub">నామాన్ని ప్రశాంతంగా రాయండి</div>
-        </button>
-        <button type="button" class="mode-btn new" data-mode="stotra-pariksha">
-          <div class="display">స్తోత్ర పరీక్ష</div>
-          <div class="sub">మీ అవగాహనను పరీక్షించుకోండి</div>
+          <div class="display">${t('likhitaJapamTitle')}</div>
+          <div class="sub">${t('likhitaJapamSub')}</div>
         </button>
       </div>
       <div class="btn-row" style="margin-top:28px;">
-        <button type="button" class="btn btn-secondary" data-scoreboard>స్కోరు బోర్డు</button>
-        <button type="button" class="btn btn-secondary" data-about>ఈ యాప్ గురించి</button>
+        <button type="button" class="btn btn-secondary" data-scoreboard>${t('scoreboardBtn')}</button>
+        <button type="button" class="btn btn-secondary" data-about>${t('aboutBtn')}</button>
       </div>
     </div>
   `);
+  screen.prepend(languageToggle(showHome));
   screen.prepend(topBar());
-  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', startNamaGuptaNidhi);
+  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showNamaGuptaNidhiHub);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
-  screen.querySelector('[data-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
 }
 
+// నామ గుప్త నిధి itself isn't one puzzle mode - it's an umbrella over two
+// puzzles that are structurally the same (a word-search grid + hints
+// panel): a general mixed-pool puzzle, and Stotra Pariksha's per-stotram
+// puzzles. This hub is the shared entry point; Likhita Japam is the only
+// other independent top-level mode from Home.
+function showNamaGuptaNidhiHub() {
+  const screen = el(`
+    <div>
+      <h2 style="text-align:center;">${t('namaGuptaNidhiTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('chooseSubModePrompt')}</p>
+      <div class="mode-choice">
+        <button type="button" class="mode-btn" data-sub-mode="general">
+          <div class="display">${t('generalModeTitle')}</div>
+          <div class="sub">${t('generalModeSub')}</div>
+        </button>
+        <button type="button" class="mode-btn" data-sub-mode="stotra-pariksha">
+          <div class="display">${t('stotraParikshaTitle')}</div>
+          <div class="sub">${t('stotraParikshaSub')}</div>
+        </button>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction: showHome }));
+  screen.querySelector('[data-sub-mode="general"]').addEventListener('click', startNamaGuptaNidhi);
+  screen.querySelector('[data-sub-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
+  setScreen(screen);
+}
+
 // ---------------------------------------------------------------------
-// Nama Gupta Nidhi: straight into a puzzle, no category or difficulty
-// picker. Every puzzle mixes entries from all content packs AND all
-// three difficulty tiers together - the hint line is the only clue to
-// what each hidden word is, and to what it's worth (ముత్యం/రత్నం/వజ్రం).
+// Nama Gupta Nidhi (general): straight into a puzzle, no category or
+// difficulty picker. Every puzzle mixes entries from all content packs
+// AND all three difficulty tiers together - the hint line is the only
+// clue to what each hidden word is, and to what it's worth (ముత్యం/
+// రత్నం/వజ్రం, i.e. pearl/gem/diamond).
 // ---------------------------------------------------------------------
 
 const WRONG_TRIES_FOR_NUDGE = 4;
@@ -238,24 +318,26 @@ function pointerAngleDeg(dr, dc) {
 }
 
 // Smaller grids have more room per cell - scale the letter up to use it,
-// instead of a flat size that leaves the 4x4 grid's big cells half-empty.
+// instead of a flat size that leaves a small grid's big cells half-empty.
 function cellFontSize(gridSize) {
-  const rem = Math.min(2.3, Math.max(0.85, 9.2 / gridSize));
+  const rem = Math.min(2.3, Math.max(0.6, 9.2 / gridSize));
   return `${rem.toFixed(2)}rem`;
 }
 
 async function startNamaGuptaNidhi() {
-  const [levels, pool] = await Promise.all([loadLevels(), loadEntryPool()]);
+  const lang = getLang();
+  const [levels, pool] = await Promise.all([loadLevels(lang), loadEntryPool(lang)]);
   renderGame(buildSession(levels[0], pool));
 }
 
 function buildSession(level, pool) {
-  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals().puzzlesCompleted);
+  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals(getLang()).puzzlesCompleted);
   const { gridSize, entries } = sampleMixedEntries(pool, level, weights);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
     fillerMode: level.fillerMode,
+    fillerPool: fillerPool(),
   });
   return {
     level,
@@ -271,22 +353,22 @@ function renderGame(session) {
   const { level, gridSize } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">నామ గుప్త నిధి · ${gridSize}×${gridSize}</h2>
-      <p class="tagline" style="text-align:center;">కింద సూచనల్లో ఉన్న నామాలను అక్షరాల్లో వేలితో గీసి కనుగొనండి</p>
+      <h2 style="text-align:center;">${t('namaGuptaNidhiTitle')} · ${gridSize}×${gridSize}</h2>
+      <p class="tagline" style="text-align:center;">${t('puzzleInstructions')}</p>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
       </div>
       <div class="game-toolbar">
-        <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
-        <button type="button" class="btn btn-secondary" data-show-answer>సమాధానం చూపు</button>
+        <button type="button" class="btn btn-secondary" data-new-puzzle>${t('newPuzzleBtn')}</button>
+        <button type="button" class="btn btn-secondary" data-show-answer>${t('showAnswerBtn')}</button>
       </div>
       <div class="hints-panel">
-        <h3>సూచనలు</h3>
+        <h3>${t('hintsTitle')}</h3>
         <div data-hints></div>
       </div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showHome }));
+  screen.prepend(topBar({ backAction: showNamaGuptaNidhiHub }));
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
@@ -310,7 +392,7 @@ function renderGame(session) {
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
-          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">(${p.letters.length})</span></span>
+          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">${t('syllableCount', p.letters.length)}</span></span>
         </div>
       `);
       hintsEl.appendChild(item);
@@ -376,7 +458,7 @@ function renderGame(session) {
     if (!session.placements.every((p) => p.found)) return;
     recordLevelProgress(session);
     toolbarEl.innerHTML = '';
-    const continueBtn = el('<button type="button" class="btn btn-primary" data-level-continue>కొనసాగించు</button>');
+    const continueBtn = el(`<button type="button" class="btn btn-primary" data-level-continue>${t('continueLevelBtn')}</button>`);
     continueBtn.addEventListener('click', () => showLevelComplete(level));
     toolbarEl.appendChild(continueBtn);
   }
@@ -431,25 +513,25 @@ function recordLevelProgress(session) {
     gems_found: gemCounts.medium,
     diamonds_found: gemCounts.difficult,
   };
-  recordPuzzleProgressLocal(progress);
-  if (state.playerId) syncPuzzleProgress(state.playerId, progress);
+  recordPuzzleProgressLocal(progress, getLang());
+  if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
 }
 
 function showLevelComplete(level) {
   const screen = el(`
     <div class="complete-screen">
       <div class="glow">🙏</div>
-      <h2>అభినందనలు!</h2>
-      <p>అన్ని నామాలు దొరికాయి.</p>
+      <h2>${t('congratulations')}</h2>
+      <p>${t('allFoundLevel')}</p>
       <div class="btn-row" style="margin-top:24px;">
-        <button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>
+        <button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>
       </div>
     </div>
   `);
   screen.querySelector('[data-continue]').addEventListener('click', () => {
     startJapamSession({
       mode: 'interlude',
-      word: INTERLUDE_WORD,
+      word: interludeWord(),
       target: level.japamCount,
       onExit: showHome,
     });
@@ -467,23 +549,23 @@ function showLevelComplete(level) {
 async function showStotramList() {
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">స్తోత్ర పరీక్ష</h2>
-      <p class="tagline" style="text-align:center;">మీ అవగాహనను పరీక్షించుకోండి</p>
+      <h2 style="text-align:center;">${t('stotraParikshaTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('stotraParikshaSub')}</p>
       <div class="card-grid" data-stotrams style="margin-top:20px;"></div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showHome }));
+  screen.prepend(topBar({ backAction: showNamaGuptaNidhiHub }));
   setScreen(screen);
 
-  const stotrams = await loadStotrams();
+  const stotrams = await loadStotrams(getLang());
   const container = screen.querySelector('[data-stotrams]');
   for (const stotram of stotrams) {
     if (stotram.status !== 'active') {
       container.appendChild(el(`
         <div class="card locked">
           <div class="card-title">${stotram.title}</div>
-          <div class="card-sub">త్వరలో వస్తుంది</div>
-          <span class="badge soon">త్వరలో</span>
+          <div class="card-sub">${t('soonSub')}</div>
+          <span class="badge soon">${t('soonBadge')}</span>
         </div>
       `));
       continue;
@@ -491,8 +573,8 @@ async function showStotramList() {
     const card = el(`
       <button type="button" class="card">
         <div class="card-title">${stotram.title}</div>
-        <div class="card-sub">మొత్తం ${stotram.entries.length} పేర్లు · గ్రిడ్ సైజు, ప్రశ్నల సంఖ్య ప్రతిసారి మారుతుంది</div>
-        <span class="badge">ఆడవచ్చు</span>
+        <div class="card-sub">${t('stotramCardSub', stotram.entries.length)}</div>
+        <span class="badge">${t('playableBadge')}</span>
       </button>
     `);
     card.addEventListener('click', () => startStotram(stotram));
@@ -517,7 +599,10 @@ function shuffleLocal(arr) {
 // asks for, same as the main pool. Each call also rolls its own grid
 // size within the stotram's range, which changes which words are
 // eligible - so the existing per-tier queue is first trimmed to only
-// currently-eligible words before topping it back up.
+// currently-eligible words before topping it back up. Keyed per language
+// too (stotram.id is shared across data/stotrams.json and
+// data/en/stotrams.json), so switching languages doesn't corrupt either
+// queue with the other's words.
 const stotramDrawQueues = new Map();
 
 function drawStotramRound(stotram, gridSize, weights) {
@@ -528,7 +613,7 @@ function drawStotramRound(stotram, gridSize, weights) {
     if (!eligible.length) continue;
 
     const eligibleWords = new Set(eligible.map((e) => e.word));
-    const key = `${stotram.id}::${difficulty}`;
+    const key = `${getLang()}::${stotram.id}::${difficulty}`;
     let queue = (stotramDrawQueues.get(key) || []).filter((e) => eligibleWords.has(e.word));
     const count = Math.min(targetCounts[difficulty], eligible.length);
 
@@ -545,9 +630,9 @@ function drawStotramRound(stotram, gridSize, weights) {
 
 function buildStotramSession(stotram) {
   const gridSize = randomInt(stotram.gridSizeMin, stotram.gridSizeMax);
-  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals().puzzlesCompleted);
+  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals(getLang()).puzzlesCompleted);
   const entries = drawStotramRound(stotram, gridSize, weights);
-  const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode });
+  const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode, fillerPool: fillerPool() });
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
 }
 
@@ -560,16 +645,16 @@ function renderStotramGame(session) {
   const screen = el(`
     <div>
       <h2 style="text-align:center;">${stotram.title}</h2>
-      <p class="tagline" style="text-align:center;">మీ అవగాహనను పరీక్షించుకోండి</p>
+      <p class="tagline" style="text-align:center;">${t('stotraParikshaSub')}</p>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
       </div>
       <div class="game-toolbar">
-        <button type="button" class="btn btn-secondary" data-new-puzzle>కొత్త పజిల్</button>
-        <button type="button" class="btn btn-secondary" data-show-answer>సమాధానం చూపు</button>
+        <button type="button" class="btn btn-secondary" data-new-puzzle>${t('newPuzzleBtn')}</button>
+        <button type="button" class="btn btn-secondary" data-show-answer>${t('showAnswerBtn')}</button>
       </div>
       <div class="hints-panel">
-        <h3>సూచనలు</h3>
+        <h3>${t('hintsTitle')}</h3>
         <div data-hints></div>
       </div>
     </div>
@@ -598,7 +683,7 @@ function renderStotramGame(session) {
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
-          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">(${p.letters.length})</span></span>
+          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">${t('syllableCount', p.letters.length)}</span></span>
         </div>
       `));
     }
@@ -655,7 +740,7 @@ function renderStotramGame(session) {
     if (!session.placements.every((p) => p.found)) return;
     recordStotramProgress(session);
     toolbarEl.innerHTML = '';
-    const btn = el('<button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>');
+    const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
     btn.addEventListener('click', () => showStotramComplete(stotram));
     toolbarEl.appendChild(btn);
   }
@@ -696,22 +781,22 @@ function recordStotramProgress(session) {
     gems_found: gemCounts.medium,
     diamonds_found: gemCounts.difficult,
   };
-  recordPuzzleProgressLocal(progress);
-  if (state.playerId) syncPuzzleProgress(state.playerId, progress);
+  recordPuzzleProgressLocal(progress, getLang());
+  if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
 }
 
 function showStotramComplete(stotram) {
   const screen = el(`
     <div class="complete-screen">
       <div class="glow">🙏</div>
-      <h2>అభినందనలు!</h2>
-      <p>${stotram.title}లోని అన్ని నామాలను మీరు కనుగొన్నారు.</p>
+      <h2>${t('congratulations')}</h2>
+      <p>${t('stotramFoundAll', stotram.title)}</p>
       <div class="about-box">
-        <strong>${stotram.title}</strong> గురించి: ${stotram.about}
+        ${t('stotramAboutLabel', stotram.title)} ${stotram.about}
       </div>
       <div class="btn-row" style="margin-top:12px;">
-        <button type="button" class="btn btn-secondary" data-again>మళ్ళీ ఆడండి</button>
-        <button type="button" class="btn btn-primary" data-list>ముగించు</button>
+        <button type="button" class="btn btn-secondary" data-again>${t('playAgainBtn')}</button>
+        <button type="button" class="btn btn-primary" data-list>${t('finishBtn')}</button>
       </div>
     </div>
   `);
@@ -727,24 +812,24 @@ function showStotramComplete(stotram) {
 function showJapamNamePicker() {
   const screen = el(`
     <div>
-      <h2>ఏ నామాన్ని రాద్దాం?</h2>
+      <h2>${t('japamPickerTitle')}</h2>
       <div class="card-grid" data-names></div>
       <div class="custom-word-block">
-        <p class="tagline" style="text-align:center;">లేదా మీకు నచ్చిన నామాన్ని రాయండి</p>
-        <input type="text" class="text-input" maxlength="60" placeholder="తెలుగులో లేదా English లో రాయండి" data-custom-word />
+        <p class="tagline" style="text-align:center;">${t('japamCustomPrompt')}</p>
+        <input type="text" class="text-input" maxlength="60" placeholder="${t('japamCustomPlaceholder')}" data-custom-word />
         <div class="btn-row">
-          <button type="button" class="btn btn-primary" data-custom-start>ప్రారంభించండి</button>
+          <button type="button" class="btn btn-primary" data-custom-start>${t('beginBtn')}</button>
         </div>
       </div>
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
   const container = screen.querySelector('[data-names]');
-  JAPAM_NAMES.forEach(({ word, label }, i) => {
+  japamNames().forEach(({ word, label }, i) => {
     const card = el(`
       <button type="button" class="card" style="text-align:center;">
         <div class="card-title">${label}</div>
-        ${i === 0 ? '<span class="badge">సూచించినది</span>' : ''}
+        ${i === 0 ? `<span class="badge">${t('suggestedBadge')}</span>` : ''}
       </button>
     `);
     card.addEventListener('click', () => {
@@ -757,7 +842,10 @@ function showJapamNamePicker() {
   const startCustom = () => {
     const typed = customInput.value.trim();
     if (!typed) { customInput.focus(); return; }
-    const word = looksLikeLatin(typed) ? transliterate(typed) : typed;
+    // Telugu mode transliterates a Latin-typed guess ("rama") into Telugu
+    // script; English mode has nothing to transliterate to, so the typed
+    // text is traced as-is.
+    const word = getLang() === 'en' ? typed : (looksLikeLatin(typed) ? transliterate(typed) : typed);
     startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
   };
   screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);
@@ -775,14 +863,15 @@ async function renderJapamTrace(session) {
   const isStandalone = !session.target;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">లిఖిత జపం</h2>
-      <p class="tagline" style="text-align:center;">కింద చుక్కలను అనుసరిస్తూ వేలితో గీయండి</p>
+      <h2 style="text-align:center;">${t('likhitaJapamHeading')}</h2>
+      <p class="tagline" style="text-align:center;">${t('japamTraceInstructions')}</p>
+      <p class="landscape-hint">${t('japamLandscapeHint')}</p>
       <div class="japam-word">${session.word}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface-frame">
         <canvas data-canvas></canvas>
       </div>
-      ${isStandalone ? '<div class="btn-row"><button type="button" class="btn btn-secondary" data-exit>ముగించు</button></div>' : ''}
+      ${isStandalone ? `<div class="btn-row"><button type="button" class="btn btn-secondary" data-exit>${t('finishBtn')}</button></div>` : ''}
     </div>
   `);
   const exitAction = isStandalone ? () => showJapamSessionSummary(session) : session.onExit;
@@ -795,7 +884,7 @@ async function renderJapamTrace(session) {
       mala.appendChild(el(`<div class="bead${i < session.count ? ' filled' : ''}"></div>`));
     }
   } else {
-    screen.querySelector('[data-count]').textContent = `ఈ సెషన్‌లో: ${session.count} సార్లు`;
+    screen.querySelector('[data-count]').textContent = t('japamSessionCount', session.count);
   }
 
   setScreen(screen);
@@ -837,8 +926,8 @@ function onJapamSuccess(session) {
     count: 1,
     session_type: session.mode === 'interlude' ? 'interlude' : 'standalone',
   };
-  recordJapamLocal(entry);
-  if (state.playerId) syncJapamLog(state.playerId, entry);
+  recordJapamLocal(entry, getLang());
+  if (state.playerId && syncsToBackend()) syncJapamLog(state.playerId, entry);
 
   if (session.mode === 'interlude' && session.count >= session.target) {
     showJapamCompletion(session);
@@ -850,10 +939,10 @@ function onJapamSuccess(session) {
 function showJapamSessionSummary(session) {
   const screen = el(`
     <div class="completion-beat">
-      <h2>ఈ సెషన్‌లో</h2>
-      <p style="font-size:1.6rem;">${session.count} సార్లు</p>
+      <h2>${t('japamThisSession')}</h2>
+      <p style="font-size:1.6rem;">${t('japamTimes', session.count)}</p>
       <div class="btn-row" style="margin-top:20px;">
-        <button type="button" class="btn btn-primary" data-home>హోమ్‌కు వెళ్ళండి</button>
+        <button type="button" class="btn btn-primary" data-home>${t('goHomeBtn')}</button>
       </div>
     </div>
   `);
@@ -865,9 +954,9 @@ function showJapamCompletion(session) {
   const screen = el(`
     <div class="completion-beat">
       <div class="glow">🙏</div>
-      <p>లిఖిత జపం పూర్తయింది.</p>
+      <p>${t('japamComplete')}</p>
       <div class="btn-row" style="margin-top:20px;">
-        <button type="button" class="btn btn-primary" data-continue>కొనసాగించు</button>
+        <button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>
       </div>
     </div>
   `);
@@ -882,15 +971,15 @@ function showJapamCompletion(session) {
 async function showScoreboard() {
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">స్కోరు బోర్డు</h2>
-      <p class="tagline" style="text-align:center;">మన బృందం సాధించిన ప్రగతి</p>
+      <h2 style="text-align:center;">${t('scoreboardTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('scoreboardTagline')}</p>
       <div class="score-section">
-        <h3>నామ గుప్త నిధి స్కోరు బోర్డు</h3>
-        <div data-puzzle-board>లోడ్ అవుతోంది...</div>
+        <h3>${t('puzzleBoardTitle')}</h3>
+        <div data-puzzle-board>${t('loading')}</div>
       </div>
       <div class="score-section">
-        <h3>లిఖిత జప స్కోరు బోర్డు</h3>
-        <div data-japam-board>లోడ్ అవుతోంది...</div>
+        <h3>${t('japamBoardTitle')}</h3>
+        <div data-japam-board>${t('loading')}</div>
       </div>
     </div>
   `);
@@ -900,7 +989,7 @@ async function showScoreboard() {
   const puzzleBoardEl = screen.querySelector('[data-puzzle-board]');
   const japamBoardEl = screen.querySelector('[data-japam-board]');
 
-  if (isBackendConfigured()) {
+  if (syncsToBackend()) {
     const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(), fetchJapamLeaderboard()]);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
@@ -908,31 +997,31 @@ async function showScoreboard() {
     puzzleBoardEl.replaceWith(renderLeaderboardTable(
       activePuzzleRows,
       ['display_name', 'total_pearls', 'total_gems', 'total_diamonds', 'puzzles_completed'],
-      ['పేరు', `${gemBadge('easy')} ముత్యాలు`, `${gemBadge('medium')} రత్నాలు`, `${gemBadge('difficult')} వజ్రాలు`, 'పూర్తయిన పజిల్స్'],
+      [t('colName'), `${gemBadge('easy')} ${t('colPearls')}`, `${gemBadge('medium')} ${t('colGems')}`, `${gemBadge('difficult')} ${t('colDiamonds')}`, t('colPuzzlesCompleted')],
       'data-puzzle-board'
     ));
-    japamBoardEl.replaceWith(renderLeaderboardTable(japamRows || [], ['display_name', 'total_count'], ['పేరు', 'మొత్తం జపసంఖ్య'], 'data-japam-board'));
+    japamBoardEl.replaceWith(renderLeaderboardTable(japamRows || [], ['display_name', 'total_count'], [t('colName'), t('colTotalJapamCount')], 'data-japam-board'));
   } else {
-    const puzzleTotals = getLocalPuzzleTotals();
-    const japamTotals = getLocalJapamTotals();
+    const puzzleTotals = getLocalPuzzleTotals(getLang());
+    const japamTotals = getLocalJapamTotals(getLang());
     puzzleBoardEl.outerHTML = `
       <div data-puzzle-board>
-        <p>${gemBadge('easy')} ముత్యాలు: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; ${gemBadge('medium')} రత్నాలు: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; ${gemBadge('difficult')} వజ్రాలు: <strong>${puzzleTotals.diamonds}</strong></p>
-        <p>పూర్తయిన పజిల్స్: <strong>${puzzleTotals.puzzlesCompleted}</strong></p>
-        <p class="score-note">ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.</p>
+        <p>${gemBadge('easy')} ${t('colPearls')}: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; ${gemBadge('medium')} ${t('colGems')}: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; ${gemBadge('difficult')} ${t('colDiamonds')}: <strong>${puzzleTotals.diamonds}</strong></p>
+        <p>${t('localPuzzlesCompleted', puzzleTotals.puzzlesCompleted)}</p>
+        <p class="score-note">${t('localOnlyNote')}</p>
       </div>`;
     japamBoardEl.outerHTML = `
       <div data-japam-board>
-        <p>మొత్తం జపసంఖ్య: <strong>${japamTotals.total}</strong></p>
-        <p>ఈ రోజు: <strong>${japamTotals.today}</strong></p>
-        <p class="score-note">ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.</p>
+        <p>${t('localTotalJapam', japamTotals.total)}</p>
+        <p>${t('localTodayJapam', japamTotals.today)}</p>
+        <p class="score-note">${t('localOnlyNote')}</p>
       </div>`;
   }
 }
 
 function renderLeaderboardTable(rows, keys, labels, dataAttr) {
   if (!rows || !rows.length) {
-    return el(`<div ${dataAttr}><p class="score-note">ఇంకా స్కోర్లు లేవు.</p></div>`);
+    return el(`<div ${dataAttr}><p class="score-note">${t('noScoresYet')}</p></div>`);
   }
   const header = labels.map((l) => `<th>${l}</th>`).join('');
   const body = rows.map((row) => `<tr>${keys.map((k) => `<td>${row[k] ?? 0}</td>`).join('')}</tr>`).join('');
