@@ -74,8 +74,21 @@ const state = {
   playerId: null,
 };
 
-function escapeAttr(s) {
-  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+// Escapes text pulled from anywhere a player (not this codebase) could
+// have typed it - a display name, a custom Likhita Japam word, a
+// Supabase leaderboard row - before it's ever interpolated into an HTML
+// template string and handed to el()'s innerHTML. Every one of those is
+// attacker-reachable: a player's display_name in particular is stored in
+// the shared Supabase table and re-rendered on the Scoreboard for every
+// other player who opens it, so an unescaped '<' or '"' there is a
+// stored-XSS hole affecting the whole group, not just whoever typed it.
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function el(html) {
@@ -94,7 +107,7 @@ function topBar({ backAction } = {}) {
   const bar = el(`
     <div class="top-bar">
       <div>${backAction ? `<button type="button" class="btn btn-link" data-back>${t('back')}</button>` : ''}</div>
-      <div class="player">${state.playerName ? `${escapeAttr(state.playerName)} · <button type="button" class="btn-link" data-change-name style="min-height:auto;padding:0;">${t('changeName')}</button>` : ''}</div>
+      <div class="player">${state.playerName ? `${escapeHtml(state.playerName)} · <button type="button" class="btn-link" data-change-name style="min-height:auto;padding:0;">${t('changeName')}</button>` : ''}</div>
     </div>
   `);
   if (backAction) bar.querySelector('[data-back]').addEventListener('click', backAction);
@@ -866,7 +879,7 @@ async function renderJapamTrace(session) {
       <h2 style="text-align:center;">${t('likhitaJapamHeading')}</h2>
       <p class="tagline" style="text-align:center;">${t('japamTraceInstructions')}</p>
       <p class="landscape-hint">${t('japamLandscapeHint')}</p>
-      <div class="japam-word">${session.word}</div>
+      <div class="japam-word">${escapeHtml(session.word)}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface-frame">
         <canvas data-canvas></canvas>
@@ -1024,7 +1037,11 @@ function renderLeaderboardTable(rows, keys, labels, dataAttr) {
     return el(`<div ${dataAttr}><p class="score-note">${t('noScoresYet')}</p></div>`);
   }
   const header = labels.map((l) => `<th>${l}</th>`).join('');
-  const body = rows.map((row) => `<tr>${keys.map((k) => `<td>${row[k] ?? 0}</td>`).join('')}</tr>`).join('');
+  // Rows come straight from the shared Supabase leaderboard views - any
+  // player's own chosen display_name ends up here, so it must be escaped
+  // like any other untrusted input before going into innerHTML (see
+  // escapeHtml's comment above).
+  const body = rows.map((row) => `<tr>${keys.map((k) => `<td>${escapeHtml(row[k] ?? 0)}</td>`).join('')}</tr>`).join('');
   return el(`
     <div ${dataAttr}>
       <table class="score-table">
