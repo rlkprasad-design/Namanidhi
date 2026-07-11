@@ -295,6 +295,18 @@ than their Telugu counterparts - check actual word lengths (not "does it
 look short in Telugu") before picking a grid size range for new English
 content.
 
+Every `word` in `data/en/questions.json` and `data/en/stotrams.json` is
+stored in ALL CAPS (`"RAMA"`, not `"Rama"`) - deliberately, not a
+style choice. Telugu has no letter case at all, so a Telugu grid gives
+no visual clue about where a word starts; normal English capitalization
+("Rama") would put a single capital letter at the start of every hidden
+word and nowhere else, handing English-mode players a free tell that
+Telugu-mode players don't get. Uppercasing removes that asymmetry, and
+happens to match how printed word-search puzzles are conventionally set
+anyway. Keep new English entries uppercase for the same reason - the
+hint panel displays exactly what's in the grid, so this doesn't need any
+code-side transformation, just consistent data.
+
 The English content pool (`data/en/questions.json`, 80 entries) and Rama
 Raksha translation (`data/en/stotrams.json`) are a first-pass starter
 set, smaller than the Telugu pool (300 entries) - same "grows over time,

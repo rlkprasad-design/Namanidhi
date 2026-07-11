@@ -1,481 +1,481 @@
 {
   "entries": [
     {
-      "word": "Rama",
+      "word": "RAMA",
       "meaning": "Prince of Ayodhya, an incarnation of Vishnu",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Sita",
+      "word": "SITA",
       "meaning": "Rama's wife, also called Janaki",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Lakshmana",
+      "word": "LAKSHMANA",
       "meaning": "Rama's devoted younger brother",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Hanuman",
+      "word": "HANUMAN",
       "meaning": "Rama's great devotee, son of the wind god",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Krishna",
+      "word": "KRISHNA",
       "meaning": "An incarnation of Vishnu, Yashoda's beloved son",
       "difficulty": "easy",
       "source": "mahabharata"
     },
     {
-      "word": "Radha",
+      "word": "RADHA",
       "meaning": "Krishna's beloved, a symbol of pure devotion",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Ganesha",
+      "word": "GANESHA",
       "meaning": "Elephant-headed god, remover of obstacles",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Shiva",
+      "word": "SHIVA",
       "meaning": "The auspicious one, part of the divine trinity",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Parvati",
+      "word": "PARVATI",
       "meaning": "Shiva's consort, daughter of the mountains",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Vishnu",
+      "word": "VISHNU",
       "meaning": "The preserver, sustainer of the universe",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Lakshmi",
+      "word": "LAKSHMI",
       "meaning": "Goddess of wealth and prosperity",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Saraswati",
+      "word": "SARASWATI",
       "meaning": "Goddess of knowledge, speech, and music",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Durga",
+      "word": "DURGA",
       "meaning": "The invincible warrior goddess",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Ravana",
+      "word": "RAVANA",
       "meaning": "Ten-headed demon king of Lanka",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Bharata",
+      "word": "BHARATA",
       "meaning": "Rama's brother, who ruled Ayodhya as his regent",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Shatrughna",
+      "word": "SHATRUGHNA",
       "meaning": "Youngest of the four royal brothers of Ayodhya",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
-      "word": "Ayodhya",
+      "word": "AYODHYA",
       "meaning": "Rama's birthplace and capital city",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Mathura",
+      "word": "MATHURA",
       "meaning": "Krishna's birthplace",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Vrindavan",
+      "word": "VRINDAVAN",
       "meaning": "Where young Krishna played and grazed cows",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Kashi",
+      "word": "KASHI",
       "meaning": "The holiest city on the Ganga, also called Varanasi",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Tirupati",
+      "word": "TIRUPATI",
       "meaning": "Home of Lord Venkateswara's hill shrine",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Dwaraka",
+      "word": "DWARAKA",
       "meaning": "Krishna's kingdom by the sea",
       "difficulty": "easy",
       "source": "kshetram"
     },
     {
-      "word": "Shankha",
+      "word": "SHANKHA",
       "meaning": "The conch shell blown before worship",
       "difficulty": "easy",
       "source": "item"
     },
     {
-      "word": "Tulasi",
+      "word": "TULASI",
       "meaning": "The sacred basil plant, dear to Vishnu",
       "difficulty": "easy",
       "source": "item"
     },
     {
-      "word": "Padma",
+      "word": "PADMA",
       "meaning": "The lotus, seat of many deities",
       "difficulty": "easy",
       "source": "item"
     },
     {
-      "word": "Arjuna",
+      "word": "ARJUNA",
       "meaning": "The great archer, Krishna's devoted friend",
       "difficulty": "easy",
       "source": "mahabharata"
     },
     {
-      "word": "Yashoda",
+      "word": "YASHODA",
       "meaning": "Krishna's foster mother",
       "difficulty": "easy",
       "source": "purana"
     },
     {
-      "word": "Balarama",
+      "word": "BALARAMA",
       "meaning": "Krishna's elder brother",
       "difficulty": "easy",
       "source": "mahabharata"
     },
     {
-      "word": "Narasimha",
+      "word": "NARASIMHA",
       "meaning": "The man-lion incarnation of Vishnu",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Vamana",
+      "word": "VAMANA",
       "meaning": "The dwarf incarnation of Vishnu",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Kartikeya",
+      "word": "KARTIKEYA",
       "meaning": "Shiva's son, commander of the gods' army",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Indra",
+      "word": "INDRA",
       "meaning": "King of the heavens and god of rain",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Surya",
+      "word": "SURYA",
       "meaning": "The sun god",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Chandra",
+      "word": "CHANDRA",
       "meaning": "The moon god",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Agni",
+      "word": "AGNI",
       "meaning": "The fire god",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Vayu",
+      "word": "VAYU",
       "meaning": "The wind god",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Varuna",
+      "word": "VARUNA",
       "meaning": "God of the waters",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Brahma",
+      "word": "BRAHMA",
       "meaning": "The creator, first of the divine trinity",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Rukmini",
+      "word": "RUKMINI",
       "meaning": "Krishna's chief queen",
       "difficulty": "medium",
       "source": "mahabharata"
     },
     {
-      "word": "Satyabhama",
+      "word": "SATYABHAMA",
       "meaning": "One of Krishna's queens, known for her pride",
       "difficulty": "medium",
       "source": "mahabharata"
     },
     {
-      "word": "Nandi",
+      "word": "NANDI",
       "meaning": "Shiva's bull, his loyal vehicle",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Garuda",
+      "word": "GARUDA",
       "meaning": "Vishnu's eagle, his divine vehicle",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Ayyappa",
+      "word": "AYYAPPA",
       "meaning": "Son of Shiva and Mohini, deity of Sabarimala",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Venkateswara",
+      "word": "VENKATESWARA",
       "meaning": "Form of Vishnu worshipped at Tirupati",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Kubera",
+      "word": "KUBERA",
       "meaning": "Treasurer and guardian of wealth among the gods",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Yama",
+      "word": "YAMA",
       "meaning": "God of death and justice",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Prahlada",
+      "word": "PRAHLADA",
       "meaning": "Child devotee saved from his demon father",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Dhruva",
+      "word": "DHRUVA",
       "meaning": "The boy whose devotion made him a pole star",
       "difficulty": "medium",
       "source": "purana"
     },
     {
-      "word": "Sudama",
+      "word": "SUDAMA",
       "meaning": "Krishna's poor but beloved childhood friend",
       "difficulty": "medium",
       "source": "bhakti"
     },
     {
-      "word": "Vibhishana",
+      "word": "VIBHISHANA",
       "meaning": "Ravana's righteous brother who aided Rama",
       "difficulty": "medium",
       "source": "ramayana"
     },
     {
-      "word": "Jatayu",
+      "word": "JATAYU",
       "meaning": "The vulture who fought Ravana to save Sita",
       "difficulty": "medium",
       "source": "ramayana"
     },
     {
-      "word": "Sabari",
+      "word": "SABARI",
       "meaning": "The devotee who waited years to feed Rama",
       "difficulty": "medium",
       "source": "ramayana"
     },
     {
-      "word": "Draupadi",
+      "word": "DRAUPADI",
       "meaning": "Wife of the five Pandava brothers",
       "difficulty": "medium",
       "source": "mahabharata"
     },
     {
-      "word": "Rameswaram",
+      "word": "RAMESWARAM",
       "meaning": "Where Rama worshipped before crossing to Lanka",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Puri",
+      "word": "PURI",
       "meaning": "Home of Lord Jagannath's great temple",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Badrinath",
+      "word": "BADRINATH",
       "meaning": "Himalayan shrine of Vishnu",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Kedarnath",
+      "word": "KEDARNATH",
       "meaning": "Himalayan shrine of Shiva",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Haridwar",
+      "word": "HARIDWAR",
       "meaning": "Gateway city on the Ganga",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Kanchipuram",
+      "word": "KANCHIPURAM",
       "meaning": "Ancient temple city of the south",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Madurai",
+      "word": "MADURAI",
       "meaning": "City of the Meenakshi temple",
       "difficulty": "medium",
       "source": "kshetram"
     },
     {
-      "word": "Chakra",
+      "word": "CHAKRA",
       "meaning": "Vishnu's discus, his divine weapon",
       "difficulty": "medium",
       "source": "item"
     },
     {
-      "word": "Gada",
+      "word": "GADA",
       "meaning": "The mace, a weapon of Vishnu and Hanuman",
       "difficulty": "medium",
       "source": "item"
     },
     {
-      "word": "Trishula",
+      "word": "TRISHULA",
       "meaning": "Shiva's three-pronged trident",
       "difficulty": "medium",
       "source": "item"
     },
     {
-      "word": "Rudraksha",
+      "word": "RUDRAKSHA",
       "meaning": "Sacred beads worn in worship",
       "difficulty": "medium",
       "source": "item"
     },
     {
-      "word": "Mala",
+      "word": "MALA",
       "meaning": "A string of beads used for chanting",
       "difficulty": "medium",
       "source": "item"
     },
     {
-      "word": "Annapurna",
+      "word": "ANNAPURNA",
       "meaning": "Goddess of nourishment, a form of Parvati",
       "difficulty": "difficult",
       "source": "purana"
     },
     {
-      "word": "Padmavati",
+      "word": "PADMAVATI",
       "meaning": "Consort of Venkateswara at Tirupati",
       "difficulty": "difficult",
       "source": "kshetram"
     },
     {
-      "word": "Kalki",
+      "word": "KALKI",
       "meaning": "The prophesied final incarnation of Vishnu",
       "difficulty": "difficult",
       "source": "purana"
     },
     {
-      "word": "Bhishma",
+      "word": "BHISHMA",
       "meaning": "Grand patriarch who chose the moment of his death",
       "difficulty": "difficult",
       "source": "mahabharata"
     },
     {
-      "word": "Meera",
+      "word": "MEERA",
       "meaning": "Rajput princess devoted entirely to Krishna",
       "difficulty": "difficult",
       "source": "bhakti"
     },
     {
-      "word": "Tyagaraja",
+      "word": "TYAGARAJA",
       "meaning": "Composer-saint who sang Rama's praises",
       "difficulty": "difficult",
       "source": "bhakti"
     },
     {
-      "word": "Andal",
+      "word": "ANDAL",
       "meaning": "Girl saint who wed the Lord in devotion",
       "difficulty": "difficult",
       "source": "bhakti"
     },
     {
-      "word": "Tulsidas",
+      "word": "TULSIDAS",
       "meaning": "Poet-saint who wrote the Ramcharitmanas",
       "difficulty": "difficult",
       "source": "bhakti"
     },
     {
-      "word": "Kabir",
+      "word": "KABIR",
       "meaning": "Mystic poet-saint of devotion beyond ritual",
       "difficulty": "difficult",
       "source": "bhakti"
     },
     {
-      "word": "Ujjain",
+      "word": "UJJAIN",
       "meaning": "City of the Mahakaleshwar shrine",
       "difficulty": "difficult",
       "source": "kshetram"
     },
     {
-      "word": "Prayag",
+      "word": "PRAYAG",
       "meaning": "Sacred confluence of three rivers",
       "difficulty": "difficult",
       "source": "kshetram"
     },
     {
-      "word": "Sabarimala",
+      "word": "SABARIMALA",
       "meaning": "Forest shrine of Lord Ayyappa",
       "difficulty": "difficult",
       "source": "kshetram"
     },
     {
-      "word": "Damaru",
+      "word": "DAMARU",
       "meaning": "Shiva's small hand-drum",
       "difficulty": "difficult",
       "source": "item"
     },
     {
-      "word": "Vina",
+      "word": "VINA",
       "meaning": "Saraswati's stringed instrument",
       "difficulty": "difficult",
       "source": "item"
     },
     {
-      "word": "Kamandalu",
+      "word": "KAMANDALU",
       "meaning": "The water-pot carried by ascetics",
       "difficulty": "difficult",
       "source": "item"
