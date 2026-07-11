@@ -989,6 +989,7 @@ async function showScoreboard() {
       <p class="tagline" style="text-align:center;">${t('scoreboardTagline')}</p>
       <div class="score-section">
         <h3>${t('puzzleBoardTitle')}</h3>
+        <p class="gem-legend">${t('gemLegend', gemBadge('easy'), gemBadge('medium'), gemBadge('difficult'))}</p>
         <div data-puzzle-board>${t('loading')}</div>
       </div>
       <div class="score-section">

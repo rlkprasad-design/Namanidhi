@@ -485,6 +485,14 @@ h1, h2, h3, .display {
 /* Scoreboard --------------------------------------------------------------- */
 
 .score-section { margin-bottom: 28px; }
+.gem-legend {
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  opacity: 0.85;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+.gem-legend .gem-icon { margin: 0 1px; }
 .score-table {
   width: 100%;
   border-collapse: collapse;
