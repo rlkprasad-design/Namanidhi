@@ -38,11 +38,15 @@ still tracked on-device via `localStorage`.
   content data (which lives per-language in `data/` - see below).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
 - `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
-  complete, Scoreboard). There's no category picker and, as of this
-  writing, no difficulty picker either: tapping "నామ గుప్త నిధి" on Home
-  goes straight into a puzzle. Every puzzle mixes entries from all three
-  difficulty tiers in the same grid - each hint row shows a gem badge
-  (ముత్యం/రత్నం/వజ్రం for easy/medium/difficult) alongside its meaning, so
+  complete, Scoreboard). Home has two independent top-level modes:
+  "నామ గుప్త నిధి" and "లిఖిత జపం". నామ గుప్త నిధి isn't itself one puzzle -
+  tapping it opens a small hub (`showNamaGuptaNidhiHub`) with two
+  structurally-identical puzzle types under it: "సాధారణ" (General, the
+  original mixed-pool puzzle) and "స్తోత్ర పరీక్ష" (Stotra Pariksha). There's
+  no category or difficulty picker within the general puzzle - every
+  puzzle mixes entries from all three difficulty tiers in the same grid -
+  each hint row shows a gem badge (ముత్యం/రత్నం/వజ్రం for easy/medium/
+  difficult) alongside its meaning, so
   the difficulty of each specific word is visible without the player ever
   choosing a tier up front.
 - `data/questions.json` - every entry (deity names, devotees, kshetrams,

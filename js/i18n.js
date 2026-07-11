@@ -13,19 +13,23 @@ const STRINGS = {
   introTitle: { te: 'నామ నిధి కి స్వాగతం', en: 'Welcome to Nama Nidhi' },
   introBody1: {
     te: "ఇది ఒక ఆటవిడుపు లాంటి సాధన. మీరు రెండు మార్గాలు ఎంచుకోవచ్చు. మొదటిది ఇచ్చిన అక్షరాల సమూహంలో భగవంతుని లేదా ఆ సంబంధించిన వ్యక్తుల లేదా వస్తువుల పేర్లను గుర్తించడం ('ఈనాడు' పదవినోదం లాగా ).",
-    en: "This is a small daily practice, more play than chore. You can pick one of two ways to spend a few minutes. The first is spotting names of the divine - or people and things connected to it - hidden in a grid of letters (like a newspaper word-search).",
+    en: "Think of this as a little daily break, more play than practice. There are two ways to spend a few minutes here. One is hunting for names of the divine - or people and things connected to them - hidden inside a grid of letters, much like the word-search in the newspaper.",
   },
   introBody2: {
     te: 'రెండవది, తెల్సిన నామాన్ని ప్రశాంతంగా పెన్ తో పేపర్ మీద రాస్తున్నట్లు గా స్క్రీన్ మీద వ్రాయడం. దీన్ని లిఖిత జపం అంటారు. మీకు నచ్చిన పేర్లను కూడా మీరు వ్రాయవచ్చు.',
-    en: 'The second is writing out a name you already know, calmly, as if pen were touching paper - on the screen instead. This is called Likhita Japam ("written chanting"). You can write any name you like, not just the suggested ones.',
+    en: 'The other is writing out a name you already know, slowly and calmly, as if pen were touching paper - except it\'s your finger on the screen. This is Likhita Japam, "written chanting." Write whatever name you like, not just the ones suggested.',
   },
   introBody3: {
-    te: 'స్కోర్ బోర్డు లో మీ ప్రగతి ని చూడగలరు. మన ఇతర కుటుంబ సభ్యుల ప్రగతి కూడా అక్కడ ఉంటుంది.',
-    en: "You can see your own progress on the Scoreboard, alongside the rest of the family's.",
+    te: 'స్కోర్ బోర్డు లో మీ ప్రగతి ని చూడగలరు. మన బృందంలోని మిగతా వారి ప్రగతి కూడా అక్కడ ఉంటుంది.',
+    en: "You'll find your own progress on the Scoreboard, right alongside everyone else in our little network.",
   },
   introBody4: {
     te: 'ఇది చెయ్యటానికి ముఖ్య కారణం, మన phone ద్వారా మనం చాల సేపు మనం సమాచార సేకరణ యంత్రాలుగా ఉంటున్నాం. కొంచెం సేపు దానికి విరామం అవసరం అనిపించి వేరే ఎదో పని బదులు ఇది పురుషార్థం గా కూడా పనికి వస్తుంది అన్న భావం తో దీనికి పూనుకున్నా.',
-    en: "The main reason I built this: our phones keep us in near-constant information-gathering mode. It felt like a short break from that - spent on something worthwhile instead - would do some good.",
+    en: "Why I made this: our phones keep us glued to them, endlessly gathering information we don't really need. It felt like this could be a nice little break from that - a few minutes spent on something worthwhile instead.",
+  },
+  introPrivacyNote: {
+    te: 'ఇది కేవలం ఒక వ్యక్తిగత సాధన కోసం రూపొందించిన యాప్ - యాడ్‌లు గానీ, ట్రాకింగ్ గానీ ఉండవు. మీరిచ్చే పేరు, మీ ఆట పురోగతి తప్ప వేరే ఏ వ్యక్తిగత సమాచారం సేకరించబడదు, ఎక్కడికీ పంపబడదు.',
+    en: "This is purely a personal sadhana app - no ads, no tracking. Nothing about you is collected beyond the name you enter and your own play progress, and none of it goes anywhere beyond that.",
   },
   introSignature: {
     te: 'Just a random thought in action....but once started, it was absorbing for me. Hope you too enjoy it.',
@@ -53,9 +57,12 @@ const STRINGS = {
 
   chooseModePrompt: { te: 'మీకు నచ్చిన విధానాన్ని ఎంచుకోండి', en: 'Choose how you would like to play' },
   namaGuptaNidhiTitle: { te: 'నామ గుప్త నిధి', en: 'Nama Gupta Nidhi' },
-  namaGuptaNidhiSub: { te: 'నామాలు దాగిన పజిల్ ఆడండి', en: 'Play the hidden-names puzzle' },
+  namaGuptaNidhiSub: { te: 'పజిల్ ఆడండి, స్తోత్రాలను పరీక్షించుకోండి', en: 'Play word puzzles, test your stotram recall' },
   likhitaJapamTitle: { te: 'లిఖిత జపం', en: 'Likhita Japam' },
   likhitaJapamSub: { te: 'నామాన్ని ప్రశాంతంగా రాయండి', en: 'Write a name calmly, one letter at a time' },
+  chooseSubModePrompt: { te: 'ఏ పజిల్ ఆడాలనుకుంటున్నారు?', en: 'Which puzzle would you like to play?' },
+  generalModeTitle: { te: 'సాధారణ', en: 'General' },
+  generalModeSub: { te: 'అన్ని నామాల నుండి కలగలిపిన పజిల్', en: 'A mixed puzzle drawn from all names' },
   stotraParikshaTitle: { te: 'స్తోత్ర పరీక్ష', en: 'Stotra Pariksha' },
   stotraParikshaSub: { te: 'మీ అవగాహనను పరీక్షించుకోండి', en: 'Test how well you know a stotram' },
   scoreboardBtn: { te: 'స్కోరు బోర్డు', en: 'Scoreboard' },
@@ -101,6 +108,10 @@ const STRINGS = {
     te: 'కింద చుక్కలను అనుసరిస్తూ వేలితో గీయండి',
     en: 'Trace the dots below with your finger',
   },
+  japamLandscapeHint: {
+    te: '📱 ఫోన్‌ను అడ్డంగా (ల్యాండ్‌స్కేప్) తిప్పితే రాయడం మరింత సులభంగా ఉంటుంది',
+    en: '📱 Turning your phone sideways (landscape) makes writing easier',
+  },
   japamSessionCount: { te: (n) => `ఈ సెషన్‌లో: ${n} సార్లు`, en: (n) => `This session: ${n} times` },
   japamThisSession: { te: 'ఈ సెషన్‌లో', en: 'This session' },
   japamTimes: { te: (n) => `${n} సార్లు`, en: (n) => `${n} times` },
@@ -108,7 +119,7 @@ const STRINGS = {
   japamComplete: { te: 'లిఖిత జపం పూర్తయింది.', en: 'Likhita Japam complete.' },
 
   scoreboardTitle: { te: 'స్కోరు బోర్డు', en: 'Scoreboard' },
-  scoreboardTagline: { te: 'మన బృందం సాధించిన ప్రగతి', en: "Our family's progress" },
+  scoreboardTagline: { te: 'మన బృందం సాధించిన ప్రగతి', en: "Our network's progress" },
   puzzleBoardTitle: { te: 'నామ గుప్త నిధి స్కోరు బోర్డు', en: 'Nama Gupta Nidhi scoreboard' },
   japamBoardTitle: { te: 'లిఖిత జప స్కోరు బోర్డు', en: 'Likhita Japam scoreboard' },
   loading: { te: 'లోడ్ అవుతోంది...', en: 'Loading...' },

@@ -171,6 +171,7 @@ function showIntro(onContinue) {
       <p>${t('introBody2')}</p>
       <p>${t('introBody3')}</p>
       <p>${t('introBody4')}</p>
+      <p class="intro-privacy-note">${t('introPrivacyNote')}</p>
       <p class="intro-signature">${t('introSignature')}</p>
       <div class="btn-row" style="margin-top:24px;">
         <button type="button" class="btn btn-primary" data-intro-continue>${t('continueBtn')}</button>
@@ -255,10 +256,6 @@ function showHome() {
           <div class="display">${t('likhitaJapamTitle')}</div>
           <div class="sub">${t('likhitaJapamSub')}</div>
         </button>
-        <button type="button" class="mode-btn" data-mode="stotra-pariksha">
-          <div class="display">${t('stotraParikshaTitle')}</div>
-          <div class="sub">${t('stotraParikshaSub')}</div>
-        </button>
       </div>
       <div class="btn-row" style="margin-top:28px;">
         <button type="button" class="btn btn-secondary" data-scoreboard>${t('scoreboardBtn')}</button>
@@ -268,20 +265,47 @@ function showHome() {
   `);
   screen.prepend(languageToggle(showHome));
   screen.prepend(topBar());
-  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', startNamaGuptaNidhi);
+  screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showNamaGuptaNidhiHub);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
-  screen.querySelector('[data-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
 }
 
+// నామ గుప్త నిధి itself isn't one puzzle mode - it's an umbrella over two
+// puzzles that are structurally the same (a word-search grid + hints
+// panel): a general mixed-pool puzzle, and Stotra Pariksha's per-stotram
+// puzzles. This hub is the shared entry point; Likhita Japam is the only
+// other independent top-level mode from Home.
+function showNamaGuptaNidhiHub() {
+  const screen = el(`
+    <div>
+      <h2 style="text-align:center;">${t('namaGuptaNidhiTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('chooseSubModePrompt')}</p>
+      <div class="mode-choice">
+        <button type="button" class="mode-btn" data-sub-mode="general">
+          <div class="display">${t('generalModeTitle')}</div>
+          <div class="sub">${t('generalModeSub')}</div>
+        </button>
+        <button type="button" class="mode-btn" data-sub-mode="stotra-pariksha">
+          <div class="display">${t('stotraParikshaTitle')}</div>
+          <div class="sub">${t('stotraParikshaSub')}</div>
+        </button>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction: showHome }));
+  screen.querySelector('[data-sub-mode="general"]').addEventListener('click', startNamaGuptaNidhi);
+  screen.querySelector('[data-sub-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
+  setScreen(screen);
+}
+
 // ---------------------------------------------------------------------
-// Nama Gupta Nidhi: straight into a puzzle, no category or difficulty
-// picker. Every puzzle mixes entries from all content packs AND all
-// three difficulty tiers together - the hint line is the only clue to
-// what each hidden word is, and to what it's worth (ముత్యం/రత్నం/వజ్రం,
-// i.e. pearl/gem/diamond).
+// Nama Gupta Nidhi (general): straight into a puzzle, no category or
+// difficulty picker. Every puzzle mixes entries from all content packs
+// AND all three difficulty tiers together - the hint line is the only
+// clue to what each hidden word is, and to what it's worth (ముత్యం/
+// రత్నం/వజ్రం, i.e. pearl/gem/diamond).
 // ---------------------------------------------------------------------
 
 const WRONG_TRIES_FOR_NUDGE = 4;
@@ -344,7 +368,7 @@ function renderGame(session) {
       </div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showHome }));
+  screen.prepend(topBar({ backAction: showNamaGuptaNidhiHub }));
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
@@ -530,7 +554,7 @@ async function showStotramList() {
       <div class="card-grid" data-stotrams style="margin-top:20px;"></div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showHome }));
+  screen.prepend(topBar({ backAction: showNamaGuptaNidhiHub }));
   setScreen(screen);
 
   const stotrams = await loadStotrams(getLang());
@@ -841,6 +865,7 @@ async function renderJapamTrace(session) {
     <div>
       <h2 style="text-align:center;">${t('likhitaJapamHeading')}</h2>
       <p class="tagline" style="text-align:center;">${t('japamTraceInstructions')}</p>
+      <p class="landscape-hint">${t('japamLandscapeHint')}</p>
       <div class="japam-word">${session.word}</div>
       ${session.target ? '<div class="mala" data-mala></div>' : '<p class="tagline" style="text-align:center;" data-count></p>'}
       <div class="japam-surface-frame">

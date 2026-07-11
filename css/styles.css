@@ -237,6 +237,11 @@ h1, h2, h3, .display {
   margin: 0 0 16px;
   line-height: 1.7;
 }
+.intro-screen .intro-privacy-note {
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  opacity: 0.8;
+}
 .intro-screen .intro-signature {
   margin-top: 20px;
   padding-top: 16px;
@@ -400,6 +405,20 @@ h1, h2, h3, .display {
 }
 
 /* Japam ------------------------------------------------------------------ */
+
+.landscape-hint {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  opacity: 0.75;
+  margin: 0 0 8px;
+}
+
+@media (orientation: landscape) {
+  .landscape-hint {
+    display: none;
+  }
+}
 
 .japam-word {
   text-align: center;
