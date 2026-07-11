@@ -2,7 +2,7 @@
   "entries": [
     {
       "word": "RAMA",
-      "meaning": "Prince of Ayodhya, an incarnation of Vishnu",
+      "meaning": "Prince of Ayodhya, Vishnu's avatar",
       "difficulty": "easy",
       "source": "ramayana"
     },
@@ -20,19 +20,19 @@
     },
     {
       "word": "HANUMAN",
-      "meaning": "Rama's great devotee, son of the wind god",
+      "meaning": "Rama's great devotee, son of Vayu",
       "difficulty": "easy",
       "source": "ramayana"
     },
     {
       "word": "KRISHNA",
-      "meaning": "An incarnation of Vishnu, Yashoda's beloved son",
+      "meaning": "Vishnu's avatar, Yashoda's beloved son",
       "difficulty": "easy",
       "source": "mahabharata"
     },
     {
       "word": "RADHA",
-      "meaning": "Krishna's beloved, a symbol of pure devotion",
+      "meaning": "Krishna's beloved, devoted to him with pure love",
       "difficulty": "easy",
       "source": "purana"
     },
@@ -44,19 +44,19 @@
     },
     {
       "word": "SHIVA",
-      "meaning": "The auspicious one, part of the divine trinity",
+      "meaning": "One of the Trimurti, along with Brahma and Vishnu",
       "difficulty": "easy",
       "source": "purana"
     },
     {
       "word": "PARVATI",
-      "meaning": "Shiva's consort, daughter of the mountains",
+      "meaning": "Shiva's wife, daughter of the Himalayas",
       "difficulty": "easy",
       "source": "purana"
     },
     {
       "word": "VISHNU",
-      "meaning": "The preserver, sustainer of the universe",
+      "meaning": "One of the Trimurti, who preserves the universe",
       "difficulty": "easy",
       "source": "purana"
     },
@@ -74,7 +74,7 @@
     },
     {
       "word": "DURGA",
-      "meaning": "The invincible warrior goddess",
+      "meaning": "The powerful warrior goddess",
       "difficulty": "easy",
       "source": "purana"
     },
@@ -86,7 +86,7 @@
     },
     {
       "word": "BHARATA",
-      "meaning": "Rama's brother, who ruled Ayodhya as his regent",
+      "meaning": "Rama's brother, who ruled Ayodhya in his place",
       "difficulty": "easy",
       "source": "ramayana"
     },
@@ -146,7 +146,7 @@
     },
     {
       "word": "PADMA",
-      "meaning": "The lotus, seat of many deities",
+      "meaning": "The lotus flower, linked to many gods and goddesses",
       "difficulty": "easy",
       "source": "item"
     },
@@ -158,7 +158,7 @@
     },
     {
       "word": "YASHODA",
-      "meaning": "Krishna's foster mother",
+      "meaning": "Krishna's mother, who raised him in Gokulam",
       "difficulty": "easy",
       "source": "purana"
     },
@@ -170,25 +170,25 @@
     },
     {
       "word": "NARASIMHA",
-      "meaning": "The man-lion incarnation of Vishnu",
+      "meaning": "The man-lion avatar of Vishnu",
       "difficulty": "medium",
       "source": "purana"
     },
     {
       "word": "VAMANA",
-      "meaning": "The dwarf incarnation of Vishnu",
+      "meaning": "The dwarf avatar of Vishnu",
       "difficulty": "medium",
       "source": "purana"
     },
     {
       "word": "KARTIKEYA",
-      "meaning": "Shiva's son, commander of the gods' army",
+      "meaning": "Shiva's son, leader of the devas' army",
       "difficulty": "medium",
       "source": "purana"
     },
     {
       "word": "INDRA",
-      "meaning": "King of the heavens and god of rain",
+      "meaning": "King of the devas and god of rain",
       "difficulty": "medium",
       "source": "purana"
     },
@@ -224,7 +224,7 @@
     },
     {
       "word": "BRAHMA",
-      "meaning": "The creator, first of the divine trinity",
+      "meaning": "One of the Trimurti, the creator",
       "difficulty": "medium",
       "source": "purana"
     },
@@ -242,13 +242,13 @@
     },
     {
       "word": "NANDI",
-      "meaning": "Shiva's bull, his loyal vehicle",
+      "meaning": "Shiva's bull, his vahana (vehicle)",
       "difficulty": "medium",
       "source": "purana"
     },
     {
       "word": "GARUDA",
-      "meaning": "Vishnu's eagle, his divine vehicle",
+      "meaning": "Vishnu's eagle, his vahana (vehicle)",
       "difficulty": "medium",
       "source": "purana"
     },
@@ -266,7 +266,7 @@
     },
     {
       "word": "KUBERA",
-      "meaning": "Treasurer and guardian of wealth among the gods",
+      "meaning": "The devas' treasurer, god of wealth",
       "difficulty": "medium",
       "source": "purana"
     },
@@ -296,7 +296,7 @@
     },
     {
       "word": "VIBHISHANA",
-      "meaning": "Ravana's righteous brother who aided Rama",
+      "meaning": "Ravana's brother who chose to help Rama",
       "difficulty": "medium",
       "source": "ramayana"
     },
@@ -386,37 +386,37 @@
     },
     {
       "word": "MALA",
-      "meaning": "A string of beads used for chanting",
+      "meaning": "A string of prayer beads (japa mala) used for chanting",
       "difficulty": "medium",
       "source": "item"
     },
     {
       "word": "ANNAPURNA",
-      "meaning": "Goddess of nourishment, a form of Parvati",
+      "meaning": "Goddess of food, a form of Parvati",
       "difficulty": "difficult",
       "source": "purana"
     },
     {
       "word": "PADMAVATI",
-      "meaning": "Consort of Venkateswara at Tirupati",
+      "meaning": "Venkateswara's wife at Tirupati",
       "difficulty": "difficult",
       "source": "kshetram"
     },
     {
       "word": "KALKI",
-      "meaning": "The prophesied final incarnation of Vishnu",
+      "meaning": "Vishnu's tenth and final avatar, yet to come",
       "difficulty": "difficult",
       "source": "purana"
     },
     {
       "word": "BHISHMA",
-      "meaning": "Grand patriarch who chose the moment of his death",
+      "meaning": "The Kuru elder who could choose the moment of his own death",
       "difficulty": "difficult",
       "source": "mahabharata"
     },
     {
       "word": "MEERA",
-      "meaning": "Rajput princess devoted entirely to Krishna",
+      "meaning": "Rajput princess who devoted her life to Krishna",
       "difficulty": "difficult",
       "source": "bhakti"
     },
@@ -428,7 +428,7 @@
     },
     {
       "word": "ANDAL",
-      "meaning": "Girl saint who wed the Lord in devotion",
+      "meaning": "Girl saint who considered herself married to Vishnu",
       "difficulty": "difficult",
       "source": "bhakti"
     },
@@ -440,7 +440,7 @@
     },
     {
       "word": "KABIR",
-      "meaning": "Mystic poet-saint of devotion beyond ritual",
+      "meaning": "Poet-saint known for simple, direct devotion",
       "difficulty": "difficult",
       "source": "bhakti"
     },
@@ -452,7 +452,7 @@
     },
     {
       "word": "PRAYAG",
-      "meaning": "Sacred confluence of three rivers",
+      "meaning": "Where Ganga, Yamuna and Saraswati meet (Triveni Sangam)",
       "difficulty": "difficult",
       "source": "kshetram"
     },
@@ -476,7 +476,7 @@
     },
     {
       "word": "KAMANDALU",
-      "meaning": "The water-pot carried by ascetics",
+      "meaning": "The water-pot carried by sadhus and rishis",
       "difficulty": "difficult",
       "source": "item"
     }
