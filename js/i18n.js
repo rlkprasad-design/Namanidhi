@@ -125,6 +125,10 @@ const STRINGS = {
   scoreboardTitle: { te: 'స్కోరు బోర్డు', en: 'Scoreboard' },
   scoreboardTagline: { te: 'మన బృందం సాధించిన ప్రగతి', en: "Our network's progress" },
   puzzleBoardTitle: { te: 'నామ గుప్త నిధి స్కోరు బోర్డు', en: 'Nama Gupta Nidhi scoreboard' },
+  gemLegend: {
+    te: (pearl, gem, diamond) => `${pearl} ముత్యం = సులభం, ${gem} రత్నం = మధ్యమం, ${diamond} వజ్రం = కష్టం — మీరే స్వయంగా కనుగొన్న పదాలకు మాత్రమే లభిస్తాయి, "సమాధానం చూపు" వాడితే రావు.`,
+    en: (pearl, gem, diamond) => `${pearl} Pearl = easy, ${gem} Gem = medium, ${diamond} Diamond = difficult — earned only for words you find yourself, not ones revealed with "Show answer."`,
+  },
   japamBoardTitle: { te: 'లిఖిత జప స్కోరు బోర్డు', en: 'Likhita Japam scoreboard' },
   loading: { te: 'లోడ్ అవుతోంది...', en: 'Loading...' },
   colName: { te: 'పేరు', en: 'Name' },
