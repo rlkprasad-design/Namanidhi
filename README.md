@@ -314,6 +314,19 @@ human-reviewed before merging" model as Telugu, see "Adding new content"
 below (the validator also runs against `data/en` in CI, see
 `.github/workflows/validate-content.yml`).
 
+English meanings are written the way these things actually get talked
+about in a bilingual Telugu household, not as formal literary
+translations - a family member flagged early meanings like "sacred
+confluence of three rivers" or "grand patriarch" as stiffer than how
+anyone would really say it. Prefer common Sanskrit devotional
+vocabulary that's already familiar in Indian English over a fully
+translated equivalent: "avatar" not "incarnation," "vahana" not
+"divine vehicle," "Trimurti" not "divine trinity," "devas" where that's
+more natural than "gods." The puzzle *words* themselves were never the
+issue - they're already Sanskrit names in Roman letters (RAMA,
+VENKATESWARA, TRISHULA) - this is purely about the hint text read
+alongside them.
+
 Lakshmi Ashtottaram and Vishnu Sahasranamam aren't in English yet -
 `data/en/stotrams.json` lists them as `"soon"` placeholders, same as
 Vishnu Sahasranamam still is in Telugu.
