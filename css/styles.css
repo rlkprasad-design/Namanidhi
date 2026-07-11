@@ -242,6 +242,11 @@ h1, h2, h3, .display {
   color: var(--gold-light);
   opacity: 0.8;
 }
+.intro-screen .intro-privacy-note a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  opacity: 1;
+}
 .intro-screen .intro-signature {
   margin-top: 20px;
   padding-top: 16px;
