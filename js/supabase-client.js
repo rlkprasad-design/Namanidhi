@@ -84,12 +84,13 @@ export async function syncJapamLog(playerId, entry) {
   if (error) console.warn('syncJapamLog failed:', error);
 }
 
-export async function fetchPuzzleLeaderboard() {
+export async function fetchPuzzleLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
   const { data, error } = await sb
     .from('puzzle_leaderboard')
     .select('*')
+    .eq('language', lang)
     .order('total_entries_found', { ascending: false });
   if (error) {
     console.warn('fetchPuzzleLeaderboard failed:', error);
@@ -98,12 +99,13 @@ export async function fetchPuzzleLeaderboard() {
   return data;
 }
 
-export async function fetchJapamLeaderboard() {
+export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
   const { data, error } = await sb
     .from('japam_leaderboard')
     .select('*')
+    .eq('language', lang)
     .order('total_count', { ascending: false });
   if (error) {
     console.warn('fetchJapamLeaderboard failed:', error);

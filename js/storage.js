@@ -2,11 +2,12 @@
 // local fallback tally so the app still works fully offline / before a
 // Supabase project is configured.
 //
-// Puzzle/Japam logs are namespaced per language (see LANGUAGE_KEY) - by
-// design, English-mode play tracks separately from Telugu-mode play and
-// never syncs to the shared Supabase scoreboard (see isBackendConfigured
-// callers in app.js), so switching languages must not mix or lose either
-// language's local tally.
+// Puzzle/Japam logs are namespaced per language (see LANGUAGE_KEY) so
+// switching languages can't mix or lose either language's local tally.
+// This is also the fallback used before a Supabase backend is configured
+// (or while offline) - once configured, both languages sync to the
+// shared scoreboard too (see syncsToBackend in app.js), each kept as its
+// own per-language tally there as well.
 
 const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';

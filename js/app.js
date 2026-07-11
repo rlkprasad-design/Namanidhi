@@ -41,12 +41,12 @@ function fillerPool() {
   return getLang() === 'en' ? LATIN_POOL : undefined;
 }
 
-// Only Telugu-mode play syncs to the shared family Supabase scoreboard -
-// English-mode scores stay local-only per device (see README), so every
-// sync/fetch call below is gated on the current language, not just on
-// whether a backend happens to be configured.
+// Both languages sync to the shared family Supabase scoreboard, kept as
+// separate per-language tallies (see language column on puzzle_progress/
+// japam_log and the fetch calls in showScoreboard) rather than merged
+// into one combined number per player.
 function syncsToBackend() {
-  return getLang() === 'te' && isBackendConfigured();
+  return isBackendConfigured();
 }
 
 // What a found word of each difficulty is "worth" - shown as a small
@@ -526,6 +526,7 @@ function recordLevelProgress(session) {
     pearls_found: gemCounts.easy,
     gems_found: gemCounts.medium,
     diamonds_found: gemCounts.difficult,
+    language: getLang(),
   };
   recordPuzzleProgressLocal(progress, getLang());
   if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
@@ -794,6 +795,7 @@ function recordStotramProgress(session) {
     pearls_found: gemCounts.easy,
     gems_found: gemCounts.medium,
     diamonds_found: gemCounts.difficult,
+    language: getLang(),
   };
   recordPuzzleProgressLocal(progress, getLang());
   if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
@@ -939,6 +941,7 @@ function onJapamSuccess(session) {
     name_traced: session.word,
     count: 1,
     session_type: session.mode === 'interlude' ? 'interlude' : 'standalone',
+    language: getLang(),
   };
   recordJapamLocal(entry, getLang());
   if (state.playerId && syncsToBackend()) syncJapamLog(state.playerId, entry);
@@ -1005,7 +1008,7 @@ async function showScoreboard() {
   const japamBoardEl = screen.querySelector('[data-japam-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(), fetchJapamLeaderboard()]);
+    const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang())]);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
     );

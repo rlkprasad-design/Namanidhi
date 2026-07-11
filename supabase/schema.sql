@@ -18,6 +18,7 @@ create table if not exists puzzle_progress (
   pearls_found int not null default 0,
   gems_found int not null default 0,
   diamonds_found int not null default 0,
+  language text not null default 'te',
   completed_at timestamptz not null default now()
 );
 
@@ -27,6 +28,7 @@ create table if not exists japam_log (
   name_traced text not null,
   count int not null default 1,
   session_type text not null check (session_type in ('standalone', 'interlude')),
+  language text not null default 'te',
   occurred_at timestamptz not null default now()
 );
 
@@ -61,24 +63,34 @@ create policy "anyone can log japam traces"
 -- Mirrors the leaderboard-view pattern from the BBA Practice App: one view
 -- per scoreboard, aggregated per player, read by the Scoreboard screen.
 
+-- Grouped by (display_name, language) rather than just display_name, so a
+-- player who has played in both languages gets a separate row per
+-- language - the two languages' tallies are never merged into one
+-- combined number (see js/app.js's showScoreboard, which fetches with
+-- the player's current language). An inner join is used deliberately: a
+-- player only appears on a language's board once they've actually played
+-- in it.
+
 create or replace view puzzle_leaderboard as
 select
   p.display_name,
+  pp.language,
   coalesce(sum(pp.entries_found), 0) as total_entries_found,
   coalesce(sum(pp.pearls_found), 0) as total_pearls,
   coalesce(sum(pp.gems_found), 0) as total_gems,
   coalesce(sum(pp.diamonds_found), 0) as total_diamonds,
   count(pp.id) as puzzles_completed
 from players p
-left join puzzle_progress pp on pp.player_id = p.id
-group by p.display_name
+join puzzle_progress pp on pp.player_id = p.id
+group by p.display_name, pp.language
 order by coalesce(sum(pp.pearls_found), 0) + coalesce(sum(pp.gems_found), 0) + coalesce(sum(pp.diamonds_found), 0) desc;
 
 create or replace view japam_leaderboard as
 select
   p.display_name,
+  jl.language,
   coalesce(sum(jl.count), 0) as total_count
 from players p
-left join japam_log jl on jl.player_id = p.id
-group by p.display_name
+join japam_log jl on jl.player_id = p.id
+group by p.display_name, jl.language
 order by total_count desc;

@@ -138,6 +138,15 @@ can't be backfilled this way, since those puzzles were never single-
 tier - if one of those shows `0` gems with a real `entries_found`, it's
 either from before that mode's own gem tracking shipped, or every word
 was revealed via "సమాధానం చూపు" (which legitimately earns nothing).
+
+If your project predates per-language scoreboard sync, also run
+`supabase/add-language-tracking.sql` once - it adds the `language`
+column to `puzzle_progress`/`japam_log` (defaulting existing rows to
+`'te'`, since Telugu was the only language that used to sync) and
+rebuilds both leaderboard views to group by `(display_name, language)`.
+A brand-new project created from the current `schema.sql` already has
+this. Until this migration is run on an existing project, English-mode
+play keeps falling back to local-only, same as before.
 Safe to re-run; each `UPDATE` only touches rows it hasn't already
 touched.
 
@@ -267,14 +276,18 @@ argument and cache per language. Adding a third language means adding a
 isn't a simple a-stem/consonant alphabet like Telugu's) a filler pool in
 `js/grid.js` alongside `LATIN_POOL`.
 
-English-mode scores are intentionally **not** shared with the family
-Supabase scoreboard - `syncsToBackend()` in `js/app.js` gates every sync/
-fetch call on `getLang() === 'te'`, so English play only ever writes to
-this device's `localStorage` (namespaced separately per language in
-`js/storage.js`, so switching languages can't mix or clobber either
-language's local tally) and its Scoreboard screen always shows the
-local-only view, even when Supabase is configured. Player identity
-(name) is shared across languages - only the score data is split.
+Both languages sync to the shared family Supabase scoreboard, kept as
+separate per-language tallies rather than merged into one combined
+number - `puzzle_progress`/`japam_log` rows carry a `language` column,
+and the `puzzle_leaderboard`/`japam_leaderboard` views group by
+`(display_name, language)`, so the Scoreboard screen's fetch calls
+(`fetchPuzzleLeaderboard(getLang())`/`fetchJapamLeaderboard(getLang())`)
+only ever pull the current language's rows. Before Supabase is configured
+(or while offline), both languages still fall back to this device's own
+`localStorage`, namespaced separately per language in `js/storage.js` so
+switching languages can't mix or clobber either language's local tally.
+Player identity (name) is shared across languages - only the score data
+is split.
 
 `js/segmenter.js`'s `Intl.Segmenter('te', ...)` is reused for English
 text too rather than adding a second segmenter - grapheme-cluster
