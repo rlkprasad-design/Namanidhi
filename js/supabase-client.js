@@ -11,7 +11,12 @@ async function getClient() {
   if (!isBackendConfigured()) return null;
   if (client) return client;
   if (!clientPromise) {
-    clientPromise = import('https://esm.sh/@supabase/supabase-js@2')
+    // Pinned to an exact release rather than the "@2" tag - esm.sh would
+    // otherwise be free to serve a different minor/patch build over time
+    // without this repo ever changing, which is a supply-chain risk for
+    // code that runs unaudited in every player's browser. Bump this
+    // deliberately (and re-test) rather than letting it drift silently.
+    clientPromise = import('https://esm.sh/@supabase/supabase-js@2.110.2')
       .then(({ createClient }) => {
         client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         return client;
