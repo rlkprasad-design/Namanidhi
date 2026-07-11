@@ -13,7 +13,7 @@ const STRINGS = {
   introTitle: { te: 'నామ నిధి కి స్వాగతం', en: 'Welcome to Nama Nidhi' },
   introBody1: {
     te: "ఇది ఒక ఆటవిడుపు లాంటి సాధన. మీరు రెండు మార్గాలు ఎంచుకోవచ్చు. మొదటిది ఇచ్చిన అక్షరాల సమూహంలో భగవంతుని లేదా ఆ సంబంధించిన వ్యక్తుల లేదా వస్తువుల పేర్లను గుర్తించడం ('ఈనాడు' పదవినోదం లాగా ).",
-    en: "Think of this as a little daily break, more play than practice. There are two ways to spend a few minutes here. One is hunting for names of the divine - or people and things connected to them - hidden inside a grid of letters, much like the word-search in the newspaper.",
+    en: "Think of this as a little daily break, more play than practice. There are two ways to spend a few minutes here. One is searching for names of the divine - or people and things connected to them - hidden inside a grid of letters, much like the word-search in the newspaper.",
   },
   introBody2: {
     te: 'రెండవది, తెల్సిన నామాన్ని ప్రశాంతంగా పెన్ తో పేపర్ మీద రాస్తున్నట్లు గా స్క్రీన్ మీద వ్రాయడం. దీన్ని లిఖిత జపం అంటారు. మీకు నచ్చిన పేర్లను కూడా మీరు వ్రాయవచ్చు.',
@@ -92,8 +92,8 @@ const STRINGS = {
     en: (title) => `You found every name in ${title}.`,
   },
   stotramAboutLabel: {
-    te: (title) => `<strong>${title}</strong> గురించి:`,
-    en: (title) => `About <strong>${title}</strong>:`,
+    te: (title) => `${title} గురించి:`,
+    en: (title) => `About ${title}:`,
   },
   playAgainBtn: { te: 'మళ్ళీ ఆడండి', en: 'Play again' },
   finishBtn: { te: 'ముగించు', en: 'Finish' },
