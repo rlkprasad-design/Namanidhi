@@ -74,6 +74,18 @@ export function difficultyWeightsForExperience(puzzlesCompleted) {
   };
 }
 
+// Caps how large a grid a beginner can roll, ramping linearly up to the
+// level's full gridSizeMax by their 50th completed puzzle - a big board is
+// intimidating on its own regardless of how easy the words on it are, so
+// this runs independently of (and longer than) the difficulty-mix ramp
+// above, which finishes by puzzle 30. A brand-new player always gets
+// gridSizeMin; from then on the ceiling grows until the full range opens
+// up.
+export function gridSizeCapForExperience(puzzlesCompleted, min, max) {
+  const t = Math.min(1, Math.max(0, puzzlesCompleted) / 50);
+  return Math.round(min + (max - min) * t);
+}
+
 // Splits `total` across the three difficulty tiers proportional to
 // `weights` (an even split by default), using largest-remainder
 // apportionment so the counts always sum to exactly `total` while still
@@ -92,17 +104,19 @@ export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
   return counts;
 }
 
-// Each call rolls its own grid size within the level's range, then draws
-// a mix of easy/medium/difficult entries sized to fit that roll - every
-// puzzle blends all three tiers (so a hint's word can turn out to be a
-// ముత్యం, రత్నం, or వజ్రం) rather than being one difficulty end to end.
-// `weights` (see difficultyWeightsForExperience) skews that mix toward
-// easier tiers for a newer/lower-scoring player instead of always an
-// even split. Each tier is still drawn from its own shuffled rotation
-// queue, trimmed to whatever's eligible at the rolled size before
-// topping back up, so nothing repeats until that tier cycles.
-export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS) {
-  const gridSize = randomInt(level.gridSizeMin, level.gridSizeMax);
+// Each call rolls its own grid size within the level's range (capped for
+// newer players - see gridSizeCapForExperience), then draws a mix of
+// easy/medium/difficult entries sized to fit that roll - every puzzle
+// blends all three tiers (so a hint's word can turn out to be a ముత్యం,
+// రత్నం, or వజ్రం) rather than being one difficulty end to end. `weights`
+// (see difficultyWeightsForExperience) skews that mix toward easier tiers
+// for a newer/lower-scoring player instead of always an even split. Each
+// tier is still drawn from its own shuffled rotation queue, trimmed to
+// whatever's eligible at the rolled size before topping back up, so
+// nothing repeats until that tier cycles.
+export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity) {
+  const cappedMax = gridSizeCapForExperience(puzzlesCompleted, level.gridSizeMin, level.gridSizeMax);
+  const gridSize = randomInt(level.gridSizeMin, cappedMax);
   const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
 
   const entries = [];

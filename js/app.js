@@ -1,6 +1,6 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
-  splitAcrossDifficulties, difficultyWeightsForExperience, DIFFICULTIES, LATIN_POOL,
+  splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
@@ -345,8 +345,9 @@ async function startNamaGuptaNidhi() {
 }
 
 function buildSession(level, pool) {
-  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals(getLang()).puzzlesCompleted);
-  const { gridSize, entries } = sampleMixedEntries(pool, level, weights);
+  const puzzlesCompleted = getLocalPuzzleTotals(getLang()).puzzlesCompleted;
+  const weights = difficultyWeightsForExperience(puzzlesCompleted);
+  const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -644,8 +645,9 @@ function drawStotramRound(stotram, gridSize, weights) {
 }
 
 function buildStotramSession(stotram) {
-  const gridSize = randomInt(stotram.gridSizeMin, stotram.gridSizeMax);
-  const weights = difficultyWeightsForExperience(getLocalPuzzleTotals(getLang()).puzzlesCompleted);
+  const puzzlesCompleted = getLocalPuzzleTotals(getLang()).puzzlesCompleted;
+  const gridSize = randomInt(stotram.gridSizeMin, gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax));
+  const weights = difficultyWeightsForExperience(puzzlesCompleted);
   const entries = drawStotramRound(stotram, gridSize, weights);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode, fillerPool: fillerPool() });
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
