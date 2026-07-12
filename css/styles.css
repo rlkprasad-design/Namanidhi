@@ -41,6 +41,21 @@ h1, h2, h3, .display {
   padding: 20px 16px 48px;
 }
 
+.global-feedback-note {
+  margin: 28px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(240, 210, 139, 0.18);
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--gold-light);
+  opacity: 0.75;
+}
+.global-feedback-note a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  opacity: 1;
+}
+
 .top-bar {
   display: flex;
   align-items: center;

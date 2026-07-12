@@ -97,9 +97,15 @@ function el(html) {
   return tpl.content.firstElementChild;
 }
 
-function setScreen(node) {
+// Every screen gets a small feedback-email reminder footer except the
+// Intro/"About this app" screen, which already spells this out in full as
+// part of introPrivacyNote - repeating it there would be redundant.
+function setScreen(node, { footer = true } = {}) {
   root.innerHTML = '';
   root.appendChild(node);
+  if (footer) {
+    root.appendChild(el(`<p class="global-feedback-note">${t('feedbackNote')}</p>`));
+  }
   document.documentElement.lang = getLang();
 }
 
@@ -194,7 +200,7 @@ function showIntro(onContinue) {
   `);
   screen.prepend(languageToggle(() => showIntro(onContinue)));
   screen.querySelector('[data-intro-continue]').addEventListener('click', onContinue);
-  setScreen(screen);
+  setScreen(screen, { footer: false });
 }
 
 function showNameGate() {
