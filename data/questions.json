@@ -553,12 +553,6 @@
       "source": "bhagavatam"
     },
     {
-      "word": "వరాహావతారం",
-      "meaning": "విష్ణువు వరాహ అవతారం",
-      "difficulty": "easy",
-      "source": "bhagavatam"
-    },
-    {
       "word": "నరసింహావతారం",
       "meaning": "విష్ణువు నరసింహ అవతారం",
       "difficulty": "easy",
@@ -567,12 +561,6 @@
     {
       "word": "పరశురాముడు",
       "meaning": "విష్ణువు గొడ్డలి ధరించిన అవతారం",
-      "difficulty": "easy",
-      "source": "bhagavatam"
-    },
-    {
-      "word": "బుద్ధావతారం",
-      "meaning": "విష్ణువు బుద్ధ అవతారం",
       "difficulty": "easy",
       "source": "bhagavatam"
     },
@@ -987,7 +975,7 @@
     },
     {
       "word": "దక్షుడు",
-      "meaning": "సతీదేవి తండ్రి, శివునిచే అవమానింపబడినవాడు",
+      "meaning": "సతీదేవి తండ్రి, శివుని అవమానించినవాడు",
       "difficulty": "medium",
       "source": "shiva_family"
     },
@@ -1041,7 +1029,7 @@
     },
     {
       "word": "అత్రి మహర్షి",
-      "meaning": "వనవాసంలో రామునికి ఆతిథ్యమిచ్చిన మహర్షి",
+      "meaning": "వనవాసంలో రామునికి ఆతిథ్యమిచ్చిన మహర్షి, అనసూయా పతి",
       "difficulty": "medium",
       "source": "ramayana"
     },
@@ -1059,7 +1047,7 @@
     },
     {
       "word": "అగస్త్య మహర్షి",
-      "meaning": "రామునికి దివ్యాస్త్రాలు ఇచ్చిన మహర్షి",
+      "meaning": "రామునికి దివ్యాస్త్రాలు, ఆదిత్య హృదయం ఇచ్చిన మహర్షి",
       "difficulty": "medium",
       "source": "ramayana"
     },
@@ -1087,19 +1075,7 @@
       "difficulty": "medium",
       "source": "ramayana"
     },
-    {
-      "word": "మైందుడు",
-      "meaning": "బలశాలి వానర వీరుడు",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
-    {
-      "word": "ద్వివిదుడు",
-      "meaning": "వానర వీరుడు",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
-    {
+        {
       "word": "కుంభుడు",
       "meaning": "కుంభకర్ణుని కుమారుడు, రాక్షస యోధుడు",
       "difficulty": "medium",
@@ -1107,7 +1083,7 @@
     },
     {
       "word": "నికుంభుడు",
-      "meaning": "రావణుని సైన్యంలో రాక్షసుడు",
+      "meaning": "కుంభకర్ణుని కుమారుడు, రాక్షస యోధుడు",
       "difficulty": "medium",
       "source": "ramayana"
     },
@@ -1126,18 +1102,6 @@
     {
       "word": "అతికాయుడు",
       "meaning": "రావణుని కుమారుడు, బలశాలి రాక్షసుడు",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
-    {
-      "word": "ధూమ్రాక్షుడు",
-      "meaning": "రావణుని సైన్యంలో రాక్షసుడు",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
-    {
-      "word": "వజ్రదంష్ట్రుడు",
-      "meaning": "రాక్షస యోధుడు",
       "difficulty": "medium",
       "source": "ramayana"
     },
@@ -1196,19 +1160,13 @@
       "source": "ramayana"
     },
     {
-      "word": "శతబలి",
-      "meaning": "వానర సేనాని",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
-    {
       "word": "సుషేణుడు",
       "meaning": "వానర వైద్యుడు, సంజీవని తెచ్చుటలో సహకరించినవాడు",
       "difficulty": "medium",
       "source": "ramayana"
     },
     {
-      "word": "సురసుడు",
+      "word": "సురస",
       "meaning": "హనుమను పరీక్షించిన నాగమాత",
       "difficulty": "medium",
       "source": "ramayana"
@@ -1225,12 +1183,7 @@
       "difficulty": "medium",
       "source": "ramayana"
     },
-    {
-      "word": "అనలుడు",
-      "meaning": "సేతు నిర్మాణంలో పాల్గొన్న వానర సేనాని",
-      "difficulty": "medium",
-      "source": "ramayana"
-    },
+    
     {
       "word": "ఉత్తంకుడు",
       "meaning": "వ్యాస శిష్యుడు, కృష్ణుని విశ్వరూపం చూసిన మహర్షి",
@@ -1269,19 +1222,13 @@
     },
     {
       "word": "సైరంధ్రి",
-      "meaning": "అజ్ఞాతవాసంలో ద్రౌపది ధరించిన మారుపేరు",
+      "meaning": "అజ్ఞాతవాసంలో ద్రౌపది చేసిన వృత్తి",
       "difficulty": "medium",
       "source": "mahabharata"
     },
     {
       "word": "ఉత్తరకుమారుడు",
       "meaning": "విరాట రాజు కుమారుడు",
-      "difficulty": "medium",
-      "source": "mahabharata"
-    },
-    {
-      "word": "శ్వేతుడు",
-      "meaning": "విరాట రాజు కుమారుడు, యుద్ధంలో మరణించినవాడు",
       "difficulty": "medium",
       "source": "mahabharata"
     },
@@ -1453,31 +1400,7 @@
       "difficulty": "medium",
       "source": "bhagavatam"
     },
-    {
-      "word": "కాళిందీ",
-      "meaning": "కృష్ణుని పత్ని",
-      "difficulty": "medium",
-      "source": "bhagavatam"
-    },
-    {
-      "word": "మిత్రవింద",
-      "meaning": "కృష్ణుని పత్ని",
-      "difficulty": "medium",
-      "source": "bhagavatam"
-    },
-    {
-      "word": "భద్ర",
-      "meaning": "కృష్ణుని పత్ని",
-      "difficulty": "medium",
-      "source": "bhagavatam"
-    },
-    {
-      "word": "నాగ్నజితి",
-      "meaning": "కృష్ణుని పత్ని, సత్య అని కూడా పిలుస్తారు",
-      "difficulty": "medium",
-      "source": "bhagavatam"
-    },
-    {
+        {
       "word": "వృషభానుడు",
       "meaning": "రాధ తండ్రి",
       "difficulty": "medium",
@@ -1504,12 +1427,6 @@
     {
       "word": "శకటాసురుడు",
       "meaning": "బండి రూపంలో వచ్చిన రాక్షసుడు",
-      "difficulty": "medium",
-      "source": "bhagavatam"
-    },
-    {
-      "word": "వత్సాసురుడు",
-      "meaning": "దూడ రూపంలో వచ్చిన రాక్షసుడు",
       "difficulty": "medium",
       "source": "bhagavatam"
     },
