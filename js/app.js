@@ -1051,7 +1051,7 @@ async function showScoreboard() {
     ));
     const japamRowsWithAverage = (japamRows || []).map((row) => ({
       ...row,
-      daily_average: row.first_logged_at ? (row.total_count / daysElapsedInclusive(row.first_logged_at)).toFixed(1) : '0.0',
+      daily_average: row.first_logged_at ? Math.round(row.total_count / daysElapsedInclusive(row.first_logged_at)) : 0,
     }));
     japamBoardEl.replaceWith(renderLeaderboardTable(
       japamRowsWithAverage,
