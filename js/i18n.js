@@ -58,6 +58,12 @@ const STRINGS = {
   nameGatePrompt: { te: 'ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి', en: 'Enter your name or nickname to play' },
   namePlaceholder: { te: 'మీ పేరు', en: 'Your name' },
   beginBtn: { te: 'ప్రారంభించండి', en: 'Start' },
+  resumeNoticeText: {
+    te: (name) => `"${name}" పేరుతో ఇప్పటికే ఆట చరిత్ర ఉంది. ఇది మీరే గతంలో వాడిన పేరైతే పర్వాలేదు — కానీ వేరే వ్యక్తి వాడిన పేరైతే, మీ స్కోర్లు వారి స్కోర్లతో కలిసిపోతాయి.`,
+    en: (name) => `"${name}" already has play history. If this is your own name from before, that's fine - but if it belongs to someone else, your scores will merge with theirs.`,
+  },
+  resumeConfirmBtn: { te: 'ఇది నేనే, కొనసాగించు', en: "It's me, continue" },
+  resumeCancelBtn: { te: 'వెనక్కి, పేరు మార్చాలి', en: 'Go back, change name' },
 
   languageLabel: { te: 'భాష', en: 'Language' },
   languageTelugu: { te: 'తెలుగు', en: 'తెలుగు' },

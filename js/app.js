@@ -231,15 +231,55 @@ function showNameGate() {
       <p class="tagline">${t('appTagline')}</p>
       <p>${t('nameGatePrompt')}</p>
       <input type="text" class="text-input" maxlength="40" placeholder="${t('namePlaceholder')}" data-name-input />
-      <div class="btn-row">
+      <div class="btn-row" data-begin-row>
         <button type="button" class="btn btn-primary" data-begin>${t('beginBtn')}</button>
       </div>
+      <div class="resume-notice" data-resume-notice style="display:none;"></div>
     </div>
   `);
   screen.prepend(languageToggle(showNameGate));
   const input = screen.querySelector('[data-name-input]');
   const beginBtn = screen.querySelector('[data-begin]');
+  const beginRow = screen.querySelector('[data-begin-row]');
+  const noticeEl = screen.querySelector('[data-resume-notice]');
   if (state.playerName) input.value = state.playerName;
+
+  const finish = (name, playerId) => {
+    setPlayerName(name);
+    state.playerName = name;
+    state.playerId = playerId;
+    setPlayerId(playerId);
+    showHome();
+  };
+
+  // Picking up a name that already has history is fine if it's genuinely
+  // the same person returning (the common case on a shared family device),
+  // but it's also the one moment a real collision between two different
+  // people would be silent otherwise - since ensurePlayer no longer blocks
+  // it (see its comment), this pauses to make it visible instead, only
+  // when the name actually changed (not on a no-op re-submit of the name
+  // already active on this device).
+  const showResumeNotice = (name, playerId) => {
+    beginRow.style.display = 'none';
+    noticeEl.style.display = 'block';
+    noticeEl.innerHTML = `
+      <p class="resume-notice-text">${t('resumeNoticeText', escapeHtml(name))}</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" data-resume-confirm>${t('resumeConfirmBtn')}</button>
+        <button type="button" class="btn btn-secondary" data-resume-cancel>${t('resumeCancelBtn')}</button>
+      </div>
+    `;
+    noticeEl.querySelector('[data-resume-confirm]').addEventListener('click', () => finish(name, playerId));
+    noticeEl.querySelector('[data-resume-cancel]').addEventListener('click', () => {
+      noticeEl.style.display = 'none';
+      noticeEl.innerHTML = '';
+      beginRow.style.display = 'flex';
+      beginBtn.disabled = false;
+      input.value = '';
+      input.focus();
+    });
+  };
+
   const submit = async () => {
     const name = input.value.trim();
     if (!name) { input.focus(); return; }
@@ -247,14 +287,14 @@ function showNameGate() {
     let playerId = null;
     if (syncsToBackend()) {
       const result = await ensurePlayer(name);
+      if (result.status === 'ok' && result.resumed && name !== state.playerName) {
+        showResumeNotice(name, result.id);
+        return;
+      }
       playerId = result.id;
     }
-    setPlayerName(name);
-    state.playerName = name;
-    state.playerId = playerId;
-    setPlayerId(playerId);
     beginBtn.disabled = false;
-    showHome();
+    finish(name, playerId);
   };
   screen.querySelector('[data-begin]').addEventListener('click', submit);
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });

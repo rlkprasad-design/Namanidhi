@@ -42,9 +42,12 @@ async function getClient() {
 // while costing only the rarer, lower-stakes case of two unrelated people
 // independently picking an identical display name.
 //
-// Returns { id, status } where status is 'ok' (created or resumed),
-// 'offline' (backend not reachable), or 'error' (unexpected failure -
-// caller should stay local-only).
+// Returns { id, status, resumed } where status is 'ok' (created or
+// resumed), 'offline' (backend not reachable), or 'error' (unexpected
+// failure - caller should stay local-only). `resumed` is true when the
+// name already had history - callers use that to flag "you're picking up
+// an existing name" so a genuine name collision between two different
+// people is at least noticeable, even though it isn't blocked.
 export async function ensurePlayer(name) {
   const sb = await getClient();
   if (!sb) return { id: null, status: 'offline' };
@@ -54,7 +57,7 @@ export async function ensurePlayer(name) {
       .select('id')
       .eq('display_name', name)
       .maybeSingle();
-    if (existing) return { id: existing.id, status: 'ok' };
+    if (existing) return { id: existing.id, status: 'ok', resumed: true };
 
     const { data, error } = await sb
       .from('players')
@@ -67,11 +70,11 @@ export async function ensurePlayer(name) {
         // and INSERT. Just resume it, same as if we'd looked it up a
         // moment later.
         const { data: raced } = await sb.from('players').select('id').eq('display_name', name).maybeSingle();
-        if (raced) return { id: raced.id, status: 'ok' };
+        if (raced) return { id: raced.id, status: 'ok', resumed: true };
       }
       throw error;
     }
-    return { id: data.id, status: 'ok' };
+    return { id: data.id, status: 'ok', resumed: false };
   } catch (err) {
     console.warn('ensurePlayer failed, staying local-only:', err);
     return { id: null, status: 'error' };

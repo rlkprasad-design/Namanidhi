@@ -323,6 +323,21 @@ h1, h2, h3, .display {
   border-top: 1px solid rgba(240, 210, 139, 0.25);
 }
 
+.resume-notice {
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin: 20px auto 0;
+  max-width: 380px;
+}
+.resume-notice-text {
+  margin: 0 0 14px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--cream);
+}
+
 /* Grid / temple-arch frame --------------------------------------------- */
 
 .grid-frame {
