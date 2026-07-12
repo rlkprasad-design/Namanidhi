@@ -150,6 +150,13 @@ play keeps falling back to local-only, same as before.
 Safe to re-run; each `UPDATE` only touches rows it hasn't already
 touched.
 
+If your project predates the Likhita Japam board's daily-average column,
+also run `supabase/add-japam-daily-average.sql` once - it adds
+`first_logged_at` (each player's earliest japam timestamp per language)
+to `japam_leaderboard`, which the Scoreboard screen divides `total_count`
+by the days elapsed since to get the average. A brand-new project already
+has this.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,

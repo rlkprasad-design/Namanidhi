@@ -85,11 +85,17 @@ join puzzle_progress pp on pp.player_id = p.id
 group by p.display_name, pp.language
 order by coalesce(sum(pp.pearls_found), 0) + coalesce(sum(pp.gems_found), 0) + coalesce(sum(pp.diamonds_found), 0) desc;
 
+-- first_logged_at feeds the Scoreboard's daily-average column (total_count
+-- divided by days elapsed since a player's first japam in this language) -
+-- computed client-side in js/app.js rather than here, since "days elapsed"
+-- depends on the current date at read time, not write time.
+
 create or replace view japam_leaderboard as
 select
   p.display_name,
   jl.language,
-  coalesce(sum(jl.count), 0) as total_count
+  coalesce(sum(jl.count), 0) as total_count,
+  min(jl.occurred_at) as first_logged_at
 from players p
 join japam_log jl on jl.player_id = p.id
 group by p.display_name, jl.language
