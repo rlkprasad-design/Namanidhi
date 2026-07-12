@@ -1078,24 +1078,40 @@ async function showScoreboard() {
   }
 }
 
-function renderLeaderboardTable(rows, keys, labels, dataAttr) {
+// Shows only the top `limit` rows by default (the views already return
+// rows best-first), with a "more"/"less" toggle to expand or collapse -
+// as the family/community using this grows, a single long table gets
+// unwieldy fast. The wrapper element is built once and re-rendered in
+// place on toggle, rather than going through setScreen again.
+function renderLeaderboardTable(rows, keys, labels, dataAttr, limit = 10) {
   if (!rows || !rows.length) {
     return el(`<div ${dataAttr}><p class="score-note">${t('noScoresYet')}</p></div>`);
   }
+  let expanded = false;
+  const wrap = el(`<div ${dataAttr}></div>`);
   const header = labels.map((l) => `<th>${l}</th>`).join('');
-  // Rows come straight from the shared Supabase leaderboard views - any
-  // player's own chosen display_name ends up here, so it must be escaped
-  // like any other untrusted input before going into innerHTML (see
-  // escapeHtml's comment above).
-  const body = rows.map((row) => `<tr>${keys.map((k) => `<td>${escapeHtml(row[k] ?? 0)}</td>`).join('')}</tr>`).join('');
-  return el(`
-    <div ${dataAttr}>
+  const renderInner = () => {
+    const visibleRows = expanded ? rows : rows.slice(0, limit);
+    // Rows come straight from the shared Supabase leaderboard views - any
+    // player's own chosen display_name ends up here, so it must be
+    // escaped like any other untrusted input before going into innerHTML
+    // (see escapeHtml's comment above).
+    const body = visibleRows.map((row) => `<tr>${keys.map((k) => `<td>${escapeHtml(row[k] ?? 0)}</td>`).join('')}</tr>`).join('');
+    const toggle = rows.length > limit
+      ? `<p class="score-toggle"><button type="button" class="btn-link" data-toggle>${expanded ? t('showLessLink') : t('showMoreLink')}</button></p>`
+      : '';
+    wrap.innerHTML = `
       <table class="score-table">
         <thead><tr>${header}</tr></thead>
         <tbody>${body}</tbody>
       </table>
-    </div>
-  `);
+      ${toggle}
+    `;
+    const toggleBtn = wrap.querySelector('[data-toggle]');
+    if (toggleBtn) toggleBtn.addEventListener('click', () => { expanded = !expanded; renderInner(); });
+  };
+  renderInner();
+  return wrap;
 }
 
 // ---------------------------------------------------------------------
