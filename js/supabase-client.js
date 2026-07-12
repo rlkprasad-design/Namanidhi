@@ -30,15 +30,22 @@ async function getClient() {
   return clientPromise;
 }
 
-// Finds a player row by display name, creating one if needed. `knownPlayerId`
-// is this device's already-saved player id (if any) - when the found row's id
-// matches it, the name belongs to the device asking for it, so it's a normal
-// resume rather than a conflict.
+// Finds a player row by display name, creating one if needed, and always
+// resumes it - there's no login here (see schema.sql's RLS comment: a
+// permissive, trust-based family/community tally, not authenticated data),
+// so there is no way to actually verify "is this device's owner the same
+// person who first used this name," and a family sharing one device
+// between members (switching names back and forth) is the expected common
+// case, not an edge case. Blocking a name as "already taken" used to lock
+// a returning player out of their own name the moment any other name was
+// used on the same device in between - resuming unconditionally fixes that
+// while costing only the rarer, lower-stakes case of two unrelated people
+// independently picking an identical display name.
 //
 // Returns { id, status } where status is 'ok' (created or resumed),
-// 'taken' (another player already owns this name), 'offline' (backend not
-// reachable), or 'error' (unexpected failure - caller should stay local-only).
-export async function ensurePlayer(name, knownPlayerId = null) {
+// 'offline' (backend not reachable), or 'error' (unexpected failure -
+// caller should stay local-only).
+export async function ensurePlayer(name) {
   const sb = await getClient();
   if (!sb) return { id: null, status: 'offline' };
   try {
@@ -47,12 +54,7 @@ export async function ensurePlayer(name, knownPlayerId = null) {
       .select('id')
       .eq('display_name', name)
       .maybeSingle();
-    if (existing) {
-      if (knownPlayerId && existing.id === knownPlayerId) {
-        return { id: existing.id, status: 'ok' };
-      }
-      return { id: null, status: 'taken' };
-    }
+    if (existing) return { id: existing.id, status: 'ok' };
 
     const { data, error } = await sb
       .from('players')
@@ -60,7 +62,13 @@ export async function ensurePlayer(name, knownPlayerId = null) {
       .select('id')
       .single();
     if (error) {
-      if (error.code === '23505') return { id: null, status: 'taken' }; // unique_violation: lost a race
+      if (error.code === '23505') {
+        // Race: someone else inserted this exact name between our SELECT
+        // and INSERT. Just resume it, same as if we'd looked it up a
+        // moment later.
+        const { data: raced } = await sb.from('players').select('id').eq('display_name', name).maybeSingle();
+        if (raced) return { id: raced.id, status: 'ok' };
+      }
       throw error;
     }
     return { id: data.id, status: 'ok' };

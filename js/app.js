@@ -192,11 +192,9 @@ async function continueBoot() {
     return;
   }
   if (!state.playerId && syncsToBackend()) {
-    // Boot-time resume: if the saved name now conflicts with someone else's
-    // (e.g. two devices settled on the same name before this device ever
-    // synced), just stay local-only for this session rather than blocking
-    // the app - the player can pick a distinct name via "మార్చు"/"Change" later.
-    const result = await ensurePlayer(state.playerName, state.playerId);
+    // Boot-time resume: pick up (or create) this device's saved name's
+    // player id if it isn't already known locally.
+    const result = await ensurePlayer(state.playerName);
     if (result.id) {
       state.playerId = result.id;
       setPlayerId(result.id);
@@ -233,7 +231,6 @@ function showNameGate() {
       <p class="tagline">${t('appTagline')}</p>
       <p>${t('nameGatePrompt')}</p>
       <input type="text" class="text-input" maxlength="40" placeholder="${t('namePlaceholder')}" data-name-input />
-      <p class="field-error" data-name-error style="display:none;"></p>
       <div class="btn-row">
         <button type="button" class="btn btn-primary" data-begin>${t('beginBtn')}</button>
       </div>
@@ -241,27 +238,15 @@ function showNameGate() {
   `);
   screen.prepend(languageToggle(showNameGate));
   const input = screen.querySelector('[data-name-input]');
-  const errorEl = screen.querySelector('[data-name-error]');
   const beginBtn = screen.querySelector('[data-begin]');
   if (state.playerName) input.value = state.playerName;
   const submit = async () => {
     const name = input.value.trim();
     if (!name) { input.focus(); return; }
-    errorEl.style.display = 'none';
     beginBtn.disabled = true;
     let playerId = null;
     if (syncsToBackend()) {
-      // Only carry over this device's own player id if the name is unchanged -
-      // otherwise a brand-new name must not silently inherit someone else's id.
-      const knownPlayerId = name === state.playerName ? state.playerId : null;
-      const result = await ensurePlayer(name, knownPlayerId);
-      if (result.status === 'taken') {
-        errorEl.textContent = t('nameTakenError');
-        errorEl.style.display = 'block';
-        beginBtn.disabled = false;
-        input.focus();
-        return;
-      }
+      const result = await ensurePlayer(name);
       playerId = result.id;
     }
     setPlayerName(name);
