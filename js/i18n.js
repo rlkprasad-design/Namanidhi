@@ -151,6 +151,8 @@ const STRINGS = {
   colTotalJapamCount: { te: 'మొత్తం జపసంఖ్య', en: 'Total japam count' },
   colDailyAverage: { te: 'రోజువారీ సగటు', en: 'Daily average' },
   noScoresYet: { te: 'ఇంకా స్కోర్లు లేవు.', en: 'No scores yet.' },
+  showMoreLink: { te: 'మరిన్ని చూపు →', en: 'Show more →' },
+  showLessLink: { te: '← తక్కువగా చూపు', en: 'Show less ←' },
   localOnlyNote: {
     te: 'ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.',
     en: 'This is saved only on this device.',
