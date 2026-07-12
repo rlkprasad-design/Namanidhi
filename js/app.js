@@ -10,7 +10,7 @@ import { loadEntryPool, loadLevels, loadStotrams } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
   recordPuzzleProgressLocal, recordJapamLocal,
-  getLocalPuzzleTotals, getLocalJapamTotals,
+  getLocalPuzzleTotals, getLocalJapamTotals, daysElapsedInclusive,
   hasSeenIntro, markIntroSeen,
   getLanguage, setLanguage,
 } from './storage.js';
@@ -1049,7 +1049,16 @@ async function showScoreboard() {
       [t('colName'), `${gemBadge('easy')} ${t('colPearls')}`, `${gemBadge('medium')} ${t('colGems')}`, `${gemBadge('difficult')} ${t('colDiamonds')}`, t('colPuzzlesCompleted')],
       'data-puzzle-board'
     ));
-    japamBoardEl.replaceWith(renderLeaderboardTable(japamRows || [], ['display_name', 'total_count'], [t('colName'), t('colTotalJapamCount')], 'data-japam-board'));
+    const japamRowsWithAverage = (japamRows || []).map((row) => ({
+      ...row,
+      daily_average: row.first_logged_at ? (row.total_count / daysElapsedInclusive(row.first_logged_at)).toFixed(1) : '0.0',
+    }));
+    japamBoardEl.replaceWith(renderLeaderboardTable(
+      japamRowsWithAverage,
+      ['display_name', 'total_count', 'daily_average'],
+      [t('colName'), t('colTotalJapamCount'), t('colDailyAverage')],
+      'data-japam-board'
+    ));
   } else {
     const puzzleTotals = getLocalPuzzleTotals(getLang());
     const japamTotals = getLocalJapamTotals(getLang());
@@ -1063,6 +1072,7 @@ async function showScoreboard() {
       <div data-japam-board>
         <p>${t('localTotalJapam', japamTotals.total)}</p>
         <p>${t('localTodayJapam', japamTotals.today)}</p>
+        <p>${t('localAverageJapam', japamTotals.average)}</p>
         <p class="score-note">${t('localOnlyNote')}</p>
       </div>`;
   }

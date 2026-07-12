@@ -149,6 +149,7 @@ const STRINGS = {
   colDiamonds: { te: 'వజ్రాలు', en: 'Diamonds' },
   colPuzzlesCompleted: { te: 'పూర్తయిన పజిల్స్', en: 'Puzzles completed' },
   colTotalJapamCount: { te: 'మొత్తం జపసంఖ్య', en: 'Total japam count' },
+  colDailyAverage: { te: 'రోజువారీ సగటు', en: 'Daily average' },
   noScoresYet: { te: 'ఇంకా స్కోర్లు లేవు.', en: 'No scores yet.' },
   localOnlyNote: {
     te: 'ఇది ఈ పరికరంలో మాత్రమే భద్రపరచబడింది.',
@@ -157,6 +158,7 @@ const STRINGS = {
   localPuzzlesCompleted: { te: (n) => `పూర్తయిన పజిల్స్: ${n}`, en: (n) => `Puzzles completed: ${n}` },
   localTotalJapam: { te: (n) => `మొత్తం జపసంఖ్య: ${n}`, en: (n) => `Total japam count: ${n}` },
   localTodayJapam: { te: (n) => `ఈ రోజు: ${n}`, en: (n) => `Today: ${n}` },
+  localAverageJapam: { te: (n) => `రోజువారీ సగటు: ${n}`, en: (n) => `Daily average: ${n}` },
 
   gemEasy: { te: 'ముత్యం', en: 'Pearl' },
   gemMedium: { te: 'రత్నం', en: 'Gem' },

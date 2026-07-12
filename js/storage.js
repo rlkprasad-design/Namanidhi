@@ -87,13 +87,28 @@ export function getLocalPuzzleTotals(lang = 'te') {
   };
 }
 
+// Counts calendar days from `dateStr` through today, inclusive of both
+// ends - a first japam logged earlier today counts as 1 day of practice,
+// not 0, so a same-day average shows the day's real count rather than
+// being undefined or infinite.
+export function daysElapsedInclusive(dateStr) {
+  const start = new Date(dateStr);
+  const startDay = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  const today = new Date();
+  const todayDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+  return Math.round((todayDay - startDay) / 86400000) + 1;
+}
+
 export function getLocalJapamTotals(lang = 'te') {
   const list = readLog(japamLogKey(lang));
   const today = new Date().toDateString();
+  const total = list.reduce((sum, e) => sum + (e.count || 0), 0);
+  const firstOccurredAt = list.reduce((min, e) => (!min || e.occurred_at < min ? e.occurred_at : min), null);
   return {
-    total: list.reduce((sum, e) => sum + (e.count || 0), 0),
+    total,
     today: list
       .filter((e) => new Date(e.occurred_at).toDateString() === today)
       .reduce((sum, e) => sum + (e.count || 0), 0),
+    average: firstOccurredAt ? (total / daysElapsedInclusive(firstOccurredAt)).toFixed(1) : '0.0',
   };
 }
