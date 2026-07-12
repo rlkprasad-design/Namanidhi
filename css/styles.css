@@ -56,6 +56,23 @@ h1, h2, h3, .display {
   opacity: 1;
 }
 
+.global-share-row {
+  margin: 10px 0 0;
+  text-align: center;
+}
+.global-share-row a {
+  display: inline-block;
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  opacity: 0.9;
+}
+.global-share-row a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 .top-bar {
   display: flex;
   align-items: center;
