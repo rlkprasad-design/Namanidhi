@@ -41,6 +41,25 @@ function fillerPool() {
   return getLang() === 'en' ? LATIN_POOL : undefined;
 }
 
+// The app's live URL - shared alongside shareMessage from every screen's
+// share link (see setScreen). GitHub Pages serves this repo from here;
+// update if the project ever moves.
+const APP_URL = 'https://rlkprasad-design.github.io/Namanidhi/';
+
+function shareHref() {
+  return `https://wa.me/?text=${encodeURIComponent(`${t('shareMessage')} ${APP_URL}`)}`;
+}
+
+// Prefers the native share sheet (lets a player pick WhatsApp, SMS, email,
+// anything installed) when available; the link itself already points at
+// a WhatsApp Web fallback for browsers without navigator.share (typically
+// desktop), so the href alone still works if this handler never runs.
+function shareApp(e) {
+  if (!navigator.share) return;
+  e.preventDefault();
+  navigator.share({ title: t('appTitle'), text: t('shareMessage'), url: APP_URL }).catch(() => {});
+}
+
 // Both languages sync to the shared family Supabase scoreboard, kept as
 // separate per-language tallies (see language column on puzzle_progress/
 // japam_log and the fetch calls in showScoreboard) rather than merged
@@ -97,15 +116,19 @@ function el(html) {
   return tpl.content.firstElementChild;
 }
 
-// Every screen gets a small feedback-email reminder footer except the
+// Every screen gets a small feedback-email reminder footer (except the
 // Intro/"About this app" screen, which already spells this out in full as
-// part of introPrivacyNote - repeating it there would be redundant.
+// part of introPrivacyNote - repeating it there would be redundant) and a
+// share link, unconditionally on every screen including Intro/About.
 function setScreen(node, { footer = true } = {}) {
   root.innerHTML = '';
   root.appendChild(node);
   if (footer) {
     root.appendChild(el(`<p class="global-feedback-note">${t('feedbackNote')}</p>`));
   }
+  const shareRow = el(`<p class="global-share-row"><a href="${shareHref()}" target="_blank" rel="noopener" data-share>${t('shareBtnLabel')}</a></p>`);
+  shareRow.querySelector('[data-share]').addEventListener('click', shareApp);
+  root.appendChild(shareRow);
   document.documentElement.lang = getLang();
 }
 

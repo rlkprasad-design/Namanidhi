@@ -35,6 +35,14 @@ const STRINGS = {
     te: 'మీ విలువైన అభిప్రాయం, సలహా లేదా సూచనలను దయచేసి <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>కి తెలియజేయండి.',
     en: 'Please share your valuable feedback, advice, or suggestions at <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>.',
   },
+  shareBtnLabel: {
+    te: '↗ మిత్రులతో పంచుకోండి',
+    en: '↗ Share with friends',
+  },
+  shareMessage: {
+    te: 'నామ నిధి - నామాల్లో దాగిన రత్నాలను వెతికే ఒక భక్తి పద పజిల్ ఆట. మీరు కూడా ప్రయత్నించండి!',
+    en: 'Nama Nidhi - a devotional word-search game for finding hidden names. Try it out!',
+  },
   installGuideLink: {
     te: 'యాప్‌గా ఇన్‌స్టాల్ చేసుకోవడం ఎలా? →',
     en: 'How to install this as an app →',
