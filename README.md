@@ -157,6 +157,16 @@ to `japam_leaderboard`, which the Scoreboard screen divides `total_count`
 by the days elapsed since to get the average. A brand-new project already
 has this.
 
+If your project predates the puzzle Scoreboard's sort fix, also run
+`supabase/fix-puzzle-leaderboard-sort.sql` once - `fetchPuzzleLeaderboard`
+used to order rows by `total_entries_found` (a raw find-count that
+includes answers revealed via "Show answer," which earn no gem, and isn't
+even a column the table displays), which could rank a player above
+someone with strictly higher pearls, gems, diamonds, *and* puzzles
+completed - every number the table actually shows. This adds `total_score`
+(pearls+gems+diamonds) as a real column so the client can sort by the
+same metric that's displayed. A brand-new project already has this.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,
