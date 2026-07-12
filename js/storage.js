@@ -109,6 +109,6 @@ export function getLocalJapamTotals(lang = 'te') {
     today: list
       .filter((e) => new Date(e.occurred_at).toDateString() === today)
       .reduce((sum, e) => sum + (e.count || 0), 0),
-    average: firstOccurredAt ? (total / daysElapsedInclusive(firstOccurredAt)).toFixed(1) : '0.0',
+    average: firstOccurredAt ? Math.round(total / daysElapsedInclusive(firstOccurredAt)) : 0,
   };
 }
