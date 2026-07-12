@@ -71,6 +71,13 @@ create policy "anyone can log japam traces"
 -- player only appears on a language's board once they've actually played
 -- in it.
 
+-- total_score is exposed as its own column (not just an ORDER BY
+-- expression) specifically so js/supabase-client.js's fetchPuzzleLeaderboard
+-- can .order() by it explicitly - PostgREST doesn't guarantee it will honor
+-- a view's own internal ORDER BY, so the ranking a player actually sees
+-- must come from a column the client requests by name, not this view's
+-- default order alone.
+
 create or replace view puzzle_leaderboard as
 select
   p.display_name,
@@ -79,11 +86,12 @@ select
   coalesce(sum(pp.pearls_found), 0) as total_pearls,
   coalesce(sum(pp.gems_found), 0) as total_gems,
   coalesce(sum(pp.diamonds_found), 0) as total_diamonds,
-  count(pp.id) as puzzles_completed
+  count(pp.id) as puzzles_completed,
+  coalesce(sum(pp.pearls_found), 0) + coalesce(sum(pp.gems_found), 0) + coalesce(sum(pp.diamonds_found), 0) as total_score
 from players p
 join puzzle_progress pp on pp.player_id = p.id
 group by p.display_name, pp.language
-order by coalesce(sum(pp.pearls_found), 0) + coalesce(sum(pp.gems_found), 0) + coalesce(sum(pp.diamonds_found), 0) desc;
+order by total_score desc;
 
 -- first_logged_at feeds the Scoreboard's daily-average column (total_count
 -- divided by days elapsed since a player's first japam in this language) -

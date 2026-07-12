@@ -79,7 +79,7 @@ const STRINGS = {
   likhitaJapamTitle: { te: 'లిఖిత జపం', en: 'Likhita Japam' },
   likhitaJapamSub: { te: 'నామాన్ని ప్రశాంతంగా రాయండి', en: 'Write a name calmly, one letter at a time' },
   chooseSubModePrompt: { te: 'ఏ పజిల్ ఆడాలనుకుంటున్నారు?', en: 'Which puzzle would you like to play?' },
-  generalModeTitle: { te: 'సాధారణ', en: 'General' },
+  generalModeTitle: { te: 'పురాణాలు', en: 'Puranas' },
   generalModeSub: { te: 'అన్ని నామాల నుండి కలగలిపిన పజిల్', en: 'A mixed puzzle drawn from all names' },
   stotraParikshaTitle: { te: 'స్తోత్ర పరీక్ష', en: 'Stotra Pariksha' },
   stotraParikshaSub: { te: 'మీ అవగాహనను పరీక్షించుకోండి', en: 'Test how well you know a stotram' },

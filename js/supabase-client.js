@@ -102,7 +102,7 @@ export async function fetchPuzzleLeaderboard(lang) {
     .from('puzzle_leaderboard')
     .select('*')
     .eq('language', lang)
-    .order('total_entries_found', { ascending: false });
+    .order('total_score', { ascending: false });
   if (error) {
     console.warn('fetchPuzzleLeaderboard failed:', error);
     return null;
