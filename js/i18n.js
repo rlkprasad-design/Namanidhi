@@ -57,10 +57,6 @@ const STRINGS = {
   appTagline: { te: 'నామాల్లో దాగిన రత్నాలు', en: 'Gems hidden in names' },
   nameGatePrompt: { te: 'ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి', en: 'Enter your name or nickname to play' },
   namePlaceholder: { te: 'మీ పేరు', en: 'Your name' },
-  nameTakenError: {
-    te: 'ఈ పేరు ఇప్పటికే వాడుకలో ఉంది. దయచేసి వేరే పేరు లేదా ఇంటిపేరు జోడించి రాయండి.',
-    en: 'That name is already taken. Please try another name, or add a last name.',
-  },
   beginBtn: { te: 'ప్రారంభించండి', en: 'Start' },
 
   languageLabel: { te: 'భాష', en: 'Language' },
