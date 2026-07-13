@@ -4,83 +4,39 @@
 // strokes), each blob's outer boundary is walked and resampled into evenly
 // spaced dots. The visible canvas draws a ruled-paper baseline plus those
 // dots; dragging a finger/mouse near a dot fills it in.
-//
-// English words render in a cursive font (Dancing Script) with every
-// letter of one word (capitals included) grouped into a single fillText
-// call, so the browser's own text shaping joins the whole word into one
-// continuous ink blob (and so one continuous dot path) instead of a
-// block-letter font's separate per-letter strokes - the finger can flow
-// through the entire word without lifting. Only an actual space - a
-// break between separate words, e.g. "Sri" and "Rama" - starts a new
-// segment with a gap, the same way a pen naturally lifts between words
-// even in cursive handwriting; a capital letter never forces a break on
-// its own. Telugu (and anything else non-Latin) keeps the original
-// block-font, gap-between-every-grapheme behavior unchanged.
 
 import { graphemes } from './segmenter.js';
-import { looksLikeLatin } from './transliterate.js';
 
 const FONT_PX = 170;
-const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between segments
+const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between each letter
 const DOT_SPACING = 12; // px between dots along a stroke's outline
 const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
 export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
-const CURSIVE_FONT = 'Dancing Script';
-const BLOCK_FONT = 'Noto Sans Telugu';
 
 const cache = new Map();
 
 async function ensureFontReady() {
   if (document.fonts && document.fonts.load) {
-    await Promise.all([
-      document.fonts.load(`700 ${FONT_PX}px "${BLOCK_FONT}"`),
-      document.fonts.load(`700 ${FONT_PX}px "${CURSIVE_FONT}"`),
-    ]);
+    await document.fonts.load(`700 ${FONT_PX}px "Noto Sans Telugu"`);
   }
 }
 
 const isSpace = (ch) => /\s/.test(ch);
 
-// Groups graphemes into fillText segments. Non-Latin words (Telugu etc.)
-// get one segment per grapheme, matching the original behavior exactly.
-// Latin words merge every non-space letter of one word - including any
-// capital - into a single segment, rendered together so the cursive
-// font's own connecting strokes join the whole word; only a space
-// starts a new segment.
-function segmentWord(letters, cursive) {
-  if (!cursive) return letters.map((letter) => ({ text: letter, joinable: false }));
-
-  const segments = [];
-  for (const letter of letters) {
-    const canJoin = !isSpace(letter);
-    const last = segments[segments.length - 1];
-    if (canJoin && last && last.joinable) {
-      last.text += letter;
-    } else {
-      segments.push({ text: letter, joinable: canJoin });
-    }
-  }
-  return segments;
-}
-
 function renderInkMask(word) {
-  const cursive = looksLikeLatin(word);
-  const fontFamily = cursive ? CURSIVE_FONT : BLOCK_FONT;
-  const fontShorthand = `700 ${FONT_PX}px "${fontFamily}", sans-serif`;
-  const segments = segmentWord(graphemes(word), cursive);
-
+  const letters = graphemes(word);
   const measure = document.createElement('canvas').getContext('2d');
-  measure.font = fontShorthand;
+  measure.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
 
   let ascent = FONT_PX * 0.8;
   let descent = FONT_PX * 0.25;
   let textWidth = 0;
-  const segmentWidths = segments.map((seg, i) => {
-    const m = measure.measureText(seg.text);
+  const letterWidths = letters.map((letter, i) => {
+    const m = measure.measureText(letter);
     ascent = Math.max(ascent, m.actualBoundingBoxAscent || 0);
     descent = Math.max(descent, m.actualBoundingBoxDescent || 0);
     textWidth += m.width;
-    if (i < segments.length - 1 && !isSpace(seg.text) && !isSpace(segments[i + 1].text)) textWidth += LETTER_GAP;
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) textWidth += LETTER_GAP;
     return m.width;
   });
 
@@ -92,16 +48,16 @@ function renderInkMask(word) {
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  ctx.font = fontShorthand;
+  ctx.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'alphabetic';
 
   const baselineY = padding + ascent;
   let x = padding;
-  segments.forEach((seg, i) => {
-    ctx.fillText(seg.text, x, baselineY);
-    x += segmentWidths[i];
-    if (i < segments.length - 1 && !isSpace(seg.text) && !isSpace(segments[i + 1].text)) x += LETTER_GAP;
+  letters.forEach((letter, i) => {
+    ctx.fillText(letter, x, baselineY);
+    x += letterWidths[i];
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) x += LETTER_GAP;
   });
 
   const { data } = ctx.getImageData(0, 0, width, height);

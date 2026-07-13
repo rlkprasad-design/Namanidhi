@@ -337,20 +337,6 @@ anyway. Keep new English entries uppercase for the same reason - the
 hint panel displays exactly what's in the grid, so this doesn't need any
 code-side transformation, just consistent data.
 
-That ALL-CAPS rule is specific to the word-search grid; Likhita Japam's
-suggested/typed names keep normal casing (`js/app.js`'s `japamNames()`
-still returns "Sri Rama", not "SRI RAMA"), since `js/handwriting.js`
-renders English words in a cursive font (Dancing Script) and uses case to
-decide how letters join. Consecutive lowercase letters are grouped into
-one `fillText` call each, so the browser's own text shaping visually
-connects them into a single ink blob (and so a single continuous dot
-path) - the finger doesn't need to lift between them. An uppercase letter
-always starts its own segment with a gap on each side, so a name's
-capitalized first letter stays visually distinct rather than getting
-dragged into a cursive join it isn't part of. Telugu (anything
-`looksLikeLatin()` says no to) is unaffected - it keeps the original
-block-font, gap-between-every-grapheme rendering.
-
 The English content pool (`data/en/questions.json`, 80 entries) and Rama
 Raksha translation (`data/en/stotrams.json`) are a first-pass starter
 set, smaller than the Telugu pool (300 entries) - same "grows over time,
