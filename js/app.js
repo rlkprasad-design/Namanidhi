@@ -1,6 +1,7 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
   splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL,
+  exportDrawQueues, importDrawQueues,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
@@ -13,6 +14,8 @@ import {
   getLocalPuzzleTotals, getLocalJapamTotals, daysElapsedInclusive,
   hasSeenIntro, markIntroSeen,
   getLanguage, setLanguage,
+  getPersistedDrawQueues, setPersistedDrawQueues,
+  getPersistedStotramDrawQueues, setPersistedStotramDrawQueues,
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
@@ -177,6 +180,10 @@ function languageToggle(onSwitch) {
 
 async function boot() {
   setLang(getLanguage());
+  importDrawQueues(getPersistedDrawQueues());
+  for (const [key, entries] of Object.entries(getPersistedStotramDrawQueues())) {
+    stotramDrawQueues.set(key, entries);
+  }
   if (!hasSeenIntro()) {
     showIntro(() => { markIntroSeen(); continueBoot(); });
     return;
@@ -401,7 +408,8 @@ async function startNamaGuptaNidhi() {
 function buildSession(level, pool) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang()).puzzlesCompleted;
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
-  const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted);
+  const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted, getLang());
+  setPersistedDrawQueues(exportDrawQueues());
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -672,7 +680,9 @@ function shuffleLocal(arr) {
 // currently-eligible words before topping it back up. Keyed per language
 // too (stotram.id is shared across data/stotrams.json and
 // data/en/stotrams.json), so switching languages doesn't corrupt either
-// queue with the other's words.
+// queue with the other's words. Hydrated from and persisted to
+// localStorage (see boot() and drawStotramRound's last line) so a word
+// can't resurface right after a page reload either.
 const stotramDrawQueues = new Map();
 
 function drawStotramRound(stotram, gridSize, weights) {
@@ -695,6 +705,7 @@ function drawStotramRound(stotram, gridSize, weights) {
     drawn.push(...queue.slice(0, count));
     stotramDrawQueues.set(key, queue.slice(count));
   }
+  setPersistedStotramDrawQueues(Object.fromEntries(stotramDrawQueues));
   return drawn;
 }
 

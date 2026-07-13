@@ -13,6 +13,8 @@ const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';
 const INTRO_SEEN_KEY = 'namanidhi.introSeen';
 const LANGUAGE_KEY = 'namanidhi.language';
+const DRAW_QUEUES_KEY = 'namanidhi.drawQueues';
+const STOTRAM_DRAW_QUEUES_KEY = 'namanidhi.stotramDrawQueues';
 
 function puzzleLogKey(lang) {
   return lang === 'te' ? 'namanidhi.puzzleLog' : `namanidhi.puzzleLog.${lang}`;
@@ -52,6 +54,37 @@ export function getPlayerId() {
 
 export function setPlayerId(id) {
   if (id) localStorage.setItem(PLAYER_ID_KEY, id);
+}
+
+// The per-difficulty "shuffle then cycle through every word before
+// repeating" draw queues (see grid.js/app.js) used to live only in memory,
+// so a word that had just been shown could resurface right after any page
+// reload - closing the tab, the phone locking, etc. - which is normal,
+// frequent behavior for casual daily play, not an edge case. Persisting
+// them here makes the "no repeat until the tier fully cycles" guarantee
+// hold across reloads too, not just within one continuous session.
+function readJson(key) {
+  try {
+    return JSON.parse(localStorage.getItem(key) || '{}');
+  } catch {
+    return {};
+  }
+}
+
+export function getPersistedDrawQueues() {
+  return readJson(DRAW_QUEUES_KEY);
+}
+
+export function setPersistedDrawQueues(queues) {
+  localStorage.setItem(DRAW_QUEUES_KEY, JSON.stringify(queues));
+}
+
+export function getPersistedStotramDrawQueues() {
+  return readJson(STOTRAM_DRAW_QUEUES_KEY);
+}
+
+export function setPersistedStotramDrawQueues(queues) {
+  localStorage.setItem(STOTRAM_DRAW_QUEUES_KEY, JSON.stringify(queues));
 }
 
 function readLog(key) {
