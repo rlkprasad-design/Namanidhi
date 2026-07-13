@@ -40,12 +40,25 @@ export function entryCountForGridSize(gridSize) {
   return Math.max(2, Math.round(gridSize * 0.7));
 }
 
-// Per-difficulty draw queues, so puzzles cycle through every eligible word
-// once before any word repeats - independent random draws each time would
-// still be "random" but would frequently repeat words by chance, especially
-// for small pools (e.g. drawing 6 of 9 "difficult" words twice in a row
-// shares ~4 words on average). Reset on page reload.
+// Per-language-per-difficulty draw queues, so puzzles cycle through every
+// eligible word once before any word repeats - independent random draws
+// each time would still be "random" but would frequently repeat words by
+// chance, especially for small pools (e.g. drawing 6 of 9 "difficult"
+// words twice in a row shares ~4 words on average). Keyed per language too
+// (mirroring app.js's stotramDrawQueues), so switching languages doesn't
+// corrupt either queue with the other's words. exportDrawQueues/
+// importDrawQueues let app.js persist this to localStorage so the "no
+// repeat until the tier cycles" guarantee survives a page reload too, not
+// just one continuous session - see storage.js's getPersistedDrawQueues.
 const drawQueues = new Map();
+
+export function exportDrawQueues() {
+  return Object.fromEntries(drawQueues);
+}
+
+export function importDrawQueues(queues) {
+  for (const [key, entries] of Object.entries(queues || {})) drawQueues.set(key, entries);
+}
 
 function refillQueue(queue, eligible, count) {
   while (queue.length < count) {
@@ -114,7 +127,7 @@ export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
 // tier is still drawn from its own shuffled rotation queue, trimmed to
 // whatever's eligible at the rolled size before topping back up, so
 // nothing repeats until that tier cycles.
-export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity) {
+export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity, lang = 'te') {
   const cappedMax = gridSizeCapForExperience(puzzlesCompleted, level.gridSizeMin, level.gridSizeMax);
   const gridSize = randomInt(level.gridSizeMin, cappedMax);
   const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
@@ -125,12 +138,13 @@ export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesC
     if (!eligible.length) continue;
 
     const eligibleWords = new Set(eligible.map((e) => e.word));
-    const trimmedQueue = (drawQueues.get(difficulty) || []).filter((e) => eligibleWords.has(e.word));
+    const key = `${lang}::${difficulty}`;
+    const trimmedQueue = (drawQueues.get(key) || []).filter((e) => eligibleWords.has(e.word));
     const count = Math.min(targetCounts[difficulty], eligible.length);
 
     const queue = refillQueue(trimmedQueue, eligible, count);
     entries.push(...queue.slice(0, count));
-    drawQueues.set(difficulty, queue.slice(count));
+    drawQueues.set(key, queue.slice(count));
   }
   return { gridSize, entries };
 }
