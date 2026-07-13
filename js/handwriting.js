@@ -5,17 +5,17 @@
 // spaced dots. The visible canvas draws a ruled-paper baseline plus those
 // dots; dragging a finger/mouse near a dot fills it in.
 //
-// English words render in a cursive font (Dancing Script) with runs of
-// lowercase letters grouped into a single fillText call each, so the
-// browser's own text shaping joins them into one continuous ink blob (and
-// so one continuous dot path) instead of a block-letter font's separate
-// per-letter strokes - the finger can flow from letter to letter without
-// lifting. An uppercase letter (a "genuine capital," per how English
-// content is written here - see data/en/*.json's ALL-CAPS puzzle words
-// vs. Likhita Japam's normally-cased suggested/typed names) stays its own
-// segment with a gap on each side, so it doesn't get dragged into a join
-// it isn't part of. Telugu (and anything else non-Latin) keeps the
-// original block-font, gap-between-every-letter behavior unchanged.
+// English words render in a cursive font (Dancing Script) with every
+// letter of one word (capitals included) grouped into a single fillText
+// call, so the browser's own text shaping joins the whole word into one
+// continuous ink blob (and so one continuous dot path) instead of a
+// block-letter font's separate per-letter strokes - the finger can flow
+// through the entire word without lifting. Only an actual space - a
+// break between separate words, e.g. "Sri" and "Rama" - starts a new
+// segment with a gap, the same way a pen naturally lifts between words
+// even in cursive handwriting; a capital letter never forces a break on
+// its own. Telugu (and anything else non-Latin) keeps the original
+// block-font, gap-between-every-grapheme behavior unchanged.
 
 import { graphemes } from './segmenter.js';
 import { looksLikeLatin } from './transliterate.js';
@@ -40,19 +40,19 @@ async function ensureFontReady() {
 }
 
 const isSpace = (ch) => /\s/.test(ch);
-const isUpperLetter = (ch) => ch !== ch.toLowerCase() && ch === ch.toUpperCase();
 
 // Groups graphemes into fillText segments. Non-Latin words (Telugu etc.)
 // get one segment per grapheme, matching the original behavior exactly.
-// Latin words merge consecutive lowercase letters into a single segment
-// (rendered together so the cursive font's own connecting strokes join
-// them); a space or an uppercase letter always starts its own segment.
+// Latin words merge every non-space letter of one word - including any
+// capital - into a single segment, rendered together so the cursive
+// font's own connecting strokes join the whole word; only a space
+// starts a new segment.
 function segmentWord(letters, cursive) {
   if (!cursive) return letters.map((letter) => ({ text: letter, joinable: false }));
 
   const segments = [];
   for (const letter of letters) {
-    const canJoin = !isSpace(letter) && !isUpperLetter(letter);
+    const canJoin = !isSpace(letter);
     const last = segments[segments.length - 1];
     if (canJoin && last && last.joinable) {
       last.text += letter;
