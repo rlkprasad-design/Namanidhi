@@ -4,39 +4,83 @@
 // strokes), each blob's outer boundary is walked and resampled into evenly
 // spaced dots. The visible canvas draws a ruled-paper baseline plus those
 // dots; dragging a finger/mouse near a dot fills it in.
+//
+// English words render in a cursive font (Dancing Script) with runs of
+// lowercase letters grouped into a single fillText call each, so the
+// browser's own text shaping joins them into one continuous ink blob (and
+// so one continuous dot path) instead of a block-letter font's separate
+// per-letter strokes - the finger can flow from letter to letter without
+// lifting. An uppercase letter (a "genuine capital," per how English
+// content is written here - see data/en/*.json's ALL-CAPS puzzle words
+// vs. Likhita Japam's normally-cased suggested/typed names) stays its own
+// segment with a gap on each side, so it doesn't get dragged into a join
+// it isn't part of. Telugu (and anything else non-Latin) keeps the
+// original block-font, gap-between-every-letter behavior unchanged.
 
 import { graphemes } from './segmenter.js';
+import { looksLikeLatin } from './transliterate.js';
 
 const FONT_PX = 170;
-const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between each letter
+const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between segments
 const DOT_SPACING = 12; // px between dots along a stroke's outline
 const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
 export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
+const CURSIVE_FONT = 'Dancing Script';
+const BLOCK_FONT = 'Noto Sans Telugu';
 
 const cache = new Map();
 
 async function ensureFontReady() {
   if (document.fonts && document.fonts.load) {
-    await document.fonts.load(`700 ${FONT_PX}px "Noto Sans Telugu"`);
+    await Promise.all([
+      document.fonts.load(`700 ${FONT_PX}px "${BLOCK_FONT}"`),
+      document.fonts.load(`700 ${FONT_PX}px "${CURSIVE_FONT}"`),
+    ]);
   }
 }
 
 const isSpace = (ch) => /\s/.test(ch);
+const isUpperLetter = (ch) => ch !== ch.toLowerCase() && ch === ch.toUpperCase();
+
+// Groups graphemes into fillText segments. Non-Latin words (Telugu etc.)
+// get one segment per grapheme, matching the original behavior exactly.
+// Latin words merge consecutive lowercase letters into a single segment
+// (rendered together so the cursive font's own connecting strokes join
+// them); a space or an uppercase letter always starts its own segment.
+function segmentWord(letters, cursive) {
+  if (!cursive) return letters.map((letter) => ({ text: letter, joinable: false }));
+
+  const segments = [];
+  for (const letter of letters) {
+    const canJoin = !isSpace(letter) && !isUpperLetter(letter);
+    const last = segments[segments.length - 1];
+    if (canJoin && last && last.joinable) {
+      last.text += letter;
+    } else {
+      segments.push({ text: letter, joinable: canJoin });
+    }
+  }
+  return segments;
+}
 
 function renderInkMask(word) {
-  const letters = graphemes(word);
+  const cursive = looksLikeLatin(word);
+  const fontFamily = cursive ? CURSIVE_FONT : BLOCK_FONT;
+  const fontShorthand = `700 ${FONT_PX}px "${fontFamily}", sans-serif`;
+  const segments = segmentWord(graphemes(word), cursive);
+
   const measure = document.createElement('canvas').getContext('2d');
-  measure.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
+  measure.font = fontShorthand;
 
   let ascent = FONT_PX * 0.8;
   let descent = FONT_PX * 0.25;
   let textWidth = 0;
-  const letterWidths = letters.map((letter, i) => {
-    const m = measure.measureText(letter);
+  const segmentWidths = segments.map((seg, i) => {
+    const m = measure.measureText(seg.text);
     ascent = Math.max(ascent, m.actualBoundingBoxAscent || 0);
     descent = Math.max(descent, m.actualBoundingBoxDescent || 0);
     textWidth += m.width;
-    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) textWidth += LETTER_GAP;
+    if (i < segments.length - 1 && !isSpace(seg.text) && !isSpace(segments[i + 1].text)) textWidth += LETTER_GAP;
     return m.width;
   });
 
@@ -48,16 +92,16 @@ function renderInkMask(word) {
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  ctx.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
+  ctx.font = fontShorthand;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'alphabetic';
 
   const baselineY = padding + ascent;
   let x = padding;
-  letters.forEach((letter, i) => {
-    ctx.fillText(letter, x, baselineY);
-    x += letterWidths[i];
-    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) x += LETTER_GAP;
+  segments.forEach((seg, i) => {
+    ctx.fillText(seg.text, x, baselineY);
+    x += segmentWidths[i];
+    if (i < segments.length - 1 && !isSpace(seg.text) && !isSpace(segments[i + 1].text)) x += LETTER_GAP;
   });
 
   const { data } = ctx.getImageData(0, 0, width, height);
