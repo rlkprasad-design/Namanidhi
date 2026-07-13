@@ -16,6 +16,7 @@ import {
   getLanguage, setLanguage,
   getPersistedDrawQueues, setPersistedDrawQueues,
   getPersistedStotramDrawQueues, setPersistedStotramDrawQueues,
+  migrateLegacyDataOnce,
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
@@ -180,15 +181,24 @@ function languageToggle(onSwitch) {
 
 async function boot() {
   setLang(getLanguage());
-  importDrawQueues(getPersistedDrawQueues());
-  for (const [key, entries] of Object.entries(getPersistedStotramDrawQueues())) {
-    stotramDrawQueues.set(key, entries);
-  }
+  migrateLegacyDataOnce();
   if (!hasSeenIntro()) {
     showIntro(() => { markIntroSeen(); continueBoot(); });
     return;
   }
   continueBoot();
+}
+
+// Loads the currently-active player's own draw queues into the shared
+// in-memory Maps - called whenever state.playerName is established or
+// changes (here, and in showNameGate's finish()), never once at boot,
+// since a shared device switching names mid-session needs each switch to
+// swap in that player's own queues, not just the very first one.
+function loadDrawQueuesForCurrentPlayer() {
+  importDrawQueues(getPersistedDrawQueues(state.playerName));
+  for (const [key, entries] of Object.entries(getPersistedStotramDrawQueues(state.playerName))) {
+    stotramDrawQueues.set(key, entries);
+  }
 }
 
 async function continueBoot() {
@@ -198,6 +208,7 @@ async function continueBoot() {
     showNameGate();
     return;
   }
+  loadDrawQueuesForCurrentPlayer();
   if (!state.playerId && syncsToBackend()) {
     // Boot-time resume: pick up (or create) this device's saved name's
     // player id if it isn't already known locally.
@@ -256,6 +267,7 @@ function showNameGate() {
     state.playerName = name;
     state.playerId = playerId;
     setPlayerId(playerId);
+    loadDrawQueuesForCurrentPlayer();
     showHome();
   };
 
@@ -406,10 +418,10 @@ async function startNamaGuptaNidhi() {
 }
 
 function buildSession(level, pool) {
-  const puzzlesCompleted = getLocalPuzzleTotals(getLang()).puzzlesCompleted;
+  const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
   const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted, getLang());
-  setPersistedDrawQueues(exportDrawQueues());
+  setPersistedDrawQueues(exportDrawQueues(), state.playerName);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -591,7 +603,7 @@ function recordLevelProgress(session) {
     diamonds_found: gemCounts.difficult,
     language: getLang(),
   };
-  recordPuzzleProgressLocal(progress, getLang());
+  recordPuzzleProgressLocal(progress, getLang(), state.playerName);
   if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
 }
 
@@ -705,12 +717,12 @@ function drawStotramRound(stotram, gridSize, weights) {
     drawn.push(...queue.slice(0, count));
     stotramDrawQueues.set(key, queue.slice(count));
   }
-  setPersistedStotramDrawQueues(Object.fromEntries(stotramDrawQueues));
+  setPersistedStotramDrawQueues(Object.fromEntries(stotramDrawQueues), state.playerName);
   return drawn;
 }
 
 function buildStotramSession(stotram) {
-  const puzzlesCompleted = getLocalPuzzleTotals(getLang()).puzzlesCompleted;
+  const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
   const gridSize = randomInt(stotram.gridSizeMin, gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax));
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
   const entries = drawStotramRound(stotram, gridSize, weights);
@@ -864,7 +876,7 @@ function recordStotramProgress(session) {
     diamonds_found: gemCounts.difficult,
     language: getLang(),
   };
-  recordPuzzleProgressLocal(progress, getLang());
+  recordPuzzleProgressLocal(progress, getLang(), state.playerName);
   if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
 }
 
@@ -1010,7 +1022,7 @@ function onJapamSuccess(session) {
     session_type: session.mode === 'interlude' ? 'interlude' : 'standalone',
     language: getLang(),
   };
-  recordJapamLocal(entry, getLang());
+  recordJapamLocal(entry, getLang(), state.playerName);
   if (state.playerId && syncsToBackend()) syncJapamLog(state.playerId, entry);
 
   if (session.mode === 'interlude' && session.count >= session.target) {
@@ -1096,8 +1108,8 @@ async function showScoreboard() {
       'data-japam-board'
     ));
   } else {
-    const puzzleTotals = getLocalPuzzleTotals(getLang());
-    const japamTotals = getLocalJapamTotals(getLang());
+    const puzzleTotals = getLocalPuzzleTotals(getLang(), state.playerName);
+    const japamTotals = getLocalJapamTotals(getLang(), state.playerName);
     puzzleBoardEl.outerHTML = `
       <div data-puzzle-board>
         <p>${gemBadge('easy')} ${t('colPearls')}: <strong>${puzzleTotals.pearls}</strong> &nbsp;·&nbsp; ${gemBadge('medium')} ${t('colGems')}: <strong>${puzzleTotals.gems}</strong> &nbsp;·&nbsp; ${gemBadge('difficult')} ${t('colDiamonds')}: <strong>${puzzleTotals.diamonds}</strong></p>
