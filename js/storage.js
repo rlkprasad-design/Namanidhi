@@ -2,12 +2,19 @@
 // local fallback tally so the app still works fully offline / before a
 // Supabase project is configured.
 //
-// Puzzle/Japam logs are namespaced per language (see LANGUAGE_KEY) so
-// switching languages can't mix or lose either language's local tally.
-// This is also the fallback used before a Supabase backend is configured
-// (or while offline) - once configured, both languages sync to the
-// shared scoreboard too (see syncsToBackend in app.js), each kept as its
-// own per-language tally there as well.
+// Puzzle/Japam logs and draw queues are namespaced per language (see
+// LANGUAGE_KEY) AND per player name, so a shared family device switching
+// names via "మార్చు"/"Change" gives each person their own independent
+// difficulty ramp, draw-queue cycling, and local scoreboard totals -
+// without the per-player split, one person's play history would leak
+// into whoever switches to a different name next, and a "fresh" second
+// player would inherit the first player's experience level instead of
+// starting at the easy end themselves. This is also the fallback used
+// before a Supabase backend is configured (or while offline) - once
+// configured, both languages sync to the shared scoreboard too (see
+// syncsToBackend in app.js), each kept as its own per-language,
+// per-player tally there as well (Supabase's is keyed by player_id, not
+// name, so it was never subject to this device-sharing bug).
 
 const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';
@@ -15,13 +22,47 @@ const INTRO_SEEN_KEY = 'namanidhi.introSeen';
 const LANGUAGE_KEY = 'namanidhi.language';
 const DRAW_QUEUES_KEY = 'namanidhi.drawQueues';
 const STOTRAM_DRAW_QUEUES_KEY = 'namanidhi.stotramDrawQueues';
+const LEGACY_MIGRATED_KEY = 'namanidhi.legacyDataMigrated';
 
-function puzzleLogKey(lang) {
-  return lang === 'te' ? 'namanidhi.puzzleLog' : `namanidhi.puzzleLog.${lang}`;
+function playerScopedKey(baseKey, playerName) {
+  return `${baseKey}.${playerName || '_default'}`;
 }
 
-function japamLogKey(lang) {
-  return lang === 'te' ? 'namanidhi.japamLog' : `namanidhi.japamLog.${lang}`;
+function puzzleLogKey(lang, playerName) {
+  const base = lang === 'te' ? 'namanidhi.puzzleLog' : `namanidhi.puzzleLog.${lang}`;
+  return playerScopedKey(base, playerName);
+}
+
+function japamLogKey(lang, playerName) {
+  const base = lang === 'te' ? 'namanidhi.japamLog' : `namanidhi.japamLog.${lang}`;
+  return playerScopedKey(base, playerName);
+}
+
+// One-time migration for devices that had data saved before per-player
+// scoping existed: copies each older, unscoped key's data onto whoever is
+// the CURRENTLY active player name at the moment this runs (call once,
+// early at boot) - never lazily on every read, since that would make
+// every subsequently-added new name on the device also inherit the
+// original player's history instead of starting its own clean record.
+// Safe to call on every boot; does nothing once the flag is set.
+export function migrateLegacyDataOnce() {
+  if (localStorage.getItem(LEGACY_MIGRATED_KEY) === '1') return;
+  const currentPlayer = localStorage.getItem(PLAYER_NAME_KEY);
+  if (currentPlayer) {
+    const legacyKeys = [
+      'namanidhi.puzzleLog', 'namanidhi.puzzleLog.en',
+      'namanidhi.japamLog', 'namanidhi.japamLog.en',
+      DRAW_QUEUES_KEY, STOTRAM_DRAW_QUEUES_KEY,
+    ];
+    for (const legacyKey of legacyKeys) {
+      const legacy = localStorage.getItem(legacyKey);
+      const scoped = playerScopedKey(legacyKey, currentPlayer);
+      if (legacy !== null && localStorage.getItem(scoped) === null) {
+        localStorage.setItem(scoped, legacy);
+      }
+    }
+  }
+  localStorage.setItem(LEGACY_MIGRATED_KEY, '1');
 }
 
 export function hasSeenIntro() {
@@ -71,20 +112,20 @@ function readJson(key) {
   }
 }
 
-export function getPersistedDrawQueues() {
-  return readJson(DRAW_QUEUES_KEY);
+export function getPersistedDrawQueues(playerName) {
+  return readJson(playerScopedKey(DRAW_QUEUES_KEY, playerName));
 }
 
-export function setPersistedDrawQueues(queues) {
-  localStorage.setItem(DRAW_QUEUES_KEY, JSON.stringify(queues));
+export function setPersistedDrawQueues(queues, playerName) {
+  localStorage.setItem(playerScopedKey(DRAW_QUEUES_KEY, playerName), JSON.stringify(queues));
 }
 
-export function getPersistedStotramDrawQueues() {
-  return readJson(STOTRAM_DRAW_QUEUES_KEY);
+export function getPersistedStotramDrawQueues(playerName) {
+  return readJson(playerScopedKey(STOTRAM_DRAW_QUEUES_KEY, playerName));
 }
 
-export function setPersistedStotramDrawQueues(queues) {
-  localStorage.setItem(STOTRAM_DRAW_QUEUES_KEY, JSON.stringify(queues));
+export function setPersistedStotramDrawQueues(queues, playerName) {
+  localStorage.setItem(playerScopedKey(STOTRAM_DRAW_QUEUES_KEY, playerName), JSON.stringify(queues));
 }
 
 function readLog(key) {
@@ -101,16 +142,16 @@ function appendLog(key, entry) {
   localStorage.setItem(key, JSON.stringify(list));
 }
 
-export function recordPuzzleProgressLocal(entry, lang = 'te') {
-  appendLog(puzzleLogKey(lang), { ...entry, completed_at: new Date().toISOString() });
+export function recordPuzzleProgressLocal(entry, lang = 'te', playerName) {
+  appendLog(puzzleLogKey(lang, playerName), { ...entry, completed_at: new Date().toISOString() });
 }
 
-export function recordJapamLocal(entry, lang = 'te') {
-  appendLog(japamLogKey(lang), { ...entry, occurred_at: new Date().toISOString() });
+export function recordJapamLocal(entry, lang = 'te', playerName) {
+  appendLog(japamLogKey(lang, playerName), { ...entry, occurred_at: new Date().toISOString() });
 }
 
-export function getLocalPuzzleTotals(lang = 'te') {
-  const list = readLog(puzzleLogKey(lang));
+export function getLocalPuzzleTotals(lang = 'te', playerName) {
+  const list = readLog(puzzleLogKey(lang, playerName));
   return {
     entriesFound: list.reduce((sum, e) => sum + (e.entries_found || 0), 0),
     pearls: list.reduce((sum, e) => sum + (e.pearls_found || 0), 0),
@@ -132,8 +173,8 @@ export function daysElapsedInclusive(dateStr) {
   return Math.round((todayDay - startDay) / 86400000) + 1;
 }
 
-export function getLocalJapamTotals(lang = 'te') {
-  const list = readLog(japamLogKey(lang));
+export function getLocalJapamTotals(lang = 'te', playerName) {
+  const list = readLog(japamLogKey(lang, playerName));
   const today = new Date().toDateString();
   const total = list.reduce((sum, e) => sum + (e.count || 0), 0);
   const firstOccurredAt = list.reduce((min, e) => (!min || e.occurred_at < min ? e.occurred_at : min), null);
