@@ -920,12 +920,6 @@
       "source": "karthikeya"
     },
     {
-      "word": "కుమారస్వామి",
-      "meaning": "తారకాసురుని సంహరించినవాడు",
-      "difficulty": "difficult",
-      "source": "karthikeya"
-    },
-    {
       "word": "మయూరవాహనుడు",
       "meaning": "నెమలిని వాహనముగా గలవాడు",
       "difficulty": "medium",
@@ -1075,7 +1069,7 @@
       "difficulty": "medium",
       "source": "ramayana"
     },
-        {
+    {
       "word": "కుంభుడు",
       "meaning": "కుంభకర్ణుని కుమారుడు, రాక్షస యోధుడు",
       "difficulty": "medium",
@@ -1183,7 +1177,6 @@
       "difficulty": "medium",
       "source": "ramayana"
     },
-    
     {
       "word": "ఉత్తంకుడు",
       "meaning": "వ్యాస శిష్యుడు, కృష్ణుని విశ్వరూపం చూసిన మహర్షి",
@@ -1400,7 +1393,7 @@
       "difficulty": "medium",
       "source": "bhagavatam"
     },
-        {
+    {
       "word": "వృషభానుడు",
       "meaning": "రాధ తండ్రి",
       "difficulty": "medium",
@@ -1687,6 +1680,762 @@
       "meaning": "దేవతల తల్లి, కశ్యప ప్రజాపతి భార్య",
       "difficulty": "easy",
       "source": "purana"
+    },
+    {
+      "word": "అహల్యాశాపవిమోచనం",
+      "meaning": "రాముని పాదధూళిచే అహల్య శిలారూపం నుండి విముక్తి పొందిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సీతాస్వయంవరం",
+      "meaning": "శివధనుర్భంగము ద్వారా రాముడు సీతను వివాహమాడిన ఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "కైకేయివరములు",
+      "meaning": "కైకేయి కోరిన రెండు వరాల వల్ల రాముడు వనవాసానికి వెళ్ళిన ఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "స్వర్ణమృగప్రలోభం",
+      "meaning": "మారీచుడు బంగారు జింకగా మారి సీతను ప్రలోభపెట్టిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సీతాపహరణం",
+      "meaning": "రావణుడు సీతను అపహరించిన ఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "జటాయువధ",
+      "meaning": "సీతను కాపాడబోయి రావణుని చేతిలో జటాయువు మరణించిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "లంకాదహనం",
+      "meaning": "సీతను వెతుకుతూ హనుమంతుడు లంకను దహించిన ఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "సేతునిర్మాణం",
+      "meaning": "రాముడు లంకకు వారధి కట్టిన ఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "కుంభకర్ణవధ",
+      "meaning": "రామునిచే కుంభకర్ణుడు వధించబడిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "రావణవధ",
+      "meaning": "రాముడు రావణుని సంహరించిన అంతిమ యుద్ధఘటన",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "అగ్నిపరీక్ష",
+      "meaning": "సీత తన పాతివ్రత్యాన్ని నిరూపించుకొనుటకు అగ్నిలో ప్రవేశించిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సీతాపరిత్యాగం",
+      "meaning": "లోకాపవాదు కారణంగా రాముడు సీతను అడవికి పంపిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "శబరిఎంగిలిపండ్లు",
+      "meaning": "శబరి భక్తితో ఇచ్చిన ఎంగిలి పండ్లను రాముడు ప్రేమతో స్వీకరించిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "వాలివధ",
+      "meaning": "రాముడు దాగి ఉండి వాలిని వధించిన వివాదాస్పద ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ద్రౌపదీవస్త్రాపహరణం",
+      "meaning": "దుశ్శాసనుడు అవమానపరచబోగా కృష్ణుడు ద్రౌపదికి అక్షయవస్త్రాలొసగిన ఘటన",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "లక్కఇల్లు",
+      "meaning": "దుర్యోధనుడు పాండవులను చంపడానికి కట్టించిన కుట్రపూరిత గృహం",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "అరణ్యవాసం",
+      "meaning": "జూదంలో ఓడిన పాండవులు పన్నెండేళ్ళు అడవిలో గడిపిన కాలం",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "అజ్ఞాతవాసం",
+      "meaning": "పాండవులు విరాట రాజ్యంలో మారువేషాలలో ఏడాది గడిపిన కాలం",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "భగవద్గీతోపదేశం",
+      "meaning": "యుద్ధభూమిలో కృష్ణుడు అర్జునునికి బోధించిన గీతోపదేశం",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "భీష్మునిఅంపశయ్య",
+      "meaning": "శరతల్పంపై పడుకుని భీష్ముడు తనకిష్టమైన మరణ సమయం కోసం వేచిన ఘటన",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శకునిజూదం",
+      "meaning": "శకుని కపట పాచికలతో ధర్మరాజును ఓడించిన జూద ఘటన",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "కురుక్షేత్రయుద్ధారంభం",
+      "meaning": "పద్దెనిమిది రోజుల మహాభారత యుద్ధం ప్రారంభమైన ఘటన",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "గాంధారిశాపం",
+      "meaning": "యుద్ధానంతరం గాంధారి యాదవ వంశనాశనానికి కృష్ణుని శపించిన ఘటన",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "గోవర్ధనోద్ధరణం",
+      "meaning": "ఇంద్రుని కోపం నుండి గోకులాన్ని కాపాడటానికి కృష్ణుడు గోవర్ధన పర్వతాన్ని ఎత్తిన ఘటన",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "రాసలీల",
+      "meaning": "బృందావనంలో కృష్ణుడు గోపికలతో ఆడిన దివ్య నృత్యం",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కాళియమర్దనం",
+      "meaning": "యమునా నదిలో కాళియ సర్పాన్ని కృష్ణుడు అణచివేసిన ఘటన",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "పూతనామోక్షం",
+      "meaning": "పూతన విషమిచ్చినా కృష్ణుడు ఆమెకు మోక్షమిచ్చిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "గోపికావస్త్రాపహరణం",
+      "meaning": "యమునలో స్నానమాడుతున్న గోపికల వస్త్రాలను కృష్ణుడు దాచిన లీల",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "మఖనచౌర్యం",
+      "meaning": "బాలకృష్ణుడు వెన్న దొంగిలించిన ప్రసిద్ధ లీల",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కువలయాపీడవధ",
+      "meaning": "కంసుని మదపుటేనుగును కృష్ణుడు వధించిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కంసవధ",
+      "meaning": "కృష్ణుడు తన మేనమామ కంసుని వధించిన ఘటన",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "శిశుపాలవధ",
+      "meaning": "వంద తప్పులు క్షమించాక కృష్ణుడు శిశుపాలుని వధించిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "గజేంద్రమోక్షం",
+      "meaning": "మొసలి బారి నుండి గజేంద్రుని విష్ణువు రక్షించిన ఘటన",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "వామనత్రివిక్రమం",
+      "meaning": "వామనుడు మూడడుగులతో ముల్లోకాలను కొలిచిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ప్రహ్లాదరక్షణ",
+      "meaning": "నరసింహుడు ప్రహ్లాదుని అతని తండ్రి నుండి కాపాడిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "మంథర",
+      "meaning": "కైకేయి దాసి, కైకేయిని రెచ్చగొట్టి రాముని వనవాసానికి కారణమైనది",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "విశ్రవసుడు",
+      "meaning": "రావణ కుంభకర్ణ విభీషణుల తండ్రి, పులస్త్య పుత్రుడు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "కైకసి",
+      "meaning": "రావణాదుల తల్లి, సుమాలి కుమార్తె",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "పులస్త్యుడు",
+      "meaning": "రావణుని తాత, సప్తర్షులలో ఒకడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "ధాన్యమాలిని",
+      "meaning": "రావణుని ద్వితీయ పత్ని",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "సుబాహుడు",
+      "meaning": "తాటకి కుమారుడు, రామునిచే వధించబడినవాడు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "అక్షయకుమారుడు",
+      "meaning": "రావణుని కుమారుడు, హనుమచే వధించబడినవాడు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "త్రిశిరుడు",
+      "meaning": "రావణుని కుమారుడు, హనుమచే వధించబడినవాడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "మాల్యవంతుడు",
+      "meaning": "రావణుని బంధువు, సీతాపహరణాన్ని వ్యతిరేకించినవాడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "దేవాంతకుడు",
+      "meaning": "రావణుని కుమారుడు, హనుమచే వధించబడినవాడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "నారాంతకుడు",
+      "meaning": "రావణుని కుమారుడు, అంగదునిచే వధించబడినవాడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "చంద్రభాగ",
+      "meaning": "జనకుని తమ్ముడు కుశధ్వజుని పత్ని, మాండవీ శ్రుతకీర్తుల తల్లి",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "శాంత",
+      "meaning": "దశరథుని కుమార్తె, ఋష్యశృంగుని పత్ని",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సునయన",
+      "meaning": "జనకుని పత్ని, సీతా ఊర్మిళల తల్లి",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సుమంత్రుడు",
+      "meaning": "దశరథుని మంత్రి, రాజ్య రహస్యములు తెలిసినవాడు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "కృపి",
+      "meaning": "కృపాచార్యుని సోదరి, ద్రోణుని పత్ని, అశ్వత్థామ తల్లి",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శరద్వానుడు",
+      "meaning": "కృపాకృపిల తండ్రి, మహర్షి",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సుభలుడు",
+      "meaning": "శకుని గాంధారుల తండ్రి, గాంధార రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "హయగ్రీవుడు",
+      "meaning": "వేదములను రక్షించిన అశ్వముఖ విష్ణు అవతారం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సావిత్రి",
+      "meaning": "యమునితో వాదించి తన భర్తను తిరిగి బ్రతికించుకున్న పతివ్రత",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సత్యవంతుడు",
+      "meaning": "సావిత్రి భర్త, మరణించి తిరిగి బ్రతికినవాడు",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "దమయంతి",
+      "meaning": "నలమహారాజు పత్ని, ప్రేమకథకు ప్రతీక",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "నలమహారాజు",
+      "meaning": "దమయంతిని వివాహమాడిన విదర్భ రాజు",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శకుంతల",
+      "meaning": "దుష్యంతుని పత్ని, భరతుని తల్లి",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "దుష్యంతుడు",
+      "meaning": "శకుంతల భర్త, చక్రవర్తి",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "యయాతి",
+      "meaning": "శాపగ్రస్తుడైన చంద్రవంశ రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "దేవయాని",
+      "meaning": "శుక్రాచార్యుని పుత్రిక, యయాతి పత్ని",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శుక్రాచార్యుడు",
+      "meaning": "అసురగురువు, శుక్రనీతి కర్త",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "పురూరవుడు",
+      "meaning": "ఊర్వశిని ప్రేమించిన చంద్రవంశ రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఊర్వశి",
+      "meaning": "పురూరవుని ప్రేమించిన అప్సరస",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "తక్షకుడు",
+      "meaning": "పరీక్షిత్తును కాటువేసిన నాగరాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "జనమేజయుడు",
+      "meaning": "పరీక్షిత్తు కుమారుడు, సర్పయాగం చేసినవాడు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఉగ్రశ్రవసుడు",
+      "meaning": "శౌనకాదులకు మహాభారతం వినిపించిన సూతుడు",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "అజామిళుడు",
+      "meaning": "మరణ సమయాన నారాయణ నామం పలికి ముక్తి పొందిన బ్రాహ్మణుడు",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "దత్తాత్రేయుడు",
+      "meaning": "త్రిమూర్తుల అంశలతో జన్మించిన అవధూత గురువు",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ఋషభుడు",
+      "meaning": "భరతుని తండ్రి, త్యాగమునకు ప్రతీకయైన రాజర్షి",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "పృథుచక్రవర్తి",
+      "meaning": "భూమిని పితికి సస్యసంపదనొసగిన ఆదర్శ రాజు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ముచుకుందుడు",
+      "meaning": "నిద్రాభంగం చేసినవానిని దహించే వరము పొందిన రాజు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ఇంద్రద్యుమ్నుడు",
+      "meaning": "గజేంద్రునిగా జన్మించిన భక్త రాజు",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "శమీకమహర్షి",
+      "meaning": "పరీక్షిత్తుచే అవమానింపబడిన మౌన మహర్షి",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "శృంగి",
+      "meaning": "శమీకుని కుమారుడు, పరీక్షిత్తును శపించినవాడు",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "చతుఃసనులు",
+      "meaning": "బ్రహ్మ మానస పుత్రులు, సనక సనందనాదులు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "హంసావతారం",
+      "meaning": "విష్ణువు యొక్క హంస రూప అవతారం",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కేసరి",
+      "meaning": "హనుమంతుని తండ్రి, వానర ప్రముఖుడు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "అంజన",
+      "meaning": "హనుమంతుని తల్లి, అప్సరస జన్మ",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సుమాలి",
+      "meaning": "రావణుని తాత, రాక్షస రాజు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "విద్యుజ్జిహ్వుడు",
+      "meaning": "శూర్పణఖ భర్త",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "అశ్వపతి",
+      "meaning": "సావిత్రి తండ్రి, మద్ర రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "కుంతిభోజుడు",
+      "meaning": "కుంతిని పెంచి పెద్దచేసిన రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శూరసేనుడు",
+      "meaning": "కుంతి జన్మతండ్రి, యాదవ రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "కరేణుమతి",
+      "meaning": "నకులుని పత్ని, చేది రాకుమారి",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "దేవిక",
+      "meaning": "ధర్మరాజు రెండవ పత్ని, శివి రాకుమారి",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "బలంధర",
+      "meaning": "భీముని పత్ని, కాశీ రాకుమారి",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "బభ్రువాహనుడు",
+      "meaning": "అర్జునుని కుమారుడు, మణిపుర రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "శాల్వుడు",
+      "meaning": "అంబను ప్రేమించి తిరస్కరించిన రాజు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "జయవిజయులు",
+      "meaning": "వైకుంఠద్వారపాలకులు, శాపముచే రాక్షసులుగా జన్మించినవారు",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కకుద్మి",
+      "meaning": "రేవతి తండ్రి",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కాలయవనుడు",
+      "meaning": "ముచుకుందునిచే దహింపబడిన రాక్షసుడు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "చిత్రలేఖ",
+      "meaning": "ఉషాదేవి చెలికత్తె, చిత్రపటం ద్వారా అనిరుద్ధుని గుర్తించినది",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "రంతిదేవుడు",
+      "meaning": "దానధర్మములకు మారుపేరైన రాజు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "రేణుక",
+      "meaning": "పరశురాముని తల్లి",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "రోహిణి",
+      "meaning": "వసుదేవుని పత్ని, బలరాముని తల్లి",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కబీర్‌దాసు",
+      "meaning": "హిందూ ముస్లిం మతాల సమన్వయాన్ని బోధించిన సాధు కవి",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "తులసీదాసు",
+      "meaning": "రామచరితమానస్ రచయిత",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "త్యాగరాజు",
+      "meaning": "కర్ణాటక సంగీత త్రయంలో ఒకడు, రామభక్త వాగ్గేయకారుడు",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "ముత్తుస్వామి దీక్షితార్",
+      "meaning": "కర్ణాటక సంగీత త్రయంలో ఒకడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "శ్యామశాస్త్రి",
+      "meaning": "కర్ణాటక సంగీత త్రయంలో ఒకడు, దేవీభక్తుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "జ్ఞానేశ్వరుడు",
+      "meaning": "వార్కరీ సంప్రదాయ స్థాపకుడు, జ్ఞానేశ్వరి రచయిత",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "ఏకనాథుడు",
+      "meaning": "వార్కరీ సంప్రదాయ భక్తకవి",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "సమర్థ రామదాసు",
+      "meaning": "శివాజీ గురువు, రామభక్తుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "రామానందుడు",
+      "meaning": "ఉత్తర భారత భక్తి ఉద్యమ ప్రవర్తకుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "రవిదాసు",
+      "meaning": "నిమ్నకుల భక్తకవి, రామానందుని శిష్యుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "సూరదాసు",
+      "meaning": "కృష్ణభక్త అంధకవి, సూరసాగర్ రచయిత",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "నర్సీ మెహతా",
+      "meaning": "గుజరాతీ కృష్ణభక్త కవి",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "చైతన్య మహాప్రభు",
+      "meaning": "బెంగాల్ వైష్ణవ సంప్రదాయ స్థాపకుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "జయదేవుడు",
+      "meaning": "గీతగోవిందం రచించిన కృష్ణభక్త కవి",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "బసవణ్ణ",
+      "meaning": "లింగాయత సంప్రదాయ స్థాపకుడు, వచన సాహిత్య కర్త",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "పురందరదాసు",
+      "meaning": "కర్ణాటక సంగీత పితామహుడు, హరిదాస కవి",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "కనకదాసు",
+      "meaning": "హరిదాస సంప్రదాయ కవి",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "నమ్మాళ్వార్",
+      "meaning": "ద్వాదశాళ్వారులలో ప్రధానుడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "పెరియాళ్వార్",
+      "meaning": "ఆండాళ్ తండ్రి, ఆళ్వారులలో ఒకడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "తిరుమంగై ఆళ్వార్",
+      "meaning": "ఆళ్వారులలో ఒకడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "తిరుప్పాణాళ్వార్",
+      "meaning": "నిమ్నకుల ఆళ్వార్ భక్తుడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "అప్పర్",
+      "meaning": "నాయనార్లలో ప్రధానుడు, శైవభక్త కవి",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "సుందరమూర్తి నాయనార్",
+      "meaning": "నాయనార్లలో ఒకడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "సంబంధర్",
+      "meaning": "బాల శైవభక్త కవి, నాయనార్",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "మాణిక్యవాచకర్",
+      "meaning": "తిరువాచకం రచయిత, శైవభక్తుడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "రామానుజాచార్యులు",
+      "meaning": "విశిష్టాద్వైత సిద్ధాంత స్థాపకుడు",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "మధ్వాచార్యులు",
+      "meaning": "ద్వైత సిద్ధాంత స్థాపకుడు",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "వల్లభాచార్యులు",
+      "meaning": "పుష్టిమార్గ స్థాపకుడు, కృష్ణభక్తుడు",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "నింబార్కాచార్యులు",
+      "meaning": "ద్వైతాద్వైత సిద్ధాంత స్థాపకుడు",
+      "difficulty": "difficult",
+      "source": "bhakti"
     }
   ]
 }

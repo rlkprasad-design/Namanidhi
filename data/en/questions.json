@@ -479,6 +479,1860 @@
       "meaning": "The water-pot carried by sadhus and rishis",
       "difficulty": "difficult",
       "source": "item"
+    },
+    {
+      "word": "KUMBHAKARNA",
+      "meaning": "Ravana's brother, who slept for six months at a stretch",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUGRIVA",
+      "meaning": "Vanara king, Rama's ally",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "VALI",
+      "meaning": "Sugriva's brother, king of Kishkindha",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "AHALYA",
+      "meaning": "The cursed woman freed by Rama's touch",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "KAIKEYI",
+      "meaning": "Dasharatha's wife, Bharata's mother",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "KAUSALYA",
+      "meaning": "Dasharatha's wife, Rama's mother",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUMITRA",
+      "meaning": "Dasharatha's wife, mother of Lakshmana and Shatrughna",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "DASHARATHA",
+      "meaning": "King of Ayodhya, Rama's father",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "VISHWAMITRA",
+      "meaning": "The sage who trained Rama and Lakshmana",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "VASHISHTHA",
+      "meaning": "The royal sage of the solar dynasty",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ANGADA",
+      "meaning": "Vali's son, a vanara warrior",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "MARICHA",
+      "meaning": "The demon who took the form of a golden deer",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "SHURPANAKHA",
+      "meaning": "Ravana's sister",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "MANDODARI",
+      "meaning": "Ravana's wife",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "INDRAJIT",
+      "meaning": "Ravana's son, also called Meghanatha",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "LANKA",
+      "meaning": "Ravana's kingdom",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "KISHKINDHA",
+      "meaning": "The vanara kingdom",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "CHITRAKOOTA",
+      "meaning": "The hill where Rama lived in exile",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "PANCHAVATI",
+      "meaning": "Where Rama, Sita and Lakshmana stayed in the forest",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "DANDAKARANYA",
+      "meaning": "The forest Rama wandered through",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ASHOKAVANAM",
+      "meaning": "The garden where Sita was held captive",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "GUHA",
+      "meaning": "The Nishada king, Rama's friend",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "LAVA-KUSHA",
+      "meaning": "Rama and Sita's twin sons",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "VALMIKI",
+      "meaning": "Author of the Ramayana",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "TATAKA",
+      "meaning": "The demoness who disrupted Vishwamitra's sacrifice",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "SAMPATI",
+      "meaning": "Jatayu's brother, who located Sita's whereabouts",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "TRIJATA",
+      "meaning": "The kind rakshasi who protected Sita in captivity",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "YUDHISHTHIRA",
+      "meaning": "Eldest of the Pandavas, embodiment of righteousness",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BHIMA",
+      "meaning": "The mighty Pandava",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "NAKULA",
+      "meaning": "Pandava skilled in horsemanship",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SAHADEVA",
+      "meaning": "Pandava skilled in astrology",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KUNTI",
+      "meaning": "Mother of the Pandavas",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "MADRI",
+      "meaning": "Mother of Nakula and Sahadeva",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DURYODHANA",
+      "meaning": "Eldest of the Kauravas",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DUSHASANA",
+      "meaning": "Duryodhana's brother",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHAKUNI",
+      "meaning": "King of Gandhara, known for his cunning",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KARNA",
+      "meaning": "Kunti's son, famed for his generosity",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DRONACHARYA",
+      "meaning": "Teacher of the Kauravas and Pandavas",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KRIPACHARYA",
+      "meaning": "The royal preceptor of the Kurus",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ASHWATTHAMA",
+      "meaning": "Drona's son",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ABHIMANYU",
+      "meaning": "Arjuna's son, who died in the Chakravyuha",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "GHATOTKACHA",
+      "meaning": "Bhima's son",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "GANDHARI",
+      "meaning": "Dhritarashtra's wife",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "VIDURA",
+      "meaning": "The wise Kuru minister",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SANJAYA",
+      "meaning": "Who narrated the war to Dhritarashtra",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SUBHADRA",
+      "meaning": "Krishna's sister, Arjuna's wife",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "EKALAVYA",
+      "meaning": "The Nishada prince, a symbol of devotion to his guru",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DRUPADA",
+      "meaning": "King of Panchala, Draupadi's father",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KURUKSHETRA",
+      "meaning": "The battlefield of the Mahabharata war",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "HASTINAPURA",
+      "meaning": "The Kuru capital",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "INDRAPRASTHA",
+      "meaning": "The Pandavas' capital",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "JAYADRATHA",
+      "meaning": "King of Sindhu, responsible for Abhimanyu's death",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "VYASA",
+      "meaning": "Author of the Mahabharata",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHIKHANDI",
+      "meaning": "The one whose presence led to Bhishma's fall",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "UTTARA",
+      "meaning": "Abhimanyu's wife, Parikshit's mother",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "VIRATA",
+      "meaning": "The king who sheltered the Pandavas in disguise",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BRIHANNALA",
+      "meaning": "Arjuna's disguised name in exile",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DEVAKI",
+      "meaning": "Krishna's mother",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "VASUDEVA",
+      "meaning": "Krishna's father",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "NANDA",
+      "meaning": "Krishna's foster father",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KAMSA",
+      "meaning": "King of Mathura, Krishna's tyrant uncle",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "GAJENDRA",
+      "meaning": "The elephant king saved by Vishnu from a crocodile",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PARIKSHIT",
+      "meaning": "The king who heard the Bhagavatam",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PUTANA",
+      "meaning": "The demoness who tried to kill infant Krishna",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KALIYA",
+      "meaning": "The serpent subdued by Krishna in the Yamuna",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SHISHUPALA",
+      "meaning": "The king slain by Krishna",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "NARADA",
+      "meaning": "The divine sage, a spreader of devotion",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MARKANDEYA",
+      "meaning": "The immortal sage",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PARASHURAMA",
+      "meaning": "Vishnu's axe-wielding avatar",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "GOKULAM",
+      "meaning": "Krishna's childhood home",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "AKRURA",
+      "meaning": "Krishna's devoted kinsman",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "UDDHAVA",
+      "meaning": "Krishna's dear friend and devotee",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "JAMBAVANTHA",
+      "meaning": "King of the bears",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KUBJA",
+      "meaning": "The hunchbacked woman Krishna set straight",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PRADYUMNA",
+      "meaning": "Krishna's son",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "BANASURA",
+      "meaning": "The thousand-armed demon king",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "USHA",
+      "meaning": "Banasura's daughter, Aniruddha's wife",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MADHAVA",
+      "meaning": "Consort of Lakshmi",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "KESHAVA",
+      "meaning": "One with beautiful hair",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "DAMODARA",
+      "meaning": "Bound at the waist by a rope",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "VAASUDEVA",
+      "meaning": "Son of Vasudeva, the all-pervading one",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "JANARDANA",
+      "meaning": "Punisher of the wicked, protector of people",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "PADMANABHA",
+      "meaning": "One with a lotus at his navel, Brahma's birthplace",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "SHRIDHARA",
+      "meaning": "One who bears Lakshmi in his heart",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "HRISHIKESHA",
+      "meaning": "Lord of the senses",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "PURUSHOTTAMA",
+      "meaning": "The supreme among beings",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "TRIVIKRAMA",
+      "meaning": "Who measured the three worlds in three steps",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ANIRUDDHA",
+      "meaning": "The one none can obstruct",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "SANKARSHANA",
+      "meaning": "Who draws everything into himself at dissolution",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "TRILOKESHA",
+      "meaning": "Lord of the three worlds",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "SAHASRAKSHA",
+      "meaning": "The thousand-eyed one",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "PARAMATMA",
+      "meaning": "The supreme soul within all beings",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "MEERABAI",
+      "meaning": "Devotee of Krishna, composer of devotional songs",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "NAMDEV",
+      "meaning": "Varkari saint-poet, devotee of Panduranga",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "TUKARAM",
+      "meaning": "Maharashtrian saint-poet who composed the Abhangas",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "AMBARISHA",
+      "meaning": "The devoted king wholly dedicated to Vishnu",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "SHRISAILAM",
+      "meaning": "The Mallikarjuna Jyotirlinga shrine",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "BHADRACHALAM",
+      "meaning": "The Sita-Rama temple on the Godavari",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "PANDHARPUR",
+      "meaning": "Home of Vithoba, sacred to the Varkari devotees",
+      "difficulty": "difficult",
+      "source": "kshetram"
+    },
+    {
+      "word": "TULASI MALA",
+      "meaning": "Prayer beads made of tulasi stems, worn by Vishnu devotees",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "TRIPUNDRA",
+      "meaning": "The three horizontal ash-marks of Shiva worship",
+      "difficulty": "difficult",
+      "source": "item"
+    },
+    {
+      "word": "AKSHAMALA",
+      "meaning": "A string of prayer beads used for chanting",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "KALASHAM",
+      "meaning": "The sacred water-filled vessel used in worship",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "VINAYAKA",
+      "meaning": "The one worshipped first, lord of obstacles",
+      "difficulty": "easy",
+      "source": "ganesha"
+    },
+    {
+      "word": "GAJANANA",
+      "meaning": "The elephant-faced one",
+      "difficulty": "easy",
+      "source": "ganesha"
+    },
+    {
+      "word": "LAMBODARA",
+      "meaning": "The large-bellied one",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "VIGHNESHWARA",
+      "meaning": "Lord of obstacles, who removes them",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "EKADANTA",
+      "meaning": "The one with a single tusk",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "HERAMBA",
+      "meaning": "Protector of the weak",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "SUMUKHA",
+      "meaning": "The pleasant-faced one",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "MODAKAPRIYA",
+      "meaning": "Fond of modaka sweets",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "SIDDHI",
+      "meaning": "Ganesha's consort, symbol of accomplishment",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "BUDDHI",
+      "meaning": "Ganesha's consort, symbol of wisdom",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "KARTHIKEYA",
+      "meaning": "Raised by the Krittikas, son of Shiva and Parvati",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "SUBRAHMANYA",
+      "meaning": "Commander of the devas' army",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "SKANDA",
+      "meaning": "The god of war",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "SHANMUKHA",
+      "meaning": "The six-faced one",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "KUMARASWAMY",
+      "meaning": "Son of Shiva and Parvati",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "VELAYUDHA",
+      "meaning": "Who wields the vel (spear) as a weapon",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "MAYURAVAHANA",
+      "meaning": "Whose vehicle is a peacock",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "VALLI",
+      "meaning": "Karthikeya's wife, a hunter's daughter",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "DEVASENA",
+      "meaning": "Karthikeya's wife, Indra's daughter",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "VEERABHADRA",
+      "meaning": "The fierce form born of Shiva's rage",
+      "difficulty": "medium",
+      "source": "shiva_family"
+    },
+    {
+      "word": "KAILASA",
+      "meaning": "Shiva's mountain abode",
+      "difficulty": "easy",
+      "source": "shiva_family"
+    },
+    {
+      "word": "DAKSHA",
+      "meaning": "Sati's father, humiliated by Shiva",
+      "difficulty": "medium",
+      "source": "shiva_family"
+    },
+    {
+      "word": "SATI DEVI",
+      "meaning": "Parvati's earlier incarnation, Daksha's daughter",
+      "difficulty": "medium",
+      "source": "shiva_family"
+    },
+    {
+      "word": "HIMAVANTHA",
+      "meaning": "Parvati's father, lord of the mountains",
+      "difficulty": "medium",
+      "source": "shiva_family"
+    },
+    {
+      "word": "MENAKA",
+      "meaning": "Parvati's mother",
+      "difficulty": "difficult",
+      "source": "shiva_family"
+    },
+    {
+      "word": "BHRINGI",
+      "meaning": "Shiva's devoted attendant",
+      "difficulty": "difficult",
+      "source": "shiva_family"
+    },
+    {
+      "word": "JANAKA",
+      "meaning": "Sita's father, king of Mithila",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "URMILA",
+      "meaning": "Lakshmana's wife, Sita's sister",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "MANDAVI",
+      "meaning": "Bharata's wife",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SHRUTAKIRTI",
+      "meaning": "Shatrughna's wife",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ANASUYA",
+      "meaning": "Atri's wife, who counseled Sita on devotion",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUTIKSHNA",
+      "meaning": "The sage who hosted Rama in exile",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SHARABHANGA",
+      "meaning": "The sage Rama met in the forest",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KABANDHA",
+      "meaning": "The demon freed from a curse by Rama",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "NALA",
+      "meaning": "The vanara architect who built the bridge",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "NILA",
+      "meaning": "The vanara commander who helped build the bridge",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KUMBHA",
+      "meaning": "Kumbhakarna's son, a rakshasa warrior",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "NIKUMBHA",
+      "meaning": "A rakshasa in Ravana's army",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "PRAHASTA",
+      "meaning": "Ravana's commander-in-chief",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "AKAMPANA",
+      "meaning": "A rakshasa in Ravana's army",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ATIKAYA",
+      "meaning": "Ravana's son, a powerful rakshasa",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "MAKARAKSHA",
+      "meaning": "Khara's son, a rakshasa",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KHARA",
+      "meaning": "Ravana's brother, slain by Rama",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "DUSHANA",
+      "meaning": "Khara's brother, a rakshasa commander",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "VIRADHA",
+      "meaning": "The rakshasa slain by Rama",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "JAYANTA",
+      "meaning": "Indra's son, who tormented Sita as a crow",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "LANKINI",
+      "meaning": "The guardian deity of Lanka, defeated by Hanuman",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SARAMA",
+      "meaning": "Vibhishana's wife, kind to Sita",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "TARA",
+      "meaning": "Vali's wife, later married to Sugriva",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "RUMA",
+      "meaning": "Sugriva's wife",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUSHENA",
+      "meaning": "The vanara physician who helped bring the healing herbs",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SURASA",
+      "meaning": "The serpent-mother who tested Hanuman",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SIMHIKA",
+      "meaning": "The demoness who tried to swallow Hanuman",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KUSHADHWAJA",
+      "meaning": "Sita's uncle, Janaka's brother",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "UTTANKA",
+      "meaning": "Vyasa's disciple, who saw Krishna's cosmic form",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BAKASURA",
+      "meaning": "The demon slain by Bhima",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "HIDIMBI",
+      "meaning": "Bhima's first wife, Ghatotkacha's mother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "JARASANDHA",
+      "meaning": "King of Magadha, slain by Bhima",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "PAUNDRAKA",
+      "meaning": "The king who imitated Krishna",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KEECHAKA",
+      "meaning": "Virata's brother-in-law, slain by Bhima",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SAIRANDHRI",
+      "meaning": "Draupadi's disguised name in exile",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BARBARIKA",
+      "meaning": "Ghatotkacha's son, who watched the war with his own severed head",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AMBA",
+      "meaning": "Reborn as Shikhandi, bore a grudge against Bhishma",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AMBIKA",
+      "meaning": "Dhritarashtra's mother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AMBALIKA",
+      "meaning": "Pandu's mother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "PANDU",
+      "meaning": "Father of the Pandavas",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SATYAVATI",
+      "meaning": "Shantanu's wife, Vyasa's mother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHANTANU",
+      "meaning": "Bhishma's father, king of the Kurus",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "GANGA DEVI",
+      "meaning": "Bhishma's mother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "CHITRANGADA",
+      "meaning": "Shantanu's son, Bhishma's brother",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SURYA DEVA",
+      "meaning": "Karna's father",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ADHIRATHA",
+      "meaning": "Karna's foster father, a charioteer",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHALYA",
+      "meaning": "King of Madra, Karna's charioteer",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "PUROCHANA",
+      "meaning": "Duryodhana's minister who built the house of lac",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "CHARVAKA",
+      "meaning": "The demon who denounced Yudhishthira after the war",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SOMADATTA",
+      "meaning": "An elder of the Kuru dynasty",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BHURISHRAVA",
+      "meaning": "Somadatta's son, a Kuru warrior",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "VIKARNA",
+      "meaning": "Duryodhana's brother, who spoke up for Draupadi",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "YUYUTSU",
+      "meaning": "Dhritarashtra's son who joined the Pandavas",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "PRATIVINDHYA",
+      "meaning": "Son of Yudhishthira and Draupadi",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHRUTASENA",
+      "meaning": "Son of Sahadeva and Draupadi",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "IRAVAN",
+      "meaning": "Arjuna's son, born of the serpent-princess Ulupi",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ULUPI",
+      "meaning": "Arjuna's wife, a serpent princess",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KRITAVARMA",
+      "meaning": "A Kaurava warrior who raided the Pandava camp at night",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ALAMBUSA",
+      "meaning": "A rakshasa warrior who fought Ghatotkacha",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BAHLIKA",
+      "meaning": "Shantanu's brother, an elder of the Kurus",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "JAMBAVATI",
+      "meaning": "Jambavantha's daughter, Krishna's wife",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "VRISHABHANU",
+      "meaning": "Radha's father",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KIRTIDA",
+      "meaning": "Radha's mother",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "AGHASURA",
+      "meaning": "The demon slain by Krishna in childhood",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "TRINAVARTA",
+      "meaning": "The whirlwind demon slain by infant Krishna",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SHAKATASURA",
+      "meaning": "The demon who came in the form of a cart",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "DHENUKASURA",
+      "meaning": "The demon in the form of a donkey",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PRALAMBASURA",
+      "meaning": "The demon slain by Balarama",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "RUKMI",
+      "meaning": "Rukmini's brother, Krishna's enemy",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "BHISHMAKA",
+      "meaning": "Rukmini's father, king of Vidarbha",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SAMBA",
+      "meaning": "Krishna's son",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "CHARUDESHNA",
+      "meaning": "Krishna's son",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "NARAKASURA",
+      "meaning": "The demon king slain by Krishna",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SATRAJIT",
+      "meaning": "Owner of the Syamantaka gem, Satyabhama's father",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SYAMANTAKA",
+      "meaning": "The divine gem Satrajit received from the sun god",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "REVATI",
+      "meaning": "Balarama's wife",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "HAMSA",
+      "meaning": "Kamsa's friend, a wrestler",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "CHANURA",
+      "meaning": "Kamsa's wrestler, slain by Krishna",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MUSHTIKA",
+      "meaning": "Kamsa's wrestler, slain by Balarama",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KESHI",
+      "meaning": "The demon who came in the form of a horse",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ARISHTASURA",
+      "meaning": "The demon who came in the form of a bull",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MAITREYA",
+      "meaning": "The sage who instructed Vidura",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "DEVAHUTI",
+      "meaning": "Kardama's wife, Kapila's mother",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "VRITRASURA",
+      "meaning": "The demon slain by Indra",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "HIRANYAKSHA",
+      "meaning": "The demon slain by the Varaha avatar",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "VAIKUNTHA",
+      "meaning": "Vishnu's abode",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "TARAKASURA",
+      "meaning": "The demon slain by Karthikeya",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "MAHISHASURA",
+      "meaning": "The buffalo-demon slain by Durga",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "RAKTABIJA",
+      "meaning": "The demon granted a boon that new demons sprang from each drop of his blood",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "SHUMBHA",
+      "meaning": "The demon king slain by Durga",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "NISHUMBHA",
+      "meaning": "Shumbha's brother, slain by Durga",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "CHANDA-MUNDA",
+      "meaning": "Shumbha and Nishumbha's generals, slain by Kali",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "DHANVANTARI",
+      "meaning": "The god of Ayurveda who emerged with the pot of nectar",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "VASUKI",
+      "meaning": "The serpent king used as the churning rope",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "AIRAVATA",
+      "meaning": "Indra's white elephant, born from the churning of the ocean",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "KAMADHENU",
+      "meaning": "The wish-granting cow born from the churning of the ocean",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "MANDARA",
+      "meaning": "The mountain used as the churning rod",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "NEELAKANTHA",
+      "meaning": "Shiva's name for swallowing the poison and holding it in his throat",
+      "difficulty": "easy",
+      "source": "shiva_family"
+    },
+    {
+      "word": "MOHINI",
+      "meaning": "The female form Vishnu took to distribute the nectar",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ADITI",
+      "meaning": "Mother of the gods, Kashyapa's wife",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "JATAYU VADHA",
+      "meaning": "Jatayu's death fighting Ravana to save Sita",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "RAVANA VADHA",
+      "meaning": "The final battle in which Rama slays Ravana",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "VALI VADHA",
+      "meaning": "The controversial killing of Vali by Rama while hidden",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "LAKSHAGRAHA",
+      "meaning": "The house of lac built by Duryodhana to kill the Pandavas",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ARANYAVASAM",
+      "meaning": "The twelve years the Pandavas spent in exile in the forest",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AJNATAVASAM",
+      "meaning": "The year the Pandavas spent in hiding at Virata's court",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "RASA LEELA",
+      "meaning": "Krishna's divine dance with the gopikas in Vrindavan",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KAMSA VADHA",
+      "meaning": "Krishna's slaying of his tyrant uncle Kamsa",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MANTHARA",
+      "meaning": "Kaikeyi's maid who provoked her into sending Rama into exile",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "VISHRAVA",
+      "meaning": "Father of Ravana, Kumbhakarna, and Vibhishana, son of Pulastya",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KAIKASI",
+      "meaning": "Mother of Ravana and his siblings, daughter of Sumali",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "PULASTYA",
+      "meaning": "Ravana's grandfather, one of the Saptarishis",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "DHANYAMALINI",
+      "meaning": "Ravana's second wife",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUBAHU",
+      "meaning": "Tataka's son, slain by Rama",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "TRISHIRA",
+      "meaning": "Ravana's son, killed by Hanuman",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "MALYAVAN",
+      "meaning": "Ravana's kinsman who opposed the abduction of Sita",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "DEVANTAKA",
+      "meaning": "Ravana's son, killed by Hanuman",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "NARANTAKA",
+      "meaning": "Ravana's son, killed by Angada",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "CHANDRABHAGA",
+      "meaning": "Wife of Janaka's brother Kushadhwaja, mother of Mandavi and Shrutakirti",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "SHANTA",
+      "meaning": "Dasharatha's daughter, married to sage Rishyashringa",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUNAYANA",
+      "meaning": "Janaka's wife, mother of Sita and Urmila",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUMANTRA",
+      "meaning": "Dasharatha's minister, privy to the royal family's secrets",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KRIPI",
+      "meaning": "Kripacharya's sister, wife of Drona, mother of Ashwatthama",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHARADVAN",
+      "meaning": "Sage, father of Kripa and Kripi",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SUBALA",
+      "meaning": "Father of Shakuni and Gandhari, king of Gandhara",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "HAYAGRIVA",
+      "meaning": "Horse-headed avatar of Vishnu who recovered the Vedas",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SAVITRI",
+      "meaning": "The devoted wife who won her husband back from Yama",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SATYAVAN",
+      "meaning": "Savitri's husband, who died and was brought back to life",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DAMAYANTI",
+      "meaning": "Wife of King Nala, heroine of a famous love story",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHAKUNTALA",
+      "meaning": "Wife of Dushyanta, mother of Bharata",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DUSHYANTA",
+      "meaning": "Shakuntala's husband, an emperor",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "YAYATI",
+      "meaning": "Cursed king of the lunar dynasty",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DEVAYANI",
+      "meaning": "Daughter of Shukracharya, wife of Yayati",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHUKRACHARYA",
+      "meaning": "Guru of the asuras, author of Shukra Niti",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "PURURAVAS",
+      "meaning": "Lunar dynasty king who loved the apsara Urvashi",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "URVASHI",
+      "meaning": "The apsara loved by Pururavas",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "TAKSHAKA",
+      "meaning": "The serpent king whose bite killed Parikshit",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "JANAMEJAYA",
+      "meaning": "Parikshit's son, who performed the snake sacrifice",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "UGRASHRAVAS",
+      "meaning": "The Suta who narrated the Mahabharata to the sages at Shaunaka's sacrifice",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AJAMILA",
+      "meaning": "A Brahmin liberated at death by uttering the name Narayana",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "DATTATREYA",
+      "meaning": "Avadhuta guru born of the combined essence of the Trimurti",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "RISHABHA",
+      "meaning": "Father of Bharata, a royal sage who embodied renunciation",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MUCHUKUNDA",
+      "meaning": "The king granted a boon to reduce to ash whoever woke him",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "INDRADYUMNA",
+      "meaning": "The devoted king reborn as Gajendra",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SHRINGI",
+      "meaning": "Shamika's son, who cursed Parikshit",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "CHATUHSANAS",
+      "meaning": "The mind-born sons of Brahma: Sanaka, Sanandana, and their brothers",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KESARI",
+      "meaning": "Hanuman's father, a prominent vanara",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ANJANA",
+      "meaning": "Hanuman's mother, born of an apsara",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SUMALI",
+      "meaning": "Ravana's grandfather, a Daitya king",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "VIDYUTJIVA",
+      "meaning": "Shurpanakha's husband",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "ASHVAPATI",
+      "meaning": "Savitri's father, king of Madra",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KUNTIBHOJA",
+      "meaning": "The king who raised Kunti",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHURASENA",
+      "meaning": "Kunti's birth father, a Yadava king",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KARENUMATI",
+      "meaning": "Nakula's wife, a princess of Chedi",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DEVIKA",
+      "meaning": "Yudhishthira's second wife, princess of Sivi",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BALANDHARA",
+      "meaning": "Bhima's wife, princess of Kashi",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BABRUVAHANA",
+      "meaning": "Arjuna's son, king of Manipura",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SHALVA",
+      "meaning": "The king who loved and then rejected Amba",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "JAYA VIJAYA",
+      "meaning": "Vishnu's gatekeepers, cursed to be reborn as demons",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KAKUDMI",
+      "meaning": "Revati's father",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "KALAYAVANA",
+      "meaning": "The demon burned to ash by Muchukunda",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "CHITRALEKHA",
+      "meaning": "Usha's friend who identified Aniruddha from a painting",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "RANTIDEVA",
+      "meaning": "A king famed for his generosity and charity",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "RENUKA",
+      "meaning": "Mother of Parashurama",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ROHINI",
+      "meaning": "Wife of Vasudeva, mother of Balarama",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "SYAMA SASTRI",
+      "meaning": "One of the Carnatic Music Trinity, devoted to the Goddess",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "DNYANESHWAR",
+      "meaning": "Founder of the Varkari tradition, author of the Dnyaneshwari",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "EKNATH",
+      "meaning": "Varkari tradition poet-saint",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "RAMANANDA",
+      "meaning": "Pioneer of the Bhakti movement in North India",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "RAVIDAS",
+      "meaning": "Poet-saint from a marginalized caste, disciple of Ramananda",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "SURDAS",
+      "meaning": "Blind Krishna-devotee poet, author of the Sursagar",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "JAYADEVA",
+      "meaning": "Krishna-devotee poet who wrote the Gita Govinda",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "BASAVANNA",
+      "meaning": "Founder of the Lingayat tradition, author of the Vachanas",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "KANAKADASA",
+      "meaning": "Poet of the Haridasa tradition",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "NAMMALVAR",
+      "meaning": "Foremost of the twelve Alvars",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "PERIYALVAR",
+      "meaning": "Andal's father, one of the Alvars",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "APPAR",
+      "meaning": "Foremost of the Nayanars, a Shiva-devotee poet",
+      "difficulty": "medium",
+      "source": "bhakti"
+    },
+    {
+      "word": "SUNDARAR",
+      "meaning": "One of the Nayanars",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "SAMBANDAR",
+      "meaning": "Child Shiva-devotee poet, a Nayanar",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "MADHVACHARYA",
+      "meaning": "Founder of the Dvaita philosophy",
+      "difficulty": "easy",
+      "source": "bhakti"
     }
   ]
 }
