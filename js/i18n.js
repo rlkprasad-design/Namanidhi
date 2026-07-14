@@ -10,7 +10,7 @@ const STRINGS = {
   back: { te: '← వెనుకకు', en: '← Back' },
   changeName: { te: 'మార్చు', en: 'Change' },
 
-  introTitle: { te: 'నామ నిధి కి స్వాగతం', en: 'Welcome to Nama Nidhi' },
+  introTitle: { te: 'నామ నిధి కి స్వాగతం', en: 'Welcome to Nāma Nidhi' },
   introBody1: {
     te: "ఇది ఒక ఆటవిడుపు లాంటి సాధన. మీరు రెండు మార్గాలు ఎంచుకోవచ్చు. మొదటిది ఇచ్చిన అక్షరాల సమూహంలో భగవంతుని లేదా ఆ సంబంధించిన వ్యక్తుల లేదా వస్తువుల పేర్లను గుర్తించడం ('ఈనాడు' పదవినోదం లాగా ).",
     en: "Think of this as a little daily break, more play than practice. There are two ways to spend a few minutes here. One is searching for names of the divine - or people and things connected to them - hidden inside a grid of letters, much like the word-search in the newspaper.",
@@ -41,7 +41,7 @@ const STRINGS = {
   },
   shareMessage: {
     te: 'నామ నిధి - నామాల్లో దాగిన రత్నాలను వెతికే ఒక భక్తి పద పజిల్ ఆట. మీరు కూడా ప్రయత్నించండి!',
-    en: 'Nama Nidhi - a devotional word-search game for finding hidden names. Try it out!',
+    en: 'Nāma Nidhi - a devotional word-search game for finding hidden names. Try it out!',
   },
   installGuideLink: {
     te: 'యాప్‌గా ఇన్‌స్టాల్ చేసుకోవడం ఎలా? →',
@@ -53,7 +53,7 @@ const STRINGS = {
   },
   continueBtn: { te: 'ప్రారంభించండి', en: 'Continue' },
 
-  appTitle: { te: 'నామ నిధి', en: 'Nama Nidhi' },
+  appTitle: { te: 'నామ నిధి', en: 'Nāma Nidhi' },
   appTagline: { te: 'నామాల్లో దాగిన రత్నాలు', en: 'Gems hidden in names' },
   nameGatePrompt: { te: 'ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి', en: 'Enter your name or nickname to play' },
   namePlaceholder: { te: 'మీ పేరు', en: 'Your name' },
@@ -74,7 +74,7 @@ const STRINGS = {
   },
 
   chooseModePrompt: { te: 'మీకు నచ్చిన విధానాన్ని ఎంచుకోండి', en: 'Choose how you would like to play' },
-  namaGuptaNidhiTitle: { te: 'నామ గుప్త నిధి', en: 'Nama Gupta Nidhi' },
+  namaGuptaNidhiTitle: { te: 'నామ గుప్త నిధి', en: 'Nāma Gupta Nidhi' },
   namaGuptaNidhiSub: { te: 'పజిల్ ఆడండి, స్తోత్రాలను పరీక్షించుకోండి', en: 'Play word puzzles, test your stotram recall' },
   likhitaJapamTitle: { te: 'లిఖిత జపం', en: 'Likhita Japam' },
   likhitaJapamSub: { te: 'నామాన్ని ప్రశాంతంగా రాయండి', en: 'Write a name calmly, one letter at a time' },
@@ -150,7 +150,7 @@ const STRINGS = {
 
   scoreboardTitle: { te: 'స్కోరు బోర్డు', en: 'Scoreboard' },
   scoreboardTagline: { te: 'మన బృందం సాధించిన ప్రగతి', en: "Our network's progress" },
-  puzzleBoardTitle: { te: 'నామ గుప్త నిధి స్కోరు బోర్డు', en: 'Nama Gupta Nidhi scoreboard' },
+  puzzleBoardTitle: { te: 'నామ గుప్త నిధి స్కోరు బోర్డు', en: 'Nāma Gupta Nidhi scoreboard' },
   gemLegend: {
     te: (pearl, gem, diamond) => `${pearl} ముత్యం = సులభం, ${gem} రత్నం = మధ్యమం, ${diamond} వజ్రం = కష్టం — మీరే స్వయంగా కనుగొన్న పదాలకు మాత్రమే లభిస్తాయి, "సమాధానం చూపు" వాడితే రావు.`,
     en: (pearl, gem, diamond) => `${pearl} Pearl = easy, ${gem} Gem = medium, ${diamond} Diamond = difficult — earned only for words you find yourself, not ones revealed with "Show answer."`,
