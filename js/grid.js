@@ -71,6 +71,23 @@ function refillQueue(queue, eligible, count) {
 
 export const DIFFICULTIES = ['easy', 'medium', 'difficult'];
 
+// Once a word has been asked this many times, it's retired from the draw
+// rotation for that player/pool - a name search stays a light daily
+// break, not a slog through the same handful of "difficult" words forever.
+// `exposure` (word -> times-shown count) is looked up by the caller from
+// storage.js's getWordExposureCounts, already scoped to the right
+// player+language+pool.
+export const MAX_WORD_EXPOSURES = 15;
+
+// True once every entry in `pool` has hit MAX_WORD_EXPOSURES - i.e. there's
+// nothing left this player hasn't already seen its full allotment of times.
+// Checked against the whole pool (not just whatever's eligible for one
+// rolled grid size) so it reflects real exhaustion, not just an unlucky
+// roll.
+export function isPoolExhausted(pool, exposure = {}, maxExposures = MAX_WORD_EXPOSURES) {
+  return pool.length > 0 && pool.every((e) => (exposure[e.word] || 0) >= maxExposures);
+}
+
 const EVEN_WEIGHTS = { easy: 1 / 3, medium: 1 / 3, difficult: 1 / 3 };
 
 // Ramps a beginner's mix from all-easy up to a settled, still-approachable
@@ -127,14 +144,15 @@ export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
 // tier is still drawn from its own shuffled rotation queue, trimmed to
 // whatever's eligible at the rolled size before topping back up, so
 // nothing repeats until that tier cycles.
-export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity, lang = 'te') {
+export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity, lang = 'te', exposure = {}) {
   const cappedMax = gridSizeCapForExperience(puzzlesCompleted, level.gridSizeMin, level.gridSizeMax);
   const gridSize = randomInt(level.gridSizeMin, cappedMax);
   const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
 
   const entries = [];
   for (const difficulty of DIFFICULTIES) {
-    const eligible = pool.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize);
+    const eligible = pool.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize
+      && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
     if (!eligible.length) continue;
 
     const eligibleWords = new Set(eligible.map((e) => e.word));

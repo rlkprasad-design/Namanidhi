@@ -1,7 +1,7 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
   splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL,
-  exportDrawQueues, importDrawQueues,
+  exportDrawQueues, importDrawQueues, isPoolExhausted, MAX_WORD_EXPOSURES,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
@@ -16,6 +16,7 @@ import {
   getLanguage, setLanguage,
   getPersistedDrawQueues, setPersistedDrawQueues,
   getPersistedStotramDrawQueues, setPersistedStotramDrawQueues,
+  getWordExposureCounts, recordWordExposures,
   migrateLegacyDataOnce,
 } from './storage.js';
 import {
@@ -411,17 +412,43 @@ function cellFontSize(gridSize) {
   return `${rem.toFixed(2)}rem`;
 }
 
+function generalScopeKey() {
+  return `${getLang()}::general`;
+}
+
 async function startNamaGuptaNidhi() {
   const lang = getLang();
   const [levels, pool] = await Promise.all([loadLevels(lang), loadEntryPool(lang)]);
-  renderGame(buildSession(levels[0], pool));
+  renderGeneralSession(levels[0], pool);
+}
+
+// Checks whether this player has already been asked every word in the
+// general pool MAX_WORD_EXPOSURES times before building a puzzle - rather
+// than silently degrading toward emptier and emptier grids as the last few
+// not-yet-maxed words run out, this catches full exhaustion up front and
+// points the player at Stotra Pariksha instead.
+function renderGeneralSession(level, pool) {
+  const exposure = getWordExposureCounts(generalScopeKey(), state.playerName);
+  if (isPoolExhausted(pool, exposure)) {
+    showPoolExhausted({
+      messageKey: 'poolExhaustedGeneralMessage',
+      backAction: showNamaGuptaNidhiHub,
+      switchLabel: t('poolExhaustedSwitchToStotra'),
+      onSwitch: showStotramList,
+    });
+    return;
+  }
+  renderGame(buildSession(level, pool));
 }
 
 function buildSession(level, pool) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
-  const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted, getLang());
+  const scopeKey = generalScopeKey();
+  const exposure = getWordExposureCounts(scopeKey, state.playerName);
+  const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted, getLang(), exposure);
   setPersistedDrawQueues(exportDrawQueues(), state.playerName);
+  recordWordExposures(entries.map((e) => e.word), scopeKey, state.playerName);
   const { grid, placements } = generateGridReliable({
     size: gridSize,
     entries,
@@ -577,13 +604,32 @@ function renderGame(session) {
   });
 
   screen.querySelector('[data-new-puzzle]').addEventListener('click', () => {
-    renderGame(buildSession(level, session.pool));
+    renderGeneralSession(level, session.pool);
   });
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
     if (target) markFound(target, true);
   });
 
+  setScreen(screen);
+}
+
+// Shared "you've run out of not-yet-maxed words" screen for both Nama
+// Gupta Nidhi (general pool) and Stotra Pariksha (per-stotram pool) - see
+// renderGeneralSession/renderStotramSession, the only two callers.
+function showPoolExhausted({ messageKey, backAction, switchLabel, onSwitch }) {
+  const screen = el(`
+    <div class="complete-screen">
+      <div class="glow">🙏</div>
+      <h2>${t('poolExhaustedTitle')}</h2>
+      <p>${t(messageKey)}</p>
+      <div class="btn-row" style="margin-top:24px;">
+        <button type="button" class="btn btn-primary" data-switch>${switchLabel}</button>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction }));
+  screen.querySelector('[data-switch]').addEventListener('click', onSwitch);
   setScreen(screen);
 }
 
@@ -697,11 +743,16 @@ function shuffleLocal(arr) {
 // can't resurface right after a page reload either.
 const stotramDrawQueues = new Map();
 
-function drawStotramRound(stotram, gridSize, weights) {
+function stotramScopeKey(stotram) {
+  return `${getLang()}::${stotram.id}`;
+}
+
+function drawStotramRound(stotram, gridSize, weights, exposure) {
   const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
   const drawn = [];
   for (const difficulty of DIFFICULTIES) {
-    const eligible = stotram.entries.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize);
+    const eligible = stotram.entries.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize
+      && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
     if (!eligible.length) continue;
 
     const eligibleWords = new Set(eligible.map((e) => e.word));
@@ -725,13 +776,33 @@ function buildStotramSession(stotram) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
   const gridSize = randomInt(stotram.gridSizeMin, gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax));
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
-  const entries = drawStotramRound(stotram, gridSize, weights);
+  const scopeKey = stotramScopeKey(stotram);
+  const exposure = getWordExposureCounts(scopeKey, state.playerName);
+  const entries = drawStotramRound(stotram, gridSize, weights, exposure);
+  recordWordExposures(entries.map((e) => e.word), scopeKey, state.playerName);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode, fillerPool: fillerPool() });
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
 }
 
-function startStotram(stotram) {
+// Mirrors renderGeneralSession above: checks this stotram's own pool for
+// full exhaustion before building a puzzle, and if so points the player at
+// a different stotram or back to Puranas instead of a near-empty grid.
+function renderStotramSession(stotram) {
+  const exposure = getWordExposureCounts(stotramScopeKey(stotram), state.playerName);
+  if (isPoolExhausted(stotram.entries, exposure)) {
+    showPoolExhausted({
+      messageKey: 'poolExhaustedStotramMessage',
+      backAction: showStotramList,
+      switchLabel: t('poolExhaustedSwitchToPuranas'),
+      onSwitch: startNamaGuptaNidhi,
+    });
+    return;
+  }
   renderStotramGame(buildStotramSession(stotram));
+}
+
+function startStotram(stotram) {
+  renderStotramSession(stotram);
 }
 
 function renderStotramGame(session) {
@@ -852,7 +923,7 @@ function renderStotramGame(session) {
     },
   });
 
-  screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderStotramGame(buildStotramSession(stotram)));
+  screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderStotramSession(stotram));
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
     if (target) markFound(target, true);
