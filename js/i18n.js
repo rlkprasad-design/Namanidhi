@@ -98,6 +98,18 @@ const STRINGS = {
   congratulations: { te: 'అభినందనలు!', en: 'Well done!' },
   allFoundLevel: { te: 'అన్ని నామాలు దొరికాయి.', en: 'You found every name.' },
 
+  poolExhaustedTitle: { te: 'అన్ని నామాలు చాలాసార్లు వచ్చాయి!', en: "You've seen every name here!" },
+  poolExhaustedGeneralMessage: {
+    te: 'ఈ విభాగంలోని అన్ని నామాలు ఇప్పటికే చాలాసార్లు కనిపించాయి. కొంచెం విరామం తర్వాత మళ్ళీ రండి, లేదా స్తోత్ర పరీక్ష ప్రయత్నించండి.',
+    en: "You've already been asked every name in this pool many times over. Take a little break and come back later, or try Stotra Pariksha for now.",
+  },
+  poolExhaustedStotramMessage: {
+    te: 'ఈ స్తోత్రంలోని అన్ని నామాలు ఇప్పటికే చాలాసార్లు కనిపించాయి. వేరే స్తోత్రం ఎంచుకోండి, లేదా పురాణాలు ప్రయత్నించండి.',
+    en: "You've already been asked every name in this stotram many times over. Choose a different stotram, or try Puranas for now.",
+  },
+  poolExhaustedSwitchToStotra: { te: 'స్తోత్ర పరీక్షకు వెళ్ళండి', en: 'Go to Stotra Pariksha' },
+  poolExhaustedSwitchToPuranas: { te: 'పురాణాలకు వెళ్ళండి', en: 'Go to Puranas' },
+
   soonBadge: { te: 'త్వరలో', en: 'Soon' },
   soonSub: { te: 'త్వరలో వస్తుంది', en: 'Coming soon' },
   playableBadge: { te: 'ఆడవచ్చు', en: 'Play' },

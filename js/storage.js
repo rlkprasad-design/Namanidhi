@@ -22,6 +22,7 @@ const INTRO_SEEN_KEY = 'namanidhi.introSeen';
 const LANGUAGE_KEY = 'namanidhi.language';
 const DRAW_QUEUES_KEY = 'namanidhi.drawQueues';
 const STOTRAM_DRAW_QUEUES_KEY = 'namanidhi.stotramDrawQueues';
+const WORD_EXPOSURE_KEY = 'namanidhi.wordExposure';
 const LEGACY_MIGRATED_KEY = 'namanidhi.legacyDataMigrated';
 
 function playerScopedKey(baseKey, playerName) {
@@ -126,6 +127,25 @@ export function getPersistedStotramDrawQueues(playerName) {
 
 export function setPersistedStotramDrawQueues(queues, playerName) {
   localStorage.setItem(playerScopedKey(STOTRAM_DRAW_QUEUES_KEY, playerName), JSON.stringify(queues));
+}
+
+// How many times each word has been shown to this player, so a word can be
+// retired from rotation once it's been asked MAX_WORD_EXPOSURES times (see
+// grid.js) instead of cycling forever. Scoped per player (like the draw
+// queues above) and further nested by `scopeKey` (e.g. "te::general" for
+// the Puranas pool, or "te::rama-raksha" for a single stotram) since each
+// pool's words are drawn - and should be capped - independently.
+export function getWordExposureCounts(scopeKey, playerName) {
+  const store = readJson(playerScopedKey(WORD_EXPOSURE_KEY, playerName));
+  return store[scopeKey] || {};
+}
+
+export function recordWordExposures(words, scopeKey, playerName) {
+  const store = readJson(playerScopedKey(WORD_EXPOSURE_KEY, playerName));
+  const scoped = store[scopeKey] || {};
+  for (const word of words) scoped[word] = (scoped[word] || 0) + 1;
+  store[scopeKey] = scoped;
+  localStorage.setItem(playerScopedKey(WORD_EXPOSURE_KEY, playerName), JSON.stringify(store));
 }
 
 function readLog(key) {
