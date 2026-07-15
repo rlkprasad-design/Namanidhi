@@ -98,7 +98,7 @@ export const DIFFICULTIES = ['easy', 'medium', 'difficult'];
 // `exposure` (word -> times-shown count) is looked up by the caller from
 // storage.js's getWordExposureCounts, already scoped to the right
 // player+language+pool.
-export const MAX_WORD_EXPOSURES = 15;
+export const MAX_WORD_EXPOSURES = 10;
 
 // True once every entry in `pool` has hit MAX_WORD_EXPOSURES - i.e. there's
 // nothing left this player hasn't already seen its full allotment of times.
