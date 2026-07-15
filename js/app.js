@@ -751,22 +751,35 @@ function drawStotramRound(stotram, gridSize, weights, exposure) {
   const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
   const drawn = [];
   for (const difficulty of DIFFICULTIES) {
-    const eligible = stotram.entries.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize
-      && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
-    if (!eligible.length) continue;
+    // See grid.js's sampleMixedEntries for why this pool isn't filtered by
+    // gridSize up front: doing so used to drop a word from the persisted
+    // queue whenever it was briefly too long for a small roll, letting it
+    // resurface as "unseen" the next time a bigger grid came around,
+    // well before the tier had actually cycled.
+    const tierPool = stotram.entries.filter((e) => e.difficulty === difficulty && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
+    if (!tierPool.length) continue;
 
-    const eligibleWords = new Set(eligible.map((e) => e.word));
+    const fitsThisRoll = (e) => graphemes(e.word).length <= gridSize;
+    const eligibleNow = tierPool.filter(fitsThisRoll);
+    const count = Math.min(targetCounts[difficulty], eligibleNow.length);
+    if (!count) continue;
+
+    const tierWords = new Set(tierPool.map((e) => e.word));
     const key = `${getLang()}::${stotram.id}::${difficulty}`;
-    let queue = (stotramDrawQueues.get(key) || []).filter((e) => eligibleWords.has(e.word));
-    const count = Math.min(targetCounts[difficulty], eligible.length);
+    const queue = (stotramDrawQueues.get(key) || []).filter((e) => tierWords.has(e.word));
+    // A fresh cycle only starts once every word has been drawn (queue
+    // fully empty) - never just because the front of the queue doesn't
+    // happen to fit this roll's grid size. See grid.js's
+    // startNewCycleIfEmpty for why that distinction is the actual fix.
+    if (queue.length === 0) queue.push(...shuffleLocal(tierPool));
 
-    while (queue.length < count) {
-      const queuedWords = new Set(queue.map((e) => e.word));
-      const unseen = eligible.filter((e) => !queuedWords.has(e.word));
-      queue = queue.concat(shuffleLocal(unseen.length ? unseen : eligible));
+    const remaining = [];
+    let drawnHere = 0;
+    for (const entry of queue) {
+      if (drawnHere < count && fitsThisRoll(entry)) { drawn.push(entry); drawnHere += 1; }
+      else remaining.push(entry);
     }
-    drawn.push(...queue.slice(0, count));
-    stotramDrawQueues.set(key, queue.slice(count));
+    stotramDrawQueues.set(key, remaining);
   }
   setPersistedStotramDrawQueues(Object.fromEntries(stotramDrawQueues), state.playerName);
   return drawn;

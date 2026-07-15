@@ -60,13 +60,34 @@ export function importDrawQueues(queues) {
   for (const [key, entries] of Object.entries(queues || {})) drawQueues.set(key, entries);
 }
 
-function refillQueue(queue, eligible, count) {
-  while (queue.length < count) {
-    const queuedWords = new Set(queue.map((e) => e.word));
-    const unseen = eligible.filter((e) => !queuedWords.has(e.word));
-    queue.push(...shuffle(unseen.length ? unseen : eligible));
-  }
+// `queue` holds every tier word not yet drawn THIS cycle, in shuffled
+// order. A fresh cycle only starts (reshuffling the whole tier back in)
+// once the queue is completely empty - i.e. every word has been drawn
+// once - never just because the words currently at the front happen not
+// to fit this particular roll's grid size. Topping up early on a
+// too-small subset was the bug: it treated already-drawn words as
+// "unseen" again as soon as the few still-queued words didn't fit, so a
+// word could resurface long before the rest of its tier had its turn.
+function startNewCycleIfEmpty(queue, tierPool) {
+  if (queue.length === 0) queue.push(...shuffle(tierPool));
   return queue;
+}
+
+// Draws the first `count` queued words that fit this roll's grid size,
+// leaving every other queued word - fitting or not - in place for a
+// later draw instead of discarding or reshuffling it. Returns
+// { drawn, remaining } - remaining becomes the new persisted queue. May
+// return fewer than `count` if what's left this cycle doesn't have
+// enough words at this size; that's fine, the caller already tolerates a
+// tier contributing fewer entries than asked for.
+function drawFromQueue(queue, count, fitsThisRoll) {
+  const drawn = [];
+  const remaining = [];
+  for (const entry of queue) {
+    if (drawn.length < count && fitsThisRoll(entry)) drawn.push(entry);
+    else remaining.push(entry);
+  }
+  return { drawn, remaining };
 }
 
 export const DIFFICULTIES = ['easy', 'medium', 'difficult'];
@@ -141,9 +162,10 @@ export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
 // రత్నం, or వజ్రం) rather than being one difficulty end to end. `weights`
 // (see difficultyWeightsForExperience) skews that mix toward easier tiers
 // for a newer/lower-scoring player instead of always an even split. Each
-// tier is still drawn from its own shuffled rotation queue, trimmed to
-// whatever's eligible at the rolled size before topping back up, so
-// nothing repeats until that tier cycles.
+// tier is still drawn from its own shuffled rotation queue over the
+// tier's full word list - see drawFromQueue - so nothing repeats until
+// every word in that tier has been drawn once, regardless of how this
+// or any other puzzle's grid size happened to roll in between.
 export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity, lang = 'te', exposure = {}) {
   const cappedMax = gridSizeCapForExperience(puzzlesCompleted, level.gridSizeMin, level.gridSizeMax);
   const gridSize = randomInt(level.gridSizeMin, cappedMax);
@@ -151,18 +173,28 @@ export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesC
 
   const entries = [];
   for (const difficulty of DIFFICULTIES) {
-    const eligible = pool.filter((e) => e.difficulty === difficulty && graphemes(e.word).length <= gridSize
-      && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
-    if (!eligible.length) continue;
+    // The tier's full rotation pool - not filtered by this roll's grid
+    // size, only by whether the word is still within its exposure cap.
+    // Filtering by gridSize here (as this used to) meant a word too long
+    // for one puzzle's small grid would drop out of the persisted queue
+    // entirely, then look "unseen" again as soon as a bigger grid rolled
+    // - letting it resurface well before the tier had actually cycled.
+    const tierPool = pool.filter((e) => e.difficulty === difficulty && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
+    if (!tierPool.length) continue;
 
-    const eligibleWords = new Set(eligible.map((e) => e.word));
+    const fitsThisRoll = (e) => graphemes(e.word).length <= gridSize;
+    const eligibleNow = tierPool.filter(fitsThisRoll);
+    const count = Math.min(targetCounts[difficulty], eligibleNow.length);
+    if (!count) continue;
+
+    const tierWords = new Set(tierPool.map((e) => e.word));
     const key = `${lang}::${difficulty}`;
-    const trimmedQueue = (drawQueues.get(key) || []).filter((e) => eligibleWords.has(e.word));
-    const count = Math.min(targetCounts[difficulty], eligible.length);
+    const queue = (drawQueues.get(key) || []).filter((e) => tierWords.has(e.word));
+    startNewCycleIfEmpty(queue, tierPool);
 
-    const queue = refillQueue(trimmedQueue, eligible, count);
-    entries.push(...queue.slice(0, count));
-    drawQueues.set(key, queue.slice(count));
+    const { drawn, remaining } = drawFromQueue(queue, count, fitsThisRoll);
+    entries.push(...drawn);
+    drawQueues.set(key, remaining);
   }
   return { gridSize, entries };
 }
