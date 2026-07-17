@@ -93,6 +93,22 @@ function gemBadge(difficulty) {
   return `<span class="gem-icon gem-${difficulty}" role="img" aria-label="${label}" title="${label}">${GEM_ICONS[difficulty] || ''}</span>`;
 }
 
+// A little celebratory pop of the earned gem, rising and fading away from
+// the middle of the word just found - only for a genuinely self-found
+// word (see markFound's earnedGem), never for a "Show answer" reveal,
+// so the animation always means the same thing: a gem was actually
+// earned. Removes itself once its CSS animation finishes.
+function popGemFeedback(cellEls, cells, difficulty) {
+  const [mr, mc] = cells[Math.floor(cells.length / 2)];
+  const anchor = cellEls[mr]?.[mc];
+  if (!anchor) return;
+  const pop = document.createElement('div');
+  pop.className = `gem-pop gem-pop-${difficulty}`;
+  pop.innerHTML = GEM_ICONS[difficulty] || '';
+  anchor.appendChild(pop);
+  pop.addEventListener('animationend', () => pop.remove());
+}
+
 // One-tap "this word/meaning looks off" report from a hint row - see
 // wireFlagButtons. Only shown when there's a backend to actually record
 // it in (see syncsToBackend's callers below); flagging into nothing would
@@ -591,6 +607,7 @@ function renderGame(session) {
     placement.found = true;
     placement.earnedGem = !viaHint;
     placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
+    if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkLevelComplete();
   }
@@ -928,6 +945,7 @@ function renderStotramGame(session) {
     placement.found = true;
     placement.earnedGem = !viaHint;
     placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
+    if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkComplete();
   }

@@ -381,6 +381,30 @@ h1, h2, h3, .display {
 .cell.found { background: var(--found); color: #fff; }
 .cell.wrong { background: var(--wrong); color: #fff; }
 
+/* Celebratory pop of the gem just earned - rises and fades from the
+   middle of the found word (see popGemFeedback in app.js). Positioned
+   against its anchor .cell, which is already position:relative. */
+.gem-pop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.8em;
+  height: 1.8em;
+  pointer-events: none;
+  z-index: 5;
+  animation: gem-pop 0.9s ease-out forwards;
+}
+.gem-pop svg { display: block; width: 100%; height: 100%; }
+.gem-pop-easy { color: var(--pearl); }
+.gem-pop-medium { color: var(--gem); }
+.gem-pop-difficult { color: var(--diamond); }
+
+@keyframes gem-pop {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  30% { transform: translate(-50%, -140%) scale(1.3); opacity: 1; }
+  100% { transform: translate(-50%, -240%) scale(1); opacity: 0; }
+}
+
 /* A small arrow badge showing which way the current drag is heading -
    purely the geometry of the drag, not a hint toward any answer. */
 .cell.direction-pointer::after {
