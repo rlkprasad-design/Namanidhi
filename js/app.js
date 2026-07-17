@@ -98,14 +98,22 @@ function gemBadge(difficulty) {
 // word (see markFound's earnedGem), never for a "Show answer" reveal,
 // so the animation always means the same thing: a gem was actually
 // earned. Removes itself once its CSS animation finishes.
-function popGemFeedback(cellEls, cells, difficulty) {
+//
+// Appended to the grid itself (not the found cell) and positioned with
+// the anchor cell's own offset - a .cell has overflow:hidden (so a long
+// grapheme can't spill into its neighbors), which would otherwise clip
+// this animation to invisibility the moment it started rising past the
+// cell's edge.
+function popGemFeedback(gridEl, cellEls, cells, difficulty) {
   const [mr, mc] = cells[Math.floor(cells.length / 2)];
   const anchor = cellEls[mr]?.[mc];
   if (!anchor) return;
   const pop = document.createElement('div');
   pop.className = `gem-pop gem-pop-${difficulty}`;
   pop.innerHTML = GEM_ICONS[difficulty] || '';
-  anchor.appendChild(pop);
+  pop.style.left = `${anchor.offsetLeft + anchor.offsetWidth / 2}px`;
+  pop.style.top = `${anchor.offsetTop + anchor.offsetHeight / 2}px`;
+  gridEl.appendChild(pop);
   pop.addEventListener('animationend', () => pop.remove());
 }
 
@@ -610,7 +618,7 @@ function renderGame(session) {
       cellEls[r][c].classList.add('found');
       if (viaHint) cellEls[r][c].classList.add('via-hint');
     });
-    if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
+    if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkLevelComplete();
   }
@@ -951,7 +959,7 @@ function renderStotramGame(session) {
       cellEls[r][c].classList.add('found');
       if (viaHint) cellEls[r][c].classList.add('via-hint');
     });
-    if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
+    if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkComplete();
   }

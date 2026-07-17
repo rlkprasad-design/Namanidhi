@@ -351,6 +351,7 @@ h1, h2, h3, .display {
 }
 
 .grid {
+  position: relative;
   display: grid;
   gap: 4px;
   touch-action: none;
@@ -383,14 +384,18 @@ h1, h2, h3, .display {
 .cell.wrong { background: var(--wrong); color: #fff; }
 
 /* Celebratory pop of the gem just earned - rises and fades from the
-   middle of the found word (see popGemFeedback in app.js). Positioned
-   against its anchor .cell, which is already position:relative. */
+   middle of the found word (see popGemFeedback in app.js). Appended to
+   .grid itself (not the found .cell) and positioned with an inline
+   left/top in px, since .cell has overflow:hidden and would otherwise
+   clip the animation the moment it started rising past the cell's edge.
+   Sized off --cell-font-size (set inline on .grid, so it inherits down)
+   rather than its own font-size, so it stays proportional to the grid's
+   letters at any grid size instead of a fixed em relative to .grid's own
+   (unrelated) font-size. */
 .gem-pop {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 1.8em;
-  height: 1.8em;
+  width: calc(var(--cell-font-size, 1.5rem) * 1.8);
+  height: calc(var(--cell-font-size, 1.5rem) * 1.8);
   pointer-events: none;
   z-index: 5;
   animation: gem-pop 0.9s ease-out forwards;
