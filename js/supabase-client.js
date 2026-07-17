@@ -110,6 +110,35 @@ export async function fetchPuzzleLeaderboard(lang) {
   return data;
 }
 
+// One-tap "this looks off" report from a puzzle's hints panel - see
+// js/app.js's flag button. `entry` is { word, meaning, language,
+// difficulty, source_mode, flagged_by }; returns { ok } rather than
+// throwing so a flag tap never disrupts the puzzle itself.
+export async function flagEntry(entry) {
+  const sb = await getClient();
+  if (!sb) return { ok: false };
+  const { error } = await sb.from('flagged_entries').insert(entry);
+  if (error) {
+    console.warn('flagEntry failed:', error);
+    return { ok: false };
+  }
+  return { ok: true };
+}
+
+export async function fetchFlaggedEntries() {
+  const sb = await getClient();
+  if (!sb) return null;
+  const { data, error } = await sb
+    .from('flagged_entries')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) {
+    console.warn('fetchFlaggedEntries failed:', error);
+    return null;
+  }
+  return data;
+}
+
 export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;

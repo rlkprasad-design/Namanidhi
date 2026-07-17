@@ -32,6 +32,22 @@ create table if not exists japam_log (
   occurred_at timestamptz not null default now()
 );
 
+-- A player-flagged content entry (an off-beat word or meaning noticed
+-- during a puzzle), so whoever curates data/questions.json can review
+-- and fix them without needing anyone to email a screenshot. No foreign
+-- key to players - flagged_by is just the display name at flag time, same
+-- trust-based identity model as everywhere else in this schema.
+create table if not exists flagged_entries (
+  id bigint generated always as identity primary key,
+  word text not null,
+  meaning text not null,
+  language text not null default 'te',
+  difficulty text,
+  source_mode text not null, -- 'general' (Puranas pool) or a stotram id
+  flagged_by text,
+  created_at timestamptz not null default now()
+);
+
 -- Row Level Security --------------------------------------------------
 -- Identity here is name-only (no Supabase Auth session), matching the
 -- app's "no login for elderly users" design. That means RLS cannot truly
@@ -44,6 +60,7 @@ create table if not exists japam_log (
 alter table players enable row level security;
 alter table puzzle_progress enable row level security;
 alter table japam_log enable row level security;
+alter table flagged_entries enable row level security;
 
 create policy "players readable by anyone"
   on players for select using (true);
@@ -51,6 +68,8 @@ create policy "puzzle_progress readable by anyone"
   on puzzle_progress for select using (true);
 create policy "japam_log readable by anyone"
   on japam_log for select using (true);
+create policy "flagged_entries readable by anyone"
+  on flagged_entries for select using (true);
 
 create policy "anyone can create a player"
   on players for insert with check (true);
@@ -58,6 +77,8 @@ create policy "anyone can log puzzle progress"
   on puzzle_progress for insert with check (true);
 create policy "anyone can log japam traces"
   on japam_log for insert with check (true);
+create policy "anyone can flag an entry"
+  on flagged_entries for insert with check (true);
 
 -- Leaderboard views -----------------------------------------------------
 -- Mirrors the leaderboard-view pattern from the BBA Practice App: one view

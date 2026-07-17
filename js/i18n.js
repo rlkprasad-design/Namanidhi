@@ -95,6 +95,17 @@ const STRINGS = {
   hintsTitle: { te: 'సూచనలు', en: 'Hints' },
   continueLevelBtn: { te: 'కొనసాగించు', en: 'Continue' },
 
+  flagBtnTitle: { te: 'ఈ పదం సరిగ్గా లేదని తెలియజేయండి', en: 'Flag this word/meaning as off' },
+  flaggedConfirm: { te: 'తెలియజేయబడింది', en: 'Flagged' },
+  flaggedQuestionsTitle: { te: 'తెలియజేసిన పదాలు', en: 'Flagged questions' },
+  noFlaggedEntries: { te: 'ఇంకా ఏమీ తెలియజేయలేదు.', en: 'Nothing flagged yet.' },
+  colWord: { te: 'పదం', en: 'Word' },
+  colMeaning: { te: 'అర్థం', en: 'Meaning' },
+  colSource: { te: 'ఎక్కడ నుండి', en: 'From' },
+  colFlaggedBy: { te: 'ఎవరు తెలియజేశారు', en: 'Flagged by' },
+  colFlaggedAt: { te: 'ఎప్పుడు', en: 'When' },
+  sourceGeneral: { te: 'పురాణాలు', en: 'Puranas' },
+
   congratulations: { te: 'అభినందనలు!', en: 'Well done!' },
   allFoundLevel: { te: 'అన్ని నామాలు దొరికాయి.', en: 'You found every name.' },
 

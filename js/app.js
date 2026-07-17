@@ -21,7 +21,7 @@ import {
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
-  fetchPuzzleLeaderboard, fetchJapamLeaderboard,
+  fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES } from './i18n.js';
 
@@ -91,6 +91,48 @@ function gemLabel(difficulty) {
 function gemBadge(difficulty) {
   const label = gemLabel(difficulty);
   return `<span class="gem-icon gem-${difficulty}" role="img" aria-label="${label}" title="${label}">${GEM_ICONS[difficulty] || ''}</span>`;
+}
+
+// One-tap "this word/meaning looks off" report from a hint row - see
+// wireFlagButtons. Only shown when there's a backend to actually record
+// it in (see syncsToBackend's callers below); flagging into nothing would
+// just be a dead button.
+const FLAG_ICON = `<svg viewBox="0 0 16 16"><path d="M3 1v14M3 1h9l-2 3 2 3H3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
+
+function flagButtonHtml(idx) {
+  return `<button type="button" class="flag-btn" data-flag="${idx}" title="${t('flagBtnTitle')}" aria-label="${t('flagBtnTitle')}">${FLAG_ICON}</button>`;
+}
+
+// Wires up every flag button just rendered inside `hintsEl` - called
+// after each renderHints() (which rebuilds the hints panel from scratch,
+// so listeners need reattaching every time, not just once). `placements`
+// matches session.placements (index-aligned with the data-flag index in
+// the markup); `sourceMode` is 'general' for the Puranas pool or a
+// stotram's id, so a curator reviewing flags later knows where each one
+// came from.
+function wireFlagButtons(hintsEl, placements, sourceMode) {
+  if (!syncsToBackend()) return;
+  hintsEl.querySelectorAll('[data-flag]').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      if (btn.disabled) return;
+      btn.disabled = true;
+      const p = placements[Number(btn.dataset.flag)];
+      const { ok } = await flagEntry({
+        word: p.letters.join(''),
+        meaning: p.entry.meaning,
+        language: getLang(),
+        difficulty: p.entry.difficulty,
+        source_mode: sourceMode,
+        flagged_by: state.playerName,
+      });
+      if (ok) {
+        btn.classList.add('flagged');
+        btn.title = t('flaggedConfirm');
+      } else {
+        btn.disabled = false; // let them retry
+      }
+    });
+  });
 }
 
 const state = {
@@ -503,16 +545,18 @@ function renderGame(session) {
 
   function renderHints() {
     hintsEl.innerHTML = '';
-    for (const p of session.placements) {
+    session.placements.forEach((p, idx) => {
       const item = el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
           <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">${t('syllableCount', p.letters.length)}</span></span>
+          ${flagButtonHtml(idx)}
         </div>
       `);
       hintsEl.appendChild(item);
-    }
+    });
+    wireFlagButtons(hintsEl, session.placements, 'general');
   }
   renderHints();
 
@@ -856,15 +900,17 @@ function renderStotramGame(session) {
 
   function renderHints() {
     hintsEl.innerHTML = '';
-    for (const p of session.placements) {
+    session.placements.forEach((p, idx) => {
       hintsEl.appendChild(el(`
         <div class="hint-item ${p.found ? 'found' : 'pending'}">
           <span class="hint-word">${p.letters.join('')}</span>
           ${gemBadge(p.entry.difficulty)}
           <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">${t('syllableCount', p.letters.length)}</span></span>
+          ${flagButtonHtml(idx)}
         </div>
       `));
-    }
+    });
+    wireFlagButtons(hintsEl, session.placements, stotram.id);
   }
   renderHints();
 
@@ -1162,6 +1208,11 @@ async function showScoreboard() {
         <h3>${t('japamBoardTitle')}</h3>
         <div data-japam-board>${t('loading')}</div>
       </div>
+      ${syncsToBackend() ? `
+      <div class="score-section">
+        <h3>${t('flaggedQuestionsTitle')}</h3>
+        <div data-flagged-board>${t('loading')}</div>
+      </div>` : ''}
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
@@ -1169,9 +1220,12 @@ async function showScoreboard() {
 
   const puzzleBoardEl = screen.querySelector('[data-puzzle-board]');
   const japamBoardEl = screen.querySelector('[data-japam-board]');
+  const flaggedBoardEl = screen.querySelector('[data-flagged-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows] = await Promise.all([fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang())]);
+    const [puzzleRows, japamRows, flaggedRows, stotrams] = await Promise.all([
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(), loadStotrams(getLang()),
+    ]);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
     );
@@ -1190,6 +1244,22 @@ async function showScoreboard() {
       ['display_name', 'total_count', 'daily_average'],
       [t('colName'), t('colTotalJapamCount'), t('colDailyAverage')],
       'data-japam-board'
+    ));
+    // source_mode is 'general' or a stotram id - map the id to its title
+    // (already loaded above) so this reads like the app, not the schema.
+    const stotramTitleById = new Map((stotrams || []).map((s) => [s.id, s.title]));
+    const flaggedRowsFormatted = (flaggedRows || []).map((row) => ({
+      ...row,
+      source_label: row.source_mode === 'general' ? t('sourceGeneral') : (stotramTitleById.get(row.source_mode) || row.source_mode),
+      flagged_at: new Date(row.created_at).toLocaleString(),
+    }));
+    flaggedBoardEl.replaceWith(renderLeaderboardTable(
+      flaggedRowsFormatted,
+      ['word', 'meaning', 'source_label', 'flagged_by', 'flagged_at'],
+      [t('colWord'), t('colMeaning'), t('colSource'), t('colFlaggedBy'), t('colFlaggedAt')],
+      'data-flagged-board',
+      10,
+      'noFlaggedEntries'
     ));
   } else {
     const puzzleTotals = getLocalPuzzleTotals(getLang(), state.playerName);
@@ -1215,9 +1285,9 @@ async function showScoreboard() {
 // as the family/community using this grows, a single long table gets
 // unwieldy fast. The wrapper element is built once and re-rendered in
 // place on toggle, rather than going through setScreen again.
-function renderLeaderboardTable(rows, keys, labels, dataAttr, limit = 10) {
+function renderLeaderboardTable(rows, keys, labels, dataAttr, limit = 10, emptyKey = 'noScoresYet') {
   if (!rows || !rows.length) {
-    return el(`<div ${dataAttr}><p class="score-note">${t('noScoresYet')}</p></div>`);
+    return el(`<div ${dataAttr}><p class="score-note">${t(emptyKey)}</p></div>`);
   }
   let expanded = false;
   const wrap = el(`<div ${dataAttr}></div>`);
