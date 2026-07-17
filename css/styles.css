@@ -379,6 +379,7 @@ h1, h2, h3, .display {
 
 .cell.selected { background: var(--gold-light); }
 .cell.found { background: var(--found); color: #fff; }
+.cell.found.via-hint { background: var(--gold); color: var(--deep-maroon); }
 .cell.wrong { background: var(--wrong); color: #fff; }
 
 /* Celebratory pop of the gem just earned - rises and fades from the
