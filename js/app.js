@@ -439,8 +439,6 @@ function showNamaGuptaNidhiHub() {
 // రత్నం/వజ్రం, i.e. pearl/gem/diamond).
 // ---------------------------------------------------------------------
 
-const WRONG_TRIES_FOR_NUDGE = 4;
-
 // Degrees to rotate a "points right" arrow glyph so it points along
 // (dr, dc) - purely the geometry of the drag itself, no knowledge of
 // where any word actually is.
@@ -504,7 +502,6 @@ function buildSession(level, pool) {
     gridSize,
     grid,
     placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })),
-    wrongAttempts: 0,
   };
 }
 
@@ -605,17 +602,6 @@ function renderGame(session) {
     }, 400);
   }
 
-  function maybeNudge() {
-    if (session.wrongAttempts < WRONG_TRIES_FOR_NUDGE) return;
-    const target = session.placements.find((p) => !p.found);
-    if (!target) return;
-    session.wrongAttempts = 0;
-    target.cells.forEach(([r, c]) => cellEls[r][c].classList.add('nudge'));
-    setTimeout(() => {
-      target.cells.forEach(([r, c]) => cellEls[r][c].classList.remove('nudge'));
-    }, 2500);
-  }
-
   function checkLevelComplete() {
     if (!session.placements.every((p) => p.found)) return;
     recordLevelProgress(session);
@@ -639,12 +625,9 @@ function renderGame(session) {
         return word === forward || word === reversed;
       });
       if (match) {
-        session.wrongAttempts = 0;
         markFound(match);
       } else {
-        session.wrongAttempts += 1;
         flashWrong(path);
-        maybeNudge();
       }
     },
   });
@@ -840,7 +823,7 @@ function buildStotramSession(stotram) {
   const entries = drawStotramRound(stotram, gridSize, weights, exposure);
   recordWordExposures(entries.map((e) => e.word), scopeKey, state.playerName);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode, fillerPool: fillerPool() });
-  return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })), wrongAttempts: 0 };
+  return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })) };
 }
 
 // Mirrors renderGeneralSession above: checks this stotram's own pool for
@@ -954,15 +937,6 @@ function renderStotramGame(session) {
     setTimeout(() => path.forEach(({ r, c }) => cellEls[r][c].classList.remove('wrong')), 400);
   }
 
-  function maybeNudge() {
-    if (session.wrongAttempts < WRONG_TRIES_FOR_NUDGE) return;
-    const target = session.placements.find((p) => !p.found);
-    if (!target) return;
-    session.wrongAttempts = 0;
-    target.cells.forEach(([r, c]) => cellEls[r][c].classList.add('nudge'));
-    setTimeout(() => target.cells.forEach(([r, c]) => cellEls[r][c].classList.remove('nudge')), 2500);
-  }
-
   function checkComplete() {
     if (!session.placements.every((p) => p.found)) return;
     recordStotramProgress(session);
@@ -980,8 +954,8 @@ function renderStotramGame(session) {
       if (path.length < 2) return;
       const { forward, reversed } = pathToStrings(path, session.grid);
       const match = session.placements.find((p) => !p.found && (p.letters.join('') === forward || p.letters.join('') === reversed));
-      if (match) { session.wrongAttempts = 0; markFound(match); }
-      else { session.wrongAttempts += 1; flashWrong(path); maybeNudge(); }
+      if (match) { markFound(match); }
+      else { flashWrong(path); }
     },
   });
 

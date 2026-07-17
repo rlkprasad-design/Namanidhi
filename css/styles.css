@@ -380,7 +380,6 @@ h1, h2, h3, .display {
 .cell.selected { background: var(--gold-light); }
 .cell.found { background: var(--found); color: #fff; }
 .cell.wrong { background: var(--wrong); color: #fff; }
-.cell.nudge { background: var(--gold-light); box-shadow: 0 0 0 3px var(--gold); animation: glow 1.2s ease-in-out infinite alternate; }
 
 /* A small arrow badge showing which way the current drag is heading -
    purely the geometry of the drag, not a hint toward any answer. */
@@ -401,11 +400,6 @@ h1, h2, h3, .display {
   justify-content: center;
   transform: rotate(var(--pointer-angle, 0deg));
   pointer-events: none;
-}
-
-@keyframes glow {
-  from { box-shadow: 0 0 0 2px var(--gold); }
-  to { box-shadow: 0 0 10px 4px var(--gold); }
 }
 
 /* Hints panel ------------------------------------------------------------ */
