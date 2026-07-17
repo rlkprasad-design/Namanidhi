@@ -420,6 +420,12 @@ h1, h2, h3, .display {
   border-bottom: 1px solid rgba(240, 210, 139, 0.35);
   padding-bottom: 6px;
 }
+.flag-hint-note {
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  opacity: 0.75;
+  margin: 8px 0;
+}
 .hint-item {
   display: flex;
   align-items: baseline;
