@@ -95,6 +95,10 @@ const STRINGS = {
   hintsTitle: { te: 'సూచనలు', en: 'Hints' },
   continueLevelBtn: { te: 'కొనసాగించు', en: 'Continue' },
 
+  flagHintExplainer: {
+    te: '🚩 ఏదైనా పదం లేదా అర్థం సరిగ్గా లేదనిపిస్తే, పక్కన ఉన్న జెండా గుర్తును నొక్కండి.',
+    en: '🚩 If a word or its meaning looks off, tap the flag next to it to let us know.',
+  },
   flagBtnTitle: { te: 'ఈ పదం సరిగ్గా లేదని తెలియజేయండి', en: 'Flag this word/meaning as off' },
   flaggedConfirm: { te: 'తెలియజేయబడింది', en: 'Flagged' },
   flaggedQuestionsTitle: { te: 'తెలియజేసిన పదాలు', en: 'Flagged questions' },

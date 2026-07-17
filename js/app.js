@@ -100,6 +100,7 @@ function gemBadge(difficulty) {
 const FLAG_ICON = `<svg viewBox="0 0 16 16"><path d="M3 1v14M3 1h9l-2 3 2 3H3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>`;
 
 function flagButtonHtml(idx) {
+  if (!syncsToBackend()) return '';
   return `<button type="button" class="flag-btn" data-flag="${idx}" title="${t('flagBtnTitle')}" aria-label="${t('flagBtnTitle')}">${FLAG_ICON}</button>`;
 }
 
@@ -522,6 +523,7 @@ function renderGame(session) {
       </div>
       <div class="hints-panel">
         <h3>${t('hintsTitle')}</h3>
+        ${syncsToBackend() ? `<p class="flag-hint-note">${t('flagHintExplainer')}</p>` : ''}
         <div data-hints></div>
       </div>
     </div>
@@ -877,6 +879,7 @@ function renderStotramGame(session) {
       </div>
       <div class="hints-panel">
         <h3>${t('hintsTitle')}</h3>
+        ${syncsToBackend() ? `<p class="flag-hint-note">${t('flagHintExplainer')}</p>` : ''}
         <div data-hints></div>
       </div>
     </div>
