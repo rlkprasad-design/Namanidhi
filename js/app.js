@@ -606,7 +606,10 @@ function renderGame(session) {
   function markFound(placement, viaHint) {
     placement.found = true;
     placement.earnedGem = !viaHint;
-    placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
+    placement.cells.forEach(([r, c]) => {
+      cellEls[r][c].classList.add('found');
+      if (viaHint) cellEls[r][c].classList.add('via-hint');
+    });
     if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkLevelComplete();
@@ -944,7 +947,10 @@ function renderStotramGame(session) {
   function markFound(placement, viaHint) {
     placement.found = true;
     placement.earnedGem = !viaHint;
-    placement.cells.forEach(([r, c]) => cellEls[r][c].classList.add('found'));
+    placement.cells.forEach(([r, c]) => {
+      cellEls[r][c].classList.add('found');
+      if (viaHint) cellEls[r][c].classList.add('via-hint');
+    });
     if (placement.earnedGem) popGemFeedback(cellEls, placement.cells, placement.entry.difficulty);
     renderHints();
     checkComplete();
@@ -1110,11 +1116,39 @@ async function renderJapamTrace(session) {
   setScreen(screen);
 
   const canvas = screen.querySelector('[data-canvas]');
-  const { dots, width, height, baselineY } = await buildDotTrace(session.word);
+  const { dots, width, height, baselineY, ink } = await buildDotTrace(session.word);
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
   const filled = new Set();
+
+  // The dots alone are a subtle "did that one just change color?" cue -
+  // easy to miss, especially for anyone not looking closely. Solidifying
+  // the actual letter as it's traced is far more obvious: solidInk is the
+  // true glyph shape rendered once in solid color; revealMask accumulates
+  // a filled circle at every traced dot; each draw() composites solidInk
+  // through revealMask (canvas destination-in, GPU-composited - cheap
+  // even on a slower phone, unlike re-checking every ink pixel by hand)
+  // so only the traced portion of the letter actually shows.
+  const solidInk = buildSolidInkCanvas(ink, width, height);
+  const revealMask = document.createElement('canvas');
+  revealMask.width = width;
+  revealMask.height = height;
+  const revealCtx = revealMask.getContext('2d');
+  const REVEAL_RADIUS = 16;
+  const revealed = new Set();
+
+  function revealNewlyFilledDots() {
+    filled.forEach((i) => {
+      if (revealed.has(i)) return;
+      revealed.add(i);
+      const d = dots[i];
+      revealCtx.beginPath();
+      revealCtx.arc(d.x, d.y, REVEAL_RADIUS, 0, Math.PI * 2);
+      revealCtx.fillStyle = '#000';
+      revealCtx.fill();
+    });
+  }
 
   function draw() {
     ctx.clearRect(0, 0, width, height);
@@ -1124,6 +1158,13 @@ async function renderJapamTrace(session) {
     ctx.moveTo(0, baselineY);
     ctx.lineTo(width, baselineY);
     ctx.stroke();
+
+    ctx.save();
+    ctx.drawImage(solidInk, 0, 0);
+    ctx.globalCompositeOperation = 'destination-in';
+    ctx.drawImage(revealMask, 0, 0);
+    ctx.restore();
+
     dots.forEach((d, i) => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, filled.has(i) ? 4.5 : 3.5, 0, Math.PI * 2);
@@ -1134,9 +1175,29 @@ async function renderJapamTrace(session) {
   draw();
 
   attachDotTracer(canvas, dots, filled, {
-    onChange: draw,
+    onChange: () => { revealNewlyFilledDots(); draw(); },
     onComplete: () => onJapamSuccess(session),
   });
+}
+
+// The true glyph shape (from handwriting.js's ink mask) rendered once in
+// solid color - see renderJapamTrace's revealMask for how it's revealed
+// progressively as the dots covering it get traced.
+function buildSolidInkCanvas(ink, width, height) {
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+  const imgData = ctx.createImageData(width, height);
+  for (let i = 0; i < ink.length; i++) {
+    if (!ink[i]) continue;
+    imgData.data[i * 4] = 201;
+    imgData.data[i * 4 + 1] = 150;
+    imgData.data[i * 4 + 2] = 46;
+    imgData.data[i * 4 + 3] = 255;
+  }
+  ctx.putImageData(imgData, 0, 0);
+  return canvas;
 }
 
 function onJapamSuccess(session) {

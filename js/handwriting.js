@@ -150,7 +150,11 @@ function resampleByArcLength(points, spacing) {
 }
 
 // Builds (and caches) the dot outline for a word:
-// { dots: [{x,y}], width, height, baselineY }.
+// { dots: [{x,y}], width, height, baselineY, ink }. `ink` (the same
+// Uint8Array rendered here, 1 = inked pixel) is included so a caller can
+// progressively reveal the real glyph shape as its dots get traced - see
+// app.js's renderJapamTrace - rather than only showing the dots
+// themselves, which are easy to miss changing color at a glance.
 export async function buildDotTrace(word) {
   if (cache.has(word)) return cache.get(word);
   await ensureFontReady();
@@ -166,7 +170,7 @@ export async function buildDotTrace(word) {
   });
   blobs.sort((a, b) => a.centroidX - b.centroidX);
 
-  const result = { dots: blobs.flatMap((b) => b.dots), width, height, baselineY };
+  const result = { dots: blobs.flatMap((b) => b.dots), width, height, baselineY, ink };
   cache.set(word, result);
   return result;
 }
