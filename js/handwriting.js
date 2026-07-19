@@ -176,10 +176,11 @@ export async function buildDotTrace(word) {
 }
 
 // A trace counts as done once this fraction of dots has been touched -
-// left deliberately short of 100% so an almost-complete trace (a stray
-// dot or two, imprecise touch input) still counts, matching the app's
-// no-penalty tone.
-const COMPLETE_THRESHOLD = 0.95;
+// left just short of 100% (rather than exactly 100%) so a single
+// stubborn dot - one that's awkward to land precisely, near an edge or
+// a tight cluster of strokes - can't leave a genuinely-finished trace
+// stuck forever, matching the app's no-penalty tone.
+const COMPLETE_THRESHOLD = 0.99;
 
 // Attaches drag-to-fill interaction to a canvas already sized to match
 // dotTrace.width/height. Calls onChange() whenever a new dot fills, and
