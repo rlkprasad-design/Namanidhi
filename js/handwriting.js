@@ -224,8 +224,13 @@ export function attachDotTracer(canvas, dots, filled, { onChange, onComplete }) 
     markNear(pointFromEvent(e));
     e.preventDefault();
   });
+  // Holding a mouse button down while dragging is awkward on a trackpad -
+  // a real touch (pointerType 'touch') physically cannot emit pointermove
+  // without an active contact point, so this only changes behavior for
+  // mouse/pen input: hovering the canvas fills nearby dots with no button
+  // held at all.
   canvas.addEventListener('pointermove', (e) => {
-    if (!dragging) return;
+    if (!dragging && e.pointerType === 'touch') return;
     markNear(pointFromEvent(e));
   });
   const release = () => { dragging = false; };

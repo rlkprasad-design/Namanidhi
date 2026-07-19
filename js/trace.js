@@ -53,21 +53,36 @@ export function attachTracer(container, { onDragStart, onDragUpdate, onDragEnd }
     return newPath;
   }
 
-  container.addEventListener('pointerdown', (e) => {
-    const p = pointFromEvent(e);
-    if (!p) return;
+  function begin(p) {
     active = true;
     start = p;
     dir = null;
     path = [p];
-    container.setPointerCapture(e.pointerId);
     onDragStart(path);
+  }
+
+  container.addEventListener('pointerdown', (e) => {
+    const p = pointFromEvent(e);
+    if (!p) return;
+    begin(p);
+    container.setPointerCapture(e.pointerId);
     e.preventDefault();
   });
 
+  // Holding a mouse button down while dragging is awkward on a trackpad -
+  // a real touch (pointerType 'touch') physically cannot emit pointermove
+  // without an active contact point, so this branch is naturally a no-op
+  // on touchscreens and only changes behavior for mouse/pen input: moving
+  // over the grid starts and continues a trace with no button held at
+  // all, ending when the pointer leaves the grid (see pointerleave below)
+  // instead of on pointerup.
   container.addEventListener('pointermove', (e) => {
-    if (!active) return;
     const p = pointFromEvent(e);
+    if (!active) {
+      if (!p || e.pointerType === 'touch') return;
+      begin(p);
+      return;
+    }
     if (!p) return;
     const newPath = computePath(p);
     if (newPath !== path) {
@@ -88,6 +103,9 @@ export function attachTracer(container, { onDragStart, onDragUpdate, onDragEnd }
 
   container.addEventListener('pointerup', release);
   container.addEventListener('pointercancel', release);
+  container.addEventListener('pointerleave', (e) => {
+    if (e.pointerType !== 'touch') release();
+  });
 }
 
 // Reads the letters along a traced path out of a grid (rows of grapheme
