@@ -4,6 +4,15 @@ const CONSONANTS = ['క','ఖ','గ','ఘ','ఙ','చ','ఛ','జ','ఝ','ఞ',
 const VOWEL_SIGNS = ['', 'ా', 'ి', 'ీ', 'ు', 'ూ', 'ె', 'ే', 'ై', 'ొ', 'ో', 'ౌ', 'ం'];
 const BASE_POOL = CONSONANTS.flatMap((c) => VOWEL_SIGNS.map((v) => c + v));
 
+// Kannada's filler pool, same idea as Telugu's BASE_POOL above (both are
+// Brahmic abugida scripts - a base consonant plus a vowel-sign diacritic
+// forms one grapheme cluster) - just Kannada's own consonant and
+// vowel-sign glyphs, so Kannada-mode filler cells look like real Kannada
+// syllables rather than random Telugu ones.
+const KANNADA_CONSONANTS = ['ಕ','ಖ','ಗ','ಘ','ಙ','ಚ','ಛ','ಜ','ಝ','ಞ','ಟ','ಠ','ಡ','ಢ','ಣ','ತ','ಥ','ದ','ಧ','ನ','ಪ','ಫ','ಬ','ಭ','ಮ','ಯ','ರ','ಲ','ವ','ಶ','ಷ','ಸ','ಹ','ಳ'];
+const KANNADA_VOWEL_SIGNS = ['', 'ಾ', 'ಿ', 'ೀ', 'ು', 'ೂ', 'ೆ', 'ೇ', 'ೈ', 'ೊ', 'ೋ', 'ೌ', 'ಂ'];
+export const KANNADA_POOL = KANNADA_CONSONANTS.flatMap((c) => KANNADA_VOWEL_SIGNS.map((v) => c + v));
+
 // English-mode filler pool - plain A-Z, since a Latin grid has no
 // grapheme-cluster concept to imitate the way Telugu's consonant+vowel-sign
 // pool does.
