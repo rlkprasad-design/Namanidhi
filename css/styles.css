@@ -21,14 +21,14 @@ html, body {
   min-height: 100vh;
   background: radial-gradient(circle at 50% 0%, #8f2532 0%, var(--deep-maroon) 60%);
   color: var(--cream);
-  font-family: 'Noto Sans Telugu', sans-serif;
+  font-family: 'Noto Sans Telugu', 'Noto Sans Kannada', sans-serif;
   font-size: 19px;
   line-height: 1.5;
   user-select: none;
 }
 
 h1, h2, h3, .display {
-  font-family: 'Noto Serif Telugu', serif;
+  font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;
   color: var(--gold-light);
   margin: 0 0 0.4em;
   letter-spacing: 0.3px;
@@ -88,6 +88,7 @@ h1, h2, h3, .display {
 
 .lang-toggle {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
   margin-bottom: 16px;
@@ -141,7 +142,7 @@ h1, h2, h3, .display {
   padding: 12px 26px;
   border-radius: 999px;
   border: 2px solid transparent;
-  font-family: 'Noto Sans Telugu', sans-serif;
+  font-family: 'Noto Sans Telugu', 'Noto Sans Kannada', sans-serif;
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
@@ -205,7 +206,7 @@ h1, h2, h3, .display {
 .card:active { transform: scale(0.98); }
 
 .card .card-title {
-  font-family: 'Noto Serif Telugu', serif;
+  font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;
   font-size: 1.3rem;
   color: var(--gold-light);
   margin-bottom: 6px;
@@ -311,7 +312,7 @@ h1, h2, h3, .display {
   max-width: 320px;
   margin: 20px auto;
   display: block;
-  font-family: 'Noto Sans Telugu', sans-serif;
+  font-family: 'Noto Sans Telugu', 'Noto Sans Kannada', sans-serif;
   text-align: center;
   background: var(--cream);
   color: var(--deep-maroon);
@@ -465,7 +466,7 @@ h1, h2, h3, .display {
   margin-bottom: 8px;
 }
 .hint-item .hint-word {
-  font-family: 'Noto Serif Telugu', serif;
+  font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;
   font-weight: 700;
   color: var(--gold-light);
   min-width: 3ch;
@@ -537,7 +538,7 @@ h1, h2, h3, .display {
 
 .japam-word {
   text-align: center;
-  font-family: 'Noto Serif Telugu', serif;
+  font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;
   font-size: 2.2rem;
   color: var(--gold-light);
   margin: 12px 0 20px;
@@ -581,7 +582,7 @@ h1, h2, h3, .display {
   text-align: center;
   padding: 32px 12px;
   color: var(--gold-light);
-  font-family: 'Noto Serif Telugu', serif;
+  font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;
   font-size: 1.3rem;
 }
 

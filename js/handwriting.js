@@ -6,6 +6,7 @@
 // dots; dragging a finger/mouse near a dot fills it in.
 
 import { graphemes } from './segmenter.js';
+import { getLang } from './i18n.js';
 
 const FONT_PX = 170;
 const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between each letter
@@ -15,18 +16,34 @@ export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
 
 const cache = new Map();
 
-async function ensureFontReady() {
-  if (document.fonts && document.fonts.load) {
-    await document.fonts.load(`700 ${FONT_PX}px "Noto Sans Telugu"`);
+// Each script needs its own web font - a font with no glyphs for a given
+// language's Unicode block renders blank boxes/tofu, not a visible fallback,
+// so the font must match the active language, not just be "a" font.
+const FONT_NAME_BY_LANG = { te: 'Noto Sans Telugu', kn: 'Noto Sans Kannada' };
+const FONT_STACK_BY_LANG = {
+  te: '"Noto Sans Telugu", sans-serif',
+  kn: '"Noto Sans Kannada", sans-serif',
+};
+const DEFAULT_FONT_STACK = 'sans-serif';
+
+function fontStackFor(lang) {
+  return FONT_STACK_BY_LANG[lang] || DEFAULT_FONT_STACK;
+}
+
+async function ensureFontReady(lang) {
+  const name = FONT_NAME_BY_LANG[lang];
+  if (name && document.fonts && document.fonts.load) {
+    await document.fonts.load(`700 ${FONT_PX}px "${name}"`);
   }
 }
 
 const isSpace = (ch) => /\s/.test(ch);
 
-function renderInkMask(word) {
+function renderInkMask(word, lang) {
   const letters = graphemes(word);
+  const fontStack = fontStackFor(lang);
   const measure = document.createElement('canvas').getContext('2d');
-  measure.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
+  measure.font = `700 ${FONT_PX}px ${fontStack}`;
 
   let ascent = FONT_PX * 0.8;
   let descent = FONT_PX * 0.25;
@@ -48,7 +65,7 @@ function renderInkMask(word) {
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  ctx.font = `700 ${FONT_PX}px "Noto Sans Telugu", sans-serif`;
+  ctx.font = `700 ${FONT_PX}px ${fontStack}`;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'alphabetic';
 
@@ -156,10 +173,12 @@ function resampleByArcLength(points, spacing) {
 // app.js's renderJapamTrace - rather than only showing the dots
 // themselves, which are easy to miss changing color at a glance.
 export async function buildDotTrace(word) {
-  if (cache.has(word)) return cache.get(word);
-  await ensureFontReady();
+  const lang = getLang();
+  const cacheKey = `${lang}:${word}`;
+  if (cache.has(cacheKey)) return cache.get(cacheKey);
+  await ensureFontReady(lang);
 
-  const { ink, width, height, baselineY } = renderInkMask(word);
+  const { ink, width, height, baselineY } = renderInkMask(word, lang);
   const components = findComponents(ink, width, height);
 
   const blobs = components.map((pixels) => {
@@ -171,7 +190,7 @@ export async function buildDotTrace(word) {
   blobs.sort((a, b) => a.centroidX - b.centroidX);
 
   const result = { dots: blobs.flatMap((b) => b.dots), width, height, baselineY, ink };
-  cache.set(word, result);
+  cache.set(cacheKey, result);
   return result;
 }
 

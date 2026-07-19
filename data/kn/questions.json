@@ -1,0 +1,862 @@
+{
+  "entries": [
+    {
+      "word": "ರಾಮ",
+      "meaning": "ಅಯೋಧ್ಯೆಯ ರಾಜಕುಮಾರ, ವಿಷ್ಣುವಿನ ಅವತಾರ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಸೀತಾ",
+      "meaning": "ರಾಮನ ಪತ್ನಿ, ಜಾನಕಿ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಲಕ್ಷ್ಮಣ",
+      "meaning": "ರಾಮನ ಭಕ್ತ ತಮ್ಮ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಹನುಮಂತ",
+      "meaning": "ರಾಮನ ಮಹಾ ಭಕ್ತ, ವಾಯುಪುತ್ರ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಕೃಷ್ಣ",
+      "meaning": "ವಿಷ್ಣುವಿನ ಅವತಾರ, ಯಶೋದೆಯ ಮುದ್ದಿನ ಮಗ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ರಾಧಾ",
+      "meaning": "ಕೃಷ್ಣನ ಪ್ರಿಯೆ, ಶುದ್ಧ ಪ್ರೇಮದಿಂದ ಭಕ್ತಿ ತೋರಿದವಳು",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಗಣೇಶ",
+      "meaning": "ಆನೆಮುಖದ ದೇವರು, ವಿಘ್ನ ನಿವಾರಕ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಶಿವ",
+      "meaning": "ತ್ರಿಮೂರ್ತಿಗಳಲ್ಲಿ ಒಬ್ಬ, ಬ್ರಹ್ಮ ವಿಷ್ಣುಗಳೊಂದಿಗೆ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಪಾರ್ವತಿ",
+      "meaning": "ಶಿವನ ಪತ್ನಿ, ಹಿಮಾಲಯದ ಮಗಳು",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ವಿಷ್ಣು",
+      "meaning": "ವಿಶ್ವವನ್ನು ಪಾಲಿಸುವ ತ್ರಿಮೂರ್ತಿ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಲಕ್ಷ್ಮಿ",
+      "meaning": "ಸಂಪತ್ತು ಮತ್ತು ಸಮೃದ್ಧಿಯ ದೇವತೆ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಸರಸ್ವತಿ",
+      "meaning": "ಜ್ಞಾನ, ವಾಣಿ ಮತ್ತು ಸಂಗೀತದ ದೇವತೆ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ದುರ್ಗಾ",
+      "meaning": "ಪ್ರಬಲ ವೀರ ದೇವತೆ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ರಾವಣ",
+      "meaning": "ಲಂಕೆಯ ಹತ್ತು ತಲೆಯ ರಾಕ್ಷಸ ರಾಜ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಭರತ",
+      "meaning": "ರಾಮನ ಸಹೋದರ, ಅವನ ಬದಲಿಗೆ ಅಯೋಧ್ಯೆಯನ್ನಾಳಿದವನು",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಶತ್ರುಘ್ನ",
+      "meaning": "ಅಯೋಧ್ಯೆಯ ನಾಲ್ಕು ಸಹೋದರರಲ್ಲಿ ಕಿರಿಯವನು",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಅಯೋಧ್ಯೆ",
+      "meaning": "ರಾಮನ ಜನ್ಮಸ್ಥಳ ಮತ್ತು ರಾಜಧಾನಿ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಮಥುರಾ",
+      "meaning": "ಕೃಷ್ಣನ ಜನ್ಮಸ್ಥಳ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ವೃಂದಾವನ",
+      "meaning": "ಬಾಲಕೃಷ್ಣ ಆಡಿ, ಹಸುಗಳನ್ನು ಮೇಯಿಸಿದ ಸ್ಥಳ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಕಾಶಿ",
+      "meaning": "ಗಂಗಾ ತೀರದ ಪವಿತ್ರ ನಗರ, ವಾರಣಾಸಿ ಎಂದೂ ಕರೆಯುತ್ತಾರೆ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ತಿರುಪತಿ",
+      "meaning": "ವೆಂಕಟೇಶ್ವರನ ಬೆಟ್ಟದ ದೇವಾಲಯದ ಊರು",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ದ್ವಾರಕಾ",
+      "meaning": "ಸಮುದ್ರ ತೀರದ ಕೃಷ್ಣನ ರಾಜ್ಯ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಶಂಖ",
+      "meaning": "ಪೂಜೆಗೆ ಮುನ್ನ ಊದುವ ಶಂಖ",
+      "difficulty": "easy",
+      "source": "item"
+    },
+    {
+      "word": "ತುಳಸಿ",
+      "meaning": "ವಿಷ್ಣುವಿಗೆ ಪ್ರಿಯವಾದ ಪವಿತ್ರ ಗಿಡ",
+      "difficulty": "easy",
+      "source": "item"
+    },
+    {
+      "word": "ಪದ್ಮ",
+      "meaning": "ಹಲವು ದೇವತೆಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಕಮಲ ಪುಷ್ಪ",
+      "difficulty": "easy",
+      "source": "item"
+    },
+    {
+      "word": "ಅರ್ಜುನ",
+      "meaning": "ಮಹಾ ಬಿಲ್ಲುಗಾರ, ಕೃಷ್ಣನ ಆಪ್ತ ಸ್ನೇಹಿತ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಯಶೋದಾ",
+      "meaning": "ಕೃಷ್ಣನನ್ನು ಗೋಕುಲದಲ್ಲಿ ಸಾಕಿದ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಬಲರಾಮ",
+      "meaning": "ಕೃಷ್ಣನ ಅಣ್ಣ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಕುಂಭಕರ್ಣ",
+      "meaning": "ರಾವಣನ ಸಹೋದರ, ಆರು ತಿಂಗಳು ನಿದ್ರಿಸುತ್ತಿದ್ದವನು",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಸುಗ್ರೀವ",
+      "meaning": "ವಾನರ ರಾಜ, ರಾಮನ ಮಿತ್ರ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ವಾಲಿ",
+      "meaning": "ಸುಗ್ರೀವನ ಸಹೋದರ, ಕಿಷ್ಕಿಂಧೆಯ ರಾಜ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಅಹಲ್ಯಾ",
+      "meaning": "ರಾಮನ ಸ್ಪರ್ಶದಿಂದ ಶಾಪ ವಿಮುಕ್ತಳಾದ ಸ್ತ್ರೀ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಕೈಕೇಯಿ",
+      "meaning": "ದಶರಥನ ಪತ್ನಿ, ಭರತನ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಕೌಸಲ್ಯಾ",
+      "meaning": "ದಶರಥನ ಪತ್ನಿ, ರಾಮನ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ದಶರಥ",
+      "meaning": "ಅಯೋಧ್ಯೆಯ ರಾಜ, ರಾಮನ ತಂದೆ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ವಾಲ್ಮೀಕಿ",
+      "meaning": "ರಾಮಾಯಣದ ರಚನಕಾರ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಯುಧಿಷ್ಠಿರ",
+      "meaning": "ಪಾಂಡವರಲ್ಲಿ ಹಿರಿಯ, ಧರ್ಮದ ಸಾಕಾರ ಮೂರ್ತಿ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಭೀಮ",
+      "meaning": "ಬಲಿಷ್ಠ ಪಾಂಡವ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ನಕುಲ",
+      "meaning": "ಅಶ್ವವಿದ್ಯೆಯಲ್ಲಿ ನಿಪುಣ ಪಾಂಡವ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಸಹದೇವ",
+      "meaning": "ಜ್ಯೋತಿಷ್ಯದಲ್ಲಿ ನಿಪುಣ ಪಾಂಡವ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಕುಂತಿ",
+      "meaning": "ಪಾಂಡವರ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ದುರ್ಯೋಧನ",
+      "meaning": "ಕೌರವರಲ್ಲಿ ಹಿರಿಯ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಕರ್ಣ",
+      "meaning": "ಕುಂತಿಯ ಮಗ, ಔದಾರ್ಯಕ್ಕೆ ಹೆಸರಾದವನು",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ವ್ಯಾಸ",
+      "meaning": "ಮಹಾಭಾರತದ ರಚನಕಾರ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ದೇವಕಿ",
+      "meaning": "ಕೃಷ್ಣನ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ವಸುದೇವ",
+      "meaning": "ಕೃಷ್ಣನ ತಂದೆ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ನಂದ",
+      "meaning": "ಕೃಷ್ಣನ ಸಾಕುತಂದೆ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ಕಂಸ",
+      "meaning": "ಮಥುರೆಯ ರಾಜ, ಕೃಷ್ಣನ ಕ್ರೂರ ಮಾವ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ವಿನಾಯಕ",
+      "meaning": "ಮೊದಲು ಪೂಜಿಸಲ್ಪಡುವ ದೇವರು, ವಿಘ್ನಗಳ ಒಡೆಯ",
+      "difficulty": "easy",
+      "source": "ganesha"
+    },
+    {
+      "word": "ಕಾರ್ತಿಕೇಯ",
+      "meaning": "ಕೃತ್ತಿಕೆಯರಿಂದ ಪೋಷಿತ, ಶಿವ ಪಾರ್ವತಿಯರ ಮಗ",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ಸುಬ್ರಹ್ಮಣ್ಯ",
+      "meaning": "ದೇವಸೈನ್ಯದ ಸೇನಾಪತಿ",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ಸ್ಕಂದ",
+      "meaning": "ಯುದ್ಧದ ದೇವರು",
+      "difficulty": "easy",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ಕೈಲಾಸ",
+      "meaning": "ಶಿವನ ಪರ್ವತ ನಿವಾಸ",
+      "difficulty": "easy",
+      "source": "shiva_family"
+    },
+    {
+      "word": "ಮಹಿಷಾಸುರ",
+      "meaning": "ದುರ್ಗೆಯಿಂದ ಸಂಹರಿಸಲ್ಪಟ್ಟ ಎಮ್ಮೆ-ರಾಕ್ಷಸ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಐರಾವತ",
+      "meaning": "ಸಮುದ್ರಮಥನದಿಂದ ಹುಟ್ಟಿದ ಇಂದ್ರನ ಬಿಳಿ ಆನೆ",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ಕಾಮಧೇನು",
+      "meaning": "ಸಮುದ್ರಮಥನದಿಂದ ಹುಟ್ಟಿದ ವರಪ್ರದ ಕಾಮಧೇನು ಹಸು",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "ನೀಲಕಂಠ",
+      "meaning": "ವಿಷವನ್ನು ಗಂಟಲಲ್ಲಿ ಹಿಡಿದಿಟ್ಟುಕೊಂಡ ಶಿವನ ಹೆಸರು",
+      "difficulty": "easy",
+      "source": "shiva_family"
+    },
+    {
+      "word": "ರಾವಣ ವಧ",
+      "meaning": "ರಾಮ ರಾವಣನನ್ನು ಸಂಹರಿಸುವ ಅಂತಿಮ ಯುದ್ಧ",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಸಾವಿತ್ರಿ",
+      "meaning": "ಪತಿಯನ್ನು ಯಮನಿಂದ ಮರಳಿ ಗೆದ್ದ ಪತಿವ್ರತೆ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಸತ್ಯವಾನ್",
+      "meaning": "ಸಾವಿತ್ರಿಯ ಪತಿ, ಸತ್ತು ಮತ್ತೆ ಬದುಕಿ ಬಂದವನು",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ದಮಯಂತಿ",
+      "meaning": "ರಾಜ ನಳನ ಪತ್ನಿ, ಪ್ರಸಿದ್ಧ ಪ್ರೇಮಕಥೆಯ ನಾಯಕಿ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಶಕುಂತಲಾ",
+      "meaning": "ದುಷ್ಯಂತನ ಪತ್ನಿ, ಭರತನ ತಾಯಿ",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಮಧ್ವಾಚಾರ್ಯ",
+      "meaning": "ದ್ವೈತ ಸಿದ್ಧಾಂತದ ಸ್ಥಾಪಕ",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "ಕನಕದಾಸ",
+      "meaning": "ಹರಿದಾಸ ಪರಂಪರೆಯ ಪ್ರಸಿದ್ಧ ಭಕ್ತ ಕವಿ",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "ಪುರಂದರದಾಸ",
+      "meaning": "ಕರ್ನಾಟಕ ಸಂಗೀತದ ಪಿತಾಮಹ ಎಂದು ಕರೆಯಲ್ಪಡುವ ಹರಿದಾಸ ಕವಿ",
+      "difficulty": "easy",
+      "source": "bhakti"
+    },
+    {
+      "word": "ನರಸಿಂಹ",
+      "meaning": "ವಿಷ್ಣುವಿನ ನರಸಿಂಹ (ಮನುಷ್ಯ-ಸಿಂಹ) ಅವತಾರ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವಾಮನ",
+      "meaning": "ವಿಷ್ಣುವಿನ ಕುಬ್ಜ ಅವತಾರ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಇಂದ್ರ",
+      "meaning": "ದೇವತೆಗಳ ರಾಜ, ಮಳೆಯ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಸೂರ್ಯ",
+      "meaning": "ಸೂರ್ಯ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಚಂದ್ರ",
+      "meaning": "ಚಂದ್ರ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಅಗ್ನಿ",
+      "meaning": "ಅಗ್ನಿ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವಾಯು",
+      "meaning": "ಗಾಳಿಯ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವರುಣ",
+      "meaning": "ಜಲಗಳ ಅಧಿಪತಿ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಬ್ರಹ್ಮ",
+      "meaning": "ಸೃಷ್ಟಿಕರ್ತ ತ್ರಿಮೂರ್ತಿ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ರುಕ್ಮಿಣಿ",
+      "meaning": "ಕೃಷ್ಣನ ಪ್ರಧಾನ ಪಟ್ಟಮಹಿಷಿ",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ನಂದಿ",
+      "meaning": "ಶಿವನ ವಾಹನ, ಗೂಳಿ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಗರುಡ",
+      "meaning": "ವಿಷ್ಣುವಿನ ವಾಹನ, ಗರುಡ ಪಕ್ಷಿ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಅಯ್ಯಪ್ಪ",
+      "meaning": "ಶಿವ ಮೋಹಿನಿಯರ ಮಗ, ಶಬರಿಮಲೆಯ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವೆಂಕಟೇಶ್ವರ",
+      "meaning": "ತಿರುಪತಿಯಲ್ಲಿ ಪೂಜಿಸಲ್ಪಡುವ ವಿಷ್ಣುವಿನ ರೂಪ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಕುಬೇರ",
+      "meaning": "ದೇವತೆಗಳ ಖಜಾಂಚಿ, ಸಂಪತ್ತಿನ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಯಮ",
+      "meaning": "ಸಾವು ಮತ್ತು ನ್ಯಾಯದ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಪ್ರಹ್ಲಾದ",
+      "meaning": "ರಾಕ್ಷಸ ತಂದೆಯಿಂದ ರಕ್ಷಿಸಲ್ಪಟ್ಟ ಬಾಲ ಭಕ್ತ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಧ್ರುವ",
+      "meaning": "ಭಕ್ತಿಯಿಂದ ಧ್ರುವತಾರೆಯಾದ ಬಾಲಕ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವಿಭೀಷಣ",
+      "meaning": "ರಾಮನಿಗೆ ಸಹಾಯ ಮಾಡಿದ ರಾವಣನ ಸಹೋದರ",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಜಟಾಯು",
+      "meaning": "ಸೀತೆಯನ್ನು ರಕ್ಷಿಸಲು ರಾವಣನೊಂದಿಗೆ ಹೋರಾಡಿದ ಹದ್ದು",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಶಬರಿ",
+      "meaning": "ರಾಮನಿಗೆ ಆಹಾರ ನೀಡಲು ವರ್ಷಗಳ ಕಾಲ ಕಾದ ಭಕ್ತೆ",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ದ್ರೌಪದಿ",
+      "meaning": "ಪಂಚ ಪಾಂಡವರ ಪತ್ನಿ",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ರಾಮೇಶ್ವರ",
+      "meaning": "ಲಂಕೆಗೆ ಹೋಗುವ ಮುನ್ನ ರಾಮ ಪೂಜಿಸಿದ ಸ್ಥಳ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಬದರೀನಾಥ",
+      "meaning": "ಹಿಮಾಲಯದ ವಿಷ್ಣು ಕ್ಷೇತ್ರ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಕೇದಾರನಾಥ",
+      "meaning": "ಹಿಮಾಲಯದ ಶಿವ ಕ್ಷೇತ್ರ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಮಧುರೈ",
+      "meaning": "ಮೀನಾಕ್ಷಿ ದೇವಾಲಯದ ನಗರ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಚಕ್ರ",
+      "meaning": "ವಿಷ್ಣುವಿನ ದಿವ್ಯ ಆಯುಧ",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "ತ್ರಿಶೂಲ",
+      "meaning": "ಶಿವನ ಮೂರು ಮೊನೆಯ ಆಯುಧ",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "ರುದ್ರಾಕ್ಷಿ",
+      "meaning": "ಪೂಜೆಯಲ್ಲಿ ಧರಿಸುವ ಪವಿತ್ರ ಬೀಜಗಳು",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "ಮಾಲೆ",
+      "meaning": "ಜಪಕ್ಕೆ ಬಳಸುವ ಜಪಮಾಲೆ",
+      "difficulty": "medium",
+      "source": "item"
+    },
+    {
+      "word": "ಕೇಶವ",
+      "meaning": "ಸುಂದರ ಕೇಶವುಳ್ಳವನು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ತ್ರಿವಿಕ್ರಮ",
+      "meaning": "ಮೂರು ಹೆಜ್ಜೆಗಳಿಂದ ಮೂರು ಲೋಕಗಳನ್ನು ಅಳೆದವನು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಪರಮಾತ್ಮ",
+      "meaning": "ಎಲ್ಲ ಜೀವಿಗಳೊಳಗಿನ ಪರಮ ಆತ್ಮ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಶ್ರೀಶೈಲ",
+      "meaning": "ಮಲ್ಲಿಕಾರ್ಜುನ ಜ್ಯೋತಿರ್ಲಿಂಗ ಕ್ಷೇತ್ರ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಭದ್ರಾಚಲ",
+      "meaning": "ಗೋದಾವರಿ ತೀರದ ಸೀತಾರಾಮ ದೇವಾಲಯ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಲಂಬೋದರ",
+      "meaning": "ದೊಡ್ಡ ಹೊಟ್ಟೆಯುಳ್ಳವನು",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "ವಿಘ್ನೇಶ್ವರ",
+      "meaning": "ವಿಘ್ನಗಳನ್ನು ನಿವಾರಿಸುವ ಒಡೆಯ",
+      "difficulty": "medium",
+      "source": "ganesha"
+    },
+    {
+      "word": "ಷಣ್ಮುಖ",
+      "meaning": "ಆರು ಮುಖಗಳುಳ್ಳವನು",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ಕುಮಾರಸ್ವಾಮಿ",
+      "meaning": "ಶಿವ ಪಾರ್ವತಿಯರ ಮಗ",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ವಳ್ಳಿ",
+      "meaning": "ಕಾರ್ತಿಕೇಯನ ಪತ್ನಿ, ಬೇಡರ ಹೆಣ್ಣುಮಗಳು",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ದೇವಸೇನಾ",
+      "meaning": "ಕಾರ್ತಿಕೇಯನ ಪತ್ನಿ, ಇಂದ್ರನ ಮಗಳು",
+      "difficulty": "medium",
+      "source": "karthikeya"
+    },
+    {
+      "word": "ವೀರಭದ್ರ",
+      "meaning": "ಶಿವನ ಕೋಪದಿಂದ ಹುಟ್ಟಿದ ಉಗ್ರ ರೂಪ",
+      "difficulty": "medium",
+      "source": "shiva_family"
+    },
+    {
+      "word": "ಜನಕ",
+      "meaning": "ಸೀತೆಯ ತಂದೆ, ಮಿಥಿಲೆಯ ರಾಜ",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ತಾರಾ",
+      "meaning": "ವಾಲಿಯ ಪತ್ನಿ, ನಂತರ ಸುಗ್ರೀವನ ಪತ್ನಿಯಾದವಳು",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಜರಾಸಂಧ",
+      "meaning": "ಮಗಧ ರಾಜ, ಭೀಮನಿಂದ ಸಂಹರಿಸಲ್ಪಟ್ಟವನು",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಪಾಂಡು",
+      "meaning": "ಪಾಂಡವರ ತಂದೆ",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಶಂತನು",
+      "meaning": "ಭೀಷ್ಮನ ತಂದೆ, ಕುರುಗಳ ರಾಜ",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಧನ್ವಂತರಿ",
+      "meaning": "ಅಮೃತ ಕಲಶದೊಂದಿಗೆ ಜನಿಸಿದ ಆಯುರ್ವೇದದ ದೇವರು",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ವಾಸುಕಿ",
+      "meaning": "ಸಮುದ್ರಮಥನಕ್ಕೆ ಹಗ್ಗವಾಗಿ ಬಳಸಿದ ಸರ್ಪರಾಜ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಮಂದರ",
+      "meaning": "ಸಮುದ್ರಮಥನಕ್ಕೆ ಬಳಸಿದ ಪರ್ವತ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಮೋಹಿನಿ",
+      "meaning": "ಅಮೃತ ಹಂಚಲು ವಿಷ್ಣು ತಾಳಿದ ಸ್ತ್ರೀ ರೂಪ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಅದಿತಿ",
+      "meaning": "ದೇವತೆಗಳ ತಾಯಿ, ಕಶ್ಯಪನ ಪತ್ನಿ",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "ಕೇಸರಿ",
+      "meaning": "ಹನುಮಂತನ ತಂದೆ, ಪ್ರಮುಖ ವಾನರ",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಅಂಜನಾ",
+      "meaning": "ಹನುಮಂತನ ತಾಯಿ, ಅಪ್ಸರೆಯ ಮಗಳು",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ಅನ್ನಪೂರ್ಣಾ",
+      "meaning": "ಆಹಾರದ ದೇವತೆ, ಪಾರ್ವತಿಯ ರೂಪ",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಪದ್ಮಾವತಿ",
+      "meaning": "ತಿರುಪತಿಯ ವೆಂಕಟೇಶ್ವರನ ಪತ್ನಿ",
+      "difficulty": "difficult",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಕಲ್ಕಿ",
+      "meaning": "ವಿಷ್ಣುವಿನ ಹತ್ತನೇ, ಇನ್ನೂ ಬರಬೇಕಾದ ಅವತಾರ",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಭೀಷ್ಮ",
+      "meaning": "ತನ್ನ ಸಾವಿನ ಕ್ಷಣವನ್ನೇ ಆರಿಸಿಕೊಳ್ಳಬಲ್ಲ ಕುರುವಂಶದ ಹಿರಿಯ",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ಮೀರಾ",
+      "meaning": "ಕೃಷ್ಣನಿಗೆ ಜೀವನ ಸಮರ್ಪಿಸಿದ ರಜಪೂತ ರಾಜಕುಮಾರಿ",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "ತ್ಯಾಗರಾಜ",
+      "meaning": "ರಾಮನ ಸ್ತುತಿ ಹಾಡಿದ ಸಂಗೀತ ಸಂತ",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "ಆಂಡಾಳ್",
+      "meaning": "ತಾನು ವಿಷ್ಣುವಿಗೆ ವಿವಾಹಿತಳೆಂದು ಭಾವಿಸಿದ ಬಾಲ ಸಂತೆ",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "ತುಳಸೀದಾಸ",
+      "meaning": "ರಾಮಚರಿತಮಾನಸ ಬರೆದ ಕವಿ ಸಂತ",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "ಕಬೀರ",
+      "meaning": "ಸರಳ, ನೇರ ಭಕ್ತಿಗೆ ಹೆಸರಾದ ಕವಿ ಸಂತ",
+      "difficulty": "difficult",
+      "source": "bhakti"
+    },
+    {
+      "word": "ಉಜ್ಜಯಿನಿ",
+      "meaning": "ಮಹಾಕಾಲೇಶ್ವರ ಕ್ಷೇತ್ರದ ನಗರ",
+      "difficulty": "difficult",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಪ್ರಯಾಗ",
+      "meaning": "ಗಂಗಾ, ಯಮುನಾ, ಸರಸ್ವತಿ ಸಂಗಮಗೊಳ್ಳುವ ಸ್ಥಳ (ತ್ರಿವೇಣಿ ಸಂಗಮ)",
+      "difficulty": "difficult",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಶಬರಿಮಲೆ",
+      "meaning": "ಅಯ್ಯಪ್ಪನ ಅರಣ್ಯ ಕ್ಷೇತ್ರ",
+      "difficulty": "difficult",
+      "source": "kshetram"
+    },
+    {
+      "word": "ಡಮರು",
+      "meaning": "ಶಿವನ ಪುಟ್ಟ ಕೈ ಡೋಲು",
+      "difficulty": "difficult",
+      "source": "item"
+    },
+    {
+      "word": "ವೀಣೆ",
+      "meaning": "ಸರಸ್ವತಿಯ ತಂತಿ ವಾದ್ಯ",
+      "difficulty": "difficult",
+      "source": "item"
+    },
+    {
+      "word": "ಕಮಂಡಲು",
+      "meaning": "ಸಾಧು ಋಷಿಗಳು ಹೊತ್ತೊಯ್ಯುವ ನೀರಿನ ಪಾತ್ರೆ",
+      "difficulty": "difficult",
+      "source": "item"
+    },
+    {
+      "word": "ಹೃಷೀಕೇಶ",
+      "meaning": "ಇಂದ್ರಿಯಗಳ ಒಡೆಯ",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಪುರುಷೋತ್ತಮ",
+      "meaning": "ಜೀವಿಗಳಲ್ಲಿ ಶ್ರೇಷ್ಠನಾದವನು",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ತ್ರಿಲೋಕೇಶ",
+      "meaning": "ಮೂರು ಲೋಕಗಳ ಒಡೆಯ",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಸಹಸ್ರಾಕ್ಷ",
+      "meaning": "ಸಾವಿರ ಕಣ್ಣುಳ್ಳವನು",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಹೇರಂಬ",
+      "meaning": "ದುರ್ಬಲರ ರಕ್ಷಕ",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "ಸಿದ್ಧಿ",
+      "meaning": "ಗಣೇಶನ ಪತ್ನಿ, ಸಾಧನೆಯ ಸಂಕೇತ",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "ಬುದ್ಧಿ",
+      "meaning": "ಗಣೇಶನ ಪತ್ನಿ, ಜ್ಞಾನದ ಸಂಕೇತ",
+      "difficulty": "difficult",
+      "source": "ganesha"
+    },
+    {
+      "word": "ರಕ್ತಬೀಜ",
+      "meaning": "ರಕ್ತದ ಪ್ರತಿ ಹನಿಯಿಂದ ಹೊಸ ರಾಕ್ಷಸ ಹುಟ್ಟುವ ವರ ಪಡೆದ ರಾಕ್ಷಸ",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "ಚಂಡ-ಮುಂಡ",
+      "meaning": "ಶುಂಭ ನಿಶುಂಭರ ಸೇನಾನಿಗಳು, ಕಾಳಿಯಿಂದ ಸಂಹರಿಸಲ್ಪಟ್ಟವರು",
+      "difficulty": "difficult",
+      "source": "purana"
+    }
+  ]
+}

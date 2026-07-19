@@ -1,6 +1,6 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
-  splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL,
+  splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL, KANNADA_POOL,
   exportDrawQueues, importDrawQueues, isPoolExhausted, MAX_WORD_EXPOSURES,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
@@ -23,27 +23,35 @@ import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
   fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries,
 } from './supabase-client.js';
-import { t, getLang, setLang, LANGUAGES } from './i18n.js';
+import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
 
 const root = document.getElementById('app');
 
 // Likhita Japam's suggested names and the post-puzzle interlude word are
 // content, not chrome, so they live per-language here rather than in
-// i18n.js's STRINGS table.
+// i18n.js's STRINGS table. Keyed by language rather than an en/else
+// ternary so adding a language is a new map entry, not a new branch.
+const JAPAM_NAMES_BY_LANG = {
+  te: [{ word: 'శ్రీరామ', label: 'శ్రీరామ' }, { word: 'గోవింద', label: 'గోవింద' }],
+  en: [{ word: 'Sri Rama', label: 'Sri Rama' }, { word: 'Govinda', label: 'Govinda' }],
+  kn: [{ word: 'ಶ್ರೀರಾಮ', label: 'ಶ್ರೀರಾಮ' }, { word: 'ಗೋವಿಂದ', label: 'ಗೋವಿಂದ' }],
+};
 function japamNames() {
-  return getLang() === 'en'
-    ? [{ word: 'Sri Rama', label: 'Sri Rama' }, { word: 'Govinda', label: 'Govinda' }]
-    : [{ word: 'శ్రీరామ', label: 'శ్రీరామ' }, { word: 'గోవింద', label: 'గోవింద' }];
-}
-function interludeWord() {
-  return getLang() === 'en' ? 'Sri Rama' : 'శ్రీరామ';
+  return JAPAM_NAMES_BY_LANG[getLang()] || JAPAM_NAMES_BY_LANG[DEFAULT_LANGUAGE];
 }
 
-// English words are plain Latin (A-Z), so the grid's filler cells should
-// draw from the same alphabet instead of Telugu's consonant+vowel-sign
-// pool - grid.js defaults to the Telugu pool when this is omitted.
+const INTERLUDE_WORD_BY_LANG = { te: 'శ్రీరామ', en: 'Sri Rama', kn: 'ಶ್ರೀರಾಮ' };
+function interludeWord() {
+  return INTERLUDE_WORD_BY_LANG[getLang()] || INTERLUDE_WORD_BY_LANG[DEFAULT_LANGUAGE];
+}
+
+// Telugu and Kannada both fill empty grid cells from a consonant+vowel-sign
+// pool (grid.js's BASE_POOL/KANNADA_POOL - real-looking syllables rather
+// than random codepoints); English draws from plain Latin A-Z instead.
+// grid.js defaults to the Telugu pool when this returns undefined.
+const FILLER_POOL_BY_LANG = { en: LATIN_POOL, kn: KANNADA_POOL };
 function fillerPool() {
-  return getLang() === 'en' ? LATIN_POOL : undefined;
+  return FILLER_POOL_BY_LANG[getLang()];
 }
 
 // The app's live URL - shared alongside shareMessage from every screen's
@@ -217,16 +225,20 @@ function topBar({ backAction } = {}) {
   return bar;
 }
 
-// A small pill for switching between Telugu and English. Switching
-// re-renders whichever screen is passed as `onSwitch` (always a
-// re-entrant screen function, e.g. showHome) rather than trying to
-// patch the current DOM in place.
+// language code -> the i18n key naming that language, so the toggle scales
+// to any number of languages instead of a te/en either-or.
+const LANGUAGE_LABEL_KEYS = { te: 'languageTelugu', en: 'languageEnglish', kn: 'languageKannada' };
+
+// A small pill row for switching between languages. Switching re-renders
+// whichever screen is passed as `onSwitch` (always a re-entrant screen
+// function, e.g. showHome) rather than trying to patch the current DOM
+// in place.
 function languageToggle(onSwitch) {
   const wrap = el(`
     <div class="lang-toggle" data-lang-toggle>
       ${LANGUAGES.map((lang) => `
         <button type="button" class="lang-pill${getLang() === lang ? ' active' : ''}" data-lang="${lang}">
-          ${lang === 'te' ? t('languageTelugu') : t('languageEnglish')}
+          ${t(LANGUAGE_LABEL_KEYS[lang])}
         </button>
       `).join('')}
     </div>
@@ -1077,9 +1089,10 @@ function showJapamNamePicker() {
     const typed = customInput.value.trim();
     if (!typed) { customInput.focus(); return; }
     // Telugu mode transliterates a Latin-typed guess ("rama") into Telugu
-    // script; English mode has nothing to transliterate to, so the typed
-    // text is traced as-is.
-    const word = getLang() === 'en' ? typed : (looksLikeLatin(typed) ? transliterate(typed) : typed);
+    // script; transliterate.js only knows Telugu output today, so every
+    // other language (English, Kannada) traces the typed text as-is
+    // rather than attempting a translation this app doesn't actually have.
+    const word = getLang() === 'te' && looksLikeLatin(typed) ? transliterate(typed) : typed;
     startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
   };
   screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);

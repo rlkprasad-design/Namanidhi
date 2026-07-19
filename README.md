@@ -19,9 +19,10 @@ still tracked on-device via `localStorage`.
 ## Project layout
 
 - `index.html`, `css/styles.css` - shell and visual design.
-- `js/segmenter.js` - Telugu grapheme-cluster helpers (`Intl.Segmenter`).
-  Every place that needs to split a word into "letters" goes through this -
-  never `str.split('')`, which would break on conjuncts/matras.
+- `js/segmenter.js` - grapheme-cluster helpers (`Intl.Segmenter`, keyed by
+  the active language). Every place that needs to split a word into
+  "letters" goes through this - never `str.split('')`, which would break
+  on conjuncts/matras.
 - `js/grid.js` - word-search grid generator: places entries in any of 8
   directions, allows two entries to legitimately cross/share a cell, and
   fills remaining cells (random or letters drawn from the puzzle itself,
@@ -33,7 +34,7 @@ still tracked on-device via `localStorage`.
   level ladder (`data/levels.json`).
 - `js/storage.js` - player identity + local score fallback (`localStorage`).
   Puzzle/Japam logs are namespaced per language (see "Languages" below).
-- `js/i18n.js` - the UI chrome string table (`te`/`en`) and `t(key)`
+- `js/i18n.js` - the UI chrome string table (`te`/`en`/`kn`) and `t(key)`
   lookup helper - covers screen labels, buttons, and messages, not
   content data (which lives per-language in `data/` - see below).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
@@ -278,41 +279,55 @@ node scripts/validate-content.js
 
 Telugu (`te`) is the default and still the deepest/best-reviewed
 language. An English (`en`) mode covers Nama Gupta Nidhi, Stotra
-Pariksha (Rama Raksha only so far), and Likhita Japam - a pill switcher
-(`languageToggle` in `js/app.js`) on the intro, name-gate, and Home
-screens flips between them, persisted via `getLanguage`/`setLanguage` in
-`js/storage.js`.
+Pariksha (Rama Raksha only so far), and Likhita Japam. A Kannada (`kn`)
+mode covers the same three sub-modes with its own starter content pool.
+A pill switcher (`languageToggle` in `js/app.js`) on the intro,
+name-gate, and Home screens flips between however many languages are
+listed in `js/i18n.js`'s `LANGUAGES` array, persisted via
+`getLanguage`/`setLanguage` in `js/storage.js`.
 
 Content is per-language, not translated on the fly: Telugu content stays
 at `data/*.json` (unchanged paths, for backward compatibility), English
-content lives at `data/en/*.json` with the same schema. `js/data.js`'s
-loaders (`loadEntryPool`/`loadLevels`/`loadStotrams`) all take a `lang`
-argument and cache per language. Adding a third language means adding a
-`data/<lang>/` directory with the same three files, an entry in
-`js/i18n.js`'s `LANGUAGES` array and `STRINGS` table, and (if the script
-isn't a simple a-stem/consonant alphabet like Telugu's) a filler pool in
-`js/grid.js` alongside `LATIN_POOL`.
+content lives at `data/en/*.json`, Kannada at `data/kn/*.json` - all with
+the same schema. `js/data.js`'s loaders (`loadEntryPool`/`loadLevels`/
+`loadStotrams`) all take a `lang` argument and cache per language. Adding
+another language means adding a `data/<lang>/` directory with the same
+three files, an entry in `js/i18n.js`'s `LANGUAGES` array and `STRINGS`
+table (including a `language<Name>` label key - see the "own name shown
+in its own script regardless of active language" convention already
+used by `languageTelugu`/`languageEnglish`/`languageKannada`), and (if
+the script isn't a simple a-stem/consonant alphabet like Telugu's) a
+filler pool in `js/grid.js` alongside `LATIN_POOL`/`KANNADA_POOL`. If the
+new language uses its own web font, also add it to `FONT_NAME_BY_LANG`/
+`FONT_STACK_BY_LANG` in `js/handwriting.js` (the Likhita Japam canvas
+tracer renders per-language now, not a single hardcoded Telugu font) and
+to the Google Fonts `<link>` in `index.html` plus the `font-family`
+fallback stacks in `css/styles.css`.
 
-Both languages sync to the shared family Supabase scoreboard, kept as
-separate per-language tallies rather than merged into one combined
+All three languages sync to the shared family Supabase scoreboard, kept
+as separate per-language tallies rather than merged into one combined
 number - `puzzle_progress`/`japam_log` rows carry a `language` column,
 and the `puzzle_leaderboard`/`japam_leaderboard` views group by
 `(display_name, language)`, so the Scoreboard screen's fetch calls
 (`fetchPuzzleLeaderboard(getLang())`/`fetchJapamLeaderboard(getLang())`)
 only ever pull the current language's rows. Before Supabase is configured
-(or while offline), both languages still fall back to this device's own
+(or while offline), all languages still fall back to this device's own
 `localStorage`, namespaced separately per language in `js/storage.js` so
-switching languages can't mix or clobber either language's local tally.
-Player identity (name) is shared across languages - only the score data
-is split.
+switching languages can't mix or clobber any other language's local
+tally. Player identity (name) is shared across languages - only the
+score data is split.
 
-`js/segmenter.js`'s `Intl.Segmenter('te', ...)` is reused for English
-text too rather than adding a second segmenter - grapheme-cluster
-boundaries are effectively locale-independent for plain Latin text (no
-combining marks in the English content), so this is safe. `js/grid.js`'s
+`js/segmenter.js`'s `Intl.Segmenter` is keyed by the active language
+(`getLang()`) rather than hardcoded to `'te'`, so it stays correct if a
+future language's grapheme boundaries ever did depend on locale - in
+practice, grapheme-cluster boundaries are effectively locale-independent
+for the scripts used here (Telugu, Kannada, and plain Latin), so this is
+mostly future-proofing rather than a behavior change. `js/grid.js`'s
 filler-cell alphabet is *not* locale-independent - English mode passes
-`LATIN_POOL` (plain A-Z) via `generateGridReliable`'s `fillerPool`
-option instead of Telugu's default consonant+vowel-sign pool.
+`LATIN_POOL` (plain A-Z) and Kannada mode passes `KANNADA_POOL` (Kannada
+consonant+vowel-sign syllables) via `generateGridReliable`'s
+`fillerPool` option instead of Telugu's default consonant+vowel-sign
+pool.
 
 One structural difference worth knowing before writing English content:
 Telugu graphemes cluster a consonant and its vowel sign into one
@@ -360,6 +375,22 @@ alongside them.
 Lakshmi Ashtottaram and Vishnu Sahasranamam aren't in English yet -
 `data/en/stotrams.json` lists them as `"soon"` placeholders, same as
 Vishnu Sahasranamam still is in Telugu.
+
+The Kannada content pool (`data/kn/questions.json`, ~140 entries across
+easy/medium/difficult) and its Rama Raksha translation
+(`data/kn/stotrams.json`) are a first-pass starter set, same "grows over
+time, human-reviewed before merging" model as Telugu and English - see
+"Adding new content" above. Kannada, like Telugu, is a Brahmic abugida
+(a base consonant plus a vowel-sign diacritic forms one grapheme
+cluster), so `data/kn/levels.json` uses grid sizes close to Telugu's
+rather than English's much larger ones - check actual grapheme lengths,
+not visual length, before picking a range for new Kannada content.
+Lakshmi Ashtottaram and Vishnu Sahasranamam are `"soon"` placeholders in
+Kannada too. **Known v1 gap:** `js/transliterate.js` only knows how to
+transliterate Latin input into Telugu script; Likhita Japam's custom
+word field in Kannada mode traces whatever is typed as-is, with no
+Latin-to-Kannada transliteration yet (same as English mode already
+does).
 
 ## What's not built yet
 
