@@ -79,6 +79,8 @@ create policy "anyone can log japam traces"
   on japam_log for insert with check (true);
 create policy "anyone can flag an entry"
   on flagged_entries for insert with check (true);
+create policy "anyone can dismiss a flagged entry"
+  on flagged_entries for delete using (true);
 
 -- Leaderboard views -----------------------------------------------------
 -- Mirrors the leaderboard-view pattern from the BBA Practice App: one view

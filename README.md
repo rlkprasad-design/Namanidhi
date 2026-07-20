@@ -168,6 +168,15 @@ completed - every number the table actually shows. This adds `total_score`
 (pearls+gems+diamonds) as a real column so the client can sort by the
 same metric that's displayed. A brand-new project already has this.
 
+If your project predates the Flagged Questions dismiss button, also run
+`supabase/add-flagged-entries-delete-policy.sql` once - `add-flagged-
+entries.sql` only ever granted `select`/`insert` on `flagged_entries`, so
+once a flagged word's meaning was fixed in the content pool, the flag had
+no way to leave the Scoreboard's "Flagged questions" panel - it would sit
+there forever. This adds a `delete` policy (same permissive, no-login
+trust model as the rest of the table's policies) that the panel's new
+dismiss button relies on. A brand-new project already has this.
+
 ## Content pool
 
 Everything lives in one file, `data/questions.json` - deity names,
