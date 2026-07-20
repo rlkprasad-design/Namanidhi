@@ -11,13 +11,49 @@ const path = require('path');
 
 const MEANING_WARN_LENGTH = 120;
 const DIFFICULTIES = ['easy', 'medium', 'difficult'];
-const segmenter = new Intl.Segmenter('te', { granularity: 'grapheme' });
-const graphemeLength = (str) => Array.from(segmenter.segment(str)).length;
 
 const targetDir = process.argv[2] || 'data';
 const QUESTIONS_FILE = 'questions.json';
 const LEVELS_FILE = 'levels.json';
 const STOTRAMS_FILE = 'stotrams.json';
+
+// Kannada's virama-joined consonant conjuncts (e.g. "ವ್ಯಾಸ") don't cluster
+// correctly through Intl.Segmenter on the browsers this app actually runs
+// on - it splits them apart, leaving a bare half-formed consonant as its
+// own "letter" (see js/segmenter.js for the full story and the matching
+// runtime fix). This validator has to count graphemes the same way the app
+// does, or its length/grid-fit checks would pass content that then renders
+// broken in the real grid - so it gets the same hand-rolled Kannada
+// clusterer instead of trusting Intl.Segmenter for data/kn.
+const KANNADA_VIRAMA = '್';
+const KANNADA_DEPENDENT_MARKS = new Set([
+  'ಂ', 'ಃ',
+  'ಾ', 'ಿ', 'ೀ', 'ು', 'ೂ', 'ೃ', 'ೄ',
+  'ೆ', 'ೇ', 'ೈ', 'ೊ', 'ೋ', 'ೌ',
+  '಼',
+]);
+function isKannadaConsonant(ch) {
+  if (!ch) return false;
+  const cp = ch.codePointAt(0);
+  return cp >= 0x0C95 && cp <= 0x0CB9;
+}
+function kannadaGraphemeLength(str) {
+  const chars = Array.from(str);
+  let count = 0;
+  let i = 0;
+  while (i < chars.length) {
+    count++;
+    i++;
+    while (chars[i] === KANNADA_VIRAMA && isKannadaConsonant(chars[i + 1])) i += 2;
+    if (chars[i] === KANNADA_VIRAMA) i++;
+    while (i < chars.length && KANNADA_DEPENDENT_MARKS.has(chars[i])) i++;
+  }
+  return count;
+}
+
+const isKannadaDir = path.basename(path.resolve(process.cwd(), targetDir)) === 'kn';
+const segmenter = new Intl.Segmenter('te', { granularity: 'grapheme' });
+const graphemeLength = (str) => (isKannadaDir ? kannadaGraphemeLength(str) : Array.from(segmenter.segment(str)).length);
 
 function isNonEmptyString(v) {
   return typeof v === 'string' && v.trim().length > 0;

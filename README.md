@@ -317,16 +317,28 @@ switching languages can't mix or clobber any other language's local
 tally. Player identity (name) is shared across languages - only the
 score data is split.
 
-`js/segmenter.js`'s `Intl.Segmenter` is keyed by the active language
-(`getLang()`) rather than hardcoded to `'te'`, so it stays correct if a
-future language's grapheme boundaries ever did depend on locale - in
-practice, grapheme-cluster boundaries are effectively locale-independent
-for the scripts used here (Telugu, Kannada, and plain Latin), so this is
-mostly future-proofing rather than a behavior change. `js/grid.js`'s
-filler-cell alphabet is *not* locale-independent - English mode passes
-`LATIN_POOL` (plain A-Z) and Kannada mode passes `KANNADA_POOL` (Kannada
-consonant+vowel-sign syllables) via `generateGridReliable`'s
-`fillerPool` option instead of Telugu's default consonant+vowel-sign
+`js/segmenter.js`'s `graphemes()` does **not** trust `Intl.Segmenter` for
+Kannada. Telugu's virama-joined consonant conjuncts (e.g. "శ్రీ") come
+back as one cluster from the platform's `Intl.Segmenter`, but on the
+browsers this app actually runs on, Kannada's don't: a conjunct like
+"ವ್ಯಾಸ" (Vyasa) splits into `["ವ್","ಯಾ","ಸ"]` instead of `["ವ್ಯಾ","ಸ"]`,
+leaving a bare half-formed consonant (a lone "ವ್") as its own "letter" -
+this shipped in the first Kannada PR and showed up as visibly broken
+grid tiles and a mis-split Likhita Japam word before a player caught it.
+`graphemes()` now hand-rolls Kannada clustering instead (base consonant,
+absorb any number of virama+consonant pairs, then absorb a trailing
+vowel sign/anusvara/visarga) rather than delegating to `Intl.Segmenter`
+for `'kn'`. `scripts/validate-content.js` has its own copy of the same
+logic (it's a standalone CommonJS script, so it can't import the ES
+module) - keep both in sync if this ever needs a third fix. If you add
+a new Brahmic-script language, don't assume `Intl.Segmenter` clusters
+its conjuncts correctly just because it works for Telugu - verify
+against real conjunct words in the actual target browsers first.
+`js/grid.js`'s filler-cell alphabet is *not* locale-independent -
+English mode passes `LATIN_POOL` (plain A-Z) and Kannada mode passes
+`KANNADA_POOL` (Kannada consonant+vowel-sign syllables) via
+`generateGridReliable`'s `fillerPool` option instead of Telugu's default
+consonant+vowel-sign
 pool.
 
 One structural difference worth knowing before writing English content:
