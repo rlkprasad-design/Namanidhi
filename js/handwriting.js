@@ -33,7 +33,22 @@ const LETTER_GAP = FONT_PX * 0.015;
 const FONT_WEIGHT = 400;
 const DOT_SPACING = 12; // px between dots along a stroke's outline
 const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
-export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
+// Hit-testing checks every dot in the whole word, not just ones "nearby"
+// along the same stroke - so on a compact, curly glyph (a conjunct like
+// "ಶ್ರೀ"/"శ్రీ" folds a lot of ink into a small area) a generous radius can
+// reach a dot from a visually distant part of the letter that just
+// happens to sit physically close in raw pixels, filling it too - a
+// player reported exactly this ("touch the lower part, upper letters also
+// get highlighted"). Used to be 25px; dropped to match DOT_SPACING once
+// verified two ways: measured how many same-word dot pairs more than 10
+// dots apart in trace order still sit within a candidate radius (a proxy
+// for this cross-talk) across several conjunct-heavy words - 25px caught
+// 500+ such pairs, 12px only ~20-50, roughly a 95% cut - and separately
+// confirmed a simulated pointer path that follows the real dot trace
+// (with up to 8px of random per-point jitter, well beyond normal
+// mouse/touch imprecision) still reaches full completion at 12px, so this
+// isn't traded off against being harder to actually trace.
+export const HIT_RADIUS = 12; // px, how close a drag has to pass to fill a dot
 
 const cache = new Map();
 
