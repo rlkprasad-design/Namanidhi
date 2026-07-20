@@ -116,6 +116,7 @@ const STRINGS = {
   },
   flagBtnTitle: { te: 'ఈ పదం సరిగ్గా లేదని తెలియజేయండి', en: 'Flag this word/meaning as off', kn: 'ಈ ಪದ/ಅರ್ಥ ಸರಿಯಿಲ್ಲ ಎಂದು ತಿಳಿಸಿ' },
   flaggedConfirm: { te: 'తెలియజేయబడింది', en: 'Flagged', kn: 'ತಿಳಿಸಲಾಗಿದೆ' },
+  dismissFlagBtn: { te: 'పరిష్కరించబడింది', en: 'Resolved', kn: 'ಪರಿಹರಿಸಲಾಗಿದೆ' },
   flaggedQuestionsTitle: { te: 'తెలియజేసిన పదాలు', en: 'Flagged questions', kn: 'ತಿಳಿಸಿದ ಪದಗಳು' },
   noFlaggedEntries: { te: 'ఇంకా ఏమీ తెలియజేయలేదు.', en: 'Nothing flagged yet.', kn: 'ಇನ್ನೂ ಏನನ್ನೂ ತಿಳಿಸಿಲ್ಲ.' },
   colWord: { te: 'పదం', en: 'Word', kn: 'ಪದ' },

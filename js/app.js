@@ -21,7 +21,7 @@ import {
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
-  fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries,
+  fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries, dismissFlaggedEntry,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
 
@@ -1330,14 +1330,7 @@ async function showScoreboard() {
       source_label: row.source_mode === 'general' ? t('sourceGeneral') : (stotramTitleById.get(row.source_mode) || row.source_mode),
       flagged_at: new Date(row.created_at).toLocaleString(),
     }));
-    flaggedBoardEl.replaceWith(renderLeaderboardTable(
-      flaggedRowsFormatted,
-      ['word', 'meaning', 'source_label', 'flagged_by', 'flagged_at'],
-      [t('colWord'), t('colMeaning'), t('colSource'), t('colFlaggedBy'), t('colFlaggedAt')],
-      'data-flagged-board',
-      10,
-      'noFlaggedEntries'
-    ));
+    flaggedBoardEl.replaceWith(renderFlaggedTable(flaggedRowsFormatted));
   } else {
     const puzzleTotals = getLocalPuzzleTotals(getLang(), state.playerName);
     const japamTotals = getLocalJapamTotals(getLang(), state.playerName);
@@ -1388,6 +1381,61 @@ function renderLeaderboardTable(rows, keys, labels, dataAttr, limit = 10, emptyK
     `;
     const toggleBtn = wrap.querySelector('[data-toggle]');
     if (toggleBtn) toggleBtn.addEventListener('click', () => { expanded = !expanded; renderInner(); });
+  };
+  renderInner();
+  return wrap;
+}
+
+// The flagged-entries table needs a per-row dismiss button (delete the
+// flag once its word/meaning has been fixed in the content pool), which
+// renderLeaderboardTable's generic key/label columns don't support - so
+// this is its own small renderer rather than bolting a one-off feature
+// onto the shared one.
+function renderFlaggedTable(rows) {
+  if (!rows || !rows.length) {
+    return el(`<div data-flagged-board><p class="score-note">${t('noFlaggedEntries')}</p></div>`);
+  }
+  let expanded = false;
+  const limit = 10;
+  const wrap = el(`<div data-flagged-board></div>`);
+  const renderInner = () => {
+    const visibleRows = expanded ? rows : rows.slice(0, limit);
+    // Same untrusted-input escaping note as renderLeaderboardTable above -
+    // word/meaning/flagged_by all come from player-submitted flags.
+    const body = visibleRows.map((row) => `
+      <tr>
+        <td>${escapeHtml(row.word)}</td>
+        <td>${escapeHtml(row.meaning)}</td>
+        <td>${escapeHtml(row.source_label)}</td>
+        <td>${escapeHtml(row.flagged_by ?? '')}</td>
+        <td>${escapeHtml(row.flagged_at)}</td>
+        <td><button type="button" class="btn-link" data-dismiss="${row.id}">${t('dismissFlagBtn')}</button></td>
+      </tr>
+    `).join('');
+    const toggle = rows.length > limit
+      ? `<p class="score-toggle"><button type="button" class="btn-link" data-toggle>${expanded ? t('showLessLink') : t('showMoreLink')}</button></p>`
+      : '';
+    wrap.innerHTML = `
+      <table class="score-table">
+        <thead><tr><th>${t('colWord')}</th><th>${t('colMeaning')}</th><th>${t('colSource')}</th><th>${t('colFlaggedBy')}</th><th>${t('colFlaggedAt')}</th><th></th></tr></thead>
+        <tbody>${body}</tbody>
+      </table>
+      ${toggle}
+    `;
+    const toggleBtn = wrap.querySelector('[data-toggle]');
+    if (toggleBtn) toggleBtn.addEventListener('click', () => { expanded = !expanded; renderInner(); });
+    wrap.querySelectorAll('[data-dismiss]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        const id = Number(btn.getAttribute('data-dismiss'));
+        const { ok } = await dismissFlaggedEntry(id);
+        if (!ok) { btn.disabled = false; return; }
+        const idx = rows.findIndex((r) => r.id === id);
+        if (idx !== -1) rows.splice(idx, 1);
+        if (!rows.length) { wrap.replaceWith(renderFlaggedTable(rows)); return; }
+        renderInner();
+      });
+    });
   };
   renderInner();
   return wrap;

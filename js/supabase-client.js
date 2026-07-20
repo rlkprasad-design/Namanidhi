@@ -139,6 +139,20 @@ export async function fetchFlaggedEntries() {
   return data;
 }
 
+// Removes a flag once its word/meaning has been fixed in the content pool
+// - see supabase/add-flagged-entries-delete-policy.sql for the RLS policy
+// this relies on. Returns { ok } rather than throwing, same as flagEntry.
+export async function dismissFlaggedEntry(id) {
+  const sb = await getClient();
+  if (!sb) return { ok: false };
+  const { error } = await sb.from('flagged_entries').delete().eq('id', id);
+  if (error) {
+    console.warn('dismissFlaggedEntry failed:', error);
+    return { ok: false };
+  }
+  return { ok: true };
+}
+
 export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
