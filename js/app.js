@@ -1221,7 +1221,30 @@ function buildSolidInkCanvas(ink, width, height) {
   return canvas;
 }
 
+// Speaks the traced name aloud via the browser's built-in text-to-speech
+// (no library, no network call - unlike everything else this app talks
+// to, speechSynthesis is local to the device). Voice availability and
+// pronunciation quality for Telugu/Kannada vary by browser/OS - decent on
+// Android Chrome, hit-or-miss elsewhere - and a player's own custom-typed
+// word gets whatever the generic synthesizer makes of it, not a curated
+// recording. Cancels any utterance still queued from a moment ago so
+// repeated completions in one session don't stack up and lag behind.
+const SPEECH_LANG_BY_LANG = { te: 'te-IN', kn: 'kn-IN', en: 'en-IN' };
+
+function speakName(word, lang) {
+  if (!('speechSynthesis' in window)) return;
+  try {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(word);
+    utterance.lang = SPEECH_LANG_BY_LANG[lang] || 'en-IN';
+    window.speechSynthesis.speak(utterance);
+  } catch (err) {
+    console.warn('speakName failed:', err);
+  }
+}
+
 function onJapamSuccess(session) {
+  speakName(session.word, getLang());
   session.count += 1;
   const entry = {
     name_traced: session.word,
