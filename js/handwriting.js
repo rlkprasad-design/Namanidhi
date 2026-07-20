@@ -21,6 +21,16 @@ const FONT_PX = 170;
 // actual ink extends slightly past their own advance width, so packing
 // with literally no gap risks the next letter's ink touching it.
 const LETTER_GAP = FONT_PX * 0.015;
+// Each stroke's ink is solid-filled, and the dots trace its outer
+// boundary - so a thick stroke gets traced by two parallel rows of dots,
+// one down each edge, rather than one. Bold (700) made that gap wide
+// enough to read as a hollow double outline instead of a single line;
+// regular weight keeps strokes thin enough to (mostly) collapse those two
+// rows together while remaining clearly visible. Verified this doesn't
+// thin any stroke enough to drop below MIN_BLOB_PIXELS or fragment a
+// letter into extra pieces, across the full content pool of all three
+// languages.
+const FONT_WEIGHT = 400;
 const DOT_SPACING = 12; // px between dots along a stroke's outline
 const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
 export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
@@ -44,7 +54,7 @@ function fontStackFor(lang) {
 async function ensureFontReady(lang) {
   const name = FONT_NAME_BY_LANG[lang];
   if (name && document.fonts && document.fonts.load) {
-    await document.fonts.load(`700 ${FONT_PX}px "${name}"`);
+    await document.fonts.load(`${FONT_WEIGHT} ${FONT_PX}px "${name}"`);
   }
 }
 
@@ -54,7 +64,7 @@ function renderInkMask(word, lang) {
   const letters = graphemes(word);
   const fontStack = fontStackFor(lang);
   const measure = document.createElement('canvas').getContext('2d');
-  measure.font = `700 ${FONT_PX}px ${fontStack}`;
+  measure.font = `${FONT_WEIGHT} ${FONT_PX}px ${fontStack}`;
 
   let ascent = FONT_PX * 0.8;
   let descent = FONT_PX * 0.25;
@@ -76,7 +86,7 @@ function renderInkMask(word, lang) {
   canvas.width = width;
   canvas.height = height;
   const ctx = canvas.getContext('2d');
-  ctx.font = `700 ${FONT_PX}px ${fontStack}`;
+  ctx.font = `${FONT_WEIGHT} ${FONT_PX}px ${fontStack}`;
   ctx.fillStyle = '#000';
   ctx.textBaseline = 'alphabetic';
 
