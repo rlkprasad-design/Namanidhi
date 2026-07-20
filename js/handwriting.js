@@ -288,7 +288,7 @@ export async function buildDotTrace(word) {
 // precisely, near an edge or a tight cluster of strokes - can't leave a
 // genuinely-finished trace stuck forever, matching the app's no-penalty
 // tone.
-const COMPLETE_THRESHOLD = 0.9;
+const COMPLETE_THRESHOLD = 0.95;
 
 // Attaches drag-to-fill interaction to a canvas already sized to match
 // dotTrace.width/height. Calls onChange() whenever a new dot fills, and
