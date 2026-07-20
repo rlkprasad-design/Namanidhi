@@ -9,7 +9,18 @@ import { graphemes } from './segmenter.js';
 import { getLang } from './i18n.js';
 
 const FONT_PX = 170;
-const LETTER_GAP = FONT_PX * 0.1; // extra gap drawn between each letter
+// The canvas is displayed at a fixed on-screen width (width:100% of the
+// japam-surface-frame - see css/styles.css), so the whole trace scales by
+// displayWidth/canvasWidth regardless of FONT_PX: growing FONT_PX alone
+// scales every term (letters, gap, padding) together and cancels out,
+// leaving the on-screen size unchanged. The only real lever is shrinking
+// canvasWidth's non-letter terms - this gap and the padding below - so a
+// player gets bigger letters sitting closer together, closer to a single
+// continuous line instead of separated blocks. Kept just above zero
+// (not exactly 0) as a safety margin: a couple of real conjunct glyphs'
+// actual ink extends slightly past their own advance width, so packing
+// with literally no gap risks the next letter's ink touching it.
+const LETTER_GAP = FONT_PX * 0.015;
 const DOT_SPACING = 12; // px between dots along a stroke's outline
 const MIN_BLOB_PIXELS = 28; // ignore anti-aliasing specks
 export const HIT_RADIUS = 25; // px, how close a drag has to pass to fill a dot
@@ -57,7 +68,7 @@ function renderInkMask(word, lang) {
     return m.width;
   });
 
-  const padding = FONT_PX * 0.08;
+  const padding = FONT_PX * 0.04;
   const width = Math.ceil(textWidth + padding * 2);
   const height = Math.ceil(ascent + descent + padding * 2);
 
