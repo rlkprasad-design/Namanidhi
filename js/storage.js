@@ -20,7 +20,6 @@ const PLAYER_NAME_KEY = 'namanidhi.playerName';
 const PLAYER_ID_KEY = 'namanidhi.playerId';
 const INTRO_SEEN_KEY = 'namanidhi.introSeen';
 const LANGUAGE_KEY = 'namanidhi.language';
-const VOICE_STYLE_KEY = 'namanidhi.voiceStyle';
 const DRAW_QUEUES_KEY = 'namanidhi.drawQueues';
 const STOTRAM_DRAW_QUEUES_KEY = 'namanidhi.stotramDrawQueues';
 const WORD_EXPOSURE_KEY = 'namanidhi.wordExposure';
@@ -81,14 +80,6 @@ export function getLanguage() {
 
 export function setLanguage(lang) {
   localStorage.setItem(LANGUAGE_KEY, lang);
-}
-
-export function getVoiceStyle() {
-  return localStorage.getItem(VOICE_STYLE_KEY);
-}
-
-export function setVoiceStyle(style) {
-  localStorage.setItem(VOICE_STYLE_KEY, style);
 }
 
 export function getPlayerName() {
