@@ -1168,7 +1168,7 @@ async function renderJapamTrace(session) {
   // revealMask as a per-pixel bitmap so coverage can be measured exactly
   // instead of estimated; only the newly-revealed disk around each dot
   // is scanned per fill, not the whole canvas, so this stays cheap.
-  const INK_COMPLETE_THRESHOLD = 0.95;
+  const INK_COMPLETE_THRESHOLD = 0.98;
   const totalInkPixels = ink.reduce((sum, v) => sum + v, 0);
   const revealedInk = new Uint8Array(ink.length);
   let revealedInkPixels = 0;
