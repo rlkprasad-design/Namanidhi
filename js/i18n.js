@@ -164,6 +164,13 @@ const STRINGS = {
   playAgainBtn: { te: 'మళ్ళీ ఆడండి', en: 'Play again', kn: 'ಮತ್ತೆ ಆಡಿ' },
   finishBtn: { te: 'ముగించు', en: 'Finish', kn: 'ಮುಗಿಸಿ' },
 
+  voiceStyleLabel: { te: 'స్వరం', en: 'Voice', kn: 'ಧ್ವನಿ' },
+  voiceStyleHint: { te: 'వినడానికి నొక్కండి', en: 'Tap to hear a sample', kn: 'ಆಲಿಸಲು ಒತ್ತಿ' },
+  voiceStyleMaleLow: { te: 'పురుషుడు (తక్కువ)', en: 'Male (Low)', kn: 'ಪುರುಷ (ಕಡಿಮೆ)' },
+  voiceStyleMaleHigh: { te: 'పురుషుడు (ఎక్కువ)', en: 'Male (High)', kn: 'ಪುರುಷ (ಹೆಚ್ಚು)' },
+  voiceStyleFemaleLow: { te: 'స్త్రీ (తక్కువ)', en: 'Female (Low)', kn: 'ಸ್ತ್ರೀ (ಕಡಿಮೆ)' },
+  voiceStyleFemaleHigh: { te: 'స్త్రీ (ఎక్కువ)', en: 'Female (High)', kn: 'ಸ್ತ್ರೀ (ಹೆಚ್ಚು)' },
+
   japamPickerTitle: { te: 'ఏ నామాన్ని రాద్దాం?', en: 'Which name shall we write?', kn: 'ಯಾವ ಹೆಸರನ್ನು ಬರೆಯೋಣ?' },
   japamCustomPrompt: { te: 'లేదా మీకు నచ్చిన నామాన్ని రాయండి', en: 'Or write any name you like', kn: 'ಅಥವಾ ನಿಮಗೆ ಇಷ್ಟವಾದ ಹೆಸರನ್ನು ಬರೆಯಿರಿ' },
   japamCustomPlaceholder: { te: 'తెలుగులో లేదా English లో రాయండి', en: 'Type the name you want to trace', kn: 'ಬರೆಯಬೇಕಾದ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ' },
