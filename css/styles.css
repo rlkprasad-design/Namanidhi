@@ -191,6 +191,7 @@ h1, h2, h3, .display {
 }
 
 .card {
+  position: relative;
   display: block;
   width: 100%;
   text-align: right;
@@ -204,6 +205,39 @@ h1, h2, h3, .display {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 .card:active { transform: scale(0.98); }
+
+.record-slot {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 6px;
+}
+.record-btn, .record-delete-btn {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border: 1px solid rgba(240, 210, 139, 0.35);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--gold-light);
+  cursor: pointer;
+}
+.record-btn svg, .record-delete-btn svg { display: block; width: 100%; height: 100%; }
+.record-btn:hover, .record-btn:focus-visible,
+.record-delete-btn:hover, .record-delete-btn:focus-visible { border-color: var(--gold); color: var(--gold); }
+.record-btn.recording {
+  color: var(--diamond);
+  border-color: var(--diamond);
+  animation: record-pulse 1.1s ease-in-out infinite;
+}
+@keyframes record-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .record-btn.recording { animation: none; }
+}
 
 .card .card-title {
   font-family: 'Noto Serif Telugu', 'Noto Serif Kannada', serif;

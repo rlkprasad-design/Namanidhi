@@ -38,6 +38,9 @@ still tracked on-device via `localStorage`.
   lookup helper - covers screen labels, buttons, and messages, not
   content data (which lives per-language in `data/` - see below).
 - `js/supabase-client.js` / `js/config.js` - optional shared backend.
+- `js/recordings.js` - personal Likhita Japam voice recordings, captured via
+  `MediaRecorder` and stored as Blobs in IndexedDB, keyed by language+word.
+  Purely on-device - never synced to Supabase or anywhere else.
 - `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
   complete, Scoreboard). Home has two independent top-level modes:
   "నామ గుప్త నిధి" and "లిఖిత జపం". నామ గుప్త నిధి isn't itself one puzzle -
