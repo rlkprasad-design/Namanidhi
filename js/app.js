@@ -1230,13 +1230,52 @@ function buildSolidInkCanvas(ink, width, height) {
 // recording. Cancels any utterance still queued from a moment ago so
 // repeated completions in one session don't stack up and lag behind.
 const SPEECH_LANG_BY_LANG = { te: 'te-IN', kn: 'kn-IN', en: 'en-IN' };
+const SPEECH_RATE = 0.8;
+
+// getVoices() often returns an empty list until the browser finishes
+// loading them asynchronously, so we cache the list and refresh it
+// whenever 'voiceschanged' fires rather than calling getVoices() cold
+// inside speakName.
+let cachedVoices = [];
+function refreshVoiceCache() {
+  cachedVoices = window.speechSynthesis.getVoices();
+}
+if ('speechSynthesis' in window) {
+  refreshVoiceCache();
+  window.speechSynthesis.addEventListener('voiceschanged', refreshVoiceCache);
+}
+
+function pickMaleVoice(langTag) {
+  const base = langTag.split('-')[0];
+  const matches = cachedVoices.filter((v) => v.lang === langTag || v.lang.startsWith(base));
+  const male = matches.find((v) => /\bmale\b/i.test(v.name) && !/female/i.test(v.name));
+  return male || matches[0] || null;
+}
 
 function speakName(word, lang) {
   if (!('speechSynthesis' in window)) return;
   try {
     window.speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = SPEECH_LANG_BY_LANG[lang] || 'en-IN';
+    const langTag = SPEECH_LANG_BY_LANG[lang] || 'en-IN';
+    utterance.lang = langTag;
+    utterance.rate = SPEECH_RATE;
+    const voice = pickMaleVoice(langTag);
+    let voiceApplied = false;
+    if (voice) {
+      try {
+        utterance.voice = voice;
+        voiceApplied = true;
+      } catch (err) {
+        console.warn('Could not apply selected voice, falling back to pitch:', err);
+      }
+    }
+    if (!voiceApplied) {
+      // No dedicated male voice available for this language/device - most
+      // Telugu/Kannada TTS voices default to one female voice - so deepen
+      // the pitch a bit as a rough approximation instead.
+      utterance.pitch = 0.7;
+    }
     window.speechSynthesis.speak(utterance);
   } catch (err) {
     console.warn('speakName failed:', err);
