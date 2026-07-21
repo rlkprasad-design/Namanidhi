@@ -283,21 +283,16 @@ export async function buildDotTrace(word) {
   return result;
 }
 
-// A trace counts as done once this fraction of dots has been touched -
-// left short of 100% so a stubborn dot or two - awkward to land
-// precisely, near an edge or a tight cluster of strokes - can't leave a
-// genuinely-finished trace stuck forever, matching the app's no-penalty
-// tone.
-const COMPLETE_THRESHOLD = 0.98;
-
 // Attaches drag-to-fill interaction to a canvas already sized to match
-// dotTrace.width/height. Calls onChange() whenever a new dot fills, and
-// onComplete() once COMPLETE_THRESHOLD of the dots have been touched
-// (called exactly once).
-export function attachDotTracer(canvas, dots, filled, { onChange, onComplete }) {
+// dotTrace.width/height. Calls onChange() whenever one or more new dots
+// fill. Completion itself isn't decided here - a trace's dots can have
+// uneven spacing (a tight curve's nearest-neighbor walk can leave one
+// dot an awkward distance from its neighbors), so counting "dots touched"
+// made some genuinely-finished traces hard to close out. The caller
+// (see renderJapamTrace in app.js) instead tracks actual ink-pixel
+// coverage from the same touches, which doesn't care about dot order.
+export function attachDotTracer(canvas, dots, filled, { onChange }) {
   let dragging = false;
-  let completed = false;
-  const threshold = Math.ceil(dots.length * COMPLETE_THRESHOLD);
 
   function pointFromEvent(e) {
     const rect = canvas.getBoundingClientRect();
@@ -317,13 +312,7 @@ export function attachDotTracer(canvas, dots, filled, { onChange, onComplete }) 
         changed = true;
       }
     });
-    if (changed) {
-      onChange();
-      if (!completed && filled.size >= threshold) {
-        completed = true;
-        onComplete();
-      }
-    }
+    if (changed) onChange();
   }
 
   canvas.addEventListener('pointerdown', (e) => {

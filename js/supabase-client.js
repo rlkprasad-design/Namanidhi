@@ -125,12 +125,13 @@ export async function flagEntry(entry) {
   return { ok: true };
 }
 
-export async function fetchFlaggedEntries() {
+export async function fetchFlaggedEntries(lang) {
   const sb = await getClient();
   if (!sb) return null;
   const { data, error } = await sb
     .from('flagged_entries')
     .select('*')
+    .eq('language', lang)
     .order('created_at', { ascending: false });
   if (error) {
     console.warn('fetchFlaggedEntries failed:', error);

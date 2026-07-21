@@ -1159,6 +1159,43 @@ async function renderJapamTrace(session) {
   const REVEAL_RADIUS = 16;
   const revealed = new Set();
 
+  // A trace counts as done once this much of the actual glyph's ink is
+  // visibly revealed - a direct read of what the player sees on screen,
+  // rather than counting "dots touched" (which struggled on tight curves
+  // where the skeleton's nearest-neighbor walk leaves one dot an awkward
+  // distance from its neighbors, order that has nothing to do with how
+  // much of the letter is actually filled in). revealedInk mirrors
+  // revealMask as a per-pixel bitmap so coverage can be measured exactly
+  // instead of estimated; only the newly-revealed disk around each dot
+  // is scanned per fill, not the whole canvas, so this stays cheap.
+  const INK_COMPLETE_THRESHOLD = 0.95;
+  const totalInkPixels = ink.reduce((sum, v) => sum + v, 0);
+  const revealedInk = new Uint8Array(ink.length);
+  let revealedInkPixels = 0;
+  let completed = false;
+
+  function markInkRevealed(cx, cy) {
+    const cxr = Math.round(cx);
+    const cyr = Math.round(cy);
+    const rSq = REVEAL_RADIUS * REVEAL_RADIUS;
+    const minX = Math.max(0, cxr - REVEAL_RADIUS);
+    const maxX = Math.min(width - 1, cxr + REVEAL_RADIUS);
+    const minY = Math.max(0, cyr - REVEAL_RADIUS);
+    const maxY = Math.min(height - 1, cyr + REVEAL_RADIUS);
+    for (let y = minY; y <= maxY; y++) {
+      const dy = y - cyr;
+      for (let x = minX; x <= maxX; x++) {
+        const dx = x - cxr;
+        if (dx * dx + dy * dy > rSq) continue;
+        const idx = y * width + x;
+        if (ink[idx] && !revealedInk[idx]) {
+          revealedInk[idx] = 1;
+          revealedInkPixels++;
+        }
+      }
+    }
+  }
+
   function revealNewlyFilledDots() {
     filled.forEach((i) => {
       if (revealed.has(i)) return;
@@ -1168,7 +1205,12 @@ async function renderJapamTrace(session) {
       revealCtx.arc(d.x, d.y, REVEAL_RADIUS, 0, Math.PI * 2);
       revealCtx.fillStyle = '#000';
       revealCtx.fill();
+      markInkRevealed(d.x, d.y);
     });
+    if (!completed && totalInkPixels > 0 && revealedInkPixels / totalInkPixels >= INK_COMPLETE_THRESHOLD) {
+      completed = true;
+      onJapamSuccess(session);
+    }
   }
 
   function draw() {
@@ -1197,7 +1239,6 @@ async function renderJapamTrace(session) {
 
   attachDotTracer(canvas, dots, filled, {
     onChange: () => { revealNewlyFilledDots(); draw(); },
-    onComplete: () => onJapamSuccess(session),
   });
 }
 
@@ -1301,7 +1342,7 @@ async function showScoreboard() {
 
   if (syncsToBackend()) {
     const [puzzleRows, japamRows, flaggedRows, stotrams] = await Promise.all([
-      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(), loadStotrams(getLang()),
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()),
     ]);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
