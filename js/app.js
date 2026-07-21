@@ -14,7 +14,6 @@ import {
   getLocalPuzzleTotals, getLocalJapamTotals, daysElapsedInclusive,
   hasSeenIntro, markIntroSeen,
   getLanguage, setLanguage,
-  getVoiceStyle, setVoiceStyle,
   getPersistedDrawQueues, setPersistedDrawQueues,
   getPersistedStotramDrawQueues, setPersistedStotramDrawQueues,
   getWordExposureCounts, recordWordExposures,
@@ -1068,12 +1067,9 @@ function showJapamNamePicker() {
           <button type="button" class="btn btn-primary" data-custom-start>${t('beginBtn')}</button>
         </div>
       </div>
-      <p class="tagline" style="text-align:center; margin-top: 20px;">${t('voiceStyleLabel')} &middot; ${t('voiceStyleHint')}</p>
-      <div data-voice-toggle-slot></div>
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
-  screen.querySelector('[data-voice-toggle-slot]').replaceWith(voiceStyleToggle());
   const container = screen.querySelector('[data-names]');
   japamNames().forEach(({ word, label }, i) => {
     const card = el(`
@@ -1225,83 +1221,7 @@ function buildSolidInkCanvas(ink, width, height) {
   return canvas;
 }
 
-// Speaks the traced name aloud via the browser's built-in text-to-speech
-// (no library, no network call - unlike everything else this app talks
-// to, speechSynthesis is local to the device). Most devices only ship one
-// installed voice per language, so hunting for a distinct "male" or
-// "female" voice by name rarely finds anything and changes nothing
-// audible. Instead, the four styles below shift pitch and rate on
-// whichever single voice the device actually has - that always has an
-// effect, and the player picks whichever sounds best to them on their
-// own device via voiceStyleToggle() below.
-const SPEECH_LANG_BY_LANG = { te: 'te-IN', kn: 'kn-IN', en: 'en-IN' };
-const DEFAULT_VOICE_STYLE = 'male-low';
-const VOICE_STYLE_PRESETS = {
-  'male-low': { pitch: 0.7, rate: 0.78 },
-  'male-high': { pitch: 0.95, rate: 0.85 },
-  'female-low': { pitch: 1.15, rate: 0.85 },
-  'female-high': { pitch: 1.5, rate: 0.9 },
-};
-const VOICE_STYLE_LABEL_KEYS = {
-  'male-low': 'voiceStyleMaleLow',
-  'male-high': 'voiceStyleMaleHigh',
-  'female-low': 'voiceStyleFemaleLow',
-  'female-high': 'voiceStyleFemaleHigh',
-};
-
-function currentVoiceStyle() {
-  const saved = getVoiceStyle();
-  return VOICE_STYLE_PRESETS[saved] ? saved : DEFAULT_VOICE_STYLE;
-}
-
-function speak(word, lang, style) {
-  if (!('speechSynthesis' in window)) return;
-  try {
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(word);
-    utterance.lang = SPEECH_LANG_BY_LANG[lang] || 'en-IN';
-    const preset = VOICE_STYLE_PRESETS[style] || VOICE_STYLE_PRESETS[DEFAULT_VOICE_STYLE];
-    utterance.pitch = preset.pitch;
-    utterance.rate = preset.rate;
-    window.speechSynthesis.speak(utterance);
-  } catch (err) {
-    console.warn('speak failed:', err);
-  }
-}
-
-function speakName(word, lang) {
-  speak(word, lang, currentVoiceStyle());
-}
-
-// A pill row (same visual language as languageToggle) for picking which
-// of the four voice styles speakName uses afterward. Tapping a pill also
-// speaks a short sample right away, since the whole point is to let the
-// player judge the four styles by ear on their own device rather than
-// guessing from a label.
-function voiceStyleToggle() {
-  const active = currentVoiceStyle();
-  const wrap = el(`
-    <div class="lang-toggle" data-voice-toggle>
-      ${Object.keys(VOICE_STYLE_PRESETS).map((style) => `
-        <button type="button" class="lang-pill${style === active ? ' active' : ''}" data-voice-style="${style}">
-          ${t(VOICE_STYLE_LABEL_KEYS[style])}
-        </button>
-      `).join('')}
-    </div>
-  `);
-  wrap.querySelectorAll('[data-voice-style]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const style = btn.getAttribute('data-voice-style');
-      setVoiceStyle(style);
-      wrap.querySelectorAll('[data-voice-style]').forEach((b) => b.classList.toggle('active', b === btn));
-      speak(japamNames()[0].word, getLang(), style);
-    });
-  });
-  return wrap;
-}
-
 function onJapamSuccess(session) {
-  speakName(session.word, getLang());
   session.count += 1;
   const entry = {
     name_traced: session.word,
