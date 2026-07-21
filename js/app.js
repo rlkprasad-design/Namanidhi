@@ -24,6 +24,7 @@ import {
   fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries, dismissFlaggedEntry,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
+import { saveRecording, getRecording, deleteRecording } from './recordings.js';
 
 const root = document.getElementById('app');
 
@@ -1055,10 +1056,93 @@ function showStotramComplete(stotram) {
 // Likhita Japam (standalone + interlude share this engine)
 // ---------------------------------------------------------------------
 
+const MIC_ICON = `<svg viewBox="0 0 16 16"><rect x="6" y="1" width="4" height="8" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 7a5 5 0 0010 0M8 12v3M5.5 15h5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+const REC_STOP_ICON = `<svg viewBox="0 0 16 16"><rect x="4" y="4" width="8" height="8" rx="1" fill="currentColor"/></svg>`;
+const REC_PLAY_ICON = `<svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6z" fill="currentColor"/></svg>`;
+const REC_TRASH_ICON = `<svg viewBox="0 0 16 16"><path d="M3 4h10M6 4V2h4v2M4 4l1 10h6l1-10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
+const MAX_RECORDING_MS = 8000;
+
+// Plays a saved on-device recording for `word` (if one exists) by
+// creating a throwaway <audio> element from its Blob. Silently does
+// nothing when no recording is stored - callers don't need to check
+// first. Fire-and-forget: callers don't await this.
+async function playRecording(lang, word) {
+  const blob = await getRecording(lang, word);
+  if (!blob) return;
+  const url = URL.createObjectURL(blob);
+  const audio = new Audio(url);
+  audio.addEventListener('ended', () => URL.revokeObjectURL(url));
+  audio.play().catch(() => URL.revokeObjectURL(url));
+}
+
+// Renders the record/play/delete control for one Likhita Japam name card
+// into `slot`, and wires up microphone capture via MediaRecorder. The
+// recording is scoped to the *current* language + word (see
+// js/recordings.js) so switching languages naturally offers a fresh,
+// independent recording rather than reusing one made for a different
+// script. Entirely on-device: nothing here ever reaches Supabase.
+function wireRecordButton(slot, word) {
+  if (!('mediaDevices' in navigator) || !window.MediaRecorder) return;
+  const lang = getLang();
+  let mediaRecorder = null;
+  let autoStopTimer = null;
+
+  async function render() {
+    slot.innerHTML = '';
+    const hasRecording = !!(await getRecording(lang, word));
+    const recBtn = el(`<button type="button" class="record-btn" title="${hasRecording ? t('playRecordingTitle') : t('recordBtnTitle')}">${hasRecording ? REC_PLAY_ICON : MIC_ICON}</button>`);
+    recBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (mediaRecorder && mediaRecorder.state === 'recording') { mediaRecorder.stop(); return; }
+      if (hasRecording) { playRecording(lang, word); return; }
+      startRecording(recBtn);
+    });
+    recBtn.addEventListener('keydown', (e) => e.stopPropagation());
+    slot.appendChild(recBtn);
+    if (hasRecording) {
+      const delBtn = el(`<button type="button" class="record-delete-btn" title="${t('deleteRecordingTitle')}">${REC_TRASH_ICON}</button>`);
+      delBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        await deleteRecording(lang, word);
+        await render();
+      });
+      slot.appendChild(delBtn);
+    }
+  }
+
+  async function startRecording(recBtn) {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mimeType = window.MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '';
+      mediaRecorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
+      const chunks = [];
+      mediaRecorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+      mediaRecorder.onstop = async () => {
+        clearTimeout(autoStopTimer);
+        stream.getTracks().forEach((tr) => tr.stop());
+        const blob = new Blob(chunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+        await saveRecording(lang, word, blob);
+        mediaRecorder = null;
+        await render();
+      };
+      mediaRecorder.start();
+      autoStopTimer = setTimeout(() => { if (mediaRecorder && mediaRecorder.state === 'recording') mediaRecorder.stop(); }, MAX_RECORDING_MS);
+      recBtn.classList.add('recording');
+      recBtn.innerHTML = REC_STOP_ICON;
+      recBtn.title = t('stopRecordingTitle');
+    } catch (err) {
+      console.warn('Recording failed:', err);
+    }
+  }
+
+  render();
+}
+
 function showJapamNamePicker() {
   const screen = el(`
     <div>
       <h2>${t('japamPickerTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('recordHintExplainer')}</p>
       <div class="card-grid" data-names></div>
       <div class="custom-word-block">
         <p class="tagline" style="text-align:center;">${t('japamCustomPrompt')}</p>
@@ -1072,15 +1156,23 @@ function showJapamNamePicker() {
   screen.prepend(topBar({ backAction: showHome }));
   const container = screen.querySelector('[data-names]');
   japamNames().forEach(({ word, label }, i) => {
+    // Was a <button>, but the per-name record control (see
+    // wireRecordButton below) is itself an interactive button, and
+    // buttons can't nest inside buttons - a div with role="button" plus
+    // a keydown handler keeps the card equally operable by keyboard.
     const card = el(`
-      <button type="button" class="card" style="text-align:center;">
+      <div class="card" style="text-align:center;" role="button" tabindex="0">
         <div class="card-title">${label}</div>
         ${i === 0 ? `<span class="badge">${t('suggestedBadge')}</span>` : ''}
-      </button>
+        <div class="record-slot" data-record-slot></div>
+      </div>
     `);
-    card.addEventListener('click', () => {
-      startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
+    const start = () => startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
+    card.addEventListener('click', start);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); }
     });
+    wireRecordButton(card.querySelector('[data-record-slot]'), word);
     container.appendChild(card);
   });
 
@@ -1263,6 +1355,7 @@ function buildSolidInkCanvas(ink, width, height) {
 }
 
 function onJapamSuccess(session) {
+  playRecording(getLang(), session.word);
   session.count += 1;
   const entry = {
     name_traced: session.word,

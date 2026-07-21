@@ -164,6 +164,16 @@ const STRINGS = {
   playAgainBtn: { te: 'మళ్ళీ ఆడండి', en: 'Play again', kn: 'ಮತ್ತೆ ಆಡಿ' },
   finishBtn: { te: 'ముగించు', en: 'Finish', kn: 'ಮುಗಿಸಿ' },
 
+  recordHintExplainer: {
+    te: '🎙 ఏదైనా పేరు పక్కన ఉన్న మైక్ గుర్తును నొక్కి, మీ స్వరంలో రికార్డు చేయండి - అది మీ ఫోన్‌లోనే ఉంటుంది, రాయడం పూర్తయినప్పుడు వినిపిస్తుంది.',
+    en: '🎙 Tap the mic next to any name to record it in your own voice - it stays on your device, and plays back when you finish tracing.',
+    kn: '🎙 ಯಾವುದೇ ಹೆಸರಿನ ಪಕ್ಕದ ಮೈಕ್ ಒತ್ತಿ ನಿಮ್ಮ ಧ್ವನಿಯಲ್ಲಿ ರೆಕಾರ್ಡ್ ಮಾಡಿ - ಅದು ನಿಮ್ಮ ಫೋನ್‌ನಲ್ಲೇ ಇರುತ್ತದೆ, ಬರೆದು ಮುಗಿಸಿದಾಗ ಪ್ಲೇ ಆಗುತ್ತದೆ.',
+  },
+  recordBtnTitle: { te: 'మీ స్వరాన్ని రికార్డు చేయండి', en: 'Record your voice for this name', kn: 'ಈ ಹೆಸರಿಗಾಗಿ ನಿಮ್ಮ ಧ್ವನಿ ರೆಕಾರ್ಡ್ ಮಾಡಿ' },
+  stopRecordingTitle: { te: 'ఆపడానికి నొక్కండి', en: 'Tap to stop', kn: 'ನಿಲ್ಲಿಸಲು ಒತ್ತಿ' },
+  playRecordingTitle: { te: 'మీ రికార్డింగ్ వినండి', en: 'Play your recording', kn: 'ನಿಮ್ಮ ರೆಕಾರ್ಡಿಂಗ್ ಕೇಳಿ' },
+  deleteRecordingTitle: { te: 'తొలగించి మళ్ళీ రికార్డు చేయండి', en: 'Delete and re-record', kn: 'ಅಳಿಸಿ ಮತ್ತೆ ರೆಕಾರ್ಡ್ ಮಾಡಿ' },
+
   japamPickerTitle: { te: 'ఏ నామాన్ని రాద్దాం?', en: 'Which name shall we write?', kn: 'ಯಾವ ಹೆಸರನ್ನು ಬರೆಯೋಣ?' },
   japamCustomPrompt: { te: 'లేదా మీకు నచ్చిన నామాన్ని రాయండి', en: 'Or write any name you like', kn: 'ಅಥವಾ ನಿಮಗೆ ಇಷ್ಟವಾದ ಹೆಸರನ್ನು ಬರೆಯಿರಿ' },
   japamCustomPlaceholder: { te: 'తెలుగులో లేదా English లో రాయండి', en: 'Type the name you want to trace', kn: 'ಬರೆಯಬೇಕಾದ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ' },

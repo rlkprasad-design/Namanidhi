@@ -12,7 +12,7 @@
 <!-- Defense-in-depth: even if an escaping bug ever slipped a stray tag
      into rendered HTML (see js/app.js's escapeHtml), this blocks it from
      loading or running anything outside what the app itself needs. -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://esm.sh https://*.supabase.co; object-src 'none'; base-uri 'self';" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self' blob:; connect-src 'self' https://esm.sh https://*.supabase.co; object-src 'none'; base-uri 'self';" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@500;700&family=Noto+Sans+Telugu:wght@400;600;700&family=Noto+Serif+Kannada:wght@500;700&family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet" />
