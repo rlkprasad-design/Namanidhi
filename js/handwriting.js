@@ -42,7 +42,16 @@ const LETTER_GAP = FONT_PX * 0.015;
 // to a single centerline (see the skeleton note up top).
 const FONT_WEIGHT = 400;
 const DOT_SPACING = 12; // px between dots along a stroke's centerline
-const MIN_SKELETON_PIXELS = 4; // ignore anti-aliasing specks left after thinning
+// Was 4 (to ignore anti-aliasing specks left after thinning), but that
+// silently dropped tiny disconnected skeleton fragments - real ink, just
+// separated by a break the thinning step left at a sharp corner or thin
+// stroke junction - leaving them with no dot anywhere nearby. Since ink
+// completion (see app.js's renderJapamTrace) is measured by how much of
+// the glyph's actual ink gets revealed, any such fragment made full
+// coverage permanently unreachable for that word, no matter how
+// thoroughly it was traced. Dropping the filter to 1 (effectively "keep
+// everything") closes that gap.
+const MIN_SKELETON_PIXELS = 1;
 // Hit-testing checks every dot in the whole word, not just ones "nearby"
 // along the same stroke - so on a compact, curly glyph (a conjunct like
 // "ಶ್ರೀ"/"శ్రీ" folds a lot of ink into a small area) a generous radius can
