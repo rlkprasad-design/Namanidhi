@@ -176,7 +176,7 @@ const STRINGS = {
 
   japamPickerTitle: { te: 'ఏ నామాన్ని రాద్దాం?', en: 'Which name shall we write?', kn: 'ಯಾವ ಹೆಸರನ್ನು ಬರೆಯೋಣ?' },
   japamCustomPrompt: { te: 'లేదా మీకు నచ్చిన నామాన్ని రాయండి', en: 'Or write any name you like', kn: 'ಅಥವಾ ನಿಮಗೆ ಇಷ್ಟವಾದ ಹೆಸರನ್ನು ಬರೆಯಿರಿ' },
-  japamCustomPlaceholder: { te: 'తెలుగులో లేదా English లో రాయండి', en: 'Type the name you want to trace', kn: 'ಬರೆಯಬೇಕಾದ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ' },
+  japamCustomPlaceholder: { te: 'రాయాలనుకున్న నామాన్ని టైప్ చేయండి', en: 'Type the name you want to trace', kn: 'ಬರೆಯಬೇಕಾದ ಹೆಸರನ್ನು ಟೈಪ್ ಮಾಡಿ' },
   suggestedBadge: { te: 'సూచించినది', en: 'Suggested', kn: 'ಸೂಚಿಸಿದ್ದು' },
 
   likhitaJapamHeading: { te: 'లిఖిత జపం', en: 'Likhita Japam', kn: 'ಲಿಖಿತ ಜಪ' },

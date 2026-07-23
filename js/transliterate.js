@@ -64,11 +64,16 @@ function transliterateWord(word) {
   let pending = null; // Telugu consonant letter waiting to see if a vowel follows
   let i = 0;
 
-  while (i < word.length) {
-    const ch = word[i];
+  // The phonetic loop below matches against the lookup tables, which are
+  // all lowercase keys - it must walk `lower`, not the original `word`,
+  // or any capitalized letter (a name typed "Sri..." rather than
+  // "sri...") fails every table match and silently gets skipped as
+  // "unrecognized" instead of transliterated.
+  while (i < lower.length) {
+    const ch = lower[i];
 
     if (ch === 'm' || ch === 'n') {
-      const vowelAhead = matchLongest(word, i + 1, VOWELS_INDEPENDENT);
+      const vowelAhead = matchLongest(lower, i + 1, VOWELS_INDEPENDENT);
       if (!vowelAhead) {
         // No vowel follows -> nasalization (anusvara), not a full consonant.
         if (pending) { out += pending; pending = null; }
@@ -78,7 +83,7 @@ function transliterateWord(word) {
       }
     }
 
-    const cons = matchLongest(word, i, CONSONANTS);
+    const cons = matchLongest(lower, i, CONSONANTS);
     if (cons) {
       if (pending) out += pending + '్'; // previous consonant had no vowel - conjunct
       pending = cons[1];
@@ -86,10 +91,10 @@ function transliterateWord(word) {
       continue;
     }
 
-    const vow = matchLongest(word, i, VOWELS_INDEPENDENT);
+    const vow = matchLongest(lower, i, VOWELS_INDEPENDENT);
     if (vow) {
       if (pending) {
-        const matra = matchLongest(word, i, VOWELS_MATRA);
+        const matra = matchLongest(lower, i, VOWELS_MATRA);
         out += pending + (matra ? matra[1] : '');
         pending = null;
       } else {
