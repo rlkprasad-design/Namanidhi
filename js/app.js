@@ -1260,7 +1260,15 @@ async function renderJapamTrace(session) {
   // revealMask as a per-pixel bitmap so coverage can be measured exactly
   // instead of estimated; only the newly-revealed disk around each dot
   // is scanned per fill, not the whole canvas, so this stays cheap.
-  const INK_COMPLETE_THRESHOLD = 0.98;
+  //
+  // A literal 100% isn't achievable for every word - a handful of pixels
+  // right at the edge of the ink always fall just outside every nearby
+  // dot's reveal radius, geometry that has nothing to do with how well
+  // the player traced. Checked the actual max reachable coverage (every
+  // dot touched) across the entire content pool (911 words, all three
+  // languages): worst case was 99.29%, so 0.99 stays reachable everywhere
+  // while requiring close to the whole glyph.
+  const INK_COMPLETE_THRESHOLD = 0.99;
   const totalInkPixels = ink.reduce((sum, v) => sum + v, 0);
   const revealedInk = new Uint8Array(ink.length);
   let revealedInkPixels = 0;

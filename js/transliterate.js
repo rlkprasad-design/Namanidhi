@@ -10,6 +10,12 @@
 // ITRANS capitalization, since casual typists won't know that scheme.
 
 const DICTIONARY = {
+  // "sri"/"shri" is the honorific ("Sri Rama", "Sri Krishna", ...), not a
+  // literal phonetic spelling - the phonetic fallback below would render
+  // it as స్రి (sa+ra+i), not the familiar శ్రీ. Listed on its own so any
+  // "Sri <name>"/"Shri <name>" gets the honorific correctly, not just the
+  // specific combinations spelled out below.
+  sri: 'శ్రీ', shri: 'శ్రీ',
   rama: 'రామ', sriram: 'శ్రీరామ', srirama: 'శ్రీరామ', shrirama: 'శ్రీరామ',
   krishna: 'కృష్ణ', shrikrishna: 'శ్రీకృష్ణ', srikrishna: 'శ్రీకృష్ణ',
   shiva: 'శివ', shivaya: 'శివాయ', mahadeva: 'మహాదేవ',
