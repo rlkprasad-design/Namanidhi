@@ -204,6 +204,13 @@ function el(html) {
 function setScreen(node, { footer = true } = {}) {
   root.innerHTML = '';
   root.appendChild(node);
+  // Without this, a screen change keeps whatever scroll position the
+  // previous screen was left at (e.g. scrolled down to a focused input,
+  // or a long puzzle's hint list) - on a short landscape viewport that
+  // was enough to push the new screen's own content, canvas included,
+  // partly or fully above the visible area with no visual cue that
+  // there was anything to scroll back up for.
+  window.scrollTo(0, 0);
   if (footer) {
     root.appendChild(el(`<p class="global-feedback-note">${t('feedbackNote')}</p>`));
   }
@@ -1201,7 +1208,7 @@ function startJapamSession(config) {
 async function renderJapamTrace(session) {
   const isStandalone = !session.target;
   const screen = el(`
-    <div>
+    <div class="japam-trace-screen">
       <div class="japam-surface-frame">
         <canvas data-canvas></canvas>
       </div>
