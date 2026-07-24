@@ -586,6 +586,19 @@ h1, h2, h3, .display {
   .japam-trace-screen > .tagline {
     display: none;
   }
+  /* Pulls the screen up into #app's own top padding and tightens the
+     top bar's own margin - #app's padding is shared by every screen
+     so it can't be changed globally just for this one, but every pixel
+     reclaimed here directly becomes more height fitJapamCanvas has to
+     work with, which - since height was the tighter constraint (see
+     the fit function's bottomMargin) - is what lets the canvas grow
+     into the width landscape offers instead of stopping short of it. */
+  .japam-trace-screen {
+    margin-top: -10px;
+  }
+  .japam-trace-screen .top-bar {
+    margin-bottom: 8px;
+  }
   .japam-trace-screen .japam-surface-frame {
     max-width: none;
     margin-bottom: 12px;

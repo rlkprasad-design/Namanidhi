@@ -1273,7 +1273,7 @@ function fitJapamCanvas(canvas, frame) {
     const paddingY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
     const borderY = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
     const availableWidth = frame.clientWidth - paddingX;
-    const bottomMargin = 16;
+    const bottomMargin = 8;
     const availableHeight = window.innerHeight - frame.getBoundingClientRect().top - paddingY - borderY - bottomMargin;
     const scale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight);
     if (!(scale > 0) || !isFinite(scale)) return;
