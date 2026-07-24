@@ -1205,43 +1205,6 @@ function startJapamSession(config) {
   renderJapamTrace(session);
 }
 
-// Sizes the Japam canvas to fill however much space is actually free
-// around it - both width and height, measured for real - instead of a
-// fixed width-only cap. A short word no longer sits small with blank
-// space beside it just because a flat height guess happened to be the
-// tighter constraint, and it can never overflow the viewport either,
-// since both bounds come from the real layout at the moment it runs.
-// Re-measures on resize/orientation change while this canvas is the one
-// on screen; screens here have no explicit teardown hook, so the fit
-// function drops its own listeners once the canvas it was sizing is no
-// longer in the document (i.e. the player has navigated away).
-function fitJapamCanvas(canvas, frame) {
-  function fit() {
-    if (!canvas.isConnected) {
-      window.removeEventListener('resize', fit);
-      window.removeEventListener('orientationchange', fit);
-      return;
-    }
-    const naturalWidth = canvas.width;
-    const naturalHeight = canvas.height;
-    if (!naturalWidth || !naturalHeight) return;
-    const cs = getComputedStyle(frame);
-    const paddingX = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
-    const paddingY = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-    const borderY = parseFloat(cs.borderTopWidth) + parseFloat(cs.borderBottomWidth);
-    const availableWidth = frame.clientWidth - paddingX;
-    const bottomMargin = 16;
-    const availableHeight = window.innerHeight - frame.getBoundingClientRect().top - paddingY - borderY - bottomMargin;
-    const scale = Math.min(availableWidth / naturalWidth, availableHeight / naturalHeight);
-    if (!(scale > 0) || !isFinite(scale)) return;
-    canvas.style.width = `${naturalWidth * scale}px`;
-    canvas.style.height = `${naturalHeight * scale}px`;
-  }
-  fit();
-  window.addEventListener('resize', fit);
-  window.addEventListener('orientationchange', fit);
-}
-
 async function renderJapamTrace(session) {
   const isStandalone = !session.target;
   const screen = el(`
@@ -1273,11 +1236,9 @@ async function renderJapamTrace(session) {
   setScreen(screen);
 
   const canvas = screen.querySelector('[data-canvas]');
-  const frame = screen.querySelector('.japam-surface-frame');
   const { dots, width, height, baselineY, ink } = await buildDotTrace(session.word);
   canvas.width = width;
   canvas.height = height;
-  fitJapamCanvas(canvas, frame);
   const ctx = canvas.getContext('2d');
   const filled = new Set();
 
