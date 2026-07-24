@@ -523,7 +523,22 @@ function renderGeneralSession(level, pool) {
     });
     return;
   }
-  renderGame(buildSession(level, pool));
+  const session = buildSession(level, pool);
+  // isPoolExhausted() above only catches total exhaustion, not the case
+  // where whatever's left unexhausted just doesn't fit any of the grid
+  // sizes sampleMixedEntries tried rolling - vanishingly rare after its
+  // own retries, but showing this instead of a grid with an empty hints
+  // panel (nothing to find, no way to progress) is the honest fallback.
+  if (session.placements.length === 0) {
+    showPoolExhausted({
+      messageKey: 'poolExhaustedGeneralMessage',
+      backAction: showNamaGuptaNidhiHub,
+      switchLabel: t('poolExhaustedSwitchToStotra'),
+      onSwitch: showStotramList,
+    });
+    return;
+  }
+  renderGame(session);
 }
 
 function buildSession(level, pool) {
@@ -862,13 +877,28 @@ function drawStotramRound(stotram, gridSize, weights, exposure) {
   return drawn;
 }
 
+// How many times a roll is allowed to come up empty before giving up -
+// see grid.js's sampleMixedEntries for why this can legitimately happen
+// even when isPoolExhausted() says the pool isn't exhausted: whatever
+// words this player hasn't exhausted yet might all be too long to fit
+// this particular roll's grid size. Re-rolling resolves it in practice.
+const STOTRAM_SAMPLE_RETRY_ATTEMPTS = 20;
+
 function buildStotramSession(stotram) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
-  const gridSize = randomInt(stotram.gridSizeMin, gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax));
+  const cappedMax = gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax);
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
   const scopeKey = stotramScopeKey(stotram);
   const exposure = getWordExposureCounts(scopeKey, state.playerName);
-  const entries = drawStotramRound(stotram, gridSize, weights, exposure);
+
+  let gridSize;
+  let entries = [];
+  for (let attempt = 0; attempt < STOTRAM_SAMPLE_RETRY_ATTEMPTS; attempt++) {
+    gridSize = randomInt(stotram.gridSizeMin, cappedMax);
+    entries = drawStotramRound(stotram, gridSize, weights, exposure);
+    if (entries.length > 0) break;
+  }
+
   recordWordExposures(entries.map((e) => e.word), scopeKey, state.playerName);
   const { grid, placements } = generateGridReliable({ size: gridSize, entries, fillerMode: stotram.fillerMode, fillerPool: fillerPool() });
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })) };
@@ -888,7 +918,20 @@ function renderStotramSession(stotram) {
     });
     return;
   }
-  renderStotramGame(buildStotramSession(stotram));
+  const session = buildStotramSession(stotram);
+  // See renderGeneralSession's matching check - isPoolExhausted() above
+  // only catches total exhaustion, not this stotram's unexhausted words
+  // all being too long for every grid size buildStotramSession tried.
+  if (session.placements.length === 0) {
+    showPoolExhausted({
+      messageKey: 'poolExhaustedStotramMessage',
+      backAction: showStotramList,
+      switchLabel: t('poolExhaustedSwitchToPuranas'),
+      onSwitch: startNamaGuptaNidhi,
+    });
+    return;
+  }
+  renderStotramGame(session);
 }
 
 function startStotram(stotram) {
@@ -1314,7 +1357,17 @@ async function renderJapamTrace(session) {
       revealCtx.fill();
       markInkRevealed(d.x, d.y);
     });
-    if (!completed && totalInkPixels > 0 && revealedInkPixels / totalInkPixels >= INK_COMPLETE_THRESHOLD) {
+    // The 99% ink-coverage bar was tuned against this app's own bundled
+    // Telugu/Kannada fonts, but English falls back to the device's
+    // generic system sans-serif (no dedicated web font is loaded for
+    // it - see fontStackFor in handwriting.js), which varies by
+    // phone/OS and can have a lower max-achievable coverage ceiling
+    // than what was measured here. Touching every single dot is
+    // therefore also accepted as complete on its own, regardless of
+    // the measured ink percentage - an unambiguous, purely geometric
+    // signal that can't be blocked by any particular font's rendering.
+    const allDotsTouched = filled.size >= dots.length;
+    if (!completed && (allDotsTouched || (totalInkPixels > 0 && revealedInkPixels / totalInkPixels >= INK_COMPLETE_THRESHOLD))) {
       completed = true;
       onJapamSuccess(session);
     }

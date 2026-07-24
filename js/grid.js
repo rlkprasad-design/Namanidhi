@@ -175,35 +175,56 @@ export function splitAcrossDifficulties(total, weights = EVEN_WEIGHTS) {
 // tier's full word list - see drawFromQueue - so nothing repeats until
 // every word in that tier has been drawn once, regardless of how this
 // or any other puzzle's grid size happened to roll in between.
+// How many times a roll is allowed to come up empty before giving up -
+// see the retry loop below for why this can legitimately happen even
+// when isPoolExhausted() says the pool isn't exhausted.
+const SAMPLE_RETRY_ATTEMPTS = 20;
+
 export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesCompleted = Infinity, lang = 'te', exposure = {}) {
   const cappedMax = gridSizeCapForExperience(puzzlesCompleted, level.gridSizeMin, level.gridSizeMax);
-  const gridSize = randomInt(level.gridSizeMin, cappedMax);
-  const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
 
-  const entries = [];
-  for (const difficulty of DIFFICULTIES) {
-    // The tier's full rotation pool - not filtered by this roll's grid
-    // size, only by whether the word is still within its exposure cap.
-    // Filtering by gridSize here (as this used to) meant a word too long
-    // for one puzzle's small grid would drop out of the persisted queue
-    // entirely, then look "unseen" again as soon as a bigger grid rolled
-    // - letting it resurface well before the tier had actually cycled.
-    const tierPool = pool.filter((e) => e.difficulty === difficulty && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
-    if (!tierPool.length) continue;
+  // isPoolExhausted() only catches total exhaustion (every word in the
+  // whole pool maxed out) - it says nothing about whether whatever's
+  // NOT yet exhausted happens to fit *this* roll's grid size. A player
+  // who's exhausted every easy/medium word but still has fresh
+  // (typically longer) difficult ones left can roll a small gridSize
+  // that none of them fit, which used to fall straight through to an
+  // empty entries list - the grid still renders (it's filled with
+  // filler regardless of entries.length), but the hints panel ends up
+  // blank with nothing to find. Re-rolling gridSize and trying again
+  // resolves this in practice - a different roll, often just a couple
+  // of columns bigger, is enough for a previously-too-long word to fit.
+  let gridSize;
+  let entries = [];
+  for (let attempt = 0; attempt < SAMPLE_RETRY_ATTEMPTS; attempt++) {
+    gridSize = randomInt(level.gridSizeMin, cappedMax);
+    const targetCounts = splitAcrossDifficulties(entryCountForGridSize(gridSize), weights);
+    entries = [];
+    for (const difficulty of DIFFICULTIES) {
+      // The tier's full rotation pool - not filtered by this roll's grid
+      // size, only by whether the word is still within its exposure cap.
+      // Filtering by gridSize here (as this used to) meant a word too long
+      // for one puzzle's small grid would drop out of the persisted queue
+      // entirely, then look "unseen" again as soon as a bigger grid rolled
+      // - letting it resurface well before the tier had actually cycled.
+      const tierPool = pool.filter((e) => e.difficulty === difficulty && (exposure[e.word] || 0) < MAX_WORD_EXPOSURES);
+      if (!tierPool.length) continue;
 
-    const fitsThisRoll = (e) => graphemes(e.word).length <= gridSize;
-    const eligibleNow = tierPool.filter(fitsThisRoll);
-    const count = Math.min(targetCounts[difficulty], eligibleNow.length);
-    if (!count) continue;
+      const fitsThisRoll = (e) => graphemes(e.word).length <= gridSize;
+      const eligibleNow = tierPool.filter(fitsThisRoll);
+      const count = Math.min(targetCounts[difficulty], eligibleNow.length);
+      if (!count) continue;
 
-    const tierWords = new Set(tierPool.map((e) => e.word));
-    const key = `${lang}::${difficulty}`;
-    const queue = (drawQueues.get(key) || []).filter((e) => tierWords.has(e.word));
-    startNewCycleIfEmpty(queue, tierPool);
+      const tierWords = new Set(tierPool.map((e) => e.word));
+      const key = `${lang}::${difficulty}`;
+      const queue = (drawQueues.get(key) || []).filter((e) => tierWords.has(e.word));
+      startNewCycleIfEmpty(queue, tierPool);
 
-    const { drawn, remaining } = drawFromQueue(queue, count, fitsThisRoll);
-    entries.push(...drawn);
-    drawQueues.set(key, remaining);
+      const { drawn, remaining } = drawFromQueue(queue, count, fitsThisRoll);
+      entries.push(...drawn);
+      drawQueues.set(key, remaining);
+    }
+    if (entries.length > 0) break;
   }
   return { gridSize, entries };
 }
