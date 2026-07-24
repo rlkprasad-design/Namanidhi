@@ -568,32 +568,32 @@ h1, h2, h3, .display {
   .landscape-hint {
     display: none;
   }
-  /* Landscape trades a taller viewport for a much shorter one. The
-     canvas's actual displayed size is computed dynamically in JS (see
-     fitJapamCanvas in app.js), which measures real available width and
-     height so the whole glyph always fits on screen with nothing to
-     scroll to mid-trace - the canvas needs touch-action: none for
-     tracing and can't also forward drag gestures to the page as a
-     scroll. max-height here is just a defensive fallback in case that
-     JS sizing doesn't run for some reason; it shouldn't normally bind.
+  /* Landscape trades a taller viewport for a much shorter one, and the
+     canvas's displayed size scales with available width (see
+     .japam-surface-frame canvas below) - on a wide-but-short landscape
+     screen that pushed some names' descenders/vowel signs off the
+     bottom of the viewport, with no way to bring them into view since
+     the canvas needs touch-action: none for tracing and can't also
+     forward drag gestures to the page as a scroll. Capping the canvas
+     to a share of the viewport height (letting it scale down by width
+     instead, still preserving its aspect ratio) keeps the whole glyph
+     on screen at once, so there's nothing to scroll to mid-trace.
      Heading and instructions are hidden here too - not needed once
      already mid-session, and reclaiming that space gives the canvas
-     more headroom to grow into. Widening the frame past its normal
-     640px cap lets a short word's canvas actually use the extra width
-     landscape offers, instead of sitting narrow with blank space
-     beside it while height was the only thing capping its size. */
+     more headroom before it has to shrink. */
   .japam-trace-screen h2,
   .japam-trace-screen > .tagline {
     display: none;
   }
   .japam-trace-screen .japam-surface-frame {
-    max-width: none;
     margin-bottom: 12px;
   }
   .japam-trace-screen .japam-surface-frame canvas {
+    width: auto;
+    height: auto;
     max-width: 100%;
-    max-height: 90vh;
-    max-height: 90dvh;
+    max-height: 62vh;
+    max-height: 62dvh;
   }
   .japam-trace-screen .japam-word {
     margin: 8px 0 12px;
