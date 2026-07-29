@@ -1,0 +1,41 @@
+[
+  {
+    "id": "sai-satcharitra-parichayam",
+    "title": "Places, Devotees & Teachings",
+    "status": "active",
+    "gridSizeMin": 5,
+    "gridSizeMax": 16,
+    "fillerMode": "curated",
+    "about": "Shirdi and Dwarkamai, devotees from Hemadpant to Tatya, and teachings like Shraddha and Saburi - the places, people, and values woven around Sai Baba's life. Remembering these names from the Satcharitra strengthens the faith of those who read them.",
+    "entries": [
+      { "word": "SHIRDI", "difficulty": "easy", "meaning": "The village in Maharashtra where Baba spent his entire life" },
+      { "word": "DWARKAMAI", "difficulty": "easy", "meaning": "The ruined mosque where Baba lived; said to be a name he gave it himself" },
+      { "word": "CHAVADI", "difficulty": "easy", "meaning": "The hall Baba was carried to in procession to sleep in every second night" },
+      { "word": "UDI", "difficulty": "easy", "meaning": "The sacred ash Baba gave devotees as a blessing from his dhuni" },
+      { "word": "DHUNI", "difficulty": "medium", "meaning": "The sacred fire Baba kept burning day and night in Dwarkamai" },
+      { "word": "LENDIBAGH", "difficulty": "medium", "meaning": "The garden Baba himself planted and watered" },
+      { "word": "KHANDOBA", "difficulty": "medium", "meaning": "The temple deity at whose gate Mhalsapati first called Baba 'Ya Sai'" },
+      { "word": "GURUSTHAN", "difficulty": "medium", "meaning": "Where villagers first saw the young Baba meditating under a neem tree" },
+      { "word": "BUTIWADA", "difficulty": "difficult", "meaning": "The building a devotee named Buti built, which later became Baba's samadhi mandir" },
+      { "word": "MHALSAPATI", "difficulty": "easy", "meaning": "The Khandoba temple priest whose greeting 'Ya Sai' gave Baba his name" },
+      { "word": "TATYA", "difficulty": "easy", "meaning": "A Shirdi villager, Bayajabai's son, who spent nearly his whole life with Baba" },
+      { "word": "HEMADPANT", "difficulty": "easy", "meaning": "Author of the Satcharitra (born Govind Raghunath Dabholkar); the name was Baba's own gift to him" },
+      { "word": "SHAMA", "difficulty": "medium", "meaning": "One of Baba's closest devotees; Baba said their bond spanned seventy-two lifetimes" },
+      { "word": "BAYAJABAI", "difficulty": "medium", "meaning": "Tatya's mother, whom Baba called his sister for seven lifetimes" },
+      { "word": "NANASAHEB", "difficulty": "medium", "meaning": "A Deputy Collector and Gita scholar, one of Baba's most prominent devotees" },
+      { "word": "DIXIT", "difficulty": "medium", "meaning": "A Bombay solicitor who asked Baba to cure 'the lameness of my mind,' not his leg" },
+      { "word": "DASGANU", "difficulty": "medium", "meaning": "A devotee who spread Baba's fame through kirtans, at Baba's own urging" },
+      { "word": "RADHAKRISHNAMAI", "difficulty": "difficult", "meaning": "A devotee Baba called his mother; she organized the Chavadi procession" },
+      { "word": "CHANDPATIL", "difficulty": "difficult", "meaning": "The villager whose lost mare Baba found; Baba came to Shirdi with his wedding procession" },
+      { "word": "BHAGOJISHINDE", "difficulty": "difficult", "meaning": "One of only seven devotees present in the mosque at Baba's mahasamadhi" },
+      { "word": "SHRADDHA", "difficulty": "easy", "meaning": "The first of the two qualities Baba asked of devotees above all - faith" },
+      { "word": "SABURI", "difficulty": "easy", "meaning": "The second quality Baba asked for - patience, perseverance" },
+      { "word": "ZOLI", "difficulty": "medium", "meaning": "The bag Baba used to collect alms daily from five chosen households" },
+      { "word": "DAKSHINA", "difficulty": "medium", "meaning": "The offering Baba asked some devotees for, then gave away the same day - teaching non-attachment" },
+      { "word": "GURUPURNIMA", "difficulty": "medium", "meaning": "The guru-worship festival celebrated at Shirdi since 1909" },
+      { "word": "MAHASAMADHI", "difficulty": "medium", "meaning": "15 October 1918, the day Baba left his body" },
+      { "word": "RAMNAVAMI", "difficulty": "difficult", "meaning": "The festival born in 1897 when Baba merged a Muslim Urs with this Hindu celebration - a mark of Hindu-Muslim unity" },
+      { "word": "ALLAHMALIK", "difficulty": "difficult", "meaning": "'God is the Master of all' - a phrase Baba often spoke" }
+    ]
+  }
+]
