@@ -154,6 +154,46 @@ export async function dismissFlaggedEntry(id) {
   return { ok: true };
 }
 
+// Live content corrections - see supabase/add-content-overrides.sql for
+// why this exists (fixing a flagged entry without a code deploy) and how
+// it's keyed. js/data.js applies these on top of the static JSON pool at
+// load time; admin.html is the only thing that ever writes to this table.
+export async function fetchContentOverrides(lang) {
+  const sb = await getClient();
+  if (!sb) return null;
+  const { data, error } = await sb
+    .from('content_overrides')
+    .select('*')
+    .eq('language', lang);
+  if (error) {
+    console.warn('fetchContentOverrides failed:', error);
+    return null;
+  }
+  return data;
+}
+
+export async function saveContentOverride(override) {
+  const sb = await getClient();
+  if (!sb) return { ok: false };
+  const { error } = await sb.from('content_overrides').insert(override);
+  if (error) {
+    console.warn('saveContentOverride failed:', error);
+    return { ok: false };
+  }
+  return { ok: true };
+}
+
+export async function deleteContentOverride(id) {
+  const sb = await getClient();
+  if (!sb) return { ok: false };
+  const { error } = await sb.from('content_overrides').delete().eq('id', id);
+  if (error) {
+    console.warn('deleteContentOverride failed:', error);
+    return { ok: false };
+  }
+  return { ok: true };
+}
+
 export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
