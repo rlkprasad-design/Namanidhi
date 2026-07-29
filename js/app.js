@@ -7,7 +7,7 @@ import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
 import { buildDotTrace, attachDotTracer } from './handwriting.js';
 import { looksLikeLatin, transliterate } from './transliterate.js';
-import { loadEntryPool, loadLevels, loadStotrams } from './data.js';
+import { loadEntryPool, loadLevels, loadStotrams, loadSaiSatcharitra } from './data.js';
 import {
   getPlayerName, setPlayerName, getPlayerId, setPlayerId,
   recordPuzzleProgressLocal, recordJapamLocal,
@@ -466,12 +466,17 @@ function showNamaGuptaNidhiHub() {
           <div class="display">${t('stotraParikshaTitle')}</div>
           <div class="sub">${t('stotraParikshaSub')}</div>
         </button>
+        <button type="button" class="mode-btn" data-sub-mode="sai-satcharitra">
+          <div class="display">${t('saiSatcharitraTitle')}</div>
+          <div class="sub">${t('saiSatcharitraSub')}</div>
+        </button>
       </div>
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
   screen.querySelector('[data-sub-mode="general"]').addEventListener('click', startNamaGuptaNidhi);
   screen.querySelector('[data-sub-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
+  screen.querySelector('[data-sub-mode="sai-satcharitra"]').addEventListener('click', showSaiSatcharitraList);
   setScreen(screen);
 }
 
@@ -708,7 +713,7 @@ function renderGame(session) {
 
 // Shared "you've run out of not-yet-maxed words" screen for both Nama
 // Gupta Nidhi (general pool) and Stotra Pariksha (per-stotram pool) - see
-// renderGeneralSession/renderStotramSession, the only two callers.
+// renderGeneralSession/renderCuratedSession, the only callers.
 function showPoolExhausted({ messageKey, backAction, switchLabel, onSwitch }) {
   const screen = el(`
     <div class="complete-screen">
@@ -768,30 +773,73 @@ function showLevelComplete(level) {
 }
 
 // ---------------------------------------------------------------------
-// Stotra Pariksha: one curated puzzle per stotram, testing recall of
-// names from that specific stotram's own text - every entry appears
-// every time (no sampling/difficulty tiers, unlike Nama Gupta Nidhi
-// above).
+// Curated collections: Stotra Pariksha (one curated puzzle per stotram)
+// and Sri Sai Satcharitra (one curated puzzle per theme) are the same
+// shape underneath - a fixed set of entries that all appear every time
+// (no sampling/difficulty tiers, unlike Nama Gupta Nidhi above), tested
+// through the same grid/hint/flag machinery. MODE_CONFIG is the only
+// thing that differs between them: which list screen "back" returns to,
+// which pool-exhausted message to show, and what to tag saved progress
+// with - renderCuratedSession/renderCuratedGame/recordCuratedProgress/
+// showCuratedComplete/startCurated below all take a `kind` key into this
+// table instead of being written twice.
 // ---------------------------------------------------------------------
 
-async function showStotramList() {
+const MODE_CONFIG = {
+  stotram: {
+    listAction: showStotramList,
+    poolExhaustedMessageKey: 'poolExhaustedStotramMessage',
+    switchLabelKey: 'poolExhaustedSwitchToPuranas',
+    onSwitch: startNamaGuptaNidhi,
+    category: 'stotram',
+    subtitleKey: 'stotraParikshaSub',
+  },
+  'sai-satcharitra': {
+    listAction: showSaiSatcharitraList,
+    poolExhaustedMessageKey: 'poolExhaustedSaiSatcharitraMessage',
+    switchLabelKey: 'poolExhaustedSwitchToPuranas',
+    onSwitch: startNamaGuptaNidhi,
+    category: 'sai-satcharitra',
+    subtitleKey: 'saiSatcharitraSub',
+  },
+};
+
+async function renderCollectionList({ titleKey, subKey, loader }) {
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">${t('stotraParikshaTitle')}</h2>
-      <p class="tagline" style="text-align:center;">${t('stotraParikshaSub')}</p>
-      <div class="card-grid" data-stotrams style="margin-top:20px;"></div>
+      <h2 style="text-align:center;">${t(titleKey)}</h2>
+      <p class="tagline" style="text-align:center;">${t(subKey)}</p>
+      <div class="card-grid" data-collections style="margin-top:20px;"></div>
     </div>
   `);
   screen.prepend(topBar({ backAction: showNamaGuptaNidhiHub }));
   setScreen(screen);
+  return { screen, collections: await loader(getLang()) };
+}
 
-  const stotrams = await loadStotrams(getLang());
-  const container = screen.querySelector('[data-stotrams]');
-  for (const stotram of stotrams) {
-    if (stotram.status !== 'active') {
+async function showStotramList() {
+  const { screen, collections } = await renderCollectionList({
+    titleKey: 'stotraParikshaTitle', subKey: 'stotraParikshaSub', loader: loadStotrams,
+  });
+  renderCollectionCards(screen.querySelector('[data-collections]'), collections, 'stotram');
+}
+
+// The "శ్రీ సాయి సచ్చరిత్ర" sub-mode's list screen - same layout and same
+// active/soon card treatment as Stotra Pariksha above, just backed by
+// data/sai-satcharitra.json (grouped by theme rather than by stotram).
+async function showSaiSatcharitraList() {
+  const { screen, collections } = await renderCollectionList({
+    titleKey: 'saiSatcharitraTitle', subKey: 'saiSatcharitraSub', loader: loadSaiSatcharitra,
+  });
+  renderCollectionCards(screen.querySelector('[data-collections]'), collections, 'sai-satcharitra');
+}
+
+function renderCollectionCards(container, collections, kind) {
+  for (const collection of collections) {
+    if (collection.status !== 'active') {
       container.appendChild(el(`
         <div class="card locked">
-          <div class="card-title">${stotram.title}</div>
+          <div class="card-title">${collection.title}</div>
           <div class="card-sub">${t('soonSub')}</div>
           <span class="badge soon">${t('soonBadge')}</span>
         </div>
@@ -800,12 +848,12 @@ async function showStotramList() {
     }
     const card = el(`
       <button type="button" class="card">
-        <div class="card-title">${stotram.title}</div>
-        <div class="card-sub">${t('stotramCardSub', stotram.entries.length)}</div>
+        <div class="card-title">${collection.title}</div>
+        <div class="card-sub">${t('stotramCardSub', collection.entries.length)}</div>
         <span class="badge">${t('playableBadge')}</span>
       </button>
     `);
-    card.addEventListener('click', () => startStotram(stotram));
+    card.addEventListener('click', () => startCurated(collection, kind));
     container.appendChild(card);
   }
 }
@@ -835,7 +883,7 @@ function shuffleLocal(arr) {
 // can't resurface right after a page reload either.
 const stotramDrawQueues = new Map();
 
-function stotramScopeKey(stotram) {
+function curatedScopeKey(stotram) {
   return `${getLang()}::${stotram.id}`;
 }
 
@@ -888,7 +936,7 @@ function buildStotramSession(stotram) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
   const cappedMax = gridSizeCapForExperience(puzzlesCompleted, stotram.gridSizeMin, stotram.gridSizeMax);
   const weights = difficultyWeightsForExperience(puzzlesCompleted);
-  const scopeKey = stotramScopeKey(stotram);
+  const scopeKey = curatedScopeKey(stotram);
   const exposure = getWordExposureCounts(scopeKey, state.playerName);
 
   let gridSize;
@@ -904,46 +952,50 @@ function buildStotramSession(stotram) {
   return { stotram, gridSize, grid, placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })) };
 }
 
-// Mirrors renderGeneralSession above: checks this stotram's own pool for
-// full exhaustion before building a puzzle, and if so points the player at
-// a different stotram or back to Puranas instead of a near-empty grid.
-function renderStotramSession(stotram) {
-  const exposure = getWordExposureCounts(stotramScopeKey(stotram), state.playerName);
-  if (isPoolExhausted(stotram.entries, exposure)) {
+// Mirrors renderGeneralSession above: checks this collection's own pool
+// for full exhaustion before building a puzzle, and if so points the
+// player at a different collection or back to Puranas instead of a
+// near-empty grid. `kind` is a MODE_CONFIG key ('stotram' or
+// 'sai-satcharitra') - see the comment above MODE_CONFIG.
+function renderCuratedSession(collection, kind) {
+  const cfg = MODE_CONFIG[kind];
+  const exposure = getWordExposureCounts(curatedScopeKey(collection), state.playerName);
+  if (isPoolExhausted(collection.entries, exposure)) {
     showPoolExhausted({
-      messageKey: 'poolExhaustedStotramMessage',
-      backAction: showStotramList,
-      switchLabel: t('poolExhaustedSwitchToPuranas'),
-      onSwitch: startNamaGuptaNidhi,
+      messageKey: cfg.poolExhaustedMessageKey,
+      backAction: cfg.listAction,
+      switchLabel: t(cfg.switchLabelKey),
+      onSwitch: cfg.onSwitch,
     });
     return;
   }
-  const session = buildStotramSession(stotram);
+  const session = buildStotramSession(collection);
   // See renderGeneralSession's matching check - isPoolExhausted() above
-  // only catches total exhaustion, not this stotram's unexhausted words
-  // all being too long for every grid size buildStotramSession tried.
+  // only catches total exhaustion, not this collection's unexhausted
+  // words all being too long for every grid size buildStotramSession tried.
   if (session.placements.length === 0) {
     showPoolExhausted({
-      messageKey: 'poolExhaustedStotramMessage',
-      backAction: showStotramList,
-      switchLabel: t('poolExhaustedSwitchToPuranas'),
-      onSwitch: startNamaGuptaNidhi,
+      messageKey: cfg.poolExhaustedMessageKey,
+      backAction: cfg.listAction,
+      switchLabel: t(cfg.switchLabelKey),
+      onSwitch: cfg.onSwitch,
     });
     return;
   }
-  renderStotramGame(session);
+  renderCuratedGame(session, kind);
 }
 
-function startStotram(stotram) {
-  renderStotramSession(stotram);
+function startCurated(collection, kind) {
+  renderCuratedSession(collection, kind);
 }
 
-function renderStotramGame(session) {
-  const { stotram, gridSize } = session;
+function renderCuratedGame(session, kind) {
+  const cfg = MODE_CONFIG[kind];
+  const { stotram: collection, gridSize } = session;
   const screen = el(`
     <div>
-      <h2 style="text-align:center;">${stotram.title}</h2>
-      <p class="tagline" style="text-align:center;">${t('stotraParikshaSub')}</p>
+      <h2 style="text-align:center;">${collection.title}</h2>
+      <p class="tagline" style="text-align:center;">${t(cfg.subtitleKey)}</p>
       <div class="grid-frame">
         <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
       </div>
@@ -958,7 +1010,7 @@ function renderStotramGame(session) {
       </div>
     </div>
   `);
-  screen.prepend(topBar({ backAction: showStotramList }));
+  screen.prepend(topBar({ backAction: cfg.listAction }));
 
   const gridEl = screen.querySelector('[data-grid]');
   const hintsEl = screen.querySelector('[data-hints]');
@@ -987,7 +1039,7 @@ function renderStotramGame(session) {
         </div>
       `));
     });
-    wireFlagButtons(hintsEl, session.placements, stotram.id);
+    wireFlagButtons(hintsEl, session.placements, collection.id);
   }
   renderHints();
 
@@ -1034,10 +1086,10 @@ function renderStotramGame(session) {
 
   function checkComplete() {
     if (!session.placements.every((p) => p.found)) return;
-    recordStotramProgress(session);
+    recordCuratedProgress(session, kind);
     toolbarEl.innerHTML = '';
     const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
-    btn.addEventListener('click', () => showStotramComplete(stotram));
+    btn.addEventListener('click', () => showCuratedComplete(collection, kind));
     toolbarEl.appendChild(btn);
   }
 
@@ -1054,7 +1106,7 @@ function renderStotramGame(session) {
     },
   });
 
-  screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderStotramSession(stotram));
+  screen.querySelector('[data-new-puzzle]').addEventListener('click', () => renderCuratedSession(collection, kind));
   screen.querySelector('[data-show-answer]').addEventListener('click', () => {
     const target = session.placements.find((p) => !p.found);
     if (target) markFound(target, true);
@@ -1063,13 +1115,13 @@ function renderStotramGame(session) {
   setScreen(screen);
 }
 
-function recordStotramProgress(session) {
+function recordCuratedProgress(session, kind) {
   const gemCounts = { easy: 0, medium: 0, difficult: 0 };
   for (const p of session.placements) {
     if (p.earnedGem) gemCounts[p.entry.difficulty] = (gemCounts[p.entry.difficulty] || 0) + 1;
   }
   const progress = {
-    category: 'stotram',
+    category: MODE_CONFIG[kind].category,
     sub_category: session.stotram.id,
     level: 1,
     entries_found: session.placements.length,
@@ -1082,14 +1134,15 @@ function recordStotramProgress(session) {
   if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
 }
 
-function showStotramComplete(stotram) {
+function showCuratedComplete(collection, kind) {
+  const cfg = MODE_CONFIG[kind];
   const screen = el(`
     <div class="complete-screen">
       <div class="glow">🙏</div>
       <h2>${t('congratulations')}</h2>
-      <p>${t('stotramFoundAll', stotram.title)}</p>
+      <p>${t('stotramFoundAll', collection.title)}</p>
       <div class="about-box">
-        ${t('stotramAboutLabel', stotram.title)} ${stotram.about}
+        ${t('stotramAboutLabel', collection.title)} ${collection.about}
       </div>
       <div class="btn-row" style="margin-top:12px;">
         <button type="button" class="btn btn-secondary" data-again>${t('playAgainBtn')}</button>
@@ -1097,8 +1150,8 @@ function showStotramComplete(stotram) {
       </div>
     </div>
   `);
-  screen.querySelector('[data-again]').addEventListener('click', () => startStotram(stotram));
-  screen.querySelector('[data-list]').addEventListener('click', showStotramList);
+  screen.querySelector('[data-again]').addEventListener('click', () => startCurated(collection, kind));
+  screen.querySelector('[data-list]').addEventListener('click', cfg.listAction);
   setScreen(screen);
 }
 
@@ -1557,8 +1610,8 @@ async function showScoreboard() {
   const flaggedBoardEl = screen.querySelector('[data-flagged-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows, flaggedRows, stotrams] = await Promise.all([
-      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()),
+    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra] = await Promise.all([
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()),
     ]);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
@@ -1581,9 +1634,10 @@ async function showScoreboard() {
       [t('colName'), t('colTotalJapamCount'), t('colDailyAverage')],
       'data-japam-board'
     ));
-    // source_mode is 'general' or a stotram id - map the id to its title
-    // (already loaded above) so this reads like the app, not the schema.
-    const stotramTitleById = new Map((stotrams || []).map((s) => [s.id, s.title]));
+    // source_mode is 'general' or a curated collection id (a stotram or a
+    // Sai Satcharitra theme) - map the id to its title (already loaded
+    // above) so this reads like the app, not the schema.
+    const stotramTitleById = new Map([...(stotrams || []), ...(saiSatcharitra || [])].map((s) => [s.id, s.title]));
     const flaggedRowsFormatted = (flaggedRows || []).map((row) => ({
       ...row,
       source_label: row.source_mode === 'general' ? t('sourceGeneral') : (stotramTitleById.get(row.source_mode) || row.source_mode),

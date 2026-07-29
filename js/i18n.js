@@ -96,6 +96,12 @@ const STRINGS = {
   generalModeSub: { te: 'అన్ని నామాల నుండి కలగలిపిన పజిల్', en: 'A mixed puzzle drawn from all names', kn: 'ಎಲ್ಲಾ ಹೆಸರುಗಳಿಂದ ಆಯ್ದ ಮಿಶ್ರ ಪಜಲ್' },
   stotraParikshaTitle: { te: 'స్తోత్ర పరీక్ష', en: 'Stotra Pariksha', kn: 'ಸ್ತೋತ್ರ ಪರೀಕ್ಷೆ' },
   stotraParikshaSub: { te: 'మీ అవగాహనను పరీక్షించుకోండి', en: 'Test how well you know a stotram', kn: 'ಒಂದು ಸ್ತೋತ್ರ ನಿಮಗೆ ಎಷ್ಟು ಗೊತ್ತಿದೆ ಎಂದು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ' },
+  saiSatcharitraTitle: { te: 'శ్రీ సాయి సచ్చరిత్ర', en: 'Sri Sai Satcharitra', kn: 'ಶ್ರೀ ಸಾಯಿ ಸಚ್ಚರಿತ್ರೆ' },
+  saiSatcharitraSub: {
+    te: 'సాయి సచ్చరిత్రలోని పేర్లు, స్థలాలు, లీలలను పరీక్షించుకోండి',
+    en: 'Test the names, places, and miracles from Sai Satcharitra',
+    kn: 'ಸಾಯಿ ಸಚ್ಚರಿತ್ರೆಯ ಹೆಸರುಗಳು, ಸ್ಥಳಗಳು, ಲೀಲೆಗಳನ್ನು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ',
+  },
   scoreboardBtn: { te: 'స్కోరు బోర్డు', en: 'Scoreboard', kn: 'ಸ್ಕೋರ್ ಬೋರ್ಡ್' },
   aboutBtn: { te: 'ఈ యాప్ గురించి', en: 'About this app', kn: 'ಈ ಆ್ಯಪ್ ಬಗ್ಗೆ' },
 
@@ -142,6 +148,11 @@ const STRINGS = {
   },
   poolExhaustedSwitchToStotra: { te: 'స్తోత్ర పరీక్షకు వెళ్ళండి', en: 'Go to Stotra Pariksha', kn: 'ಸ್ತೋತ್ರ ಪರೀಕ್ಷೆಗೆ ಹೋಗಿ' },
   poolExhaustedSwitchToPuranas: { te: 'పురాణాలకు వెళ్ళండి', en: 'Go to Puranas', kn: 'ಪುರಾಣಗಳಿಗೆ ಹೋಗಿ' },
+  poolExhaustedSaiSatcharitraMessage: {
+    te: 'ఈ విభాగంలోని అన్ని నామాలు ఇప్పటికే చాలాసార్లు కనిపించాయి. వేరే విభాగం ఎంచుకోండి, లేదా పురాణాలు ప్రయత్నించండి.',
+    en: "You've already been asked every name in this section many times over. Choose a different section, or try Puranas for now.",
+    kn: 'ಈ ವಿಭಾಗದಲ್ಲಿನ ಎಲ್ಲಾ ಹೆಸರುಗಳನ್ನೂ ನಿಮಗೆ ಈಗಾಗಲೇ ಹಲವು ಬಾರಿ ಕೇಳಲಾಗಿದೆ. ಬೇರೆ ವಿಭಾಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ, ಅಥವಾ ಸದ್ಯಕ್ಕೆ ಪುರಾಣಗಳು ಪ್ರಯತ್ನಿಸಿ.',
+  },
 
   soonBadge: { te: 'త్వరలో', en: 'Soon', kn: 'ಶೀಘ್ರದಲ್ಲಿ' },
   soonSub: { te: 'త్వరలో వస్తుంది', en: 'Coming soon', kn: 'ಶೀಘ್ರದಲ್ಲಿ ಬರಲಿದೆ' },

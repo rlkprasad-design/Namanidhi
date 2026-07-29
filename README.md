@@ -81,10 +81,26 @@ still tracked on-device via `localStorage`.
   card. See the `active` `rama-raksha` entry for the full shape an active
   stotram needs (`gridSizeMin`, `gridSizeMax`, `fillerMode`, `about`,
   `entries`).
+- `data/sai-satcharitra.json` - the "శ్రీ సాయి సచ్చరిత్ర" (Sri Sai
+  Satcharitra) sub-section: the same curated, fixed-entry-set model as
+  `data/stotrams.json` above, just one combined collection (places,
+  devotees, and teachings together) rather than per-stotram, since the
+  source is a 53-chapter biography rather than a single text with its
+  own name list. More themed collections can be added as additional
+  array entries later (see `data/stotrams.json`'s multi-entry shape) -
+  a "leelas" (miracles) collection was tried and dropped for now as not
+  framed well enough for a quiz format, see "Adding new content" below.
+  `js/app.js` reuses Stotra Pariksha's session/grid/hint/flag machinery
+  outright for this pool (`renderCuratedSession`/`renderCuratedGame`/
+  etc., keyed by a `MODE_CONFIG['sai-satcharitra']` entry) rather than a
+  parallel implementation - the two `id` namespaces just need to stay
+  distinct, since `stotramDrawQueues` and the flagged-questions title
+  lookup are shared across both files.
 - `scripts/validate-content.js` - structural validator for
-  `data/questions.json`, `data/levels.json`, and `data/stotrams.json`, run
-  automatically on PRs via `.github/workflows/validate-content.yml`. See
-  "Adding new content" below.
+  `data/questions.json`, `data/levels.json`, `data/stotrams.json`, and
+  `data/sai-satcharitra.json`, run automatically on PRs via
+  `.github/workflows/validate-content.yml`. See "Adding new content"
+  below.
 
 ## Setting up Supabase (shared scoreboard)
 
@@ -318,6 +334,21 @@ human check against the actual source text. The current `rama-raksha`
 entry's word list was reconstructed from memory rather than the source
 text and should get that review pass - checked against the actual
 stotram - before being treated as final content.
+
+`data/sai-satcharitra.json`'s entries were written from a web-researched
+reference list rather than a direct read of Hemadpant's text, and should
+get the same human review pass before being treated as final - in
+particular the choice of "Allah Malik" over the more commonly-quoted
+"Sabka Malik Ek" (the latter is widely repeated as Baba's teaching but is
+less firmly attested as a direct quotation from the text itself).
+Deliberately left out entirely: any claim about Baba's birth date,
+birthplace, or guru - these are genuinely unresolved even within the
+tradition, and asserting one as quiz-fact would mislead players. An
+earlier draft of this pool also had a "leelas" (miracles) section, worded
+generically on purpose since the devotee/date details for those specific
+episodes are less consistently sourced than e.g. the oil-lamp miracle -
+it was dropped as not framed well enough for a quiz format, so if it
+comes back later it'll need the same care.
 
 To run the check yourself before opening a PR:
 
