@@ -209,6 +209,11 @@ const STRINGS = {
 
   scoreboardTitle: { te: 'స్కోరు బోర్డు', en: 'Scoreboard', kn: 'ಸ್ಕೋರ್ ಬೋರ್ಡ್' },
   scoreboardTagline: { te: 'మన బృందం సాధించిన ప్రగతి', en: "Our network's progress", kn: 'ನಮ್ಮ ಬಳಗದ ಪ್ರಗತಿ' },
+  scoreboardMemberCount: {
+    te: (n) => `మన బృందంలో సభ్యులు: ${n}`,
+    en: (n) => `Members in our network: ${n}`,
+    kn: (n) => `ನಮ್ಮ ಬಳಗದಲ್ಲಿ ಸದಸ್ಯರು: ${n}`,
+  },
   puzzleBoardTitle: { te: 'నామ గుప్త నిధి స్కోరు బోర్డు', en: 'Nāma Gupta Nidhi scoreboard', kn: 'ನಾಮ ಗುಪ್ತ ನಿಧಿ ಸ್ಕೋರ್ ಬೋರ್ಡ್' },
   gemLegend: {
     te: (pearl, gem, diamond) => `${pearl} ముత్యం = సులభం, ${gem} రత్నం = మధ్యమం, ${diamond} వజ్రం = కష్టం — మీరే స్వయంగా కనుగొన్న పదాలకు మాత్రమే లభిస్తాయి, "సమాధానం చూపు" వాడితే రావు.`,
