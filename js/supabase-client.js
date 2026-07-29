@@ -194,6 +194,22 @@ export async function deleteContentOverride(id) {
   return { ok: true };
 }
 
+// Total distinct players who've ever joined, across every language -
+// identity here is name-only and not language-scoped (see ensurePlayer
+// above), so one row in `players` already represents one person
+// regardless of which language(s) they've played in. { count: 'exact',
+// head: true } asks Postgres for just the count, not the actual rows.
+export async function fetchPlayerCount() {
+  const sb = await getClient();
+  if (!sb) return null;
+  const { count, error } = await sb.from('players').select('*', { count: 'exact', head: true });
+  if (error) {
+    console.warn('fetchPlayerCount failed:', error);
+    return null;
+  }
+  return count;
+}
+
 export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
