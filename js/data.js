@@ -8,6 +8,30 @@
 // so the two can evolve independently (a level tuning change for one
 // language shouldn't silently affect the other before it's reviewed).
 
+import { fetchContentOverrides } from './supabase-client.js';
+
+// Overlays any admin-entered corrections (see admin.html and
+// supabase/add-content-overrides.sql) on top of the static pool before
+// the rest of the app ever sees it - a flagged word/meaning gets fixed
+// live for every player without a code deploy. No-ops (returns entries
+// unchanged) when Supabase isn't configured/reachable, matching this
+// app's local-only fallback everywhere else.
+function applyOverrides(entries, overrides, sourceMode) {
+  if (!overrides || !overrides.length) return entries;
+  const bySourceAndWord = new Map(
+    overrides.filter((o) => o.source_mode === sourceMode).map((o) => [o.word, o])
+  );
+  return entries.map((e) => {
+    const o = bySourceAndWord.get(e.word);
+    if (!o) return e;
+    return {
+      ...e,
+      word: o.corrected_word || e.word,
+      meaning: o.corrected_meaning || e.meaning,
+    };
+  });
+}
+
 function filesFor(lang) {
   const dir = lang === 'te' ? 'data' : `data/${lang}`;
   return {
@@ -30,7 +54,11 @@ async function fetchJson(file) {
 // Flat array of { word, meaning, difficulty, era? } - the whole question bank.
 export function loadEntryPool(lang = 'te') {
   if (!poolPromises.has(lang)) {
-    poolPromises.set(lang, fetchJson(filesFor(lang).questions).then((data) => data.entries));
+    poolPromises.set(
+      lang,
+      Promise.all([fetchJson(filesFor(lang).questions).then((data) => data.entries), fetchContentOverrides(lang)])
+        .then(([entries, overrides]) => applyOverrides(entries, overrides, 'general'))
+    );
   }
   return poolPromises.get(lang);
 }
@@ -46,6 +74,12 @@ export function loadLevels(lang = 'te') {
 // questions.json's pooled entries, each stotram here is a fixed curated
 // set - every entry appears every time, nothing is sampled.
 export function loadStotrams(lang = 'te') {
-  if (!stotramsPromises.has(lang)) stotramsPromises.set(lang, fetchJson(filesFor(lang).stotrams));
+  if (!stotramsPromises.has(lang)) {
+    stotramsPromises.set(
+      lang,
+      Promise.all([fetchJson(filesFor(lang).stotrams), fetchContentOverrides(lang)])
+        .then(([stotrams, overrides]) => stotrams.map((s) => ({ ...s, entries: applyOverrides(s.entries, overrides, s.id) })))
+    );
+  }
   return stotramsPromises.get(lang);
 }

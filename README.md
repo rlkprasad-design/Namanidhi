@@ -41,6 +41,8 @@ still tracked on-device via `localStorage`.
 - `js/recordings.js` - personal Likhita Japam voice recordings, captured via
   `MediaRecorder` and stored as Blobs in IndexedDB, keyed by language+word.
   Purely on-device - never synced to Supabase or anywhere else.
+- `admin.html` / `js/admin.js` - private, password-gated content-admin page,
+  not linked from the player-facing app. See "Content admin page" below.
 - `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
   complete, Scoreboard). Home has two independent top-level modes:
   "నామ గుప్త నిధి" and "లిఖిత జపం". నామ గుప్త నిధి isn't itself one puzzle -
@@ -179,6 +181,42 @@ no way to leave the Scoreboard's "Flagged questions" panel - it would sit
 there forever. This adds a `delete` policy (same permissive, no-login
 trust model as the rest of the table's policies) that the panel's new
 dismiss button relies on. A brand-new project already has this.
+
+If your project predates `admin.html` (see below), also run
+`supabase/add-content-overrides.sql` once - it adds the
+`content_overrides` table the admin page reads and writes. Without it,
+`admin.html` will load but every save will fail.
+
+## Content admin page (admin.html)
+
+`admin.html` (with `js/admin.js`) is a private page for fixing flagged
+content live, without a code deploy - not linked from the player-facing
+app anywhere, reachable only if you know the URL
+(`<your-site>/admin.html`). It's gated by a password whose SHA-256 hash
+(not the plaintext) is checked client-side in `js/admin.js`.
+
+**This is a deterrent, not real security.** Namanidhi is a public repo,
+so the hash - and everything else in `js/admin.js` - is visible to
+anyone who looks at the source. A hash is meaningfully better than a
+plaintext password (someone would have to crack it, not just read it),
+but there's no server here to actually enforce access. That's an
+acceptable trade-off for a small family/community app; it would not be
+for anything higher-stakes.
+
+To change the password: pick a new one, compute its SHA-256 hex digest
+(e.g. `echo -n 'your-new-password' | sha256sum` in a terminal, or
+`crypto.subtle.digest` in a browser console), and replace `PASSWORD_HASH`
+in `js/admin.js`.
+
+How it works: the page lists every row in `flagged_entries` across all
+three languages. Editing a word/meaning and saving writes a row to
+`content_overrides` (keyed by language + source_mode + the original word)
+and dismisses the flag; editing a word/meaning and saving does *not*
+touch the static `data/*.json` files on disk - `js/data.js` fetches
+`content_overrides` at load time and overlays any match on top of the
+static pool, so the fix is live for every player immediately. The
+"Active corrections" section lists every override in effect and lets you
+delete one directly, without opening the Supabase dashboard.
 
 ## Content pool
 
