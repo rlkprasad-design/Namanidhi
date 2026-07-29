@@ -14,12 +14,14 @@ function filesFor(lang) {
     questions: `${dir}/questions.json`,
     levels: `${dir}/levels.json`,
     stotrams: `${dir}/stotrams.json`,
+    saiSatcharitra: `${dir}/sai-satcharitra.json`,
   };
 }
 
 const poolPromises = new Map();
 const levelsPromises = new Map();
 const stotramsPromises = new Map();
+const saiSatcharitraPromises = new Map();
 
 async function fetchJson(file) {
   const res = await fetch(file);
@@ -48,4 +50,13 @@ export function loadLevels(lang = 'te') {
 export function loadStotrams(lang = 'te') {
   if (!stotramsPromises.has(lang)) stotramsPromises.set(lang, fetchJson(filesFor(lang).stotrams));
   return stotramsPromises.get(lang);
+}
+
+// "శ్రీ సాయి సచ్చరిత్ర" sub-section's list - same shape and same
+// fixed-curated-set model as loadStotrams above (grouped by theme rather
+// than by stotram), just its own file so the two content packs can evolve
+// independently.
+export function loadSaiSatcharitra(lang = 'te') {
+  if (!saiSatcharitraPromises.has(lang)) saiSatcharitraPromises.set(lang, fetchJson(filesFor(lang).saiSatcharitra));
+  return saiSatcharitraPromises.get(lang);
 }

@@ -16,6 +16,7 @@ const targetDir = process.argv[2] || 'data';
 const QUESTIONS_FILE = 'questions.json';
 const LEVELS_FILE = 'levels.json';
 const STOTRAMS_FILE = 'stotrams.json';
+const SAI_SATCHARITRA_FILE = 'sai-satcharitra.json';
 
 // Kannada's virama-joined consonant conjuncts (e.g. "ವ್ಯಾಸ") don't cluster
 // correctly through Intl.Segmenter on the browsers this app actually runs
@@ -153,20 +154,23 @@ function validateLevels(levels) {
 
 const STOTRAM_STATUSES = ['active', 'soon'];
 
-// Validates data/stotrams.json - the "స్తోత్ర పరీక్ష" sub-section's content.
-// Unlike questions.json's pooled/sampled entries, each stotram's entries are
-// a fixed curated set (every entry appears every time), so there's no
-// difficulty tier or cross-file level ladder to check against - just that
-// each stotram is internally consistent and its words fit its own grid.
-function validateStotrams(stotrams) {
+// Validates data/stotrams.json (the "స్తోత్ర పరీక్ష" sub-section) and
+// data/sai-satcharitra.json (the "శ్రీ సాయి సచ్చరిత్ర" sub-section) -
+// both are the same shape: a list of curated collections, each a fixed
+// set of entries (every entry appears every time, unlike questions.json's
+// pooled/sampled entries), so there's no difficulty tier or cross-file
+// level ladder to check against - just that each collection is internally
+// consistent and its words fit its own grid. `label` only affects error
+// message prefixes, so a failure points at the right file.
+function validateStotrams(stotrams, label = 'stotrams') {
   const errors = [];
   if (!Array.isArray(stotrams) || stotrams.length === 0) {
-    return ['stotrams.json must be a non-empty array'];
+    return [`${label}.json must be a non-empty array`];
   }
 
   const seenIds = new Set();
   stotrams.forEach((stotram, si) => {
-    const where = `stotrams[${si}]`;
+    const where = `${label}[${si}]`;
     if (!isNonEmptyString(stotram.id)) {
       errors.push(`${where}: id must be a non-empty string`);
     } else if (seenIds.has(stotram.id)) {
@@ -292,7 +296,7 @@ function main() {
     }
 
     if (file === STOTRAMS_FILE) {
-      const errors = validateStotrams(data);
+      const errors = validateStotrams(data, 'stotrams');
       if (errors.length === 0) {
         console.log(`\n✓ ${file}`);
       } else {
@@ -303,7 +307,19 @@ function main() {
       continue;
     }
 
-    console.log(`\n· ${file} (unrecognized file, skipped - only questions.json, levels.json, and stotrams.json are validated)`);
+    if (file === SAI_SATCHARITRA_FILE) {
+      const errors = validateStotrams(data, 'sai-satcharitra');
+      if (errors.length === 0) {
+        console.log(`\n✓ ${file}`);
+      } else {
+        console.log(`\n✗ ${file}`);
+        errors.forEach((e) => console.log(`  ✗ ${e}`));
+        anyFailed = true;
+      }
+      continue;
+    }
+
+    console.log(`\n· ${file} (unrecognized file, skipped - only questions.json, levels.json, stotrams.json, and sai-satcharitra.json are validated)`);
   }
 
   if (levels && poolEntries) {
