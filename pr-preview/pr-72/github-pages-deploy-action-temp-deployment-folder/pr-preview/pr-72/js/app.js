@@ -1245,7 +1245,6 @@ function showJapamNamePicker() {
   const screen = el(`
     <div>
       <h2>${t('japamPickerTitle')}</h2>
-      <p class="tagline" style="text-align:center;" data-network-total hidden></p>
       <p class="tagline" style="text-align:center;">${t('recordHintExplainer')}</p>
       <div class="card-grid" data-names></div>
       <div class="custom-word-block">
@@ -1295,20 +1294,6 @@ function showJapamNamePicker() {
   customInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') startCustom(); });
 
   setScreen(screen);
-
-  // Fetched after the picker is already on screen - a family/community
-  // total is a nice-to-have, not something worth delaying the picker
-  // (or its own network hiccup) over. Only meaningful with a shared
-  // backend; local-only devices have no "everyone" to total across.
-  if (syncsToBackend()) {
-    const totalEl = screen.querySelector('[data-network-total]');
-    fetchJapamLeaderboard(getLang()).then((rows) => {
-      if (!rows || !rows.length || !totalEl.isConnected) return;
-      const total = rows.reduce((sum, row) => sum + (row.total_count || 0), 0);
-      totalEl.textContent = t('japamNetworkTotal', total);
-      totalEl.hidden = false;
-    });
-  }
 }
 
 function startJapamSession(config) {
@@ -1592,7 +1577,6 @@ async function showScoreboard() {
       </div>
       <div class="score-section">
         <h3>${t('japamBoardTitle')}</h3>
-        ${syncsToBackend() ? `<p class="tagline" style="text-align:center;" data-japam-network-total></p>` : ''}
         <div data-japam-board>${t('loading')}</div>
       </div>
       ${syncsToBackend() ? `
@@ -1622,8 +1606,6 @@ async function showScoreboard() {
       [t('colName'), `${gemBadge('easy')} ${t('colPearls')}`, `${gemBadge('medium')} ${t('colGems')}`, `${gemBadge('difficult')} ${t('colDiamonds')}`, t('colPuzzlesCompleted')],
       'data-puzzle-board'
     ));
-    const japamNetworkTotal = (japamRows || []).reduce((sum, row) => sum + (row.total_count || 0), 0);
-    screen.querySelector('[data-japam-network-total]').textContent = t('japamNetworkTotal', japamNetworkTotal);
     const japamRowsWithAverage = (japamRows || []).map((row) => ({
       ...row,
       daily_average: row.first_logged_at ? Math.round(row.total_count / daysElapsedInclusive(row.first_logged_at)) : 0,
