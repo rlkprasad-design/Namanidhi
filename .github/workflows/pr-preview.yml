@@ -1,0 +1,26 @@
+name: Deploy PR preview
+
+# Publishes each PR's working tree to gh-pages under
+# pr-preview/pr-<number>/ and comments the PR with the live link -
+# rossjrw/pr-preview-action handles cleanup itself once the PR closes.
+# Requires Settings > Pages source = "Deploy from a branch: gh-pages".
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+concurrency: preview-${{ github.ref }}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./
+          preview-branch: gh-pages

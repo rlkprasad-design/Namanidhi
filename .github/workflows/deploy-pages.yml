@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+
+# Publishes the app's static files (no build step - see README) from main
+# to the gh-pages branch's root, which Settings > Pages serves as the
+# production site (https://rlkprasad-design.github.io/Namanidhi/).
+# keep_files preserves pr-preview.yml's pr-preview/pr-<N>/ subfolders
+# instead of wiping them on every production deploy.
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: pages-deploy
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          keep_files: true
