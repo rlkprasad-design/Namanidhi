@@ -205,6 +205,11 @@ const STRINGS = {
     kn: (pearl, gem, diamond) => `${pearl} ಮುತ್ತು = ಸುಲಭ, ${gem} ರತ್ನ = ಮಧ್ಯಮ, ${diamond} ವಜ್ರ = ಕಷ್ಟ — ನೀವೇ ಸ್ವತಃ ಕಂಡುಹಿಡಿದ ಪದಗಳಿಗೆ ಮಾತ್ರ ಸಿಗುತ್ತವೆ, "ಉತ್ತರ ತೋರಿಸಿ" ಬಳಸಿದರೆ ಸಿಗುವುದಿಲ್ಲ.`,
   },
   japamBoardTitle: { te: 'లిఖిత జప స్కోరు బోర్డు', en: 'Likhita Japam scoreboard', kn: 'ಲಿಖಿತ ಜಪ ಸ್ಕೋರ್ ಬೋರ್ಡ್' },
+  japamNetworkTotal: {
+    te: (n) => `ఇప్పటివరకు మనం అందరం కలిసి రాసిన నామాలు: ${n}`,
+    en: (n) => `Names we've all written together so far: ${n}`,
+    kn: (n) => `ಇಲ್ಲಿಯವರೆಗೆ ನಾವೆಲ್ಲರೂ ಒಟ್ಟಿಗೆ ಬರೆದ ಹೆಸರುಗಳು: ${n}`,
+  },
   loading: { te: 'లోడ్ అవుతోంది...', en: 'Loading...', kn: 'ಲೋಡ್ ಆಗುತ್ತಿದೆ...' },
   colName: { te: 'పేరు', en: 'Name', kn: 'ಹೆಸರು' },
   colPearls: { te: 'ముత్యాలు', en: 'Pearls', kn: 'ಮುತ್ತುಗಳು' },
