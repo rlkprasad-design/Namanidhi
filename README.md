@@ -46,13 +46,16 @@ still tracked on-device via `localStorage`.
 - `js/app.js` - screens and app state (Home, Game, Likhita Japam, Level
   complete, Scoreboard). Home has two independent top-level modes:
   "నామ గుప్త నిధి" and "లిఖిత జపం". నామ గుప్త నిధి isn't itself one puzzle -
-  tapping it opens a small hub (`showNamaGuptaNidhiHub`) with two
+  tapping it opens a small hub (`showNamaGuptaNidhiHub`) with three
   structurally-identical puzzle types under it: "సాధారణ" (General, the
-  original mixed-pool puzzle) and "స్తోత్ర పరీక్ష" (Stotra Pariksha). There's
-  no category or difficulty picker within the general puzzle - every
-  puzzle mixes entries from all three difficulty tiers in the same grid -
-  each hint row shows a gem badge (ముత్యం/రత్నం/వజ్రం for easy/medium/
-  difficult) alongside its meaning, so
+  original mixed-pool puzzle), "స్తోత్ర పరీక్ష" (Stotra Pariksha, a picker
+  screen over several stotrams), and "శ్రీ సాయి సచ్చరిత్ర" (Sri Sai
+  Satcharitra, one single combined collection - tapping the hub button
+  goes straight into its puzzle, no picker screen, see
+  `startSaiSatcharitra`). There's no category or difficulty picker within
+  the general puzzle - every puzzle mixes entries from all three
+  difficulty tiers in the same grid - each hint row shows a gem badge
+  (ముత్యం/రత్నం/వజ్రం for easy/medium/difficult) alongside its meaning, so
   the difficulty of each specific word is visible without the player ever
   choosing a tier up front.
 - `data/questions.json` - every entry (deity names, devotees, kshetrams,
@@ -82,14 +85,15 @@ still tracked on-device via `localStorage`.
   stotram needs (`gridSizeMin`, `gridSizeMax`, `fillerMode`, `about`,
   `entries`).
 - `data/sai-satcharitra.json` - the "శ్రీ సాయి సచ్చరిత్ర" (Sri Sai
-  Satcharitra) sub-section: the same curated, fixed-entry-set model as
-  `data/stotrams.json` above, just one combined collection (places,
-  devotees, and teachings together) rather than per-stotram, since the
-  source is a 53-chapter biography rather than a single text with its
-  own name list. More themed collections can be added as additional
-  array entries later (see `data/stotrams.json`'s multi-entry shape) -
-  a "leelas" (miracles) collection was tried and dropped for now as not
-  framed well enough for a quiz format, see "Adding new content" below.
+  Satcharitra) sub-section: same curated, fixed-entry-set shape as
+  `data/stotrams.json` above (an array of collections, each with
+  `gridSizeMin`/`gridSizeMax`/`fillerMode`/`about`/`entries`), but
+  deliberately kept to a single combined collection with no picker
+  screen - the source is a 53-chapter biography rather than a text with
+  its own per-chapter name lists, and a sub-category picker (tried once,
+  including a separate "leelas"/miracles collection) turned out to be
+  more structure than the content needed. Tapping the hub button goes
+  straight into this one collection's puzzle (`startSaiSatcharitra`).
   `js/app.js` reuses Stotra Pariksha's session/grid/hint/flag machinery
   outright for this pool (`renderCuratedSession`/`renderCuratedGame`/
   etc., keyed by a `MODE_CONFIG['sai-satcharitra']` entry) rather than a
@@ -335,20 +339,22 @@ entry's word list was reconstructed from memory rather than the source
 text and should get that review pass - checked against the actual
 stotram - before being treated as final content.
 
-`data/sai-satcharitra.json`'s entries were written from a web-researched
-reference list rather than a direct read of Hemadpant's text, and should
-get the same human review pass before being treated as final - in
-particular the choice of "Allah Malik" over the more commonly-quoted
-"Sabka Malik Ek" (the latter is widely repeated as Baba's teaching but is
-less firmly attested as a direct quotation from the text itself).
-Deliberately left out entirely: any claim about Baba's birth date,
+`data/sai-satcharitra.json`'s entries have two sources and need the same
+human review pass before being treated as final, for different reasons:
+the original core set (places, key devotees, Shraddha/Saburi-style
+teachings) was written from a web-researched reference list rather than
+a direct read of Hemadpant's text - in particular the choice of "Allah
+Malik" over the more commonly-quoted "Sabka Malik Ek" is worth checking
+(the latter is widely repeated as Baba's teaching but is less firmly
+attested as a direct quotation from the text itself). The larger,
+later-added set (more devotees, wadas, daily-life items, virtues,
+leela-adjacent entries like the brick or the water-lit lamps) came
+straight from the app's maintainer rather than independent research, so
+it hasn't had the same source-checking pass applied here - same
+trustworthiness bar, just not yet verified the same way. Deliberately
+left out entirely, in both sets: any claim about Baba's birth date,
 birthplace, or guru - these are genuinely unresolved even within the
-tradition, and asserting one as quiz-fact would mislead players. An
-earlier draft of this pool also had a "leelas" (miracles) section, worded
-generically on purpose since the devotee/date details for those specific
-episodes are less consistently sourced than e.g. the oil-lamp miracle -
-it was dropped as not framed well enough for a quiz format, so if it
-comes back later it'll need the same care.
+tradition, and asserting one as quiz-fact would mislead players.
 
 To run the check yourself before opening a PR:
 
