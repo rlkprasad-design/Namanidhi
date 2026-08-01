@@ -22,7 +22,6 @@ import {
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
   fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries, dismissFlaggedEntry,
-  fetchPlayerCount,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
 import { saveRecording, getRecording, deleteRecording } from './recordings.js';
@@ -477,7 +476,7 @@ function showNamaGuptaNidhiHub() {
   screen.prepend(topBar({ backAction: showHome }));
   screen.querySelector('[data-sub-mode="general"]').addEventListener('click', startNamaGuptaNidhi);
   screen.querySelector('[data-sub-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
-  screen.querySelector('[data-sub-mode="sai-satcharitra"]').addEventListener('click', showSaiSatcharitraList);
+  screen.querySelector('[data-sub-mode="sai-satcharitra"]').addEventListener('click', startSaiSatcharitra);
   setScreen(screen);
 }
 
@@ -796,7 +795,11 @@ const MODE_CONFIG = {
     subtitleKey: 'stotraParikshaSub',
   },
   'sai-satcharitra': {
-    listAction: showSaiSatcharitraList,
+    // Unlike Stotra Pariksha, this pool is deliberately a single combined
+    // collection with no picker screen - "back" from the puzzle (and the
+    // pool-exhausted fallback, and "Finish") all return straight to the
+    // hub. See startSaiSatcharitra below.
+    listAction: showNamaGuptaNidhiHub,
     poolExhaustedMessageKey: 'poolExhaustedSaiSatcharitraMessage',
     switchLabelKey: 'poolExhaustedSwitchToPuranas',
     onSwitch: startNamaGuptaNidhi,
@@ -825,14 +828,13 @@ async function showStotramList() {
   renderCollectionCards(screen.querySelector('[data-collections]'), collections, 'stotram');
 }
 
-// The "శ్రీ సాయి సచ్చరిత్ర" sub-mode's list screen - same layout and same
-// active/soon card treatment as Stotra Pariksha above, just backed by
-// data/sai-satcharitra.json (grouped by theme rather than by stotram).
-async function showSaiSatcharitraList() {
-  const { screen, collections } = await renderCollectionList({
-    titleKey: 'saiSatcharitraTitle', subKey: 'saiSatcharitraSub', loader: loadSaiSatcharitra,
-  });
-  renderCollectionCards(screen.querySelector('[data-collections]'), collections, 'sai-satcharitra');
+// The "శ్రీ సాయి సచ్చరిత్ర" sub-mode has just the one combined collection
+// (no per-theme picker, unlike Stotra Pariksha's per-stotram list) - so
+// tapping the hub button goes straight into its puzzle.
+async function startSaiSatcharitra() {
+  const collections = await loadSaiSatcharitra(getLang());
+  const collection = collections.find((c) => c.status === 'active') || collections[0];
+  startCurated(collection, 'sai-satcharitra');
 }
 
 function renderCollectionCards(container, collections, kind) {
@@ -1586,7 +1588,6 @@ async function showScoreboard() {
     <div>
       <h2 style="text-align:center;">${t('scoreboardTitle')}</h2>
       <p class="tagline" style="text-align:center;">${t('scoreboardTagline')}</p>
-      ${syncsToBackend() ? `<p class="tagline" style="text-align:center;" data-member-count></p>` : ''}
       <div class="score-section">
         <h3>${t('puzzleBoardTitle')}</h3>
         <p class="gem-legend">${t('gemLegend', gemBadge('easy'), gemBadge('medium'), gemBadge('difficult'))}</p>
@@ -1612,10 +1613,9 @@ async function showScoreboard() {
   const flaggedBoardEl = screen.querySelector('[data-flagged-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra, memberCount] = await Promise.all([
-      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()), fetchPlayerCount(),
+    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra] = await Promise.all([
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()),
     ]);
-    if (memberCount != null) screen.querySelector('[data-member-count]').textContent = t('scoreboardMemberCount', memberCount);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
     );
