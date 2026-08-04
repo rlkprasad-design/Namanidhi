@@ -213,6 +213,4614 @@
   {
     "id": "vishnu-sahasranamam",
     "title": "Sri Vishnu Sahasranamam",
-    "status": "soon"
+    "status": "soon",
+    "about": "The longest and most revered of all Vishnu stotras, found in the Mahabharata's Anushasana Parva - Bhishma's final teaching to Yudhishthira as he lay on his bed of arrows. Word meanings adapted from the Vishnu Sahasranamam page on Hindupedia (hindupedia.com), used with permission.",
+    "draft_entries": [
+      {
+        "word": "VISWAM",
+        "difficulty": "easy",
+        "meaning": "Universe itself"
+      },
+      {
+        "word": "VISHNU",
+        "difficulty": "easy",
+        "meaning": "Spread everywhere"
+      },
+      {
+        "word": "VASHATKARA",
+        "difficulty": "medium",
+        "meaning": "Personification of Vedic sacrifice (Yagna)"
+      },
+      {
+        "word": "BHOOTHABHAVYABHAVATPRABHU",
+        "difficulty": "difficult",
+        "meaning": "Master of past, present and future"
+      },
+      {
+        "word": "BHOOTAKRIT",
+        "difficulty": "medium",
+        "meaning": "Has created the beings in the universe"
+      },
+      {
+        "word": "BHOOTABRIT",
+        "difficulty": "medium",
+        "meaning": "One who takes care of all the beings in the universe"
+      },
+      {
+        "word": "BHAVA",
+        "difficulty": "easy",
+        "meaning": "Everything that happens"
+      },
+      {
+        "word": "BHOOTAATMA",
+        "difficulty": "medium",
+        "meaning": "Soul of every being in the Universe"
+      },
+      {
+        "word": "BHOOTABHAVANA",
+        "difficulty": "medium",
+        "meaning": "One who nurtures every being in the universe"
+      },
+      {
+        "word": "POOTATMA",
+        "difficulty": "medium",
+        "meaning": "Detached of every thing"
+      },
+      {
+        "word": "PARAMATMA",
+        "difficulty": "medium",
+        "meaning": "In every being but beyond every being or the greatest soul"
+      },
+      {
+        "word": "MUKTHANAMPARAMAGATHI",
+        "difficulty": "difficult",
+        "meaning": "Ultimate salvation of every freed being"
+      },
+      {
+        "word": "AVYAYA",
+        "difficulty": "easy",
+        "meaning": "One who does not have different forms"
+      },
+      {
+        "word": "PURUSHA",
+        "difficulty": "easy",
+        "meaning": "Inside every body"
+      },
+      {
+        "word": "SAKSHI",
+        "difficulty": "easy",
+        "meaning": "Witness of every thing that happens"
+      },
+      {
+        "word": "KSHETRAGNA",
+        "difficulty": "medium",
+        "meaning": "One who knows the body"
+      },
+      {
+        "word": "AKSHARA",
+        "difficulty": "easy",
+        "meaning": "One who does not have death"
+      },
+      {
+        "word": "YOGA",
+        "difficulty": "easy",
+        "meaning": "One who can be attained by yoga (meditation?)"
+      },
+      {
+        "word": "YOGAVITHAMNETHA",
+        "difficulty": "difficult",
+        "meaning": "Leader of all those who know yoga"
+      },
+      {
+        "word": "PRADHANAPURUSHESWARA",
+        "difficulty": "difficult",
+        "meaning": "Lord of nature and beings"
+      },
+      {
+        "word": "NARASIMHAVAPUSHA",
+        "difficulty": "difficult",
+        "meaning": "Part human and part lion"
+      },
+      {
+        "word": "SRIMAN",
+        "difficulty": "easy",
+        "meaning": "The one in whom Sri (Lakshmi or Goddess) resides"
+      },
+      {
+        "word": "KESAVA",
+        "difficulty": "easy",
+        "meaning": "Served by Vishnu, Siva and Brahma"
+      },
+      {
+        "word": "PURUSHOTTAMA",
+        "difficulty": "easy",
+        "meaning": "Greatest among Purushas (beings)"
+      },
+      {
+        "word": "SARWA",
+        "difficulty": "easy",
+        "meaning": "Everything"
+      },
+      {
+        "word": "SSARVA",
+        "difficulty": "easy",
+        "meaning": "One who destroys everything when the deluge comes"
+      },
+      {
+        "word": "SHIVA",
+        "difficulty": "easy",
+        "meaning": "Pure"
+      },
+      {
+        "word": "STHANU",
+        "difficulty": "easy",
+        "meaning": "Stable"
+      },
+      {
+        "word": "BHOOTAATHA",
+        "difficulty": "medium",
+        "meaning": "The one from whom all the beings evolved"
+      },
+      {
+        "word": "NIDHIRAVYAYA",
+        "difficulty": "medium",
+        "meaning": "Never destroyed (even at deluge)"
+      },
+      {
+        "word": "SAMBHAVA",
+        "difficulty": "medium",
+        "meaning": "All that happens"
+      },
+      {
+        "word": "BHAVANA",
+        "difficulty": "medium",
+        "meaning": "Giver of every thing"
+      },
+      {
+        "word": "BHARTHA",
+        "difficulty": "medium",
+        "meaning": "Basis supports all beings"
+      },
+      {
+        "word": "PRABHAVA",
+        "difficulty": "medium",
+        "meaning": "The one in whom all things were born"
+      },
+      {
+        "word": "PRABHU",
+        "difficulty": "easy",
+        "meaning": "Extremely clever"
+      },
+      {
+        "word": "EASWARA",
+        "difficulty": "medium",
+        "meaning": "One who controls and rules all beings"
+      },
+      {
+        "word": "SWAYAMBHU",
+        "difficulty": "medium",
+        "meaning": "Born from himself"
+      },
+      {
+        "word": "SHAMBHU",
+        "difficulty": "medium",
+        "meaning": "One who gives all pleasures"
+      },
+      {
+        "word": "ADITYA",
+        "difficulty": "easy",
+        "meaning": "One who throws light on everything"
+      },
+      {
+        "word": "PUSHKARAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has lotus like eyes"
+      },
+      {
+        "word": "MAHASWANA",
+        "difficulty": "medium",
+        "meaning": "Has a great voice"
+      },
+      {
+        "word": "ANADHINIDHANA",
+        "difficulty": "medium",
+        "meaning": "Has neither birth nor death"
+      },
+      {
+        "word": "DHATHA",
+        "difficulty": "easy",
+        "meaning": "One who carries the world"
+      },
+      {
+        "word": "VIDHATHA",
+        "difficulty": "medium",
+        "meaning": "One who creates all actions and their results"
+      },
+      {
+        "word": "DHATURUTTAMA",
+        "difficulty": "medium",
+        "meaning": "Greater than the creator ( Brahma )"
+      },
+      {
+        "word": "APRAMEYA",
+        "difficulty": "medium",
+        "meaning": "Beyond rules, regulations and definitions"
+      },
+      {
+        "word": "HRISHIKESA",
+        "difficulty": "easy",
+        "meaning": "One who controls his five senses"
+      },
+      {
+        "word": "PADMANABHA",
+        "difficulty": "easy",
+        "meaning": "Has a lotus (from which the world evolved) growing on his belly"
+      },
+      {
+        "word": "AMARAPRABHU",
+        "difficulty": "medium",
+        "meaning": "Chief of deathless beings"
+      },
+      {
+        "word": "VISWAKARMA",
+        "difficulty": "medium",
+        "meaning": "Has made this universe"
+      },
+      {
+        "word": "MANU",
+        "difficulty": "easy",
+        "meaning": "One who thinks (worries) of every thing"
+      },
+      {
+        "word": "DWASHTA",
+        "difficulty": "medium",
+        "meaning": "One who destroys every thing"
+      },
+      {
+        "word": "STHAVISHTA",
+        "difficulty": "medium",
+        "meaning": "Extremely fat"
+      },
+      {
+        "word": "STHAVIRODHRUVA",
+        "difficulty": "difficult",
+        "meaning": "Ancient and permanent"
+      },
+      {
+        "word": "AGRAHYA",
+        "difficulty": "medium",
+        "meaning": "Not reachable by senses"
+      },
+      {
+        "word": "SASWATHA",
+        "difficulty": "medium",
+        "meaning": "One who existed in the past, exists at present and will exist in future"
+      },
+      {
+        "word": "KRISHNA",
+        "difficulty": "easy",
+        "meaning": "Black"
+      },
+      {
+        "word": "LOHITAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has red eyes"
+      },
+      {
+        "word": "PRATHARDHANA",
+        "difficulty": "medium",
+        "meaning": "One who destroys every thing in the end (deluge)"
+      },
+      {
+        "word": "PRABHOOTHA",
+        "difficulty": "medium",
+        "meaning": "Full of wealth and knowledge"
+      },
+      {
+        "word": "THRIKAKUBHDHAMA",
+        "difficulty": "difficult",
+        "meaning": "The one in whom resides the three worlds viz. Earth, Heaven and Hell"
+      },
+      {
+        "word": "PAVITHRA",
+        "difficulty": "medium",
+        "meaning": "Pure"
+      },
+      {
+        "word": "MANGALAMPARAM",
+        "difficulty": "medium",
+        "meaning": "One who does good to others"
+      },
+      {
+        "word": "EASANA",
+        "difficulty": "easy",
+        "meaning": "One who rules over (appoints) everything"
+      },
+      {
+        "word": "PRANADHA",
+        "difficulty": "medium",
+        "meaning": "One who makes beings move"
+      },
+      {
+        "word": "PRANA",
+        "difficulty": "easy",
+        "meaning": "Soul"
+      },
+      {
+        "word": "JYESHTA",
+        "difficulty": "medium",
+        "meaning": "Elder to all others"
+      },
+      {
+        "word": "SRESHTA",
+        "difficulty": "medium",
+        "meaning": "Better than all others"
+      },
+      {
+        "word": "PRAJAPATHI",
+        "difficulty": "easy",
+        "meaning": "Chief of all human beings"
+      },
+      {
+        "word": "HIRANYAGARBHA",
+        "difficulty": "medium",
+        "meaning": "One who resides as the soul (Brahmam) of this golden universe"
+      },
+      {
+        "word": "BHOOGARBHA",
+        "difficulty": "medium",
+        "meaning": "One who carries the earth within himself"
+      },
+      {
+        "word": "MAADHAVA",
+        "difficulty": "medium",
+        "meaning": "Consort of Lakshmi"
+      },
+      {
+        "word": "MADUSUDHANA",
+        "difficulty": "medium",
+        "meaning": "One who killed Madhu the Asura"
+      },
+      {
+        "word": "VIKRAMI",
+        "difficulty": "medium",
+        "meaning": "Has the ability to destroy all his enemies"
+      },
+      {
+        "word": "DHANVI",
+        "difficulty": "easy",
+        "meaning": "Supreme archer"
+      },
+      {
+        "word": "MEDHAVI",
+        "difficulty": "medium",
+        "meaning": "Supreme intelligence"
+      },
+      {
+        "word": "VIKRAMA",
+        "difficulty": "medium",
+        "meaning": "Has measured the worlds"
+      },
+      {
+        "word": "KRAMA",
+        "difficulty": "easy",
+        "meaning": "Has spread every where"
+      },
+      {
+        "word": "ANUTHAMA",
+        "difficulty": "medium",
+        "meaning": "One who does not have anybody better than him"
+      },
+      {
+        "word": "DURADHARSHA",
+        "difficulty": "medium",
+        "meaning": "One who can not be cowed down by his enemies"
+      },
+      {
+        "word": "KRIDHAGNA",
+        "difficulty": "medium",
+        "meaning": "One who knows good and bad of all beings"
+      },
+      {
+        "word": "KRITHI",
+        "difficulty": "easy",
+        "meaning": "Busy in his work"
+      },
+      {
+        "word": "ATHMAVAN",
+        "difficulty": "medium",
+        "meaning": "Has only his strength as his basis"
+      },
+      {
+        "word": "SURESHA",
+        "difficulty": "medium",
+        "meaning": "Lord of all Gods (Devas)"
+      },
+      {
+        "word": "SSARANA",
+        "difficulty": "medium",
+        "meaning": "One who removes sadness from the unhappy"
+      },
+      {
+        "word": "SSHARMA",
+        "difficulty": "medium",
+        "meaning": "Personification of total happiness"
+      },
+      {
+        "word": "VISHWARETHA",
+        "difficulty": "medium",
+        "meaning": "Seed to this universe"
+      },
+      {
+        "word": "PRAJHABHAVA",
+        "difficulty": "medium",
+        "meaning": "Reason for existence of human beings"
+      },
+      {
+        "word": "AAHA",
+        "difficulty": "easy",
+        "meaning": "As bright as the day"
+      },
+      {
+        "word": "SAMVATSARA",
+        "difficulty": "medium",
+        "meaning": "Personification of the year"
+      },
+      {
+        "word": "VYALA",
+        "difficulty": "easy",
+        "meaning": "One who cannot be caught like the great serpent"
+      },
+      {
+        "word": "PRATHYAYA",
+        "difficulty": "medium",
+        "meaning": "Personification of knowledge"
+      },
+      {
+        "word": "SARVADARSHANA",
+        "difficulty": "medium",
+        "meaning": "One who sees (knows) everything"
+      },
+      {
+        "word": "AJHA",
+        "difficulty": "easy",
+        "meaning": "One who does not have birth"
+      },
+      {
+        "word": "SARVESHWARA",
+        "difficulty": "medium",
+        "meaning": "God for everything"
+      },
+      {
+        "word": "SIDDHA",
+        "difficulty": "easy",
+        "meaning": "Always everywhere"
+      },
+      {
+        "word": "SIDDHI",
+        "difficulty": "easy",
+        "meaning": "Desirable effect of everything"
+      },
+      {
+        "word": "SARVADHI",
+        "difficulty": "medium",
+        "meaning": "Primary reason for everything"
+      },
+      {
+        "word": "ACHYUTHA",
+        "difficulty": "medium",
+        "meaning": "One who does not slip"
+      },
+      {
+        "word": "VRASHAKAPI",
+        "difficulty": "medium",
+        "meaning": "Personification of Dharma and Varaha"
+      },
+      {
+        "word": "AMEYATMA",
+        "difficulty": "medium",
+        "meaning": "Whose stature can not be measured"
+      },
+      {
+        "word": "SARVAYOGAVINISRUTHA",
+        "difficulty": "difficult",
+        "meaning": "Devoid of all attachments"
+      },
+      {
+        "word": "VASU",
+        "difficulty": "easy",
+        "meaning": "One who lives in every being"
+      },
+      {
+        "word": "VASUMANA",
+        "difficulty": "medium",
+        "meaning": "Has a good heart"
+      },
+      {
+        "word": "SATYA",
+        "difficulty": "easy",
+        "meaning": "Truth personified"
+      },
+      {
+        "word": "SAMATHMA",
+        "difficulty": "medium",
+        "meaning": "One who looks everybody as equal"
+      },
+      {
+        "word": "ASAMMITHA",
+        "difficulty": "medium",
+        "meaning": "One who can not be measured"
+      },
+      {
+        "word": "SAMA",
+        "difficulty": "easy",
+        "meaning": "Without change at all times"
+      },
+      {
+        "word": "AMOGHA",
+        "difficulty": "easy",
+        "meaning": "One who gives all to his devotees"
+      },
+      {
+        "word": "PUNDARIKAKSHA",
+        "difficulty": "medium",
+        "meaning": "Lotus eyed"
+      },
+      {
+        "word": "VRISHAKARMA",
+        "difficulty": "medium",
+        "meaning": "Whose actions are dictated by Dharma"
+      },
+      {
+        "word": "VRISHAKRITHA",
+        "difficulty": "medium",
+        "meaning": "Born to uphold Dharma"
+      },
+      {
+        "word": "RUDHRA",
+        "difficulty": "easy",
+        "meaning": "One who drives away sadness and the reasons for it"
+      },
+      {
+        "word": "BAHUSIRAS",
+        "difficulty": "medium",
+        "meaning": "Has many heads"
+      },
+      {
+        "word": "BHABRU",
+        "difficulty": "easy",
+        "meaning": "One who carries the worlds"
+      },
+      {
+        "word": "VISWAYONI",
+        "difficulty": "medium",
+        "meaning": "The one from whom all beings are born"
+      },
+      {
+        "word": "SUCHISRAVA",
+        "difficulty": "medium",
+        "meaning": "One who hears holy (clean) words of his devotees"
+      },
+      {
+        "word": "AMRITHA",
+        "difficulty": "medium",
+        "meaning": "One who does not die"
+      },
+      {
+        "word": "SASWATHASTHANU",
+        "difficulty": "difficult",
+        "meaning": "Perennially stable"
+      },
+      {
+        "word": "VARORAOHA",
+        "difficulty": "medium",
+        "meaning": "One who does not send back those who attain him"
+      },
+      {
+        "word": "MAHATHAPA",
+        "difficulty": "medium",
+        "meaning": "Extremely knowledgeable"
+      },
+      {
+        "word": "SARVAGA",
+        "difficulty": "medium",
+        "meaning": "One who goes (reaches) every where"
+      },
+      {
+        "word": "SARVAVIDBHANU",
+        "difficulty": "medium",
+        "meaning": "One who shines in the knowledge of every thing"
+      },
+      {
+        "word": "VISHVAKSENA",
+        "difficulty": "medium",
+        "meaning": "One who attacks the armies of Rakshasas from all directions"
+      },
+      {
+        "word": "JANARDHANA",
+        "difficulty": "medium",
+        "meaning": "One who troubles bad people"
+      },
+      {
+        "word": "VEDA",
+        "difficulty": "easy",
+        "meaning": "Vedas"
+      },
+      {
+        "word": "VEDAVIDHA",
+        "difficulty": "medium",
+        "meaning": "One who knows the meaning of Vedas"
+      },
+      {
+        "word": "AVYANGA",
+        "difficulty": "medium",
+        "meaning": "Beyond the reach of five senses"
+      },
+      {
+        "word": "VEDANGA",
+        "difficulty": "medium",
+        "meaning": "Has Vedas as parts of his body"
+      },
+      {
+        "word": "VEDAVITH",
+        "difficulty": "medium",
+        "meaning": "One who examines (interprets) Vedas"
+      },
+      {
+        "word": "KAVI",
+        "difficulty": "easy",
+        "meaning": "One who sees (knows) everything"
+      },
+      {
+        "word": "LOKADHYAKSHA",
+        "difficulty": "medium",
+        "meaning": "One who presides over the Universe"
+      },
+      {
+        "word": "SURADYAKSHA",
+        "difficulty": "medium",
+        "meaning": "One who directs the devas"
+      },
+      {
+        "word": "DHARMADYAKSHA",
+        "difficulty": "medium",
+        "meaning": "One who presides over Dharma"
+      },
+      {
+        "word": "KRITHAKRITHA",
+        "difficulty": "medium",
+        "meaning": "Means and result of every thing"
+      },
+      {
+        "word": "CHATHURATHMA",
+        "difficulty": "medium",
+        "meaning": "Brahma during creation, Vishnu during the upkeep, Rudra during destruction and Janardhana during Pralaya (deluge) of"
+      },
+      {
+        "word": "CHATHURVYUHA",
+        "difficulty": "medium",
+        "meaning": "Aniruddha when we are awake, Pradhyumna when we are dreaming, Sangarshana when we are in Sushupthi and Vasudeva when"
+      },
+      {
+        "word": "CHATHURDAMSHTRA",
+        "difficulty": "difficult",
+        "meaning": "Has four protruding incisors ( as in Narasimha Avatara )"
+      },
+      {
+        "word": "CHATHURBHUJA",
+        "difficulty": "medium",
+        "meaning": "Has four hands"
+      },
+      {
+        "word": "BRAJISHNU",
+        "difficulty": "medium",
+        "meaning": "In the form of light"
+      },
+      {
+        "word": "BHOJANA",
+        "difficulty": "medium",
+        "meaning": "In the form which can be enjoyed like food"
+      },
+      {
+        "word": "BHOKTHA",
+        "difficulty": "medium",
+        "meaning": "Consumer of nature"
+      },
+      {
+        "word": "SAHISHNU",
+        "difficulty": "medium",
+        "meaning": "One who can pardon"
+      },
+      {
+        "word": "JAGATADHIJA",
+        "difficulty": "medium",
+        "meaning": "One who was born before the world"
+      },
+      {
+        "word": "ANAGHA",
+        "difficulty": "easy",
+        "meaning": "He whom no sin gets attached"
+      },
+      {
+        "word": "VIJAYA",
+        "difficulty": "easy",
+        "meaning": "Wins"
+      },
+      {
+        "word": "JETHA",
+        "difficulty": "easy",
+        "meaning": "Always the victor"
+      },
+      {
+        "word": "PUNARVASU",
+        "difficulty": "medium",
+        "meaning": "In every being as its controller"
+      },
+      {
+        "word": "UPENDRA",
+        "difficulty": "easy",
+        "meaning": "Indra to Indra himself"
+      },
+      {
+        "word": "VAMANA",
+        "difficulty": "easy",
+        "meaning": "One who was born as Vamana"
+      },
+      {
+        "word": "PRAMSU",
+        "difficulty": "easy",
+        "meaning": "One who grew big when measuring the world as Vamana"
+      },
+      {
+        "word": "SUCHI",
+        "difficulty": "easy",
+        "meaning": "One who cleans the mind of those who pray Him"
+      },
+      {
+        "word": "OORJITHA",
+        "difficulty": "medium",
+        "meaning": "Very powerful"
+      },
+      {
+        "word": "ATHINDRA",
+        "difficulty": "medium",
+        "meaning": "Above Indra"
+      },
+      {
+        "word": "SANGRIHA",
+        "difficulty": "medium",
+        "meaning": "One who destroys during the deluge"
+      },
+      {
+        "word": "SARGA",
+        "difficulty": "easy",
+        "meaning": "Personification of creation"
+      },
+      {
+        "word": "DHRITATMA",
+        "difficulty": "medium",
+        "meaning": "Birth less and stable"
+      },
+      {
+        "word": "NIYAMA",
+        "difficulty": "easy",
+        "meaning": "One who appoints others"
+      },
+      {
+        "word": "YAMA",
+        "difficulty": "easy",
+        "meaning": "One who controls others"
+      },
+      {
+        "word": "VEDYA",
+        "difficulty": "easy",
+        "meaning": "One who can be known"
+      },
+      {
+        "word": "VAIDYA",
+        "difficulty": "easy",
+        "meaning": "One who knows all knowledge"
+      },
+      {
+        "word": "SADAYOGI",
+        "difficulty": "medium",
+        "meaning": "Lustrous always"
+      },
+      {
+        "word": "VEERAHA",
+        "difficulty": "medium",
+        "meaning": "One who kills Asura Heroes"
+      },
+      {
+        "word": "MADHAVA",
+        "difficulty": "easy",
+        "meaning": "Lord of knowledge (Vidya)"
+      },
+      {
+        "word": "MADHU",
+        "difficulty": "easy",
+        "meaning": "Like honey"
+      },
+      {
+        "word": "ATHINDRIYA",
+        "difficulty": "medium",
+        "meaning": "Beyond human senses"
+      },
+      {
+        "word": "MAHAMAYA",
+        "difficulty": "medium",
+        "meaning": "An illusion to those great illusionists"
+      },
+      {
+        "word": "MAHOTSAHA",
+        "difficulty": "medium",
+        "meaning": "Has great enthusiasm"
+      },
+      {
+        "word": "MAHABALA",
+        "difficulty": "medium",
+        "meaning": "Very strong"
+      },
+      {
+        "word": "MAHABUDDHI",
+        "difficulty": "medium",
+        "meaning": "Has tremendous knowledge"
+      },
+      {
+        "word": "MAHAVEERYA",
+        "difficulty": "medium",
+        "meaning": "One who even if there is reason to worry never gets worried"
+      },
+      {
+        "word": "MAHASHAKTHI",
+        "difficulty": "medium",
+        "meaning": "Very strong"
+      },
+      {
+        "word": "MAHADYUTHI",
+        "difficulty": "medium",
+        "meaning": "Has great luster"
+      },
+      {
+        "word": "ANIRDESYAVAPU",
+        "difficulty": "medium",
+        "meaning": "He of whom nobody can tell that he is thus"
+      },
+      {
+        "word": "SHREEMAN",
+        "difficulty": "medium",
+        "meaning": "The one in whom godly wealth resides"
+      },
+      {
+        "word": "MAHADRIDRIK",
+        "difficulty": "medium",
+        "meaning": "One who lifted large mountains"
+      },
+      {
+        "word": "MAHESHVASA",
+        "difficulty": "medium",
+        "meaning": "A great archer"
+      },
+      {
+        "word": "MAHEEBHARTHA",
+        "difficulty": "medium",
+        "meaning": "One who lifted the earth when he was born as Varaha"
+      },
+      {
+        "word": "SREENIVASA",
+        "difficulty": "medium",
+        "meaning": "He in whose chest resides Shree Devi"
+      },
+      {
+        "word": "SADAMGATHI",
+        "difficulty": "medium",
+        "meaning": "Ultimate goal of good people"
+      },
+      {
+        "word": "ANIRUDDHA",
+        "difficulty": "medium",
+        "meaning": "One who can not be stopped by any body"
+      },
+      {
+        "word": "SURANANDA",
+        "difficulty": "medium",
+        "meaning": "One who makes Devas happy"
+      },
+      {
+        "word": "GOVINDA",
+        "difficulty": "easy",
+        "meaning": "One who lifted the earth (Go)"
+      },
+      {
+        "word": "GOVIDAMPATHI",
+        "difficulty": "medium",
+        "meaning": "Leader of those who know Vedas"
+      },
+      {
+        "word": "MAREECHI",
+        "difficulty": "medium",
+        "meaning": "In the form of light"
+      },
+      {
+        "word": "DHAMANA",
+        "difficulty": "medium",
+        "meaning": "One who punishes"
+      },
+      {
+        "word": "HAMSA",
+        "difficulty": "easy",
+        "meaning": "One who removes fear of those who consider Him as themselves"
+      },
+      {
+        "word": "SUPARNA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful wings"
+      },
+      {
+        "word": "BHUJAGOTTAMA",
+        "difficulty": "medium",
+        "meaning": "Shape of a good serpent"
+      },
+      {
+        "word": "HIRANYANABHA",
+        "difficulty": "medium",
+        "meaning": "Has a belly like gold"
+      },
+      {
+        "word": "SUTHAPA",
+        "difficulty": "medium",
+        "meaning": "Has done great penance"
+      },
+      {
+        "word": "AMRUTHYU",
+        "difficulty": "medium",
+        "meaning": "One who does not have death"
+      },
+      {
+        "word": "SARVADRIKH",
+        "difficulty": "medium",
+        "meaning": "One who sees everything"
+      },
+      {
+        "word": "SIMHA",
+        "difficulty": "easy",
+        "meaning": "One who troubles sinners"
+      },
+      {
+        "word": "SAMDATHA",
+        "difficulty": "medium",
+        "meaning": "One who adds devotees to himself"
+      },
+      {
+        "word": "SANDHIMAN",
+        "difficulty": "medium",
+        "meaning": "One who adds all those who experience Him to himself"
+      },
+      {
+        "word": "STHIRA",
+        "difficulty": "easy",
+        "meaning": "Permanent"
+      },
+      {
+        "word": "DHURMARSHANA",
+        "difficulty": "medium",
+        "meaning": "He whom enemies cannot defeat or bear"
+      },
+      {
+        "word": "SHAARATHA",
+        "difficulty": "medium",
+        "meaning": "One who orders and makes others obey"
+      },
+      {
+        "word": "VISHRUTATHMA",
+        "difficulty": "medium",
+        "meaning": "Soul of all the good one is told"
+      },
+      {
+        "word": "SURARIHA",
+        "difficulty": "medium",
+        "meaning": "One who destroys the enemies of devas"
+      },
+      {
+        "word": "GURU",
+        "difficulty": "easy",
+        "meaning": "A teacher of all knowledge"
+      },
+      {
+        "word": "GURUTHAMA",
+        "difficulty": "medium",
+        "meaning": "Teacher of teachers"
+      },
+      {
+        "word": "DHAMA",
+        "difficulty": "easy",
+        "meaning": "Light"
+      },
+      {
+        "word": "SATYAPARAKRAMA",
+        "difficulty": "difficult",
+        "meaning": "Truly a hero"
+      },
+      {
+        "word": "NIMISHA",
+        "difficulty": "medium",
+        "meaning": "One who closes his eyes (during Yoganidhra)"
+      },
+      {
+        "word": "ANIMISHA",
+        "difficulty": "medium",
+        "meaning": "One who sees everything without batting his eyelids"
+      },
+      {
+        "word": "SSRAGHVI",
+        "difficulty": "medium",
+        "meaning": "One who wears a garland"
+      },
+      {
+        "word": "VACHASPATHIUDHARATHI",
+        "difficulty": "difficult",
+        "meaning": "Supreme personification of knowledge"
+      },
+      {
+        "word": "AGRANI",
+        "difficulty": "easy",
+        "meaning": "One who takes one to a higher life"
+      },
+      {
+        "word": "GRAMMANI",
+        "difficulty": "medium",
+        "meaning": "One who appoints (controls) Pancha Bhutas"
+      },
+      {
+        "word": "SHRIMAN",
+        "difficulty": "medium",
+        "meaning": "One who shines"
+      },
+      {
+        "word": "NYAYA",
+        "difficulty": "easy",
+        "meaning": "Justice"
+      },
+      {
+        "word": "NETHA",
+        "difficulty": "easy",
+        "meaning": "One who drives the world machine as its leader"
+      },
+      {
+        "word": "SAMEERANA",
+        "difficulty": "medium",
+        "meaning": "One who in the form of wind makes beings move"
+      },
+      {
+        "word": "SAHASRAMOORDHA",
+        "difficulty": "difficult",
+        "meaning": "Has countless heads (all heads of beings are his)"
+      },
+      {
+        "word": "VISWATHMA",
+        "difficulty": "medium",
+        "meaning": "Soul of every thing"
+      },
+      {
+        "word": "SAHASRAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has thousand eyes (All eyes are his)"
+      },
+      {
+        "word": "SAHASRAPATH",
+        "difficulty": "medium",
+        "meaning": "Has thousand feet"
+      },
+      {
+        "word": "AVARTHANA",
+        "difficulty": "medium",
+        "meaning": "One who rotates (the wheel of life)"
+      },
+      {
+        "word": "NIVRITHATHMA",
+        "difficulty": "medium",
+        "meaning": "Not attached to life"
+      },
+      {
+        "word": "SAMVRITHA",
+        "difficulty": "medium",
+        "meaning": "Not visible due to net of illusion (Maya)"
+      },
+      {
+        "word": "SAMPRAMARDHANA",
+        "difficulty": "difficult",
+        "meaning": "One who destroys the world (in the form of Yama and Rudhra)"
+      },
+      {
+        "word": "AHASAMVARTHAKAYA",
+        "difficulty": "difficult",
+        "meaning": "One who makes day in the form of sun"
+      },
+      {
+        "word": "VAHNNI",
+        "difficulty": "easy",
+        "meaning": "In the form of fire"
+      },
+      {
+        "word": "ANILA",
+        "difficulty": "easy",
+        "meaning": "In the form of air"
+      },
+      {
+        "word": "DHARANIDHARA",
+        "difficulty": "medium",
+        "meaning": "One who supports the earth (in the form of Adi sesha)"
+      },
+      {
+        "word": "SUPRASADHA",
+        "difficulty": "medium",
+        "meaning": "Mercy personified"
+      },
+      {
+        "word": "PRASANNATHMA",
+        "difficulty": "medium",
+        "meaning": "Forever clear headed"
+      },
+      {
+        "word": "VISWADRIK",
+        "difficulty": "medium",
+        "meaning": "One who takes care of the world"
+      },
+      {
+        "word": "VISWABHUJA",
+        "difficulty": "medium",
+        "meaning": "One who eats up the world during deluge"
+      },
+      {
+        "word": "VIBHU",
+        "difficulty": "easy",
+        "meaning": "Has many forms"
+      },
+      {
+        "word": "SATKARTHA",
+        "difficulty": "medium",
+        "meaning": "One who worships those who do good deeds"
+      },
+      {
+        "word": "SATKRITHA",
+        "difficulty": "medium",
+        "meaning": "Worshipped by good people"
+      },
+      {
+        "word": "SADHU",
+        "difficulty": "easy",
+        "meaning": "One who walks in the righteous path"
+      },
+      {
+        "word": "JAHNNU",
+        "difficulty": "easy",
+        "meaning": "One who prevents people without Bhakthi from attaining him"
+      },
+      {
+        "word": "NARAYANA",
+        "difficulty": "easy",
+        "meaning": "One who resides in all things that he creates"
+      },
+      {
+        "word": "NARA",
+        "difficulty": "easy",
+        "meaning": "One who shows the path"
+      },
+      {
+        "word": "ASANGYEYA",
+        "difficulty": "medium",
+        "meaning": "Beyond counting"
+      },
+      {
+        "word": "APRAMEYATMAN",
+        "difficulty": "medium",
+        "meaning": "Beyond knowledge"
+      },
+      {
+        "word": "VISISHTA",
+        "difficulty": "medium",
+        "meaning": "Greatest"
+      },
+      {
+        "word": "SISHTAKRITH",
+        "difficulty": "medium",
+        "meaning": "One who orders"
+      },
+      {
+        "word": "SIDDHARTHA",
+        "difficulty": "medium",
+        "meaning": "Has all he wants"
+      },
+      {
+        "word": "SIDDHASANKALPA",
+        "difficulty": "difficult",
+        "meaning": "One who realizes all that he wants"
+      },
+      {
+        "word": "SIDDHITHA",
+        "difficulty": "medium",
+        "meaning": "One who gives devotees the ability to attain their wants"
+      },
+      {
+        "word": "SIDDHISADHANA",
+        "difficulty": "medium",
+        "meaning": "‘wants’ and the reason for ‘wants’"
+      },
+      {
+        "word": "VRISHAHI",
+        "difficulty": "medium",
+        "meaning": "One who shines like day"
+      },
+      {
+        "word": "VRISHABHA",
+        "difficulty": "medium",
+        "meaning": "One who showers all wishes on his devotees"
+      },
+      {
+        "word": "VRISHAPARVANA",
+        "difficulty": "medium",
+        "meaning": "One who can be attained through the stair case of Dharma (right action)"
+      },
+      {
+        "word": "VRISHODHARA",
+        "difficulty": "medium",
+        "meaning": "One who keeps all beings in his belly during deluge"
+      },
+      {
+        "word": "VARDHANA",
+        "difficulty": "medium",
+        "meaning": "One who rears beings"
+      },
+      {
+        "word": "VARDHAMANA",
+        "difficulty": "medium",
+        "meaning": "One who grows like the beings whom He grows"
+      },
+      {
+        "word": "VIVIKTHA",
+        "difficulty": "medium",
+        "meaning": "One who stands alone"
+      },
+      {
+        "word": "SHRUTHISAGARA",
+        "difficulty": "medium",
+        "meaning": "Ocean in which all Shrutis ( Vedas) lead"
+      },
+      {
+        "word": "SUBHUJA",
+        "difficulty": "medium",
+        "meaning": "Has good arms"
+      },
+      {
+        "word": "DHURDHARA",
+        "difficulty": "medium",
+        "meaning": "One who carries everything but not carried by anybody"
+      },
+      {
+        "word": "VAGMI",
+        "difficulty": "easy",
+        "meaning": "A great orator"
+      },
+      {
+        "word": "MAHENDRA",
+        "difficulty": "medium",
+        "meaning": "God to the Gods"
+      },
+      {
+        "word": "VASUDHA",
+        "difficulty": "medium",
+        "meaning": "One who gives good pleasures and wealth"
+      },
+      {
+        "word": "NAIKAROOPA",
+        "difficulty": "medium",
+        "meaning": "One who does not have one appearance"
+      },
+      {
+        "word": "BRIHADROOPA",
+        "difficulty": "medium",
+        "meaning": "Has a big appearance"
+      },
+      {
+        "word": "SHIPIVISHTA",
+        "difficulty": "medium",
+        "meaning": "Inside a ray of light"
+      },
+      {
+        "word": "PRAKASANA",
+        "difficulty": "medium",
+        "meaning": "One who makes everything shine"
+      },
+      {
+        "word": "OJASTEJODYUTHIDHARA",
+        "difficulty": "difficult",
+        "meaning": "Has strength, valor and luster"
+      },
+      {
+        "word": "PRAKASATHMA",
+        "difficulty": "medium",
+        "meaning": "Soul of luster"
+      },
+      {
+        "word": "PRATHAPANA",
+        "difficulty": "medium",
+        "meaning": "One who emits heat"
+      },
+      {
+        "word": "KRIDDHA",
+        "difficulty": "medium",
+        "meaning": "Full (of knowledge, Dharma and renunciation)"
+      },
+      {
+        "word": "SPASHTAKSHARA",
+        "difficulty": "medium",
+        "meaning": "Denoted by the sound of OM"
+      },
+      {
+        "word": "MANTHRA",
+        "difficulty": "medium",
+        "meaning": "Shape of Vedic manthras"
+      },
+      {
+        "word": "CHANDRAMSA",
+        "difficulty": "medium",
+        "meaning": "As pleasant as the ray of moon"
+      },
+      {
+        "word": "BHASKARADYUTHI",
+        "difficulty": "difficult",
+        "meaning": "Has light like the sun"
+      },
+      {
+        "word": "AMRUTHAMSURBHAVA",
+        "difficulty": "difficult",
+        "meaning": "One who made moon appear from the Ocean of milk"
+      },
+      {
+        "word": "BHANU",
+        "difficulty": "easy",
+        "meaning": "One who shines himself"
+      },
+      {
+        "word": "SHASABINDU",
+        "difficulty": "medium",
+        "meaning": "Like moon"
+      },
+      {
+        "word": "SURESWRA",
+        "difficulty": "medium",
+        "meaning": "Chief of those who do good"
+      },
+      {
+        "word": "AUSHADHA",
+        "difficulty": "medium",
+        "meaning": "Medicine"
+      },
+      {
+        "word": "JAGATHASETHU",
+        "difficulty": "medium",
+        "meaning": "Bridge for the worlds"
+      },
+      {
+        "word": "SATHYADHARMAPARAKRAMA",
+        "difficulty": "difficult",
+        "meaning": "Truth, Dharma and valorous"
+      },
+      {
+        "word": "BHOOTHABHAVABHANNATHA",
+        "difficulty": "difficult",
+        "meaning": "Lord of past, present and future"
+      },
+      {
+        "word": "PAVANA",
+        "difficulty": "easy",
+        "meaning": "One who cleans in the form of wind"
+      },
+      {
+        "word": "PAAVANA",
+        "difficulty": "medium",
+        "meaning": "One who makes the wind blow"
+      },
+      {
+        "word": "ANALA",
+        "difficulty": "easy",
+        "meaning": "He whom we never get satisfied"
+      },
+      {
+        "word": "KAMAHA",
+        "difficulty": "easy",
+        "meaning": "One who removes bondage of life"
+      },
+      {
+        "word": "KAMAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who satisfies wishes"
+      },
+      {
+        "word": "KANTHA",
+        "difficulty": "easy",
+        "meaning": "Attractive because of his beauty"
+      },
+      {
+        "word": "KAMA",
+        "difficulty": "easy",
+        "meaning": "Desired by everybody"
+      },
+      {
+        "word": "KAMAPRADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives all wishes for those who wish"
+      },
+      {
+        "word": "YUGADHIKRIT",
+        "difficulty": "medium",
+        "meaning": "One who created the divisions of time"
+      },
+      {
+        "word": "YUGAVARTHA",
+        "difficulty": "medium",
+        "meaning": "One who makes time periods come again and again"
+      },
+      {
+        "word": "NAIKAMAYA",
+        "difficulty": "medium",
+        "meaning": "One who creates many illusions"
+      },
+      {
+        "word": "MAHASANA",
+        "difficulty": "medium",
+        "meaning": "A big eater during deluge"
+      },
+      {
+        "word": "ADHRISYA",
+        "difficulty": "medium",
+        "meaning": "Not visible"
+      },
+      {
+        "word": "VYAKTHAROOPA",
+        "difficulty": "medium",
+        "meaning": "Clearly visible (to yogis)"
+      },
+      {
+        "word": "SAHASRAJIT",
+        "difficulty": "medium",
+        "meaning": "One who defeats thousands (of Rakshsas-bad people)"
+      },
+      {
+        "word": "ANANTHAJIT",
+        "difficulty": "medium",
+        "meaning": "For ever victorious"
+      },
+      {
+        "word": "ISHTA",
+        "difficulty": "easy",
+        "meaning": "Liked by every one"
+      },
+      {
+        "word": "AVISISHTA",
+        "difficulty": "medium",
+        "meaning": "One who does not have any one above him"
+      },
+      {
+        "word": "SISHTESHTA",
+        "difficulty": "medium",
+        "meaning": "Dear to the learned"
+      },
+      {
+        "word": "SHIKANDI",
+        "difficulty": "medium",
+        "meaning": "One who wears the feathers of pea cock"
+      },
+      {
+        "word": "NAHUSHA",
+        "difficulty": "medium",
+        "meaning": "One who ties souls by illusion"
+      },
+      {
+        "word": "VRISHA",
+        "difficulty": "easy",
+        "meaning": "One who rains (wishes of devotees)"
+      },
+      {
+        "word": "KRODHA",
+        "difficulty": "easy",
+        "meaning": "One who removes anger from devotees"
+      },
+      {
+        "word": "KRODHAKRITKARTHA",
+        "difficulty": "difficult",
+        "meaning": "One who destroys those becoming angry (like Rakshasas)"
+      },
+      {
+        "word": "VISWABHAHU",
+        "difficulty": "medium",
+        "meaning": "Has hands all over the universe (He who supports us every where)"
+      },
+      {
+        "word": "MAHEEDHARA",
+        "difficulty": "medium",
+        "meaning": "One who supports the earth"
+      },
+      {
+        "word": "PRADHITHA",
+        "difficulty": "medium",
+        "meaning": "Famous"
+      },
+      {
+        "word": "PRANAADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives strength"
+      },
+      {
+        "word": "VASAVANUJA",
+        "difficulty": "medium",
+        "meaning": "Brother of Indra"
+      },
+      {
+        "word": "APAMNIDHI",
+        "difficulty": "medium",
+        "meaning": "Ocean"
+      },
+      {
+        "word": "ADHISHTANA",
+        "difficulty": "medium",
+        "meaning": "The one in whom the world stays"
+      },
+      {
+        "word": "APRAMATHTHA",
+        "difficulty": "medium",
+        "meaning": "Always watchful"
+      },
+      {
+        "word": "PRATHISHTITHA",
+        "difficulty": "medium",
+        "meaning": "Has become stable"
+      },
+      {
+        "word": "SKANDHA",
+        "difficulty": "medium",
+        "meaning": "Ambrosia (nectar)"
+      },
+      {
+        "word": "SKANDHADHARA",
+        "difficulty": "medium",
+        "meaning": "One who supports the path of the righteous"
+      },
+      {
+        "word": "DHURYA",
+        "difficulty": "easy",
+        "meaning": "One who carries the weight of the world"
+      },
+      {
+        "word": "VARADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives boons"
+      },
+      {
+        "word": "VAYUVAHANA",
+        "difficulty": "medium",
+        "meaning": "One who makes even the wind move"
+      },
+      {
+        "word": "VASUDEVA",
+        "difficulty": "easy",
+        "meaning": "In everything and plays there"
+      },
+      {
+        "word": "BRIHATBHANU",
+        "difficulty": "medium",
+        "meaning": "Has wide rays which go every where"
+      },
+      {
+        "word": "ADHIDEVA",
+        "difficulty": "medium",
+        "meaning": "First reason of the world"
+      },
+      {
+        "word": "PURANDHARA",
+        "difficulty": "medium",
+        "meaning": "One who destroyed cities of Asuras"
+      },
+      {
+        "word": "ASHOKA",
+        "difficulty": "easy",
+        "meaning": "Never sad"
+      },
+      {
+        "word": "STHARANA",
+        "difficulty": "medium",
+        "meaning": "One who helps one to cross the sea of life"
+      },
+      {
+        "word": "STHARA",
+        "difficulty": "easy",
+        "meaning": "One who gives strength to face the fears of life"
+      },
+      {
+        "word": "SHURA",
+        "difficulty": "easy",
+        "meaning": "Has valor"
+      },
+      {
+        "word": "SHOURI",
+        "difficulty": "easy",
+        "meaning": "A hero (He who is shura, the son of Vasudeva)"
+      },
+      {
+        "word": "JANESWARA",
+        "difficulty": "medium",
+        "meaning": "God for all those who are born"
+      },
+      {
+        "word": "ANUKOOLA",
+        "difficulty": "medium",
+        "meaning": "Positively interested I every one"
+      },
+      {
+        "word": "SATHAVARTHA",
+        "difficulty": "medium",
+        "meaning": "One who was born several times (to protect Dharma)"
+      },
+      {
+        "word": "PADHMI",
+        "difficulty": "easy",
+        "meaning": "Has lotus in his hand"
+      },
+      {
+        "word": "PADHMANIBHEKSHANA",
+        "difficulty": "difficult",
+        "meaning": "Has two lotus like eyes"
+      },
+      {
+        "word": "PADHMANABHA",
+        "difficulty": "medium",
+        "meaning": "Has the lotus on his belly"
+      },
+      {
+        "word": "ARAVINDAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful lotus like eyes"
+      },
+      {
+        "word": "PADHMAGARBHA",
+        "difficulty": "medium",
+        "meaning": "Being meditated in the lotus of our mind"
+      },
+      {
+        "word": "SARRERABRIT",
+        "difficulty": "medium",
+        "meaning": "One who takes many forms by his illusion"
+      },
+      {
+        "word": "MAHARDHI",
+        "difficulty": "medium",
+        "meaning": "Has great wealth"
+      },
+      {
+        "word": "HRIDDHA",
+        "difficulty": "medium",
+        "meaning": "He grows in the form of universe"
+      },
+      {
+        "word": "VRIDHATMA",
+        "difficulty": "medium",
+        "meaning": "Oldest"
+      },
+      {
+        "word": "MAHAAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has big eyes (all seeing)"
+      },
+      {
+        "word": "GARUDADWAJA",
+        "difficulty": "medium",
+        "meaning": "Has Garuda (eagle) in his flag"
+      },
+      {
+        "word": "ATHULA",
+        "difficulty": "easy",
+        "meaning": "Has no equals"
+      },
+      {
+        "word": "SHARABHA",
+        "difficulty": "medium",
+        "meaning": "One who lives as soul in beings"
+      },
+      {
+        "word": "BHEEMA",
+        "difficulty": "easy",
+        "meaning": "One who makes everyone afraid of Him"
+      },
+      {
+        "word": "SAMAYAGNA",
+        "difficulty": "medium",
+        "meaning": "One who knows the time for action"
+      },
+      {
+        "word": "HAVIRHARI",
+        "difficulty": "medium",
+        "meaning": "One who takes share of Gods in a Yaga (fire sacrifice)"
+      },
+      {
+        "word": "SARVALAKSHANALAKSHANYA",
+        "difficulty": "difficult",
+        "meaning": "Has all known good characteristics"
+      },
+      {
+        "word": "LAKSHMIVAAN",
+        "difficulty": "medium",
+        "meaning": "The one from whom Lakshmi (goddess of wealth) never leaves"
+      },
+      {
+        "word": "SAMITHINJAYA",
+        "difficulty": "medium",
+        "meaning": "One who wins in all wars"
+      },
+      {
+        "word": "VIKSHARA",
+        "difficulty": "medium",
+        "meaning": "Never destroyed"
+      },
+      {
+        "word": "ROHITHA",
+        "difficulty": "medium",
+        "meaning": "One who took the form of red fish called Rohita"
+      },
+      {
+        "word": "MAARGA",
+        "difficulty": "easy",
+        "meaning": "Way for eternal bliss"
+      },
+      {
+        "word": "HETHA",
+        "difficulty": "easy",
+        "meaning": "Cause"
+      },
+      {
+        "word": "DAMODHARA",
+        "difficulty": "medium",
+        "meaning": "Known by knowledge got by self restraint"
+      },
+      {
+        "word": "SAHA",
+        "difficulty": "easy",
+        "meaning": "One who tolerates everything"
+      },
+      {
+        "word": "MAHIDHARA",
+        "difficulty": "medium",
+        "meaning": "One who carries the world"
+      },
+      {
+        "word": "MAHABHAGA",
+        "difficulty": "medium",
+        "meaning": "Great in the Avataras (holy births) he takes"
+      },
+      {
+        "word": "VEGAVAN",
+        "difficulty": "medium",
+        "meaning": "Very fast"
+      },
+      {
+        "word": "AMITHASANA",
+        "difficulty": "medium",
+        "meaning": "One who takes immeasurable food ( during deluge)"
+      },
+      {
+        "word": "UDBHAVA",
+        "difficulty": "medium",
+        "meaning": "Reason for the birth of the worlds"
+      },
+      {
+        "word": "KSOBHANA",
+        "difficulty": "medium",
+        "meaning": "One who during creation churns Purusha and Prakrithi"
+      },
+      {
+        "word": "DEVA",
+        "difficulty": "easy",
+        "meaning": "One who plays in activities like creation"
+      },
+      {
+        "word": "SRIGARBHA",
+        "difficulty": "medium",
+        "meaning": "One who keeps his wealth (of worlds) in his belly"
+      },
+      {
+        "word": "PARAMESHWARA",
+        "difficulty": "medium",
+        "meaning": "Most efficient ruler"
+      },
+      {
+        "word": "KARANA",
+        "difficulty": "easy",
+        "meaning": "Instrument for creation of the world"
+      },
+      {
+        "word": "KAARANA",
+        "difficulty": "medium",
+        "meaning": "Cause for creation of the world"
+      },
+      {
+        "word": "KARTHA",
+        "difficulty": "easy",
+        "meaning": "Independent master"
+      },
+      {
+        "word": "VIKARTHA",
+        "difficulty": "medium",
+        "meaning": "One who created peculiar worlds"
+      },
+      {
+        "word": "GAHANA",
+        "difficulty": "easy",
+        "meaning": "Whose shape, strength and actions are difficult to know"
+      },
+      {
+        "word": "GUHA",
+        "difficulty": "easy",
+        "meaning": "One who hides everything by illusion (Maya)"
+      },
+      {
+        "word": "VYAVASAYA",
+        "difficulty": "medium",
+        "meaning": "Personification of knowledge"
+      },
+      {
+        "word": "VYAVASTHANA",
+        "difficulty": "medium",
+        "meaning": "Not bound by any limitations"
+      },
+      {
+        "word": "SAMSTHANA",
+        "difficulty": "medium",
+        "meaning": "Has the best position"
+      },
+      {
+        "word": "STHANADA",
+        "difficulty": "medium",
+        "meaning": "One who gives positions"
+      },
+      {
+        "word": "DHRUVA",
+        "difficulty": "easy",
+        "meaning": "Permanent"
+      },
+      {
+        "word": "PARARDHI",
+        "difficulty": "medium",
+        "meaning": "Has great wealth"
+      },
+      {
+        "word": "PARAMASPASHTA",
+        "difficulty": "medium",
+        "meaning": "Limit of beauty and self evidence"
+      },
+      {
+        "word": "THUSHTA",
+        "difficulty": "medium",
+        "meaning": "Form of immortal bliss"
+      },
+      {
+        "word": "PUSHTA",
+        "difficulty": "easy",
+        "meaning": "Always complete"
+      },
+      {
+        "word": "SHUBEKSHANA",
+        "difficulty": "medium",
+        "meaning": "Has a blissful sight"
+      },
+      {
+        "word": "RAAMA",
+        "difficulty": "easy",
+        "meaning": "One who makes others to be happy with him"
+      },
+      {
+        "word": "VIRAMA",
+        "difficulty": "easy",
+        "meaning": "Ultimate end of everything"
+      },
+      {
+        "word": "VIRATHA",
+        "difficulty": "medium",
+        "meaning": "Not interested in worldly pleasures"
+      },
+      {
+        "word": "MAARGHA",
+        "difficulty": "medium",
+        "meaning": "Path (for Moksha or immortal bliss)"
+      },
+      {
+        "word": "NEYA",
+        "difficulty": "easy",
+        "meaning": "One who obeys orders of sages devoted to him"
+      },
+      {
+        "word": "NAYA",
+        "difficulty": "easy",
+        "meaning": "One who makes everything work (lead)"
+      },
+      {
+        "word": "ANAYA",
+        "difficulty": "easy",
+        "meaning": "One who cannot be lead by any body"
+      },
+      {
+        "word": "VEERA",
+        "difficulty": "easy",
+        "meaning": "Personification of valor"
+      },
+      {
+        "word": "SHAKTHIMATHAMSHRESHTA",
+        "difficulty": "difficult",
+        "meaning": "Strongest among the strong"
+      },
+      {
+        "word": "DHARMA",
+        "difficulty": "easy",
+        "meaning": "Basis of every thing"
+      },
+      {
+        "word": "DHARMAVIDHUTTAMA",
+        "difficulty": "difficult",
+        "meaning": "Greatest among those who know Dharma"
+      },
+      {
+        "word": "VAIKUNTA",
+        "difficulty": "medium",
+        "meaning": "One who keeps the five Bhutas ( air, water, sky. Fire and earth) bound together at the beginning of creation"
+      },
+      {
+        "word": "PRANAVA",
+        "difficulty": "medium",
+        "meaning": "Holy sound (Om)"
+      },
+      {
+        "word": "PRUDDHU",
+        "difficulty": "medium",
+        "meaning": "Spread in the form of the worlds"
+      },
+      {
+        "word": "SHATRUGNA",
+        "difficulty": "medium",
+        "meaning": "One who kills Asuras"
+      },
+      {
+        "word": "VYAPTHA",
+        "difficulty": "medium",
+        "meaning": "One who pervades in all beings as the cause"
+      },
+      {
+        "word": "VAYU",
+        "difficulty": "easy",
+        "meaning": "One who makes perfumes spread"
+      },
+      {
+        "word": "ADOKSHAJA",
+        "difficulty": "medium",
+        "meaning": "Never gets exhausted by use by his devotees"
+      },
+      {
+        "word": "HRITHU",
+        "difficulty": "easy",
+        "meaning": "Seasons"
+      },
+      {
+        "word": "SUDARSHANA",
+        "difficulty": "medium",
+        "meaning": "Has eyes like lotus petals"
+      },
+      {
+        "word": "KAALA",
+        "difficulty": "easy",
+        "meaning": "One who always keeps thinking of everything"
+      },
+      {
+        "word": "PARAMESHTI",
+        "difficulty": "medium",
+        "meaning": "One who by his power stays in the lotus of heart"
+      },
+      {
+        "word": "PARIGRAHA",
+        "difficulty": "medium",
+        "meaning": "Known in all possible manner by his devotees"
+      },
+      {
+        "word": "UGRA",
+        "difficulty": "easy",
+        "meaning": "One who gives strict orders"
+      },
+      {
+        "word": "DAKSHA",
+        "difficulty": "easy",
+        "meaning": "One who completes all jobs quickly"
+      },
+      {
+        "word": "VISHRAMA",
+        "difficulty": "medium",
+        "meaning": "One who provides rest for those who are tired (of life)"
+      },
+      {
+        "word": "VISWADAKSHINA",
+        "difficulty": "medium",
+        "meaning": "An expert in all things"
+      },
+      {
+        "word": "VISTHARA",
+        "difficulty": "medium",
+        "meaning": "One who makes all the world broaden in Him"
+      },
+      {
+        "word": "STAVARASTANU",
+        "difficulty": "medium",
+        "meaning": "Stable and he who makes the world stable within Him"
+      },
+      {
+        "word": "PRAMANA",
+        "difficulty": "medium",
+        "meaning": "Law to support every thing"
+      },
+      {
+        "word": "BHIJAMAVYAYA",
+        "difficulty": "medium",
+        "meaning": "Deathless reason"
+      },
+      {
+        "word": "ARTHA",
+        "difficulty": "easy",
+        "meaning": "Loved by others (because He is Sweet)"
+      },
+      {
+        "word": "ANARTHA",
+        "difficulty": "medium",
+        "meaning": "One who does not wish any thing"
+      },
+      {
+        "word": "MAHAKOSA",
+        "difficulty": "medium",
+        "meaning": "Immersed in the five continents"
+      },
+      {
+        "word": "MAHABHOGA",
+        "difficulty": "medium",
+        "meaning": "Pleasures in life personified"
+      },
+      {
+        "word": "MAHADHANA",
+        "difficulty": "medium",
+        "meaning": "Has great wealth"
+      },
+      {
+        "word": "ANIRVINNA",
+        "difficulty": "medium",
+        "meaning": "One who does not hate others"
+      },
+      {
+        "word": "STAVISHTA",
+        "difficulty": "medium",
+        "meaning": "Spread every where in his majestic form"
+      },
+      {
+        "word": "ABHU",
+        "difficulty": "easy",
+        "meaning": "One who does not have birth"
+      },
+      {
+        "word": "DHARMAYUPA",
+        "difficulty": "medium",
+        "meaning": "Like a pillar in which right action (dharma) is tied"
+      },
+      {
+        "word": "MAHAMAKHA",
+        "difficulty": "medium",
+        "meaning": "He by whom yagas become great (by giving to Him)"
+      },
+      {
+        "word": "NAKSHATRANEMI",
+        "difficulty": "medium",
+        "meaning": "Like the zodiac"
+      },
+      {
+        "word": "NAKSHATRI",
+        "difficulty": "medium",
+        "meaning": "Like the moon who is the chief of stars"
+      },
+      {
+        "word": "KSHAMA",
+        "difficulty": "easy",
+        "meaning": "Perennially patient"
+      },
+      {
+        "word": "KSHAAMA",
+        "difficulty": "medium",
+        "meaning": "One who remains alone after the deluge"
+      },
+      {
+        "word": "SAMEEHANA",
+        "difficulty": "medium",
+        "meaning": "One who likes his jobs like creation"
+      },
+      {
+        "word": "YAGNA",
+        "difficulty": "easy",
+        "meaning": "Personification of Sacrifice (Yagna)"
+      },
+      {
+        "word": "IJHYA",
+        "difficulty": "easy",
+        "meaning": "Being worshipped by Yagas"
+      },
+      {
+        "word": "MAHEJYA",
+        "difficulty": "medium",
+        "meaning": "Greatest among those worshipped by Yagas"
+      },
+      {
+        "word": "KRATHU",
+        "difficulty": "easy",
+        "meaning": "Personification of performance of Yaga"
+      },
+      {
+        "word": "SATHRAM",
+        "difficulty": "medium",
+        "meaning": "Form of Sathra Yaga"
+      },
+      {
+        "word": "SATHAMGATHI",
+        "difficulty": "medium",
+        "meaning": "Ultimate goal of those who seek for salvation ( Moksha )"
+      },
+      {
+        "word": "SARVADARSHI",
+        "difficulty": "medium",
+        "meaning": "One who knows every thing naturally"
+      },
+      {
+        "word": "VIMUKTHATHMA",
+        "difficulty": "medium",
+        "meaning": "Soul which has left all its bondages"
+      },
+      {
+        "word": "SARVAGNA",
+        "difficulty": "medium",
+        "meaning": "One who knows all that is to be known"
+      },
+      {
+        "word": "GNANAMUUTTAMAM",
+        "difficulty": "difficult",
+        "meaning": "Not born, ever existing, giver of all that is needed and personification of right knowledge"
+      },
+      {
+        "word": "SUVRITHA",
+        "difficulty": "medium",
+        "meaning": "Has great penance"
+      },
+      {
+        "word": "SUMUKHA",
+        "difficulty": "medium",
+        "meaning": "Has a handsome face"
+      },
+      {
+        "word": "SUUKSHMA",
+        "difficulty": "medium",
+        "meaning": "Smallest known thing from which every thing came"
+      },
+      {
+        "word": "SUGOSHA",
+        "difficulty": "medium",
+        "meaning": "One who sings (shouts?) good sounds like Vedas"
+      },
+      {
+        "word": "SUKHADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives pleasures to devotees"
+      },
+      {
+        "word": "SUHRITH",
+        "difficulty": "medium",
+        "meaning": "Has a great heart (mind)"
+      },
+      {
+        "word": "MANOHARA",
+        "difficulty": "medium",
+        "meaning": "One who steals our mind (by his beauty)"
+      },
+      {
+        "word": "JITAKRODHA",
+        "difficulty": "medium",
+        "meaning": "In control of anger"
+      },
+      {
+        "word": "VIRABAHU",
+        "difficulty": "medium",
+        "meaning": "Has heroic arms (to kill asuras)"
+      },
+      {
+        "word": "VIDHARANA",
+        "difficulty": "medium",
+        "meaning": "One who tears off, those who do sins"
+      },
+      {
+        "word": "SWAAPANA",
+        "difficulty": "medium",
+        "meaning": "One who makes all beings sleep by illusion"
+      },
+      {
+        "word": "SWAWASA",
+        "difficulty": "medium",
+        "meaning": "Not in the control of others"
+      },
+      {
+        "word": "VYAPI",
+        "difficulty": "easy",
+        "meaning": "Has spread every where"
+      },
+      {
+        "word": "NYKATHMA",
+        "difficulty": "medium",
+        "meaning": "One who takes various forms depending on need"
+      },
+      {
+        "word": "NYKHAKARMAKRIT",
+        "difficulty": "difficult",
+        "meaning": "One who does various jobs (like creation, upkeep and destruction)"
+      },
+      {
+        "word": "VATSARA",
+        "difficulty": "medium",
+        "meaning": "Abode of everything"
+      },
+      {
+        "word": "VATSALA",
+        "difficulty": "medium",
+        "meaning": "One who loves his devotees"
+      },
+      {
+        "word": "VATHSI",
+        "difficulty": "easy",
+        "meaning": "One who protects calves (all are calves /children to Him)"
+      },
+      {
+        "word": "RATHNAGARBHA",
+        "difficulty": "medium",
+        "meaning": "Ocean which keeps pearls within itself"
+      },
+      {
+        "word": "DHANESWARA",
+        "difficulty": "medium",
+        "meaning": "God of wealth"
+      },
+      {
+        "word": "DHARMAGUPA",
+        "difficulty": "medium",
+        "meaning": "One who protects Dharma"
+      },
+      {
+        "word": "DHARMAKRITH",
+        "difficulty": "medium",
+        "meaning": "One who practices Dharma (in spite of His being much above it)"
+      },
+      {
+        "word": "DHARMI",
+        "difficulty": "easy",
+        "meaning": "One who supports Dharma"
+      },
+      {
+        "word": "SADHA",
+        "difficulty": "easy",
+        "meaning": "Ultimate permanent truth (Para Brahman )"
+      },
+      {
+        "word": "ASADHA",
+        "difficulty": "easy",
+        "meaning": "Ultimate truth which is hidden (by illusion)"
+      },
+      {
+        "word": "KSHARA",
+        "difficulty": "easy",
+        "meaning": "All who deceives themselves as the mind, body and senses"
+      },
+      {
+        "word": "AVIGNATHA",
+        "difficulty": "medium",
+        "meaning": "Not one who does not know"
+      },
+      {
+        "word": "SAHSRAMSU",
+        "difficulty": "medium",
+        "meaning": "Has thousand rays"
+      },
+      {
+        "word": "KRITHALAKSHANA",
+        "difficulty": "difficult",
+        "meaning": "One who made the science of properties of all aspects"
+      },
+      {
+        "word": "GABASTHINEMI",
+        "difficulty": "medium",
+        "meaning": "In the form of the zodiac"
+      },
+      {
+        "word": "SATHVASTHA",
+        "difficulty": "medium",
+        "meaning": "One who permeates in Sathva guna (kind hearted disciplined life?)"
+      },
+      {
+        "word": "BHOOTHAMAHESWARA",
+        "difficulty": "difficult",
+        "meaning": "First and ultimate God of all beings"
+      },
+      {
+        "word": "MAHADEVA",
+        "difficulty": "medium",
+        "meaning": "One who lived in renunciation and by Yoga became the greatest truth (God?)"
+      },
+      {
+        "word": "DEVESHA",
+        "difficulty": "medium",
+        "meaning": "Lord of Devas"
+      },
+      {
+        "word": "DEVABRITGURU",
+        "difficulty": "medium",
+        "meaning": "Teacher (guru) for Indra the chief of devas"
+      },
+      {
+        "word": "UTTHARA",
+        "difficulty": "medium",
+        "meaning": "One who saves all beings from the miserable ocean of mortal life"
+      },
+      {
+        "word": "GOPATHI",
+        "difficulty": "medium",
+        "meaning": "One who rears the cattle (Pasu or Go can also be taken to denote all mortals)"
+      },
+      {
+        "word": "GOPTHA",
+        "difficulty": "easy",
+        "meaning": "Saviour"
+      },
+      {
+        "word": "GNANAGAMYA",
+        "difficulty": "medium",
+        "meaning": "One who can only be attained by right knowledge (Gnana)"
+      },
+      {
+        "word": "PURATHANA",
+        "difficulty": "medium",
+        "meaning": "Very ancient"
+      },
+      {
+        "word": "SAREERABHOOTHABRIT",
+        "difficulty": "difficult",
+        "meaning": "Soul of Pancha Bhoothas which is the basis of all beings"
+      },
+      {
+        "word": "KAPINDRA",
+        "difficulty": "medium",
+        "meaning": "Rama who is dear to all monkeys"
+      },
+      {
+        "word": "BHOORIDAKSHINA",
+        "difficulty": "difficult",
+        "meaning": "One who conducts Yagas and gives cash benefits ( Dakshina ) to many"
+      },
+      {
+        "word": "SOMAPA",
+        "difficulty": "easy",
+        "meaning": "One who drinks Soma"
+      },
+      {
+        "word": "AMRUTHAPA",
+        "difficulty": "medium",
+        "meaning": "One who drinks the nectar of the bliss of the soul (Athmananda)"
+      },
+      {
+        "word": "SOMA",
+        "difficulty": "easy",
+        "meaning": "One who in the form of moon helps plants to grow"
+      },
+      {
+        "word": "PURUJIT",
+        "difficulty": "medium",
+        "meaning": "Has won over several"
+      },
+      {
+        "word": "PURUSATTAMA",
+        "difficulty": "medium",
+        "meaning": "Best in several forms"
+      },
+      {
+        "word": "VINAYA",
+        "difficulty": "easy",
+        "meaning": "One who punishes bad people"
+      },
+      {
+        "word": "JAYA",
+        "difficulty": "easy",
+        "meaning": "One who wins every other being"
+      },
+      {
+        "word": "SATHYASANDHA",
+        "difficulty": "medium",
+        "meaning": "One who never breaks his word (oath)"
+      },
+      {
+        "word": "DASARHA",
+        "difficulty": "medium",
+        "meaning": "One who gives all to his devotes"
+      },
+      {
+        "word": "SATHVATHAMPATHI",
+        "difficulty": "difficult",
+        "meaning": "Takes care of the authors of the sastra of Saathvatha"
+      },
+      {
+        "word": "JIVA",
+        "difficulty": "easy",
+        "meaning": "One who in the form of soul makes all beings"
+      },
+      {
+        "word": "VINAYITHASAKSHI",
+        "difficulty": "difficult",
+        "meaning": "A witness to obedience by others to Him"
+      },
+      {
+        "word": "MUKUNDA",
+        "difficulty": "easy",
+        "meaning": "One who gives immortal bliss ( Moksha )"
+      },
+      {
+        "word": "AMITHAVIKRAMA",
+        "difficulty": "medium",
+        "meaning": "Immeasurable steps"
+      },
+      {
+        "word": "AMBHONIDHI",
+        "difficulty": "medium",
+        "meaning": "Ultimate sojourn to devas, Manushyas, asuras and pithrs"
+      },
+      {
+        "word": "ANANTHAATMA",
+        "difficulty": "medium",
+        "meaning": "Immeasurable"
+      },
+      {
+        "word": "MAHODADHISAYA",
+        "difficulty": "medium",
+        "meaning": "One who sleeps on the ocean"
+      },
+      {
+        "word": "ANTHAKA",
+        "difficulty": "medium",
+        "meaning": "One who brings about end of everything"
+      },
+      {
+        "word": "MAHARHA",
+        "difficulty": "medium",
+        "meaning": "Fit to be worshipped"
+      },
+      {
+        "word": "SWAABHAVYA",
+        "difficulty": "medium",
+        "meaning": "One who by nature is not different"
+      },
+      {
+        "word": "JITHAMITRA",
+        "difficulty": "medium",
+        "meaning": "Has won the enemies inside and outside"
+      },
+      {
+        "word": "PRAMODHANA",
+        "difficulty": "medium",
+        "meaning": "Always happy"
+      },
+      {
+        "word": "ANANDA",
+        "difficulty": "easy",
+        "meaning": "Personification of happiness"
+      },
+      {
+        "word": "NANDANA",
+        "difficulty": "medium",
+        "meaning": "One who makes his devotees happy"
+      },
+      {
+        "word": "NANDA",
+        "difficulty": "easy",
+        "meaning": "Full of everything that is needed"
+      },
+      {
+        "word": "SATYADHARMA",
+        "difficulty": "medium",
+        "meaning": "Truthful dharma"
+      },
+      {
+        "word": "TRIVIKRAMA",
+        "difficulty": "easy",
+        "meaning": "One who measured the worlds in three steps"
+      },
+      {
+        "word": "MAHARSHIKAPILACHARYA",
+        "difficulty": "difficult",
+        "meaning": "Sage Kapila"
+      },
+      {
+        "word": "KRITHAGNA",
+        "difficulty": "medium",
+        "meaning": "World and the soul which knows the world"
+      },
+      {
+        "word": "MEDHINIPATHI",
+        "difficulty": "medium",
+        "meaning": "Lord of the worlds"
+      },
+      {
+        "word": "TRIPADHA",
+        "difficulty": "medium",
+        "meaning": "Has three steps"
+      },
+      {
+        "word": "TRIDASADYAKSHA",
+        "difficulty": "difficult",
+        "meaning": "One who directs (sees from above) the states of wakefulness, sleep and dream"
+      },
+      {
+        "word": "MAHASRINGA",
+        "difficulty": "medium",
+        "meaning": "Has the great horn (in which he tied the earth traveling in a boat during deluge)"
+      },
+      {
+        "word": "KRITHANTHAKRIT",
+        "difficulty": "difficult",
+        "meaning": "One who destroys the world created by Himself"
+      },
+      {
+        "word": "MAHAVARAHA",
+        "difficulty": "medium",
+        "meaning": "One who took the shape of Varaha (boar)"
+      },
+      {
+        "word": "SUSHENA",
+        "difficulty": "medium",
+        "meaning": "Has a great army (the Stanzas in Upa Nishads are his army)"
+      },
+      {
+        "word": "KANKAMGATHI",
+        "difficulty": "medium",
+        "meaning": "Has Golden Shoulders (Golden has been translated as refined by some)"
+      },
+      {
+        "word": "GUHYA",
+        "difficulty": "easy",
+        "meaning": "Known only by the secret Upanishads"
+      },
+      {
+        "word": "GABHIRA",
+        "difficulty": "medium",
+        "meaning": "One who appears majestic because of knowledge, wealth, strength and valor"
+      },
+      {
+        "word": "GUPTHA",
+        "difficulty": "easy",
+        "meaning": "Hidden from mind and the words"
+      },
+      {
+        "word": "CHAKRAGATHADHARA",
+        "difficulty": "difficult",
+        "meaning": "One who keeps the holy Wheel (representing mind) and Holy Mace (Representing Philosophy) to save the world"
+      },
+      {
+        "word": "VEDHASA",
+        "difficulty": "medium",
+        "meaning": "One who creates"
+      },
+      {
+        "word": "SWANGA",
+        "difficulty": "easy",
+        "meaning": "Instrument reason and cause for existence"
+      },
+      {
+        "word": "AJITHA",
+        "difficulty": "easy",
+        "meaning": "One who cannot be won"
+      },
+      {
+        "word": "DHRIDA",
+        "difficulty": "easy",
+        "meaning": "Has no change in character and ability"
+      },
+      {
+        "word": "SAMKARSHANOACHYUTHA",
+        "difficulty": "difficult",
+        "meaning": "One who draws beings within Himself during the deluge"
+      },
+      {
+        "word": "VARUNA",
+        "difficulty": "easy",
+        "meaning": "Purple sun who is about to set"
+      },
+      {
+        "word": "VAARUNA",
+        "difficulty": "medium",
+        "meaning": "Vasishta who is the son of Varuna"
+      },
+      {
+        "word": "VRIKSHA",
+        "difficulty": "medium",
+        "meaning": "Firm and stable like the tree"
+      },
+      {
+        "word": "MAHAMANAA",
+        "difficulty": "medium",
+        "meaning": "One who performs creation, upkeep and destruction by a thought in his great mind"
+      },
+      {
+        "word": "BHAGAWAN",
+        "difficulty": "medium",
+        "meaning": "Storehouse of wealth, Dharma, fame. .riches., renunciation and Moksha"
+      },
+      {
+        "word": "BHAGAGNA",
+        "difficulty": "medium",
+        "meaning": "One who destroys wealth during deluge"
+      },
+      {
+        "word": "ANANDI",
+        "difficulty": "easy",
+        "meaning": "Personification of pleasure"
+      },
+      {
+        "word": "VANAMALI",
+        "difficulty": "medium",
+        "meaning": "One who wears nature as a garland"
+      },
+      {
+        "word": "HALAYUDHA",
+        "difficulty": "medium",
+        "meaning": "Has plough as his weapon"
+      },
+      {
+        "word": "ADHITYA",
+        "difficulty": "medium",
+        "meaning": "One who was born as Vamana to Adhithi"
+      },
+      {
+        "word": "JYOTIRADITHYA",
+        "difficulty": "medium",
+        "meaning": "One who shines in the zodiac"
+      },
+      {
+        "word": "GATHISATHAMA",
+        "difficulty": "medium",
+        "meaning": "Truth and He whom every one attains"
+      },
+      {
+        "word": "SUDHANVA",
+        "difficulty": "medium",
+        "meaning": "Has the holy bow called Saranga which is personification of our senses"
+      },
+      {
+        "word": "KKHANDAPARASU",
+        "difficulty": "medium",
+        "meaning": "Has axe as a weapon to kill enemies"
+      },
+      {
+        "word": "DHARUNA",
+        "difficulty": "medium",
+        "meaning": "Cruel to those who prevent the right path"
+      },
+      {
+        "word": "DHRAVINAPRADHA",
+        "difficulty": "difficult",
+        "meaning": "One who gives the wealth asked by devotees"
+      },
+      {
+        "word": "DHIVASPRIKH",
+        "difficulty": "medium",
+        "meaning": "One who touches the sky"
+      },
+      {
+        "word": "SARVADRIKVYASA",
+        "difficulty": "difficult",
+        "meaning": "One who writes about all knowledge"
+      },
+      {
+        "word": "VACHASPATHIRAYONIJA",
+        "difficulty": "difficult",
+        "meaning": "One who was not born and is the Lord of knowledge"
+      },
+      {
+        "word": "THRISAMA",
+        "difficulty": "medium",
+        "meaning": "Worshipped by the three samas (Briht, Rathandara and Vamadeva branches of Sama Veda )"
+      },
+      {
+        "word": "SAMAGA",
+        "difficulty": "easy",
+        "meaning": "One who sings sama veda"
+      },
+      {
+        "word": "NIRVANA",
+        "difficulty": "medium",
+        "meaning": "Beyond all sadness"
+      },
+      {
+        "word": "BESHAJA",
+        "difficulty": "medium",
+        "meaning": "Medicine"
+      },
+      {
+        "word": "BHISAHKH",
+        "difficulty": "medium",
+        "meaning": "Doctor"
+      },
+      {
+        "word": "SANYASAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who introduced Sanyasa (renunciation) as the method for salvation"
+      },
+      {
+        "word": "CHAMA",
+        "difficulty": "easy",
+        "meaning": "One who controls every thing"
+      },
+      {
+        "word": "SHANTHA",
+        "difficulty": "medium",
+        "meaning": "Not attracted by bodily pleasures"
+      },
+      {
+        "word": "NISHTA",
+        "difficulty": "easy",
+        "meaning": "Place where everything ends"
+      },
+      {
+        "word": "SHANTHI",
+        "difficulty": "medium",
+        "meaning": "Cause of removing ignorance"
+      },
+      {
+        "word": "PAARAYANA",
+        "difficulty": "medium",
+        "meaning": "In the high pedestal and never returns to bodily pleasures"
+      },
+      {
+        "word": "SHUBHANGA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful limbs"
+      },
+      {
+        "word": "SHANTHIDA",
+        "difficulty": "medium",
+        "meaning": "One who gives peace"
+      },
+      {
+        "word": "SRISHTA",
+        "difficulty": "medium",
+        "meaning": "One who creates everything"
+      },
+      {
+        "word": "KUMUDA",
+        "difficulty": "easy",
+        "meaning": "Happy to be in the world"
+      },
+      {
+        "word": "KUVALESAYA",
+        "difficulty": "medium",
+        "meaning": "One who sleeps on the ocean surrounding the world"
+      },
+      {
+        "word": "GOHITHA",
+        "difficulty": "medium",
+        "meaning": "One who does good to earthly beings"
+      },
+      {
+        "word": "VRISHABHAKSHA",
+        "difficulty": "medium",
+        "meaning": "Whose merciful eyes showers whatever is prayed for"
+      },
+      {
+        "word": "VRISHAPRIYA",
+        "difficulty": "medium",
+        "meaning": "One who loves Dharma"
+      },
+      {
+        "word": "ANIVARTHEE",
+        "difficulty": "medium",
+        "meaning": "One who never returns from a war without victory"
+      },
+      {
+        "word": "NIVRTHATHMA",
+        "difficulty": "medium",
+        "meaning": "Whose mind never attaches itself to pleasures"
+      },
+      {
+        "word": "SAMKSHEPTHA",
+        "difficulty": "medium",
+        "meaning": "One who shrinks the wide world during deluge"
+      },
+      {
+        "word": "KSHEMAKRITHA",
+        "difficulty": "medium",
+        "meaning": "One who keeps those recognized by Him comfortable"
+      },
+      {
+        "word": "SHRIVATSAVAKSHAS",
+        "difficulty": "difficult",
+        "meaning": "Has Shrivatsa on his chest"
+      },
+      {
+        "word": "SHRIVASA",
+        "difficulty": "medium",
+        "meaning": "The one in whom Goddess Lakshmi lives"
+      },
+      {
+        "word": "SHRIPATHI",
+        "difficulty": "medium",
+        "meaning": "Lord of Goddess Lakshmi"
+      },
+      {
+        "word": "SHRIMATAMVARA",
+        "difficulty": "medium",
+        "meaning": "Greatest among Gods"
+      },
+      {
+        "word": "SHRIDHA",
+        "difficulty": "medium",
+        "meaning": "One who gives wealth to his devotees"
+      },
+      {
+        "word": "SHRISA",
+        "difficulty": "easy",
+        "meaning": "God of Goddess Lakshmi"
+      },
+      {
+        "word": "SHRINIVASA",
+        "difficulty": "medium",
+        "meaning": "One who lives in Gentlemen (Shriman)"
+      },
+      {
+        "word": "SHRINIDHI",
+        "difficulty": "medium",
+        "meaning": "Treasure of all strengths"
+      },
+      {
+        "word": "SHRIVIBHAVANA",
+        "difficulty": "medium",
+        "meaning": "One who gives to all beings wealth according to merits earned by them"
+      },
+      {
+        "word": "SHRIDHARA",
+        "difficulty": "medium",
+        "meaning": "One who carries the Goddess Lakshmi on his chest"
+      },
+      {
+        "word": "SHRIKARA",
+        "difficulty": "medium",
+        "meaning": "One who gives all wealth to his devotees"
+      },
+      {
+        "word": "SHREYA",
+        "difficulty": "easy",
+        "meaning": "Personification of perennial happiness"
+      },
+      {
+        "word": "LOKATRAYASRAYA",
+        "difficulty": "difficult",
+        "meaning": "He on whom the three worlds depend"
+      },
+      {
+        "word": "SWAKSHA",
+        "difficulty": "medium",
+        "meaning": "Has lotus like eyes"
+      },
+      {
+        "word": "SSATHANANDA",
+        "difficulty": "medium",
+        "meaning": "Has several types (hundred) happiness"
+      },
+      {
+        "word": "JYOTHIRGANESWARA",
+        "difficulty": "difficult",
+        "meaning": "Chief of lustrous bodies"
+      },
+      {
+        "word": "VIJHITATMA",
+        "difficulty": "medium",
+        "meaning": "Has conquered the mind"
+      },
+      {
+        "word": "AVIDHEYATMA",
+        "difficulty": "medium",
+        "meaning": "Not under the control of anybody"
+      },
+      {
+        "word": "SATHKEERTHI",
+        "difficulty": "medium",
+        "meaning": "Has good fame"
+      },
+      {
+        "word": "CHINNASAMSAYA",
+        "difficulty": "medium",
+        "meaning": "One who does not suspect"
+      },
+      {
+        "word": "UUDHEERNA",
+        "difficulty": "medium",
+        "meaning": "Greater than all beings"
+      },
+      {
+        "word": "SARWATACHAKSHU",
+        "difficulty": "difficult",
+        "meaning": "One who sees everything everywhere"
+      },
+      {
+        "word": "AANEESA",
+        "difficulty": "medium",
+        "meaning": "One who does not have any God above him"
+      },
+      {
+        "word": "SASWATHASTHIRA",
+        "difficulty": "difficult",
+        "meaning": "Permanently stable"
+      },
+      {
+        "word": "BHOOSA",
+        "difficulty": "easy",
+        "meaning": "One who slept on the ground (as Rama waiting for sea God to respond)"
+      },
+      {
+        "word": "BHOOSHANA",
+        "difficulty": "medium",
+        "meaning": "One who decorated the world (by several births)"
+      },
+      {
+        "word": "BHOOTHA",
+        "difficulty": "medium",
+        "meaning": "Has existence"
+      },
+      {
+        "word": "VISHOKA",
+        "difficulty": "medium",
+        "meaning": "Never sad"
+      },
+      {
+        "word": "SHOKANASANA",
+        "difficulty": "medium",
+        "meaning": "One who destroys sadness of his devotees"
+      },
+      {
+        "word": "ARCHISHMA",
+        "difficulty": "medium",
+        "meaning": "One who gives light to astral bodies"
+      },
+      {
+        "word": "ARCHITHA",
+        "difficulty": "medium",
+        "meaning": "Worshipped in all the three worlds"
+      },
+      {
+        "word": "KHUMBA",
+        "difficulty": "easy",
+        "meaning": "Basis of everything"
+      },
+      {
+        "word": "VISHUDHATMA",
+        "difficulty": "medium",
+        "meaning": "Has supremely clean habits"
+      },
+      {
+        "word": "VISHODHANA",
+        "difficulty": "medium",
+        "meaning": "One who removes sins of those who think of Him"
+      },
+      {
+        "word": "APRATHIRADHA",
+        "difficulty": "medium",
+        "meaning": "Has no enemies"
+      },
+      {
+        "word": "PRADHYUMNA",
+        "difficulty": "medium",
+        "meaning": "Has great wealth"
+      },
+      {
+        "word": "KALANEMINIHA",
+        "difficulty": "medium",
+        "meaning": "One who killed Kala Nemi"
+      },
+      {
+        "word": "SOWRA",
+        "difficulty": "easy",
+        "meaning": "One who was born in the Sura dynasty ( Sri Krishna )"
+      },
+      {
+        "word": "SHOORAJANESWARA",
+        "difficulty": "difficult",
+        "meaning": "God for heroes like Indra"
+      },
+      {
+        "word": "THRILOKATHMA",
+        "difficulty": "medium",
+        "meaning": "Not different from the three worlds"
+      },
+      {
+        "word": "THRILOKESA",
+        "difficulty": "medium",
+        "meaning": "Lord of three worlds"
+      },
+      {
+        "word": "KESIHA",
+        "difficulty": "easy",
+        "meaning": "One who killed the Asura called Kesi"
+      },
+      {
+        "word": "HARI",
+        "difficulty": "easy",
+        "meaning": "One who removes births and deaths with their cause"
+      },
+      {
+        "word": "KAMADEVA",
+        "difficulty": "medium",
+        "meaning": "Passionately loved by his devotees"
+      },
+      {
+        "word": "KAMAPALA",
+        "difficulty": "medium",
+        "meaning": "One who takes care of desires"
+      },
+      {
+        "word": "KAAMI",
+        "difficulty": "easy",
+        "meaning": "One who fulfills desires"
+      },
+      {
+        "word": "KAANTHA",
+        "difficulty": "medium",
+        "meaning": "Has attraction"
+      },
+      {
+        "word": "KRITHAGAMA",
+        "difficulty": "medium",
+        "meaning": "One who created holy rule books (agamas)"
+      },
+      {
+        "word": "ANANTHA",
+        "difficulty": "medium",
+        "meaning": "Endless"
+      },
+      {
+        "word": "DHANANJAYA",
+        "difficulty": "medium",
+        "meaning": "Arjuna"
+      },
+      {
+        "word": "BRAHMANYA",
+        "difficulty": "medium",
+        "meaning": "One who favours penance,( Tapas ) knowledge, brahmanas and Vedas"
+      },
+      {
+        "word": "BRAHMAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who made penance ( tapas )"
+      },
+      {
+        "word": "BRAHMA",
+        "difficulty": "easy",
+        "meaning": "Brahma the creator"
+      },
+      {
+        "word": "BRAHMANA",
+        "difficulty": "medium",
+        "meaning": "Brahmam"
+      },
+      {
+        "word": "BRAHMAVIVARDHANA",
+        "difficulty": "difficult",
+        "meaning": "One who encourages the ways to Brhamam like Tapas"
+      },
+      {
+        "word": "BRAHMAVID",
+        "difficulty": "medium",
+        "meaning": "One who knows Vedas properly"
+      },
+      {
+        "word": "BRAHMI",
+        "difficulty": "easy",
+        "meaning": "One who controls all that is denoted by Brahma"
+      },
+      {
+        "word": "BRAHMANGNA",
+        "difficulty": "medium",
+        "meaning": "One who knows Vedas as Himself"
+      },
+      {
+        "word": "BRAHMANAPRIYA",
+        "difficulty": "medium",
+        "meaning": "Liked by Brahmins"
+      },
+      {
+        "word": "MAHAKRAMA",
+        "difficulty": "medium",
+        "meaning": "One who takes big steps"
+      },
+      {
+        "word": "MAHAKARMA",
+        "difficulty": "medium",
+        "meaning": "One who does the great works like creation, upkeep and destruction"
+      },
+      {
+        "word": "MAHATEJA",
+        "difficulty": "medium",
+        "meaning": "One who gives light to stars"
+      },
+      {
+        "word": "MAHORAGA",
+        "difficulty": "medium",
+        "meaning": "Has the form of the great serpent"
+      },
+      {
+        "word": "MAHAKRITHU",
+        "difficulty": "medium",
+        "meaning": "Great doer"
+      },
+      {
+        "word": "MAHARYAJWA",
+        "difficulty": "medium",
+        "meaning": "One who shows the way by performing great sacrifices (yagna)"
+      },
+      {
+        "word": "MAHAYAGNA",
+        "difficulty": "medium",
+        "meaning": "Greatest Yagna (sacrifice)"
+      },
+      {
+        "word": "MAHAHAVI",
+        "difficulty": "medium",
+        "meaning": "Greatest sacrificial offering in the yagna"
+      },
+      {
+        "word": "STAVYA",
+        "difficulty": "easy",
+        "meaning": "Being praised by everybody"
+      },
+      {
+        "word": "STHAVAPRIYA",
+        "difficulty": "medium",
+        "meaning": "One who likes being praised"
+      },
+      {
+        "word": "STOTRA",
+        "difficulty": "easy",
+        "meaning": "Song about Himself"
+      },
+      {
+        "word": "STHUTHA",
+        "difficulty": "medium",
+        "meaning": "Act of being sung about God"
+      },
+      {
+        "word": "STHOTHRA",
+        "difficulty": "medium",
+        "meaning": "Devotee who sings about him"
+      },
+      {
+        "word": "RANAPRIYA",
+        "difficulty": "medium",
+        "meaning": "One who likes war"
+      },
+      {
+        "word": "POORNA",
+        "difficulty": "easy",
+        "meaning": "Complete"
+      },
+      {
+        "word": "POORAYITHA",
+        "difficulty": "medium",
+        "meaning": "One who completes the wishes of his devotees"
+      },
+      {
+        "word": "PUSHYA",
+        "difficulty": "easy",
+        "meaning": "One who removes sins as one thinks about Him"
+      },
+      {
+        "word": "PUNYAKEERTHI",
+        "difficulty": "medium",
+        "meaning": "Famous for removing sins"
+      },
+      {
+        "word": "ANAMAYA",
+        "difficulty": "medium",
+        "meaning": "One who never becomes ill"
+      },
+      {
+        "word": "MANOJAVA",
+        "difficulty": "medium",
+        "meaning": "As fast as the mind"
+      },
+      {
+        "word": "THEERTHAKARA",
+        "difficulty": "medium",
+        "meaning": "One who created methods for salvation of all beings in the world"
+      },
+      {
+        "word": "VASURETHAS",
+        "difficulty": "medium",
+        "meaning": "Golden essence of Himself"
+      },
+      {
+        "word": "VASUPRADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives wealth to his devotees"
+      },
+      {
+        "word": "VASUMANAS",
+        "difficulty": "medium",
+        "meaning": "Has a mind which lives in all others"
+      },
+      {
+        "word": "HAVI",
+        "difficulty": "easy",
+        "meaning": "Sacrificial offering in the yagas"
+      },
+      {
+        "word": "SADGADHI",
+        "difficulty": "medium",
+        "meaning": "Attained by good people"
+      },
+      {
+        "word": "SADKRITHI",
+        "difficulty": "medium",
+        "meaning": "One who does good action"
+      },
+      {
+        "word": "SATHTHA",
+        "difficulty": "medium",
+        "meaning": "Personification of non differential knowledge"
+      },
+      {
+        "word": "SADBRITHI",
+        "difficulty": "medium",
+        "meaning": "Sat and Chit (Truth and Ultimate truth)"
+      },
+      {
+        "word": "SADPARAYANA",
+        "difficulty": "medium",
+        "meaning": "Attained by those who know him"
+      },
+      {
+        "word": "SURASENA",
+        "difficulty": "medium",
+        "meaning": "One who lead an army of heroes"
+      },
+      {
+        "word": "YADUSRESHTA",
+        "difficulty": "medium",
+        "meaning": "Greatest among Yadus ( Krishna belonged to this family)"
+      },
+      {
+        "word": "SANNIVASA",
+        "difficulty": "medium",
+        "meaning": "Ultimate place where scholars go"
+      },
+      {
+        "word": "SUYAMUNA",
+        "difficulty": "medium",
+        "meaning": "Surrounded by residents of Yamuna"
+      },
+      {
+        "word": "BHOOTAVASA",
+        "difficulty": "medium",
+        "meaning": "One who keeps all beings in his caring sight"
+      },
+      {
+        "word": "SARVASUNILAYA",
+        "difficulty": "medium",
+        "meaning": "Form of Jivatma (the form of God within every being)"
+      },
+      {
+        "word": "DARPAHA",
+        "difficulty": "medium",
+        "meaning": "One who destroys the pride of those who are against Dharma"
+      },
+      {
+        "word": "DARPADHA",
+        "difficulty": "medium",
+        "meaning": "One who gives self satisfaction to those who walk in the path of Dharma"
+      },
+      {
+        "word": "DRPTHA",
+        "difficulty": "easy",
+        "meaning": "Supremely happy"
+      },
+      {
+        "word": "DURDHARA",
+        "difficulty": "medium",
+        "meaning": "One who can be brought to the mind with difficulty"
+      },
+      {
+        "word": "APARAJITHA",
+        "difficulty": "medium",
+        "meaning": "One who can not be won"
+      },
+      {
+        "word": "VISWAMURTHI",
+        "difficulty": "medium",
+        "meaning": "Has the universe as his body"
+      },
+      {
+        "word": "MAHAMURTHI",
+        "difficulty": "medium",
+        "meaning": "Has a big body"
+      },
+      {
+        "word": "DEEPTHAMURTHY",
+        "difficulty": "medium",
+        "meaning": "Has a body which shines due to knowledge"
+      },
+      {
+        "word": "MURTHYMAN",
+        "difficulty": "medium",
+        "meaning": "Whose body when he is born is not a result of Karma"
+      },
+      {
+        "word": "ANEKAMURTHY",
+        "difficulty": "medium",
+        "meaning": "Born several times"
+      },
+      {
+        "word": "AVYAKTHA",
+        "difficulty": "medium",
+        "meaning": "Not clear"
+      },
+      {
+        "word": "SATHAMURTHY",
+        "difficulty": "medium",
+        "meaning": "Has several forms"
+      },
+      {
+        "word": "SATHANANA",
+        "difficulty": "medium",
+        "meaning": "Has several faces"
+      },
+      {
+        "word": "EKA",
+        "difficulty": "easy",
+        "meaning": "One"
+      },
+      {
+        "word": "NAIKA",
+        "difficulty": "easy",
+        "meaning": "One who appears as in different forms by illusion"
+      },
+      {
+        "word": "SAVA",
+        "difficulty": "easy",
+        "meaning": "Personification of soma yaga"
+      },
+      {
+        "word": "KAVA",
+        "difficulty": "easy",
+        "meaning": "One who shines even among those who are sinners"
+      },
+      {
+        "word": "KASMAI",
+        "difficulty": "easy",
+        "meaning": "One who can be investigated and known"
+      },
+      {
+        "word": "YASMAI",
+        "difficulty": "easy",
+        "meaning": "One who tries to help is devotees always"
+      },
+      {
+        "word": "THASMAI",
+        "difficulty": "medium",
+        "meaning": "Indicated by the word ‘THAT’"
+      },
+      {
+        "word": "PADAMANUTTAMAM",
+        "difficulty": "difficult",
+        "meaning": "In such a high position that the most knowledgeable want to attain him"
+      },
+      {
+        "word": "LOKABHANDU",
+        "difficulty": "medium",
+        "meaning": "A relation of all beings"
+      },
+      {
+        "word": "LOKANATHA",
+        "difficulty": "easy",
+        "meaning": "One who rules over the world"
+      },
+      {
+        "word": "BHAKTHAVATSALA",
+        "difficulty": "difficult",
+        "meaning": "One who loves his devotees"
+      },
+      {
+        "word": "SUVARNAVARNA",
+        "difficulty": "medium",
+        "meaning": "Of a golden colour"
+      },
+      {
+        "word": "HEMANGA",
+        "difficulty": "medium",
+        "meaning": "Has a golden body"
+      },
+      {
+        "word": "VARANGA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful body"
+      },
+      {
+        "word": "CHANDANAMGATHI",
+        "difficulty": "difficult",
+        "meaning": "One who wears Golden armlets to give happiness"
+      },
+      {
+        "word": "VISHAMA",
+        "difficulty": "medium",
+        "meaning": "One who cannot be compared to any one else"
+      },
+      {
+        "word": "SUNYA",
+        "difficulty": "easy",
+        "meaning": "One who appears as if he is not there"
+      },
+      {
+        "word": "GRITHASI",
+        "difficulty": "medium",
+        "meaning": "One who does not have desires"
+      },
+      {
+        "word": "ACHALA",
+        "difficulty": "easy",
+        "meaning": "Supremely stable"
+      },
+      {
+        "word": "CHALA",
+        "difficulty": "easy",
+        "meaning": "One who moves in the form of wind for example"
+      },
+      {
+        "word": "AMANI",
+        "difficulty": "easy",
+        "meaning": "One who does not have pride and willing to be any thing"
+      },
+      {
+        "word": "MANADA",
+        "difficulty": "easy",
+        "meaning": "One who by his illusion makes people love their body"
+      },
+      {
+        "word": "MANYA",
+        "difficulty": "easy",
+        "meaning": "Fit to be worshipped"
+      },
+      {
+        "word": "LOKASWAMI",
+        "difficulty": "medium",
+        "meaning": "Lord of the universe"
+      },
+      {
+        "word": "THRILOKADRIK",
+        "difficulty": "medium",
+        "meaning": "One who carries the three worlds"
+      },
+      {
+        "word": "SUMEDHA",
+        "difficulty": "medium",
+        "meaning": "Having good causing knowledge"
+      },
+      {
+        "word": "MEDHAJA",
+        "difficulty": "medium",
+        "meaning": "Created in Yagas"
+      },
+      {
+        "word": "DHANYA",
+        "difficulty": "easy",
+        "meaning": "Has all facilities"
+      },
+      {
+        "word": "SATHYAMEDHA",
+        "difficulty": "medium",
+        "meaning": "Has a knowledge which is unalloyed truth"
+      },
+      {
+        "word": "DHARADHARA",
+        "difficulty": "medium",
+        "meaning": "One who carried the mountain"
+      },
+      {
+        "word": "THEJOVRISHA",
+        "difficulty": "medium",
+        "meaning": "One who rains light"
+      },
+      {
+        "word": "DHYTHIDHARA",
+        "difficulty": "medium",
+        "meaning": "Has shining limbs"
+      },
+      {
+        "word": "SARVASASTRABHRITHAMVARA",
+        "difficulty": "difficult",
+        "meaning": "Greatest among those who are armed"
+      },
+      {
+        "word": "PRAGRAHA",
+        "difficulty": "medium",
+        "meaning": "One who receives (the flowers .leaves etc offered by his devotees)"
+      },
+      {
+        "word": "NIGRAHA",
+        "difficulty": "medium",
+        "meaning": "One who keeps every thing within himself"
+      },
+      {
+        "word": "VYANGA",
+        "difficulty": "easy",
+        "meaning": "One who does not have end"
+      },
+      {
+        "word": "NAIKASRINGA",
+        "difficulty": "medium",
+        "meaning": "Has several horns ( Dharma, Artha , Kama and Moksha are the horns)"
+      },
+      {
+        "word": "GADHAGRAJA",
+        "difficulty": "medium",
+        "meaning": "One who appears before by Manthras"
+      },
+      {
+        "word": "CHATURMURTHY",
+        "difficulty": "medium",
+        "meaning": "Has four forms"
+      },
+      {
+        "word": "CHATHURBAHU",
+        "difficulty": "medium",
+        "meaning": "Has four arms"
+      },
+      {
+        "word": "CHATURVYOOHA",
+        "difficulty": "medium",
+        "meaning": "Has four Vyoohas ( Four gates)"
+      },
+      {
+        "word": "CHATURGATHI",
+        "difficulty": "medium",
+        "meaning": "Destination for four varnas (brahmana, Kshatriya, Vysya and shudra)"
+      },
+      {
+        "word": "CHATURATMA",
+        "difficulty": "medium",
+        "meaning": "Has four aspects of mind. Brain., thought and pride"
+      },
+      {
+        "word": "CHATURBHAVA",
+        "difficulty": "medium",
+        "meaning": "Reason for Dharma, Artha , Kama and Moksha (right action, wealth, pleasure and salvation)"
+      },
+      {
+        "word": "CHATURVEDAVIDHA",
+        "difficulty": "difficult",
+        "meaning": "One who knows properly the meaning of four Vedas"
+      },
+      {
+        "word": "EKAPATHA",
+        "difficulty": "medium",
+        "meaning": "One who keeps all the worlds under one of his feet"
+      },
+      {
+        "word": "SAMAVARTHA",
+        "difficulty": "medium",
+        "meaning": "One who rotates the wheel of birth and death"
+      },
+      {
+        "word": "NIVRITTATMA",
+        "difficulty": "medium",
+        "meaning": "Always available everywhere"
+      },
+      {
+        "word": "DURJAYA",
+        "difficulty": "medium",
+        "meaning": "One who can not be won"
+      },
+      {
+        "word": "DURATHIKRAMA",
+        "difficulty": "medium",
+        "meaning": "Whose orders can never be disobeyed"
+      },
+      {
+        "word": "DURLABHA",
+        "difficulty": "medium",
+        "meaning": "One who can not be attained except by devotion"
+      },
+      {
+        "word": "DURGAMA",
+        "difficulty": "medium",
+        "meaning": "Easily not known"
+      },
+      {
+        "word": "DURGA",
+        "difficulty": "easy",
+        "meaning": "Difficult to attain due to way side road blocks"
+      },
+      {
+        "word": "DURAVASA",
+        "difficulty": "medium",
+        "meaning": "One who can be kept in the mind with great difficulty"
+      },
+      {
+        "word": "DURARIHA",
+        "difficulty": "medium",
+        "meaning": "One who kills those adopting the wrong path"
+      },
+      {
+        "word": "LOKASARANGA",
+        "difficulty": "medium",
+        "meaning": "One who understands the essence of the world"
+      },
+      {
+        "word": "SUTHANTHU",
+        "difficulty": "medium",
+        "meaning": "One who keeps with him the wide world"
+      },
+      {
+        "word": "THANTHUVARDHANA",
+        "difficulty": "difficult",
+        "meaning": "One who broadens the world"
+      },
+      {
+        "word": "INDRAKARMA",
+        "difficulty": "medium",
+        "meaning": "Has the work like Indra"
+      },
+      {
+        "word": "KRITHAKARMA",
+        "difficulty": "medium",
+        "meaning": "One who does not have a need to do any thing"
+      },
+      {
+        "word": "KRITHAAGAMA",
+        "difficulty": "medium",
+        "meaning": "One who created the Vedas"
+      },
+      {
+        "word": "SUNDARA",
+        "difficulty": "medium",
+        "meaning": "Epitome of beauty"
+      },
+      {
+        "word": "SUNDA",
+        "difficulty": "easy",
+        "meaning": "Wet (has mercy)"
+      },
+      {
+        "word": "RATHNANABHA",
+        "difficulty": "medium",
+        "meaning": "Has a beautiful belly"
+      },
+      {
+        "word": "SULOCHANA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful eyes"
+      },
+      {
+        "word": "ARKA",
+        "difficulty": "easy",
+        "meaning": "Suitable to be worshipped by all great Gods"
+      },
+      {
+        "word": "VAJASANA",
+        "difficulty": "medium",
+        "meaning": "One who gives Anna (food)"
+      },
+      {
+        "word": "SHRINGA",
+        "difficulty": "medium",
+        "meaning": "One who was born as a fish with horn"
+      },
+      {
+        "word": "JAYANTHA",
+        "difficulty": "medium",
+        "meaning": "Cause of victory"
+      },
+      {
+        "word": "SARVAVIJJAYI",
+        "difficulty": "medium",
+        "meaning": "One who knows all and wins over all"
+      },
+      {
+        "word": "SUVARNABINDU",
+        "difficulty": "medium",
+        "meaning": "Has limbs of the body like Gold"
+      },
+      {
+        "word": "AKSHOBYA",
+        "difficulty": "medium",
+        "meaning": "One who should not be disturbed"
+      },
+      {
+        "word": "SARVAVAGESWARESWARA",
+        "difficulty": "difficult",
+        "meaning": "Chief among Gods who speak"
+      },
+      {
+        "word": "MAHAHRIDA",
+        "difficulty": "medium",
+        "meaning": "Whose heart is full of the eternal water of happiness"
+      },
+      {
+        "word": "MAHAGARTHA",
+        "difficulty": "medium",
+        "meaning": "Lord of illusion which is like a big hole"
+      },
+      {
+        "word": "MAHABHOOTHA",
+        "difficulty": "medium",
+        "meaning": "Spread in all places always"
+      },
+      {
+        "word": "MAHANIDHI",
+        "difficulty": "medium",
+        "meaning": "The one in whom all wealth is saved"
+      },
+      {
+        "word": "KUMUDHA",
+        "difficulty": "medium",
+        "meaning": "One who makes the earth happy"
+      },
+      {
+        "word": "KUNDARA",
+        "difficulty": "medium",
+        "meaning": "One who recognizes results of good deeds"
+      },
+      {
+        "word": "KUNDA",
+        "difficulty": "easy",
+        "meaning": "One who gave earth as Dana to Kasyapa ( as Parasurama)"
+      },
+      {
+        "word": "PARJANYA",
+        "difficulty": "medium",
+        "meaning": "A cloud (which showers comfort to the sad people)"
+      },
+      {
+        "word": "AMRUTHASA",
+        "difficulty": "medium",
+        "meaning": "One who eats nectar which is the greatest happiness"
+      },
+      {
+        "word": "AMRITHAVAPU",
+        "difficulty": "medium",
+        "meaning": "Has a body which cannot be destroyed"
+      },
+      {
+        "word": "SARVATHOMUGA",
+        "difficulty": "medium",
+        "meaning": "Has faces everywhere"
+      },
+      {
+        "word": "SULABHA",
+        "difficulty": "medium",
+        "meaning": "One who can be easily attained"
+      },
+      {
+        "word": "SATHURUJITA",
+        "difficulty": "medium",
+        "meaning": "One who wins over his enemies"
+      },
+      {
+        "word": "SATHRUTHAPANA",
+        "difficulty": "medium",
+        "meaning": "One who makes his enemies suffer"
+      },
+      {
+        "word": "NYAGRODHA",
+        "difficulty": "medium",
+        "meaning": "Above all beings in the worlds below"
+      },
+      {
+        "word": "UDHUMBARA",
+        "difficulty": "medium",
+        "meaning": "Above skies"
+      },
+      {
+        "word": "ASWATHA",
+        "difficulty": "medium",
+        "meaning": "Like a banyan tree"
+      },
+      {
+        "word": "CHANURANDRANISHUDHANA",
+        "difficulty": "difficult",
+        "meaning": "One who killed Chanoora who belonged to Andhra"
+      },
+      {
+        "word": "SAHASRARCHI",
+        "difficulty": "medium",
+        "meaning": "Has thousand rays"
+      },
+      {
+        "word": "SATHAJIHWA",
+        "difficulty": "medium",
+        "meaning": "Fire God with seven tongues"
+      },
+      {
+        "word": "SAPTHAIDA",
+        "difficulty": "medium",
+        "meaning": "Has seven flames"
+      },
+      {
+        "word": "SAPTHAVAHANA",
+        "difficulty": "medium",
+        "meaning": "Sun God with seven horses"
+      },
+      {
+        "word": "AMOORTHI",
+        "difficulty": "medium",
+        "meaning": "One who does not have shape"
+      },
+      {
+        "word": "ACHINTYA",
+        "difficulty": "medium",
+        "meaning": "One who cannot be known by thought process"
+      },
+      {
+        "word": "BHAYAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who creates fear in bad people"
+      },
+      {
+        "word": "BHAYANASANA",
+        "difficulty": "medium",
+        "meaning": "One who destroys fear in good people"
+      },
+      {
+        "word": "ANU",
+        "difficulty": "easy",
+        "meaning": "Small like an atom"
+      },
+      {
+        "word": "BRIHAT",
+        "difficulty": "easy",
+        "meaning": "Extremely big"
+      },
+      {
+        "word": "KRISA",
+        "difficulty": "easy",
+        "meaning": "Thin"
+      },
+      {
+        "word": "STHOOLA",
+        "difficulty": "medium",
+        "meaning": "Stout"
+      },
+      {
+        "word": "GUNABRITHA",
+        "difficulty": "medium",
+        "meaning": "Has the nature to create, upkeep and destroy"
+      },
+      {
+        "word": "NIRGUNA",
+        "difficulty": "medium",
+        "meaning": "One who does not have any properties"
+      },
+      {
+        "word": "MAHAAN",
+        "difficulty": "easy",
+        "meaning": "Great"
+      },
+      {
+        "word": "ADHRITHA",
+        "difficulty": "medium",
+        "meaning": "Not carried by any thing"
+      },
+      {
+        "word": "SWADHRITHA",
+        "difficulty": "medium",
+        "meaning": "One who carries Himself"
+      },
+      {
+        "word": "SWASYA",
+        "difficulty": "easy",
+        "meaning": "Has a beautiful face"
+      },
+      {
+        "word": "PRAGVAMSA",
+        "difficulty": "medium",
+        "meaning": "One who belongs to the first dynasty"
+      },
+      {
+        "word": "VAMSAVARDHANA",
+        "difficulty": "medium",
+        "meaning": "One who makes dynasties grow"
+      },
+      {
+        "word": "BHARABRIT",
+        "difficulty": "medium",
+        "meaning": "One who carries heavy worlds"
+      },
+      {
+        "word": "KHADHITHA",
+        "difficulty": "medium",
+        "meaning": "Called as ultimate truth by the Vedas"
+      },
+      {
+        "word": "YOGI",
+        "difficulty": "easy",
+        "meaning": "One who can be attained by yoga"
+      },
+      {
+        "word": "YOGISA",
+        "difficulty": "easy",
+        "meaning": "Greatest among Yogis"
+      },
+      {
+        "word": "SARVAKAMADA",
+        "difficulty": "medium",
+        "meaning": "One who fulfills all desires"
+      },
+      {
+        "word": "ASRAMA",
+        "difficulty": "easy",
+        "meaning": "Place where beings can relax"
+      },
+      {
+        "word": "SRAVANA",
+        "difficulty": "medium",
+        "meaning": "One who gives sorrow to sinners"
+      },
+      {
+        "word": "DHANURDHARA",
+        "difficulty": "medium",
+        "meaning": "A great archer ( in the form of Rama )"
+      },
+      {
+        "word": "DHANURVEDA",
+        "difficulty": "medium",
+        "meaning": "One who knows the science of Archery"
+      },
+      {
+        "word": "DHANDA",
+        "difficulty": "easy",
+        "meaning": "Weapon to those who punish and also is the punishment"
+      },
+      {
+        "word": "DHAMAYITHA",
+        "difficulty": "medium",
+        "meaning": "One who controls and rules people"
+      },
+      {
+        "word": "SARVASAHA",
+        "difficulty": "medium",
+        "meaning": "An expert in every thing"
+      },
+      {
+        "word": "NIYANTHA",
+        "difficulty": "medium",
+        "meaning": "One who makes people obey rules"
+      },
+      {
+        "word": "ANIYAMA",
+        "difficulty": "medium",
+        "meaning": "Not subject to any rules"
+      },
+      {
+        "word": "AYAMA",
+        "difficulty": "easy",
+        "meaning": "One who does not have fear of death (caused by Yama)"
+      },
+      {
+        "word": "SATHVAVAN",
+        "difficulty": "medium",
+        "meaning": "Brave and valorous"
+      },
+      {
+        "word": "SAATHVIKA",
+        "difficulty": "medium",
+        "meaning": "Soft natured ( Of Sathva Guna )"
+      },
+      {
+        "word": "SATYADHARMAPARAYANA",
+        "difficulty": "difficult",
+        "meaning": "One who holds truth and charity (dharma) as important"
+      },
+      {
+        "word": "ABHIPRAYA",
+        "difficulty": "medium",
+        "meaning": "Approached by seekers of salvation"
+      },
+      {
+        "word": "PRIYARHA",
+        "difficulty": "medium",
+        "meaning": "Suitable for giving away of our most cherished things"
+      },
+      {
+        "word": "ARHA",
+        "difficulty": "easy",
+        "meaning": "Most appropriate for prayers"
+      },
+      {
+        "word": "PRIYAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who fulfills desires (Of devotees)"
+      },
+      {
+        "word": "PREETHIVARDHANA",
+        "difficulty": "difficult",
+        "meaning": "One who increases devotion of his devotees"
+      },
+      {
+        "word": "VIHAYASAGATHA",
+        "difficulty": "medium",
+        "meaning": "One who lives in the sky"
+      },
+      {
+        "word": "JYOTHI",
+        "difficulty": "easy",
+        "meaning": "One who glitters himself"
+      },
+      {
+        "word": "SURUCHI",
+        "difficulty": "medium",
+        "meaning": "One who shines beautifully"
+      },
+      {
+        "word": "HARTHABUJHA",
+        "difficulty": "medium",
+        "meaning": "One who eats what has been offered to him through fire"
+      },
+      {
+        "word": "VIBHA",
+        "difficulty": "easy",
+        "meaning": "Every where"
+      },
+      {
+        "word": "RAVI",
+        "difficulty": "easy",
+        "meaning": "Sun"
+      },
+      {
+        "word": "VIROCHANA",
+        "difficulty": "medium",
+        "meaning": "One who shines in several ways"
+      },
+      {
+        "word": "SURYA",
+        "difficulty": "easy",
+        "meaning": "One who makes everything"
+      },
+      {
+        "word": "SAVITHA",
+        "difficulty": "medium",
+        "meaning": "One who creates worlds"
+      },
+      {
+        "word": "RAVILOCHANA",
+        "difficulty": "medium",
+        "meaning": "Has the sun for his eyes"
+      },
+      {
+        "word": "HUTHABHUJA",
+        "difficulty": "medium",
+        "meaning": "One who eats what is offered in fire sacrifice ( homa )"
+      },
+      {
+        "word": "SUKHADA",
+        "difficulty": "medium",
+        "meaning": "One who gives his devotees the pleasure of salvation"
+      },
+      {
+        "word": "NAIKAJA",
+        "difficulty": "medium",
+        "meaning": "One who took several forms"
+      },
+      {
+        "word": "AGRAJA",
+        "difficulty": "easy",
+        "meaning": "In front of everything"
+      },
+      {
+        "word": "SADHAMARSHI",
+        "difficulty": "medium",
+        "meaning": "One who pardons mistakes (committed by his devotees)"
+      },
+      {
+        "word": "LOKAADHISHTANA",
+        "difficulty": "difficult",
+        "meaning": "Basis of the world"
+      },
+      {
+        "word": "ADBHUTA",
+        "difficulty": "medium",
+        "meaning": "Wonder"
+      },
+      {
+        "word": "SANAATH",
+        "difficulty": "medium",
+        "meaning": "From the very beginning"
+      },
+      {
+        "word": "SANATHANATHAMA",
+        "difficulty": "difficult",
+        "meaning": "Older than the oldest"
+      },
+      {
+        "word": "KAPILA",
+        "difficulty": "easy",
+        "meaning": "Of purple colour"
+      },
+      {
+        "word": "KAPI",
+        "difficulty": "easy",
+        "meaning": "Sun"
+      },
+      {
+        "word": "SWASTHIDA",
+        "difficulty": "medium",
+        "meaning": "One who gives all good things to his devotees"
+      },
+      {
+        "word": "SWASTHIKRITH",
+        "difficulty": "medium",
+        "meaning": "One who does good"
+      },
+      {
+        "word": "SWASTHI",
+        "difficulty": "medium",
+        "meaning": "Good Himself"
+      },
+      {
+        "word": "SWASTHIBUKH",
+        "difficulty": "medium",
+        "meaning": "One who enjoys goodness"
+      },
+      {
+        "word": "SWASTHIDAKSHINA",
+        "difficulty": "difficult",
+        "meaning": "Has the nature of giving good"
+      },
+      {
+        "word": "AROUDHRA",
+        "difficulty": "medium",
+        "meaning": "Never cruel"
+      },
+      {
+        "word": "KUNDALI",
+        "difficulty": "medium",
+        "meaning": "Adi Sesha"
+      },
+      {
+        "word": "CHAKREE",
+        "difficulty": "medium",
+        "meaning": "One who wears Chakra (the holy wheel )"
+      },
+      {
+        "word": "VIKRAMEE",
+        "difficulty": "medium",
+        "meaning": "He walks beautifully"
+      },
+      {
+        "word": "URJITHASASANA",
+        "difficulty": "medium",
+        "meaning": "One who gives firm orders"
+      },
+      {
+        "word": "SABDHATHIGA",
+        "difficulty": "medium",
+        "meaning": "One who can not be reached by words"
+      },
+      {
+        "word": "SABDHASAHA",
+        "difficulty": "medium",
+        "meaning": "One who can tolerate all sounds"
+      },
+      {
+        "word": "SHISIRA",
+        "difficulty": "medium",
+        "meaning": "Cool like winter"
+      },
+      {
+        "word": "SSARVARIKARA",
+        "difficulty": "medium",
+        "meaning": "One who creates darkness like night"
+      },
+      {
+        "word": "AKROORA",
+        "difficulty": "medium",
+        "meaning": "Not cruel"
+      },
+      {
+        "word": "PESALA",
+        "difficulty": "easy",
+        "meaning": "Extremely handsome"
+      },
+      {
+        "word": "DHAKSHA",
+        "difficulty": "medium",
+        "meaning": "Clever"
+      },
+      {
+        "word": "DHAKSHINA",
+        "difficulty": "medium",
+        "meaning": "One who goes everywhere"
+      },
+      {
+        "word": "KSHAMINAMVARA",
+        "difficulty": "medium",
+        "meaning": "Greatest among those who have patience"
+      },
+      {
+        "word": "VIDHUTHAMA",
+        "difficulty": "medium",
+        "meaning": "Greatest among those who know"
+      },
+      {
+        "word": "VEETHABHAYA",
+        "difficulty": "medium",
+        "meaning": "Not afraid"
+      },
+      {
+        "word": "PUNYASRAVANAKEERTHANA",
+        "difficulty": "difficult",
+        "meaning": "One who increases boons to those who sing about him"
+      },
+      {
+        "word": "UTHAARANA",
+        "difficulty": "medium",
+        "meaning": "One who makes you climb the shore from ocean of misery"
+      },
+      {
+        "word": "DUSHKRATHIHA",
+        "difficulty": "medium",
+        "meaning": "One who removes sins"
+      },
+      {
+        "word": "PUNYA",
+        "difficulty": "easy",
+        "meaning": "One who gives rewards to good deeds"
+      },
+      {
+        "word": "DHUSWAPNANASANA",
+        "difficulty": "difficult",
+        "meaning": "One who destroys bad dreams"
+      },
+      {
+        "word": "RAKSHANA",
+        "difficulty": "medium",
+        "meaning": "One who protects"
+      },
+      {
+        "word": "SANTHA",
+        "difficulty": "easy",
+        "meaning": "Personification of good people"
+      },
+      {
+        "word": "JIVANA",
+        "difficulty": "easy",
+        "meaning": "One who makes all beings live by being their soul"
+      },
+      {
+        "word": "PARYAVASTHITHA",
+        "difficulty": "difficult",
+        "meaning": "Spread every where"
+      },
+      {
+        "word": "ANANTHAROOPA",
+        "difficulty": "medium",
+        "meaning": "Has countless forms"
+      },
+      {
+        "word": "ANANTHASHREE",
+        "difficulty": "medium",
+        "meaning": "Whose strength cannot be estimated"
+      },
+      {
+        "word": "JITHARMANYU",
+        "difficulty": "medium",
+        "meaning": "Has won over anger"
+      },
+      {
+        "word": "BHAYAPAHA",
+        "difficulty": "medium",
+        "meaning": "One who removes fear"
+      },
+      {
+        "word": "CHATHURASRA",
+        "difficulty": "medium",
+        "meaning": "Just"
+      },
+      {
+        "word": "GABEERATHMA",
+        "difficulty": "medium",
+        "meaning": "Whose depth can never be found"
+      },
+      {
+        "word": "VIDHISA",
+        "difficulty": "medium",
+        "meaning": "One who gives special favors"
+      },
+      {
+        "word": "VYAADHISA",
+        "difficulty": "medium",
+        "meaning": "One who gives different works to different gods"
+      },
+      {
+        "word": "DHISA",
+        "difficulty": "easy",
+        "meaning": "One who as Veda, points out the results of different actions"
+      },
+      {
+        "word": "ANADHI",
+        "difficulty": "easy",
+        "meaning": "One who does not have a cause"
+      },
+      {
+        "word": "BHORBHUVA",
+        "difficulty": "medium",
+        "meaning": "Basis of the earth and its goal"
+      },
+      {
+        "word": "LAKSHMI",
+        "difficulty": "medium",
+        "meaning": "Luster of the earth"
+      },
+      {
+        "word": "SUVEERA",
+        "difficulty": "medium",
+        "meaning": "Has been praised in several ways"
+      },
+      {
+        "word": "RUCHIRANGADHA",
+        "difficulty": "medium",
+        "meaning": "Has beautiful shoulders"
+      },
+      {
+        "word": "JANANA",
+        "difficulty": "easy",
+        "meaning": "One who creates people"
+      },
+      {
+        "word": "JANAJANMADI",
+        "difficulty": "medium",
+        "meaning": "Existence of all people"
+      },
+      {
+        "word": "BHEEMAPARAKRAMA",
+        "difficulty": "difficult",
+        "meaning": "One who creates fear in his adversaries"
+      },
+      {
+        "word": "ADHARANILAYA",
+        "difficulty": "medium",
+        "meaning": "Basis of the basis (five elements)"
+      },
+      {
+        "word": "ADHATHA",
+        "difficulty": "medium",
+        "meaning": "One who drinks all beings at the time of deluge"
+      },
+      {
+        "word": "PUSHPAHASA",
+        "difficulty": "medium",
+        "meaning": "One who opens like a flower at the time of primal creation"
+      },
+      {
+        "word": "PRAJAGARA",
+        "difficulty": "medium",
+        "meaning": "Always awake"
+      },
+      {
+        "word": "URDHWAGA",
+        "difficulty": "medium",
+        "meaning": "Above everything"
+      },
+      {
+        "word": "SATPADACHARA",
+        "difficulty": "medium",
+        "meaning": "One who adopts good deeds prescribed by him"
+      },
+      {
+        "word": "PRANADA",
+        "difficulty": "medium",
+        "meaning": "One who gives life"
+      },
+      {
+        "word": "PANA",
+        "difficulty": "easy",
+        "meaning": "One who accepts all offerings to him and gives rewards"
+      },
+      {
+        "word": "PRANANILAYA",
+        "difficulty": "medium",
+        "meaning": "The one in whom all souls live"
+      },
+      {
+        "word": "PRANABRIT",
+        "difficulty": "medium",
+        "meaning": "One who nurtures beings"
+      },
+      {
+        "word": "PRANAJIVANA",
+        "difficulty": "medium",
+        "meaning": "One who makes beings live"
+      },
+      {
+        "word": "THATHVAM",
+        "difficulty": "medium",
+        "meaning": "Real meaning"
+      },
+      {
+        "word": "THATHVAVIDHE",
+        "difficulty": "medium",
+        "meaning": "One who knows his essence"
+      },
+      {
+        "word": "EKAATHMA",
+        "difficulty": "medium",
+        "meaning": "One and only one soul"
+      },
+      {
+        "word": "JANMAMRUTYUJARATHIGA",
+        "difficulty": "difficult",
+        "meaning": "Above birth, death and ageing"
+      },
+      {
+        "word": "BHURBHUVASWASTHARUSTHARA",
+        "difficulty": "difficult",
+        "meaning": "Spread as a tree to Bhuu Loka, Bhuvar Loka, and Suvar Loka"
+      },
+      {
+        "word": "THARA",
+        "difficulty": "easy",
+        "meaning": "One who makes us cross the sea of births and deaths"
+      },
+      {
+        "word": "PRAPITHAMAHA",
+        "difficulty": "medium",
+        "meaning": "Great grand father (All human beings are grand children of Brahma, the son of Vishnu)"
+      },
+      {
+        "word": "YAGNAPATHI",
+        "difficulty": "medium",
+        "meaning": "One who protects Yagna"
+      },
+      {
+        "word": "YAJWA",
+        "difficulty": "easy",
+        "meaning": "One who conducts Yagnas"
+      },
+      {
+        "word": "YAGNAANGA",
+        "difficulty": "medium",
+        "meaning": "Whose limbs are Yagna"
+      },
+      {
+        "word": "YAGNAVAHANA",
+        "difficulty": "medium",
+        "meaning": "One who carries forward Yagna"
+      },
+      {
+        "word": "YAGNABRIT",
+        "difficulty": "medium",
+        "meaning": "One who accepts yagna"
+      },
+      {
+        "word": "YAGNAKRIT",
+        "difficulty": "medium",
+        "meaning": "One who created Yagna"
+      },
+      {
+        "word": "YAGNI",
+        "difficulty": "easy",
+        "meaning": "Head of Yagna"
+      },
+      {
+        "word": "YAGNABHUJA",
+        "difficulty": "medium",
+        "meaning": "One who uses Yagna"
+      },
+      {
+        "word": "YAGNASADHANA",
+        "difficulty": "medium",
+        "meaning": "One who indicates Yagna as a method of attaining Him"
+      },
+      {
+        "word": "YAGNAANTHAKRIT",
+        "difficulty": "difficult",
+        "meaning": "One who increases the effect of Yagna"
+      },
+      {
+        "word": "YAGNAGUHYA",
+        "difficulty": "medium",
+        "meaning": "Secret of Yagna"
+      },
+      {
+        "word": "ANNA",
+        "difficulty": "easy",
+        "meaning": "Food"
+      },
+      {
+        "word": "ANNADA",
+        "difficulty": "easy",
+        "meaning": "One who eats food"
+      },
+      {
+        "word": "ATHMAYONI",
+        "difficulty": "medium",
+        "meaning": "Cause of all beings"
+      },
+      {
+        "word": "SWAYAMJATHA",
+        "difficulty": "medium",
+        "meaning": "Cause of His own birth"
+      },
+      {
+        "word": "VAIKHKHANA",
+        "difficulty": "medium",
+        "meaning": "One who dug earth as a boar (varaha)"
+      },
+      {
+        "word": "SAMAGAYANA",
+        "difficulty": "medium",
+        "meaning": "One who sings Sama Veda"
+      },
+      {
+        "word": "DEAVAKINANDANA",
+        "difficulty": "difficult",
+        "meaning": "Son of Devaki"
+      },
+      {
+        "word": "KSITHEESA",
+        "difficulty": "medium",
+        "meaning": "God to all worlds"
+      },
+      {
+        "word": "PAPANASANA",
+        "difficulty": "medium",
+        "meaning": "One who destroys sin"
+      },
+      {
+        "word": "SANKHABRIT",
+        "difficulty": "medium",
+        "meaning": "Has a Conch (Called Pancha Janya)"
+      },
+      {
+        "word": "NANDAKI",
+        "difficulty": "medium",
+        "meaning": "Has the sword called Nandaka"
+      },
+      {
+        "word": "CHAKRI",
+        "difficulty": "easy",
+        "meaning": "Has the wheel called Sudharsana"
+      },
+      {
+        "word": "SARNGADHANWA",
+        "difficulty": "medium",
+        "meaning": "Has the bow called Saranga"
+      },
+      {
+        "word": "GADHADHARA",
+        "difficulty": "medium",
+        "meaning": "Has a mace called Gowmodaki"
+      },
+      {
+        "word": "RADANGAPANI",
+        "difficulty": "medium",
+        "meaning": "One who keeps the wheel in his hand ready to use"
+      },
+      {
+        "word": "SARVAPRAHARANAYUDHA",
+        "difficulty": "difficult",
+        "meaning": "One who uses everything as a weapon"
+      }
+    ]
   }
 ]
