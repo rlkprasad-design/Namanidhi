@@ -853,7 +853,7 @@ function renderCollectionCards(container, collections, kind) {
     const card = el(`
       <button type="button" class="card">
         <div class="card-title">${collection.title}</div>
-        <div class="card-sub">${t('stotramCardSub', collection.entries.length)}</div>
+        <div class="card-sub">${t('stotramCardSub')}</div>
         <span class="badge">${t('playableBadge')}</span>
       </button>
     `);

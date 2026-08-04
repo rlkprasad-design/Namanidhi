@@ -356,8 +356,9 @@ left out entirely, in both sets: any claim about Baba's birth date,
 birthplace, or guru - these are genuinely unresolved even within the
 tradition, and asserting one as quiz-fact would mislead players.
 
-`vishnu-sahasranamam`'s `draft_entries` in `data/en/stotrams.json` (921
-names, covering all but the ~79 repeated names in the traditional 1000)
+`vishnu-sahasranamam`'s `entries` in `data/en/stotrams.json` (active;
+covering all but the ~79 repeated names in the traditional 1000, whose
+extra meanings are merged into the surviving entry instead of dropped)
 are adapted from the Vishnu Sahasranamam translation published on
 [Hindupedia](https://www.hindupedia.com/en/Vishnu_Sahasranamam), used
 with Hindupedia's permission (attribution to Hindupedia, not the
