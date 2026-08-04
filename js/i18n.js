@@ -178,12 +178,12 @@ const STRINGS = {
     kn: (title) => `${title} ಬಗ್ಗೆ:`,
   },
   stotramSourceCreditHindupedia: {
-    te: (title) =>
-      `${title} నామాలు, అర్థాలు <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a> నుండి, వారి అనుమతితో తీసుకోబడ్డాయి.`,
-    en: (title) =>
-      `Word meanings for ${title} are adapted from <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a>, used with their permission.`,
-    kn: (title) =>
-      `${title} ಹೆಸರುಗಳ ಅರ್ಥಗಳನ್ನು <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a> ನಿಂದ, ಅವರ ಅನುಮತಿಯೊಂದಿಗೆ ಪಡೆಯಲಾಗಿದೆ.`,
+    te: (title, url) =>
+      `${title} నామాలు, అర్థాలు <a href="${url}" target="_blank" rel="noopener">Hindupedia</a> నుండి, వారి అనుమతితో తీసుకోబడ్డాయి.`,
+    en: (title, url) =>
+      `Word meanings for ${title} are adapted from <a href="${url}" target="_blank" rel="noopener">Hindupedia</a>, used with their permission.`,
+    kn: (title, url) =>
+      `${title} ಹೆಸರುಗಳ ಅರ್ಥಗಳನ್ನು <a href="${url}" target="_blank" rel="noopener">Hindupedia</a> ನಿಂದ, ಅವರ ಅನುಮತಿಯೊಂದಿಗೆ ಪಡೆಯಲಾಗಿದೆ.`,
   },
   playAgainBtn: { te: 'మళ్ళీ ఆడండి', en: 'Play again', kn: 'ಮತ್ತೆ ಆಡಿ' },
   finishBtn: { te: 'ముగించు', en: 'Finish', kn: 'ಮುಗಿಸಿ' },
