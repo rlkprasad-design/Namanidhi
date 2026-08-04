@@ -314,6 +314,17 @@ h1, h2, h3, .display {
   text-decoration: underline;
   opacity: 1;
 }
+.intro-screen .intro-content-credits {
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  opacity: 0.7;
+  margin-top: -8px;
+}
+.intro-screen .intro-content-credits a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  opacity: 1;
+}
 .intro-screen .install-guide-link {
   margin-top: 10px;
   font-size: 0.9rem;

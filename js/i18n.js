@@ -36,6 +36,11 @@ const STRINGS = {
     en: 'On your safety: This is purely a personal sadhana app - no ads, no tracking. Beyond the name you enter (a nickname is completely fine, it doesn\'t need to be your real name) and your own play progress, nothing else about you is collected. Everything stays within our own network - never sold, never handed to anyone outside it. Please share your valuable feedback, advice, or suggestions at <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>.',
     kn: 'ನಿಮ್ಮ ಸುರಕ್ಷತೆಯ ಬಗ್ಗೆ: ಇದು ಸಂಪೂರ್ಣವಾಗಿ ವೈಯಕ್ತಿಕ ಸಾಧನಾ ಆ್ಯಪ್ - ಜಾಹೀರಾತುಗಳಿಲ್ಲ, ಟ್ರ್ಯಾಕಿಂಗ್ ಇಲ್ಲ. ನೀವು ನೀಡುವ ಹೆಸರು (ಅಡ್ಡಹೆಸರಾದರೂ ಸಾಕು, ನಿಜವಾದ ಹೆಸರೇ ಬೇಕಿಲ್ಲ) ಮತ್ತು ನಿಮ್ಮ ಆಟದ ಪ್ರಗತಿ ಹೊರತು ಬೇರೆ ಯಾವುದೇ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಸಂಗ್ರಹಿಸಲಾಗುವುದಿಲ್ಲ. ಇದು ನಮ್ಮ ಬಳಗದ ಒಳಗೇ ಇರುತ್ತದೆ - ಎಲ್ಲಿಯೂ ಮಾರಾಟವಾಗುವುದಿಲ್ಲ, ಯಾರಿಗೂ ಕೊಡುವುದಿಲ್ಲ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಅಮೂಲ್ಯ ಅಭಿಪ್ರಾಯ, ಸಲಹೆ ಅಥವಾ ಸೂಚನೆಗಳನ್ನು <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a> ಗೆ ತಿಳಿಸಿ.',
   },
+  introContentCredits: {
+    te: 'కొన్ని స్తోత్రాల నామాలు, అర్థాలు <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a> నుండి, వారి అనుమతితో తీసుకోబడ్డాయి.',
+    en: 'Word meanings for some stotrams are adapted from <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a>, used with their permission.',
+    kn: 'ಕೆಲವು ಸ್ತೋತ್ರಗಳ ಹೆಸರುಗಳ ಅರ್ಥಗಳನ್ನು <a href="https://www.hindupedia.com" target="_blank" rel="noopener">Hindupedia</a> ನಿಂದ, ಅವರ ಅನುಮತಿಯೊಂದಿಗೆ ಪಡೆಯಲಾಗಿದೆ.',
+  },
   feedbackNote: {
     te: 'మీ విలువైన అభిప్రాయం, సలహా లేదా సూచనలను దయచేసి <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>కి తెలియజేయండి.',
     en: 'Please share your valuable feedback, advice, or suggestions at <a href="mailto:namanidhi07@gmail.com">namanidhi07@gmail.com</a>.',
