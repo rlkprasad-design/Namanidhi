@@ -214,7 +214,7 @@
     "id": "vishnu-sahasranamam",
     "title": "Sri Vishnu Sahasranamam",
     "status": "soon",
-    "about": "The longest and most revered of all Vishnu stotras, found in the Mahabharata's Anushasana Parva - Bhishma's final teaching to Yudhishthira as he lay on his bed of arrows. Word meanings adapted from the Vishnu Sahasranamam page on Hindupedia (hindupedia.com), used with permission.",
+    "about": "The longest and most revered of all Vishnu stotras, found in the Mahabharata's Anushasana Parva - Bhishma's final teaching to Yudhishthira as he lay on his bed of arrows. Word meanings adapted from the Vishnu Sahasranamam page on Hindupedia (hindupedia.com), used with permission. The 1000 recited names include some repeats - a name can recur with a different meaning each time it appears - so this puzzle's 921 unique words carry all of those meanings together.",
     "draft_entries": [
       {
         "word": "VISWAM",
@@ -224,7 +224,7 @@
       {
         "word": "VISHNU",
         "difficulty": "easy",
-        "meaning": "Spread everywhere"
+        "meaning": "Spread everywhere; also said to have measured the three worlds in his Vamana avatara"
       },
       {
         "word": "VASHATKARA",
@@ -279,12 +279,12 @@
       {
         "word": "AVYAYA",
         "difficulty": "easy",
-        "meaning": "One who does not have different forms"
+        "meaning": "One who does not have different forms; also the one in whom all creation dissolves at the deluge"
       },
       {
         "word": "PURUSHA",
         "difficulty": "easy",
-        "meaning": "Inside every body"
+        "meaning": "Inside every body; also the soul present in every being"
       },
       {
         "word": "SAKSHI",
@@ -299,7 +299,7 @@
       {
         "word": "AKSHARA",
         "difficulty": "easy",
-        "meaning": "One who does not have death"
+        "meaning": "One who does not have death; also the permanent witness residing in every heart"
       },
       {
         "word": "YOGA",
@@ -329,7 +329,7 @@
       {
         "word": "KESAVA",
         "difficulty": "easy",
-        "meaning": "Served by Vishnu, Siva and Brahma"
+        "meaning": "Served by Vishnu, Siva and Brahma; also the one in whom Brahma, Vishnu and Shiva all reside"
       },
       {
         "word": "PURUSHOTTAMA",
@@ -349,7 +349,7 @@
       {
         "word": "SHIVA",
         "difficulty": "easy",
-        "meaning": "Pure"
+        "meaning": "Pure; also removes sins the moment his name is recalled"
       },
       {
         "word": "STHANU",
@@ -389,12 +389,12 @@
       {
         "word": "PRABHU",
         "difficulty": "easy",
-        "meaning": "Extremely clever"
+        "meaning": "Extremely clever; also stands tall above all"
       },
       {
         "word": "EASWARA",
         "difficulty": "medium",
-        "meaning": "One who controls and rules all beings"
+        "meaning": "One who controls and rules all beings; also supremely strong"
       },
       {
         "word": "SWAYAMBHU",
@@ -414,7 +414,7 @@
       {
         "word": "PUSHKARAKSHA",
         "difficulty": "medium",
-        "meaning": "Has lotus like eyes"
+        "meaning": "Has lotus like eyes; also rains kindness from his eyes"
       },
       {
         "word": "MAHASWANA",
@@ -434,7 +434,7 @@
       {
         "word": "VIDHATHA",
         "difficulty": "medium",
-        "meaning": "One who creates all actions and their results"
+        "meaning": "One who creates all actions and their results; also carries the world, and even those who carry it"
       },
       {
         "word": "DHATUR UTTAMA",
@@ -454,7 +454,7 @@
       {
         "word": "PADMANABHA",
         "difficulty": "easy",
-        "meaning": "Has a lotus (from which the world evolved) growing on his belly"
+        "meaning": "Has a lotus (from which the world evolved) growing on his belly; also shines within the lotus of every heart"
       },
       {
         "word": "AMARA PRABHU",
@@ -499,7 +499,7 @@
       {
         "word": "KRISHNA",
         "difficulty": "easy",
-        "meaning": "Black"
+        "meaning": "Black; also the name of the sage Krishna Dwaipayana"
       },
       {
         "word": "LOHITAKSHA",
@@ -539,12 +539,12 @@
       {
         "word": "PRANADHA",
         "difficulty": "medium",
-        "meaning": "One who makes beings move"
+        "meaning": "One who makes beings move; also gives life its motion"
       },
       {
         "word": "PRANA",
         "difficulty": "easy",
-        "meaning": "Soul"
+        "meaning": "Soul; also called the soul of every soul"
       },
       {
         "word": "JYESHTA",
@@ -559,12 +559,12 @@
       {
         "word": "PRAJAPATHI",
         "difficulty": "easy",
-        "meaning": "Chief of all human beings"
+        "meaning": "Chief of all human beings; also chief of all creation, not people alone"
       },
       {
         "word": "HIRANYAGARBHA",
         "difficulty": "medium",
-        "meaning": "One who resides as the soul (Brahmam) of this golden universe"
+        "meaning": "One who resides as the soul (Brahmam) of this golden universe; also the golden source of all creation"
       },
       {
         "word": "BHOOGARBHA",
@@ -664,7 +664,7 @@
       {
         "word": "SAMVATSARA",
         "difficulty": "medium",
-        "meaning": "Personification of the year"
+        "meaning": "Personification of the year; also the one in whom all things rest"
       },
       {
         "word": "VYALA",
@@ -684,7 +684,7 @@
       {
         "word": "AJHA",
         "difficulty": "easy",
-        "meaning": "One who does not have birth"
+        "meaning": "One who does not have birth; also present within everything; and in one telling, the beginning itself, in the form of Manmadha, the god of love"
       },
       {
         "word": "SARVESHWARA",
@@ -694,7 +694,7 @@
       {
         "word": "SIDDHA",
         "difficulty": "easy",
-        "meaning": "Always everywhere"
+        "meaning": "Always everywhere; also ever remains simply himself, without cause"
       },
       {
         "word": "SIDDHI",
@@ -709,7 +709,7 @@
       {
         "word": "ACHYUTHA",
         "difficulty": "medium",
-        "meaning": "One who does not slip"
+        "meaning": "One who does not slip; also never changes"
       },
       {
         "word": "VRASHAKAPI",
@@ -719,7 +719,7 @@
       {
         "word": "AMEYATMA",
         "difficulty": "medium",
-        "meaning": "Whose stature can not be measured"
+        "meaning": "Whose stature can not be measured; also whose knowledge is immeasurable"
       },
       {
         "word": "SARVA YOGA VINISRUTHA",
@@ -729,7 +729,7 @@
       {
         "word": "VASU",
         "difficulty": "easy",
-        "meaning": "One who lives in every being"
+        "meaning": "One who lives in every being; also means wealth itself; and the one in whom all others live"
       },
       {
         "word": "VASUMANA",
@@ -739,7 +739,7 @@
       {
         "word": "SATYA",
         "difficulty": "easy",
-        "meaning": "Truth personified"
+        "meaning": "Truth personified; also good to the good, and ever within reach of the virtuous"
       },
       {
         "word": "SAMATHMA",
@@ -754,12 +754,12 @@
       {
         "word": "SAMA",
         "difficulty": "easy",
-        "meaning": "Without change at all times"
+        "meaning": "Without change at all times; also the Sama Veda itself"
       },
       {
         "word": "AMOGHA",
         "difficulty": "easy",
-        "meaning": "One who gives all to his devotees"
+        "meaning": "One who gives all to his devotees; also whose every act bears fruit, never wasted"
       },
       {
         "word": "PUNDARIKAKSHA",
@@ -794,7 +794,7 @@
       {
         "word": "VISWAYONI",
         "difficulty": "medium",
-        "meaning": "The one from whom all beings are born"
+        "meaning": "The one from whom all beings are born; also the universe itself, and its creator"
       },
       {
         "word": "SUCHISRAVA",
@@ -924,12 +924,12 @@
       {
         "word": "BHOKTHA",
         "difficulty": "medium",
-        "meaning": "Consumer of nature"
+        "meaning": "Consumer of nature; also delights in his own truth, and cares for every being"
       },
       {
         "word": "SAHISHNU",
         "difficulty": "medium",
-        "meaning": "One who can pardon"
+        "meaning": "One who can pardon; also tolerates everything with patience"
       },
       {
         "word": "JAGATADHIJA",
@@ -974,7 +974,7 @@
       {
         "word": "SUCHI",
         "difficulty": "easy",
-        "meaning": "One who cleans the mind of those who pray Him"
+        "meaning": "One who cleans the mind of those who pray Him; also blemishless"
       },
       {
         "word": "OORJITHA",
@@ -1029,12 +1029,12 @@
       {
         "word": "VEERAHA",
         "difficulty": "medium",
-        "meaning": "One who kills Asura Heroes"
+        "meaning": "One who kills Asura Heroes; also a hero who destroys sin; and grants salvation to a suffering world"
       },
       {
         "word": "MADHAVA",
         "difficulty": "easy",
-        "meaning": "Lord of knowledge (Vidya)"
+        "meaning": "Lord of knowledge (Vidya); also born into the line of Madhu"
       },
       {
         "word": "MADHU",
@@ -1084,7 +1084,7 @@
       {
         "word": "ANIRDESYA VAPU",
         "difficulty": "difficult",
-        "meaning": "He of whom nobody can tell that he is thus"
+        "meaning": "He of whom nobody can tell that he is thus; also whose very form defies description"
       },
       {
         "word": "SHREEMAN",
@@ -1119,7 +1119,7 @@
       {
         "word": "ANIRUDDHA",
         "difficulty": "medium",
-        "meaning": "One who can not be stopped by any body"
+        "meaning": "One who cannot be stopped by anyone, not even his enemies"
       },
       {
         "word": "SURANANDA",
@@ -1129,7 +1129,7 @@
       {
         "word": "GOVINDA",
         "difficulty": "easy",
-        "meaning": "One who lifted the earth (Go)"
+        "meaning": "One who lifted the earth (Go); also attained through the words of the Vedas"
       },
       {
         "word": "GOVIDAM PATHI",
@@ -1154,7 +1154,7 @@
       {
         "word": "SUPARNA",
         "difficulty": "medium",
-        "meaning": "Has beautiful wings"
+        "meaning": "Has beautiful wings; also likened to a tree whose leaves are the Vedas"
       },
       {
         "word": "BHUJAGOTTAMA",
@@ -1184,7 +1184,7 @@
       {
         "word": "SIMHA",
         "difficulty": "easy",
-        "meaning": "One who troubles sinners"
+        "meaning": "One who troubles sinners; also born as a lion, and as royal as one"
       },
       {
         "word": "SAMDATHA",
@@ -1234,7 +1234,7 @@
       {
         "word": "DHAMA",
         "difficulty": "easy",
-        "meaning": "Light"
+        "meaning": "Light; also the patience he shows even while ruling"
       },
       {
         "word": "SATYAPARAKRAMA",
@@ -1274,7 +1274,7 @@
       {
         "word": "SHRIMAN",
         "difficulty": "medium",
-        "meaning": "One who shines"
+        "meaning": "One who shines; also gentle by nature"
       },
       {
         "word": "NYAYA",
@@ -1344,7 +1344,7 @@
       {
         "word": "ANILA",
         "difficulty": "easy",
-        "meaning": "In the form of air"
+        "meaning": "In the form of air; also answers to no one, and never sleeps"
       },
       {
         "word": "DHARANIDHARA",
@@ -1614,7 +1614,7 @@
       {
         "word": "PAVANA",
         "difficulty": "easy",
-        "meaning": "One who cleans in the form of wind"
+        "meaning": "One who cleans in the form of wind; also purifies a devotee by mere thought of him"
       },
       {
         "word": "PAAVANA",
@@ -1624,7 +1624,7 @@
       {
         "word": "ANALA",
         "difficulty": "easy",
-        "meaning": "He whom we never get satisfied"
+        "meaning": "He whom we never get satisfied; also possesses unending strength"
       },
       {
         "word": "KAMAHA",
@@ -1804,7 +1804,7 @@
       {
         "word": "VASU DEVA",
         "difficulty": "easy",
-        "meaning": "In everything and plays there"
+        "meaning": "In everything and plays there; also born as the son of Vasudeva; and conceals the world through maya"
       },
       {
         "word": "BRIHAT BHANU",
@@ -1814,7 +1814,7 @@
       {
         "word": "ADHI DEVA",
         "difficulty": "medium",
-        "meaning": "First reason of the world"
+        "meaning": "First reason of the world; also god before the Devas, the very first god"
       },
       {
         "word": "PURANDHARA",
@@ -1929,7 +1929,7 @@
       {
         "word": "BHEEMA",
         "difficulty": "easy",
-        "meaning": "One who makes everyone afraid of Him"
+        "meaning": "One who makes everyone afraid of Him; also a fear felt by every being"
       },
       {
         "word": "SAMA YAGNA",
@@ -2009,7 +2009,7 @@
       {
         "word": "UDBHAVA",
         "difficulty": "medium",
-        "meaning": "Reason for the birth of the worlds"
+        "meaning": "Reason for the birth of the worlds; also said to take on great births himself"
       },
       {
         "word": "KSOBHANA",
@@ -2054,7 +2054,7 @@
       {
         "word": "GAHANA",
         "difficulty": "easy",
-        "meaning": "Whose shape, strength and actions are difficult to know"
+        "meaning": "Whose shape, strength and actions are difficult to know; also whose depth cannot be measured"
       },
       {
         "word": "GUHA",
@@ -2149,7 +2149,7 @@
       {
         "word": "VEERA",
         "difficulty": "easy",
-        "meaning": "Personification of valor"
+        "meaning": "Personification of valor; also whose very name means to pervade, create and sustain"
       },
       {
         "word": "SHAKTHI MATHAM SHRESHTA",
@@ -2259,7 +2259,7 @@
       {
         "word": "PRAMANA",
         "difficulty": "medium",
-        "meaning": "Law to support every thing"
+        "meaning": "Law to support every thing; also the radiant personification of knowledge"
       },
       {
         "word": "BHIJAMAVYAYA",
@@ -2294,7 +2294,7 @@
       {
         "word": "ANIRVINNA",
         "difficulty": "medium",
-        "meaning": "One who does not hate others"
+        "meaning": "One who does not hate others; also free of every worry"
       },
       {
         "word": "STAVISHTA",
@@ -2329,7 +2329,7 @@
       {
         "word": "KSHAMA",
         "difficulty": "easy",
-        "meaning": "Perennially patient"
+        "meaning": "Perennially patient; also brings destruction at the deluge"
       },
       {
         "word": "KSHAAMA",
@@ -2344,7 +2344,7 @@
       {
         "word": "YAGNA",
         "difficulty": "easy",
-        "meaning": "Personification of Sacrifice (Yagna)"
+        "meaning": "Personification of Sacrifice (Yagna); also grants results to those who perform it"
       },
       {
         "word": "IJHYA",
@@ -2384,7 +2384,7 @@
       {
         "word": "SARVAGNA",
         "difficulty": "medium",
-        "meaning": "One who knows all that is to be known"
+        "meaning": "One who knows all that is to be known; also knows everything, without exception"
       },
       {
         "word": "GNANAMUUTTAMAM",
@@ -2574,12 +2574,12 @@
       {
         "word": "GOPATHI",
         "difficulty": "medium",
-        "meaning": "One who rears the cattle (Pasu or Go can also be taken to denote all mortals)"
+        "meaning": "One who rears the cattle (Pasu or Go can also be taken to denote all mortals); also lord of every being in the world"
       },
       {
         "word": "GOPTHA",
         "difficulty": "easy",
-        "meaning": "Saviour"
+        "meaning": "Saviour; also takes care of the world"
       },
       {
         "word": "GNANA GAMYA",
@@ -2674,7 +2674,7 @@
       {
         "word": "AMITHA VIKRAMA",
         "difficulty": "difficult",
-        "meaning": "Immeasurable steps"
+        "meaning": "Immeasurable steps; also immeasurable fame"
       },
       {
         "word": "AMBHO NIDHI",
@@ -2729,7 +2729,7 @@
       {
         "word": "NANDA",
         "difficulty": "easy",
-        "meaning": "Full of everything that is needed"
+        "meaning": "Full of everything that is needed; also the personification of supreme happiness"
       },
       {
         "word": "SATYADHARMA",
@@ -2819,7 +2819,7 @@
       {
         "word": "SWANGA",
         "difficulty": "easy",
-        "meaning": "Instrument reason and cause for existence"
+        "meaning": "Instrument reason and cause for existence; also blessed with beautiful limbs"
       },
       {
         "word": "AJITHA",
@@ -2989,7 +2989,7 @@
       {
         "word": "SHUBHANGA",
         "difficulty": "medium",
-        "meaning": "Has beautiful limbs"
+        "meaning": "Has beautiful limbs; also has a beautiful body"
       },
       {
         "word": "SHANTHIDA",
@@ -3314,7 +3314,7 @@
       {
         "word": "BRAHMANA",
         "difficulty": "medium",
-        "meaning": "Brahmam"
+        "meaning": "Brahmam; also in the form of Brahmins, the teacher of the Vedas"
       },
       {
         "word": "BRAHMA VIVARDHANA",
@@ -3349,7 +3349,7 @@
       {
         "word": "MAHA KARMA",
         "difficulty": "medium",
-        "meaning": "One who does the great works like creation, upkeep and destruction"
+        "meaning": "One who does the great works like creation, upkeep and destruction; also the creator of all great beings"
       },
       {
         "word": "MAHA TEJA",
@@ -3454,7 +3454,7 @@
       {
         "word": "VASU PRADHA",
         "difficulty": "medium",
-        "meaning": "One who gives wealth to his devotees"
+        "meaning": "One who gives wealth to his devotees; also leads his devotees to salvation"
       },
       {
         "word": "VASU MANAS",
@@ -3544,7 +3544,7 @@
       {
         "word": "APARAJITHA",
         "difficulty": "medium",
-        "meaning": "One who can not be won"
+        "meaning": "One who cannot be won, not even by his enemies"
       },
       {
         "word": "VISWA MURTHI",
@@ -3944,7 +3944,7 @@
       {
         "word": "AKSHOBYA",
         "difficulty": "medium",
-        "meaning": "One who should not be disturbed"
+        "meaning": "One who should not be disturbed; also cannot be broken down by his enemies"
       },
       {
         "word": "SARVA VAGESWARE SWARA",
@@ -4299,7 +4299,7 @@
       {
         "word": "SAVITHA",
         "difficulty": "medium",
-        "meaning": "One who creates worlds"
+        "meaning": "One who creates worlds; also has created everything"
       },
       {
         "word": "RAVI LOCHANA",
