@@ -356,6 +356,24 @@ left out entirely, in both sets: any claim about Baba's birth date,
 birthplace, or guru - these are genuinely unresolved even within the
 tradition, and asserting one as quiz-fact would mislead players.
 
+`vishnu-sahasranamam`'s `draft_entries` in `data/en/stotrams.json` (921
+names, covering all but the ~79 repeated names in the traditional 1000)
+are adapted from the Vishnu Sahasranamam translation published on
+[Hindupedia](https://www.hindupedia.com/en/Vishnu_Sahasranamam), used
+with Hindupedia's permission (attribution to Hindupedia, not the
+individual translator credited on their page - see the credit line in
+the stotram's `about` field and on the intro/About screen). This is a
+substantially better starting point than reconstructing entries from
+memory, since it's a script-assisted adaptation of a named, permissioned
+source - but it's still a mechanical first pass (word cleanup, difficulty
+tagging, and meaning trimming were done programmatically) and needs the
+same human review pass before promotion to an active stotram. The Telugu
+pool's `vishnu-sahasranamam` `draft_entries` in `data/stotrams.json` (a
+separate, earlier hand-drafted batch, reconstructed from memory rather
+than a named source) is planned to be superseded by a transliteration
+and translation of this reviewed English pool, rather than being kept as
+an independently-sourced batch.
+
 To run the check yourself before opening a PR:
 
 ```
