@@ -729,6 +729,18 @@ h1, h2, h3, .display {
   color: var(--cream);
   line-height: 1.7;
 }
+.complete-screen .content-credit {
+  max-width: 520px;
+  margin: -10px auto 0;
+  font-size: 0.8rem;
+  color: var(--gold-light);
+  opacity: 0.7;
+}
+.complete-screen .content-credit a {
+  color: var(--gold-light);
+  text-decoration: underline;
+  opacity: 1;
+}
 
 @media (max-width: 420px) {
   html, body { font-size: 17px; }

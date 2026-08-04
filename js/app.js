@@ -1148,6 +1148,7 @@ function showCuratedComplete(collection, kind) {
       <div class="about-box">
         ${t('stotramAboutLabel', collection.title)} ${collection.about}
       </div>
+      ${collection.source === 'hindupedia' ? `<p class="content-credit">${t('stotramSourceCreditHindupedia', collection.title)}</p>` : ''}
       <div class="btn-row" style="margin-top:12px;">
         <button type="button" class="btn btn-secondary" data-again>${t('playAgainBtn')}</button>
         <button type="button" class="btn btn-primary" data-list>${t('finishBtn')}</button>
