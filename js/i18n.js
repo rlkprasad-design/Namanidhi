@@ -163,9 +163,9 @@ const STRINGS = {
   soonSub: { te: 'త్వరలో వస్తుంది', en: 'Coming soon', kn: 'ಶೀಘ್ರದಲ್ಲಿ ಬರಲಿದೆ' },
   playableBadge: { te: 'ఆడవచ్చు', en: 'Play', kn: 'ಆಡಿ' },
   stotramCardSub: {
-    te: (n) => `మొత్తం ${n} పేర్లు · గ్రిడ్ సైజు, ప్రశ్నల సంఖ్య ప్రతిసారి మారుతుంది`,
-    en: (n) => `${n} names total · grid size and question count change every round`,
-    kn: (n) => `ಒಟ್ಟು ${n} ಹೆಸರುಗಳು · ಗ್ರಿಡ್ ಗಾತ್ರ ಮತ್ತು ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ ಪ್ರತಿ ಸುತ್ತಿನಲ್ಲಿ ಬದಲಾಗುತ್ತದೆ`,
+    te: 'గ్రిడ్ సైజు, ప్రశ్నల సంఖ్య ప్రతిసారి మారుతుంది',
+    en: 'Grid size and question count change every round',
+    kn: 'ಗ್ರಿಡ್ ಗಾತ್ರ ಮತ್ತು ಪ್ರಶ್ನೆಗಳ ಸಂಖ್ಯೆ ಪ್ರತಿ ಸುತ್ತಿನಲ್ಲಿ ಬದಲಾಗುತ್ತದೆ',
   },
   stotramFoundAll: {
     te: (title) => `${title}లోని అన్ని నామాలను మీరు కనుగొన్నారు.`,
