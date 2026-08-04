@@ -213,9 +213,12 @@
   {
     "id": "vishnu-sahasranamam",
     "title": "Sri Vishnu Sahasranamam",
-    "status": "soon",
+    "status": "active",
+    "gridSizeMin": 8,
+    "gridSizeMax": 28,
+    "fillerMode": "curated",
     "about": "The longest and most revered of all Vishnu stotras, found in the Mahabharata's Anushasana Parva - Bhishma's final teaching to Yudhishthira as he lay on his bed of arrows. Word meanings adapted from the Vishnu Sahasranamam page on Hindupedia (hindupedia.com), used with permission. The 1000 recited names include some repeats - a name can recur with a different meaning each time it appears - so this puzzle's 921 unique words carry all of those meanings together.",
-    "draft_entries": [
+    "entries": [
       {
         "word": "VISWAM",
         "difficulty": "easy",
