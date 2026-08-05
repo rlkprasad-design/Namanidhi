@@ -22,6 +22,7 @@ import {
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
   fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries, dismissFlaggedEntry,
+  fetchPlayerCount,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
 import { saveRecording, getRecording, deleteRecording } from './recordings.js';
@@ -1011,6 +1012,7 @@ function renderCuratedGame(session, kind) {
         <h3>${t('hintsTitle')}</h3>
         ${syncsToBackend() ? `<p class="flag-hint-note">${t('flagHintExplainer')}</p>` : ''}
         <div data-hints></div>
+        ${collection.source === 'hindupedia' ? `<p class="content-credit">${t('stotramSourceCreditHindupedia', collection.title, collection.sourceUrl)}</p>` : ''}
       </div>
     </div>
   `);
@@ -1148,7 +1150,7 @@ function showCuratedComplete(collection, kind) {
       <div class="about-box">
         ${t('stotramAboutLabel', collection.title)} ${collection.about}
       </div>
-      ${collection.source === 'hindupedia' ? `<p class="content-credit">${t('stotramSourceCreditHindupedia', collection.title)}</p>` : ''}
+      ${collection.source === 'hindupedia' ? `<p class="content-credit">${t('stotramSourceCreditHindupedia', collection.title, collection.sourceUrl)}</p>` : ''}
       <div class="btn-row" style="margin-top:12px;">
         <button type="button" class="btn btn-secondary" data-again>${t('playAgainBtn')}</button>
         <button type="button" class="btn btn-primary" data-list>${t('finishBtn')}</button>
@@ -1590,6 +1592,7 @@ async function showScoreboard() {
     <div>
       <h2 style="text-align:center;">${t('scoreboardTitle')}</h2>
       <p class="tagline" style="text-align:center;">${t('scoreboardTagline')}</p>
+      ${syncsToBackend() ? `<p class="tagline" style="text-align:center;" data-member-count></p>` : ''}
       <div class="score-section">
         <h3>${t('puzzleBoardTitle')}</h3>
         <p class="gem-legend">${t('gemLegend', gemBadge('easy'), gemBadge('medium'), gemBadge('difficult'))}</p>
@@ -1615,9 +1618,10 @@ async function showScoreboard() {
   const flaggedBoardEl = screen.querySelector('[data-flagged-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra] = await Promise.all([
-      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()),
+    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra, memberCount] = await Promise.all([
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()), fetchPlayerCount(),
     ]);
+    if (memberCount != null) screen.querySelector('[data-member-count]').textContent = t('scoreboardMemberCount', memberCount);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
       (row.total_pearls ?? 0) > 0 || (row.total_gems ?? 0) > 0 || (row.total_diamonds ?? 0) > 0 || (row.puzzles_completed ?? 0) > 0
     );

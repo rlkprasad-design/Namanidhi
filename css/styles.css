@@ -729,17 +729,24 @@ h1, h2, h3, .display {
   color: var(--cream);
   line-height: 1.7;
 }
-.complete-screen .content-credit {
-  max-width: 520px;
-  margin: -10px auto 0;
+.content-credit {
   font-size: 0.8rem;
   color: var(--gold-light);
   opacity: 0.7;
 }
-.complete-screen .content-credit a {
+.content-credit a {
   color: var(--gold-light);
   text-decoration: underline;
   opacity: 1;
+}
+.complete-screen .content-credit {
+  max-width: 520px;
+  margin: -10px auto 0;
+}
+.hints-panel .content-credit {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(240, 210, 139, 0.2);
 }
 
 @media (max-width: 420px) {
