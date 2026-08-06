@@ -1633,11 +1633,15 @@ function showJapamNamePicker() {
   // total is a nice-to-have, not something worth delaying the picker
   // (or its own network hiccup) over. Only meaningful with a shared
   // backend; local-only devices have no "everyone" to total across.
+  // Cross-language (fetchJapamNetworkTotal, not fetchJapamLeaderboard) so
+  // this matches the identically-worded total shown on Home and the
+  // Scoreboard - a player switching languages seeing "everyone, together"
+  // change was exactly the inconsistency reported and fixed everywhere
+  // else this same figure appears.
   if (syncsToBackend()) {
     const totalEl = screen.querySelector('[data-network-total]');
-    fetchJapamLeaderboard(getLang()).then((rows) => {
-      if (!rows || !rows.length || !totalEl.isConnected) return;
-      const total = rows.reduce((sum, row) => sum + (row.total_count || 0), 0);
+    fetchJapamNetworkTotal().then((total) => {
+      if (total == null || !totalEl.isConnected) return;
       totalEl.textContent = t('japamNetworkTotal', total);
       totalEl.hidden = false;
     });
@@ -1952,8 +1956,8 @@ async function showScoreboard() {
   const flaggedBoardEl = screen.querySelector('[data-flagged-board]');
 
   if (syncsToBackend()) {
-    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra, memberCount] = await Promise.all([
-      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()), fetchPlayerCount(),
+    const [puzzleRows, japamRows, flaggedRows, stotrams, saiSatcharitra, memberCount, japamTotal] = await Promise.all([
+      fetchPuzzleLeaderboard(getLang()), fetchJapamLeaderboard(getLang()), fetchFlaggedEntries(getLang()), loadStotrams(getLang()), loadSaiSatcharitra(getLang()), fetchPlayerCount(), fetchJapamNetworkTotal(),
     ]);
     if (memberCount != null) screen.querySelector('[data-member-count]').textContent = t('scoreboardMemberCount', memberCount);
     const activePuzzleRows = (puzzleRows || []).filter((row) =>
@@ -1965,8 +1969,11 @@ async function showScoreboard() {
       [t('colName'), `${gemBadge('easy')} ${t('colPearls')}`, `${gemBadge('medium')} ${t('colGems')}`, `${gemBadge('difficult')} ${t('colDiamonds')}`, t('colPuzzlesCompleted')],
       'data-puzzle-board'
     ));
-    const japamNetworkTotal = (japamRows || []).reduce((sum, row) => sum + (row.total_count || 0), 0);
-    screen.querySelector('[data-japam-network-total]').textContent = t('japamNetworkTotal', japamNetworkTotal);
+    // Cross-language, same as Home's stat and the Japam picker's total
+    // below - japamRows itself stays per-language, since the ranked
+    // table under this (each player's own count + daily average) is
+    // legitimately scoped to whichever language tab is open.
+    if (japamTotal != null) screen.querySelector('[data-japam-network-total]').textContent = t('japamNetworkTotal', japamTotal);
     const japamRowsWithAverage = (japamRows || []).map((row) => ({
       ...row,
       daily_average: row.first_logged_at ? Math.round(row.total_count / daysElapsedInclusive(row.first_logged_at)) : 0,
