@@ -34,6 +34,12 @@ const FONT_PX = 170;
 // actual ink extends slightly past their own advance width, so packing
 // with literally no gap risks the next letter's ink touching it.
 const LETTER_GAP = FONT_PX * 0.015;
+// Only used between separate WORDS in a joined-script language (English) -
+// within a word there's no gap at all (see tokensFor), so the tiny
+// LETTER_GAP above would read as two cursive words nearly running into
+// each other. Generous enough to look like a real pen-lift, still modest
+// next to FONT_PX so a multi-word phrase doesn't balloon in width.
+const WORD_GAP = FONT_PX * 0.12;
 // Each stroke's ink is solid-filled, and the dots trace its outer
 // boundary - so a thick stroke gets traced by two parallel rows of dots,
 // one down each edge, rather than one. Bold (700) made that gap wide
@@ -73,11 +79,16 @@ const cache = new Map();
 
 // Each script needs its own web font - a font with no glyphs for a given
 // language's Unicode block renders blank boxes/tofu, not a visible fallback,
-// so the font must match the active language, not just be "a" font.
-const FONT_NAME_BY_LANG = { te: 'Noto Sans Telugu', kn: 'Noto Sans Kannada' };
+// so the font must match the active language, not just be "a" font. English
+// uses Playwrite US Trad - a Google Font superfamily released specifically
+// for handwriting-practice tracing sheets (not a decorative display script
+// like the earlier "Dancing Script" attempt) - whose joined-cursive letter
+// design is meant to be traced, unlike Telugu/Kannada's block-letter fonts.
+const FONT_NAME_BY_LANG = { te: 'Noto Sans Telugu', kn: 'Noto Sans Kannada', en: 'Playwrite US Trad' };
 const FONT_STACK_BY_LANG = {
   te: '"Noto Sans Telugu", sans-serif',
   kn: '"Noto Sans Kannada", sans-serif',
+  en: '"Playwrite US Trad", cursive',
 };
 const DEFAULT_FONT_STACK = 'sans-serif';
 
@@ -94,8 +105,39 @@ async function ensureFontReady(lang) {
 
 const isSpace = (ch) => /\s/.test(ch);
 
-function renderInkMask(word, lang) {
+// English's cursive font only actually joins letters together when they're
+// shaped in one fillText() call - separate calls per grapheme (Telugu/
+// Kannada's approach, each with LETTER_GAP forced between them) can never
+// produce connected strokes no matter the font, since each call is shaped
+// as its own isolated 1-character run. So for a joined-script language,
+// group each word's letters into a single run and let the font's own
+// glyph design (its natural entry/exit strokes at normal advance width)
+// create the joined look; a break only happens at a real space between
+// separate words, the way a pen still lifts between words in cursive.
+// Telugu/Kannada are unaffected - they still get one token per grapheme,
+// identical to before this existed.
+const JOINED_LANGS = new Set(['en']);
+
+function tokensFor(word, lang) {
   const letters = graphemes(word);
+  if (!JOINED_LANGS.has(lang)) return letters;
+  const tokens = [];
+  let run = '';
+  for (const ch of letters) {
+    if (isSpace(ch)) {
+      if (run) { tokens.push(run); run = ''; }
+      tokens.push(ch);
+    } else {
+      run += ch;
+    }
+  }
+  if (run) tokens.push(run);
+  return tokens;
+}
+
+function renderInkMask(word, lang) {
+  const letters = tokensFor(word, lang);
+  const gap = JOINED_LANGS.has(lang) ? WORD_GAP : LETTER_GAP;
   const fontStack = fontStackFor(lang);
   const measure = document.createElement('canvas').getContext('2d');
   measure.font = `${FONT_WEIGHT} ${FONT_PX}px ${fontStack}`;
@@ -108,7 +150,7 @@ function renderInkMask(word, lang) {
     ascent = Math.max(ascent, m.actualBoundingBoxAscent || 0);
     descent = Math.max(descent, m.actualBoundingBoxDescent || 0);
     textWidth += m.width;
-    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) textWidth += LETTER_GAP;
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) textWidth += gap;
     return m.width;
   });
 
@@ -129,7 +171,7 @@ function renderInkMask(word, lang) {
   letters.forEach((letter, i) => {
     ctx.fillText(letter, x, baselineY);
     x += letterWidths[i];
-    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) x += LETTER_GAP;
+    if (i < letters.length - 1 && !isSpace(letter) && !isSpace(letters[i + 1])) x += gap;
   });
 
   const { data } = ctx.getImageData(0, 0, width, height);

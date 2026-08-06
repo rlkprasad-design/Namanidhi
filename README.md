@@ -410,6 +410,30 @@ tracer renders per-language now, not a single hardcoded Telugu font) and
 to the Google Fonts `<link>` in `index.html` plus the `font-family`
 fallback stacks in `css/styles.css`.
 
+English's Likhita Japam font is Playwrite US Trad - a Google Font
+superfamily built specifically for handwriting-practice tracing sheets,
+not a decorative display script. A joined-cursive font *only* actually
+joins letters when they're shaped together in one `fillText()` call;
+Telugu/Kannada each still render one grapheme per call (with a gap
+forced between them, so a conjunct or vowel sign never merges with its
+neighbor). `js/handwriting.js`'s `tokensFor()` branches on this per
+language (`JOINED_LANGS`): a joined language groups a whole word into
+one token so the font's own glyph design creates the connected look at
+normal advance width, breaking only at a real space between words. An
+earlier attempt at English cursive (Dancing Script, same single-token
+idea) got reverted the same day it shipped - not because joining
+letters doesn't work, but because it was merged without ever seeing it
+render (this project's test sandbox couldn't reach the Google Fonts CDN
+at the time) on top of a dot generator that traced each stroke's outer
+*boundary*, which reads as a hollow double outline on anything as thin
+as a cursive joining stroke. Both problems are gone now: the tracer
+was rewritten to a skeleton centerline soon after (see the note atop
+`js/handwriting.js`), and this pass verified the actual rendered glyphs
+by self-hosting the real font file for the test only, since the sandbox
+still can't reach Google's font CDN directly (Chromium hard-blocks TLS
+interception on its own vendor's domains, even through this project's
+CI-safe proxy) - production has no such restriction.
+
 All three languages sync to the shared family Supabase scoreboard, kept
 as separate per-language tallies rather than merged into one combined
 number - `puzzle_progress`/`japam_log` rows carry a `language` column,
