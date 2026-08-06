@@ -210,6 +210,26 @@ export async function fetchPlayerCount() {
   return count;
 }
 
+// Cross-language total for the Home screen's "Names written together" stat
+// - unlike fetchJapamLeaderboard below (used by the per-language Japam
+// picker/Scoreboard, filtered to whichever language is active), this sums
+// every row regardless of language, matching fetchPlayerCount's already-
+// universal "how many of us are there" scope. A player switching the
+// language toggle on Home saw the member count stay put but the Japam
+// total change - the whole point of that stat is "everyone, together",
+// so it should be as language-independent as the member count is. Same
+// view (japam_leaderboard), just no language filter.
+export async function fetchJapamNetworkTotal() {
+  const sb = await getClient();
+  if (!sb) return null;
+  const { data, error } = await sb.from('japam_leaderboard').select('total_count');
+  if (error) {
+    console.warn('fetchJapamNetworkTotal failed:', error);
+    return null;
+  }
+  return (data || []).reduce((sum, row) => sum + (row.total_count || 0), 0);
+}
+
 export async function fetchJapamLeaderboard(lang) {
   const sb = await getClient();
   if (!sb) return null;
