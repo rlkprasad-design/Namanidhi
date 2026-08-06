@@ -23,21 +23,56 @@ const DIRECTIONS = [
   [1, 1], [1, -1], [-1, 1], [-1, -1],
 ];
 
-function shuffle(arr) {
+function shuffle(arr, rng = Math.random) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(rng() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
 }
 
-function randomPool(fillerPool) {
-  return fillerPool[Math.floor(Math.random() * fillerPool.length)];
+function randomPool(fillerPool, rng = Math.random) {
+  return fillerPool[Math.floor(rng() * fillerPool.length)];
 }
 
-export function randomInt(min, max) {
-  return min + Math.floor(Math.random() * (max - min + 1));
+export function randomInt(min, max, rng = Math.random) {
+  return min + Math.floor(rng() * (max - min + 1));
+}
+
+// A tiny seedable PRNG (mulberry32) - Math.random() can't be seeded, but
+// Today's Puzzle (see app.js's showTodaysPuzzle/buildTodaysPuzzle below)
+// needs the exact same word selection and grid layout for every player of
+// a given language on a given calendar day, so a shared result actually
+// means something ("can you beat what I found today") and a shared link
+// opens the identical puzzle. Every other mode keeps using real
+// Math.random() - it's the default for every `rng` parameter in this
+// file, so nothing about the existing random puzzles changes; only
+// buildTodaysPuzzle ever constructs and passes a seeded one in.
+function mulberry32(seed) {
+  let a = seed >>> 0;
+  return function rng() {
+    a |= 0; a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Simple string hash (FNV-1a) to turn a "lang:date" string into a PRNG
+// seed - not cryptographic, just needs to spread different day/language
+// combinations across the PRNG's range.
+function hashSeed(str) {
+  let h = 2166136261;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
+  return h >>> 0;
+}
+
+export function seededRng(seedStr) {
+  return mulberry32(hashSeed(seedStr));
 }
 
 // How many entries a puzzle asks for, given the grid size that round
@@ -237,10 +272,10 @@ export function sampleMixedEntries(pool, level, weights = EVEN_WEIGHTS, puzzlesC
 // shows fewer words than it asked for.
 const GENERATE_RETRY_ATTEMPTS = 15;
 
-export function generateGridReliable({ size, entries, fillerMode, fillerPool = BASE_POOL }) {
+export function generateGridReliable({ size, entries, fillerMode, fillerPool = BASE_POOL, rng = Math.random }) {
   let result = { grid: [], placements: [] };
   for (let attempt = 0; attempt < GENERATE_RETRY_ATTEMPTS; attempt++) {
-    result = generateGrid({ size, entries, fillerMode, fillerPool });
+    result = generateGrid({ size, entries, fillerMode, fillerPool, rng });
     if (result.placements.length === entries.length) break;
   }
   return result;
@@ -248,7 +283,7 @@ export function generateGridReliable({ size, entries, fillerMode, fillerPool = B
 
 // Try every (direction, start) combo for a word, shuffled, and return the
 // first one whose path is empty or matches existing graphemes (crossing OK).
-function findPlacement(grid, size, letters) {
+function findPlacement(grid, size, letters, rng = Math.random) {
   const len = letters.length;
   const candidates = [];
   for (const [dr, dc] of DIRECTIONS) {
@@ -264,7 +299,7 @@ function findPlacement(grid, size, letters) {
     }
   }
 
-  for (const [r, c, dr, dc] of shuffle(candidates)) {
+  for (const [r, c, dr, dc] of shuffle(candidates, rng)) {
     let ok = true;
     const cells = [];
     for (let i = 0; i < len; i++) {
@@ -284,7 +319,7 @@ function findPlacement(grid, size, letters) {
 
 // Builds a size x size grid with every entry hidden in a straight line
 // (any of 8 directions), allowing entries to legitimately cross/share a cell.
-export function generateGrid({ size, entries, fillerMode, fillerPool = BASE_POOL }) {
+export function generateGrid({ size, entries, fillerMode, fillerPool = BASE_POOL, rng = Math.random }) {
   const grid = Array.from({ length: size }, () => Array(size).fill(null));
 
   const withLetters = entries
@@ -295,7 +330,7 @@ export function generateGrid({ size, entries, fillerMode, fillerPool = BASE_POOL
   const unplaced = [];
 
   for (const { entry, letters } of withLetters) {
-    const cells = findPlacement(grid, size, letters);
+    const cells = findPlacement(grid, size, letters, rng);
     if (!cells) {
       unplaced.push(entry.word);
       continue;
@@ -311,12 +346,12 @@ export function generateGrid({ size, entries, fillerMode, fillerPool = BASE_POOL
     console.warn('Could not place entries (grid too small):', unplaced);
   }
 
-  fillEmptyCells(grid, size, fillerMode, fillerPool);
+  fillEmptyCells(grid, size, fillerMode, fillerPool, rng);
 
   return { grid, placements };
 }
 
-function fillEmptyCells(grid, size, fillerMode, fillerPool) {
+function fillEmptyCells(grid, size, fillerMode, fillerPool, rng = Math.random) {
   const usedGraphemes = [];
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
@@ -327,11 +362,37 @@ function fillEmptyCells(grid, size, fillerMode, fillerPool) {
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
       if (grid[r][c] !== null) continue;
-      if (fillerMode === 'curated' && usedGraphemes.length && Math.random() < 0.7) {
-        grid[r][c] = usedGraphemes[Math.floor(Math.random() * usedGraphemes.length)];
+      if (fillerMode === 'curated' && usedGraphemes.length && rng() < 0.7) {
+        grid[r][c] = usedGraphemes[Math.floor(rng() * usedGraphemes.length)];
       } else {
-        grid[r][c] = randomPool(fillerPool);
+        grid[r][c] = randomPool(fillerPool, rng);
       }
     }
   }
+}
+
+// Today's Puzzle (see app.js's showTodaysPuzzle) - one small, easy/medium
+// puzzle per language per calendar day, identical for every player who
+// opens it that day, so a shared result or link actually means something
+// ("can you beat what I found today"). Deliberately independent of
+// sampleMixedEntries' per-player draw-queue/exposure rotation above -
+// this picks straight from the whole pool using only language+date as
+// the seed, nothing about who's playing.
+export const TODAYS_PUZZLE_WORD_COUNT = 6;
+export const TODAYS_PUZZLE_GRID_SIZE = 9;
+
+export function buildTodaysPuzzle(pool, { lang, dateStr, fillerMode = 'curated', fillerPool: fp = BASE_POOL }) {
+  const rng = seededRng(`${lang}:${dateStr}`);
+  const eligible = pool.filter(
+    (e) => e.difficulty !== 'difficult' && graphemes(e.word).length <= TODAYS_PUZZLE_GRID_SIZE
+  );
+  const entries = shuffle(eligible, rng).slice(0, TODAYS_PUZZLE_WORD_COUNT);
+  const { grid, placements } = generateGridReliable({
+    size: TODAYS_PUZZLE_GRID_SIZE, entries, fillerMode, fillerPool: fp, rng,
+  });
+  return {
+    gridSize: TODAYS_PUZZLE_GRID_SIZE,
+    grid,
+    placements: placements.map((p) => ({ ...p, found: false, earnedGem: false })),
+  };
 }
