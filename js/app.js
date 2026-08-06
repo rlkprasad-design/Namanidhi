@@ -423,6 +423,17 @@ function showHome() {
         <h1 class="display">${t('appTitle')}</h1>
         <p class="tagline">${t('appTagline')}</p>
       </div>
+      ${syncsToBackend() ? `
+      <div class="stats-strip" data-stats hidden>
+        <div class="stat-cell" data-stat-members hidden>
+          <div class="stat-number" data-stat-members-number></div>
+          <div class="stat-label">${t('homeStatMembersLabel')}</div>
+        </div>
+        <div class="stat-cell" data-stat-japam hidden>
+          <div class="stat-number" data-stat-japam-number></div>
+          <div class="stat-label">${t('homeStatJapamLabel')}</div>
+        </div>
+      </div>` : ''}
       <p class="tagline" style="text-align:center;">${t('chooseModePrompt')}</p>
       <div class="mode-choice">
         <button type="button" class="mode-btn" data-mode="nama-nidhi">
@@ -447,6 +458,29 @@ function showHome() {
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
+
+  // Fetched after Home is already on screen, same as the Japam picker's
+  // network total - these two headline numbers are a nice-to-have, not
+  // worth delaying the front page (or its own network hiccup) over.
+  if (syncsToBackend()) {
+    const statsEl = screen.querySelector('[data-stats]');
+    Promise.all([fetchPlayerCount(), fetchJapamLeaderboard(getLang())]).then(([memberCount, japamRows]) => {
+      if (!statsEl.isConnected) return;
+      const japamTotal = (japamRows || []).reduce((sum, row) => sum + (row.total_count || 0), 0);
+      let shown = false;
+      if (memberCount != null) {
+        screen.querySelector('[data-stat-members-number]').textContent = memberCount;
+        screen.querySelector('[data-stat-members]').hidden = false;
+        shown = true;
+      }
+      if (japamRows && japamRows.length) {
+        screen.querySelector('[data-stat-japam-number]').textContent = japamTotal;
+        screen.querySelector('[data-stat-japam]').hidden = false;
+        shown = true;
+      }
+      statsEl.hidden = !shown;
+    });
+  }
 }
 
 // నామ గుప్త నిధి itself isn't one puzzle mode - it's an umbrella over two
