@@ -92,6 +92,8 @@ const STRINGS = {
   },
 
   chooseModePrompt: { te: 'మీకు నచ్చిన విధానాన్ని ఎంచుకోండి', en: 'Choose how you would like to play', kn: 'ನಿಮಗೆ ಇಷ್ಟವಾದ ವಿಧಾನವನ್ನು ಆಯ್ಕೆಮಾಡಿ' },
+  homeStatMembersLabel: { te: 'బృందంలో సభ్యులు', en: 'Members in our network', kn: 'ಬಳಗದಲ್ಲಿ ಸದಸ್ಯರು' },
+  homeStatJapamLabel: { te: 'అందరూ కలిసి రాసిన నామాలు', en: 'Names written together', kn: 'ಎಲ್ಲರೂ ಸೇರಿ ಬರೆದ ಹೆಸರುಗಳು' },
   namaGuptaNidhiTitle: { te: 'నామ గుప్త నిధి', en: 'Nāma Gupta Nidhi', kn: 'ನಾಮ ಗುಪ್ತ ನಿಧಿ' },
   namaGuptaNidhiSub: { te: 'పజిల్ ఆడండి, స్తోత్రాలను పరీక్షించుకోండి', en: 'Play word puzzles, test your stotram recall', kn: 'ಪದ ಪಜಲ್ ಆಡಿ, ಸ್ತೋತ್ರಗಳ ನೆನಪನ್ನು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ' },
   likhitaJapamTitle: { te: 'లిఖిత జపం', en: 'Likhita Japam', kn: 'ಲಿಖಿತ ಜಪ' },
