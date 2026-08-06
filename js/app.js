@@ -22,7 +22,7 @@ import {
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
   fetchPuzzleLeaderboard, fetchJapamLeaderboard, flagEntry, fetchFlaggedEntries, dismissFlaggedEntry,
-  fetchPlayerCount,
+  fetchPlayerCount, fetchJapamNetworkTotal,
 } from './supabase-client.js';
 import { t, getLang, setLang, LANGUAGES, DEFAULT_LANGUAGE } from './i18n.js';
 import { saveRecording, getRecording, deleteRecording } from './recordings.js';
@@ -495,16 +495,15 @@ function showHome() {
   // worth delaying the front page (or its own network hiccup) over.
   if (syncsToBackend()) {
     const statsEl = screen.querySelector('[data-stats]');
-    Promise.all([fetchPlayerCount(), fetchJapamLeaderboard(getLang())]).then(([memberCount, japamRows]) => {
+    Promise.all([fetchPlayerCount(), fetchJapamNetworkTotal()]).then(([memberCount, japamTotal]) => {
       if (!statsEl.isConnected) return;
-      const japamTotal = (japamRows || []).reduce((sum, row) => sum + (row.total_count || 0), 0);
       let shown = false;
       if (memberCount != null) {
         screen.querySelector('[data-stat-members-number]').textContent = memberCount;
         screen.querySelector('[data-stat-members]').hidden = false;
         shown = true;
       }
-      if (japamRows && japamRows.length) {
+      if (japamTotal != null) {
         screen.querySelector('[data-stat-japam-number]').textContent = japamTotal;
         screen.querySelector('[data-stat-japam]').hidden = false;
         shown = true;
