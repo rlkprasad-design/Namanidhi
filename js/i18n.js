@@ -112,6 +112,40 @@ const STRINGS = {
   scoreboardBtn: { te: 'స్కోరు బోర్డు', en: 'Scoreboard', kn: 'ಸ್ಕೋರ್ ಬೋರ್ಡ್' },
   aboutBtn: { te: 'ఈ యాప్ గురించి', en: 'About this app', kn: 'ಈ ಆ್ಯಪ್ ಬಗ್ಗೆ' },
 
+  newBadge: { te: 'కొత్తది', en: 'New', kn: 'ಹೊಸದು' },
+  todaysPuzzleTitle: { te: 'నేటి పజిల్', en: "Today's Puzzle", kn: 'ಇಂದಿನ ಪಜಲ್' },
+  todaysPuzzleSub: {
+    te: 'చిన్న పజిల్ - ప్రతిరోజూ కొత్తది, ఫలితాన్ని పంచుకోండి',
+    en: 'A quick one, fresh every day - share your result',
+    kn: 'ಚಿಕ್ಕ ಪಜಲ್ - ಪ್ರತಿದಿನ ಹೊಸದು, ನಿಮ್ಮ ಫಲಿತಾಂಶ ಹಂಚಿಕೊಳ್ಳಿ',
+  },
+  todaysPuzzleResultTitle: { te: 'నేటి ఫలితం', en: "Today's result", kn: 'ಇಂದಿನ ಫಲಿತಾಂಶ' },
+  todaysPuzzleFoundLine: {
+    te: (found, total) => `${total}లో ${found} పేర్లు కనుగొన్నారు`,
+    en: (found, total) => `You found ${found} of ${total} names`,
+    kn: (found, total) => `${total} ರಲ್ಲಿ ${found} ಹೆಸರುಗಳನ್ನು ಕಂಡುಹಿಡಿದಿದ್ದೀರಿ`,
+  },
+  todaysPuzzleElapsedLabel: {
+    te: (time) => `సమయం: ${time}`,
+    en: (time) => `Time: ${time}`,
+    kn: (time) => `ಸಮಯ: ${time}`,
+  },
+  todaysPuzzleShareBtn: { te: 'ఫలితాన్ని పంచుకోండి', en: 'Share my result', kn: 'ನನ್ನ ಫಲಿತಾಂಶ ಹಂಚಿಕೊಳ್ಳಿ' },
+  todaysPuzzleShareIntro: {
+    te: (found, total) => `నేటి నామ నిధి పజిల్‌లో ${total}లో ${found} పేర్లు కనుగొన్నాను!`,
+    en: (found, total) => `I found ${found} of ${total} names in today's Nāma Nidhi puzzle!`,
+    kn: (found, total) => `ಇಂದಿನ ನಾಮ ನಿಧಿ ಪಜಲ್‌ನಲ್ಲಿ ${total} ರಲ್ಲಿ ${found} ಹೆಸರುಗಳನ್ನು ಕಂಡುಹಿಡಿದೆ!`,
+  },
+  todaysPuzzleShareCta: { te: 'మీరూ ప్రయత్నించండి:', en: 'Try it yourself:', kn: 'ನೀವೂ ಪ್ರಯತ್ನಿಸಿ:' },
+  todaysPuzzleSaveBtn: { te: 'స్కోరు బోర్డులో నిల్వ చేయండి', en: 'Save to Scoreboard', kn: 'ಸ್ಕೋರ್ ಬೋರ್ಡ್‌ನಲ್ಲಿ ಉಳಿಸಿ' },
+  todaysPuzzleSavePrompt: {
+    te: 'స్కోరు బోర్డులో చేర్చడానికి మీ పేరు రాయండి',
+    en: 'Enter your name to save this to the scoreboard',
+    kn: 'ಸ್ಕೋರ್ ಬೋರ್ಡ್‌ಗೆ ಸೇರಿಸಲು ನಿಮ್ಮ ಹೆಸರು ಬರೆಯಿರಿ',
+  },
+  todaysPuzzleSavedConfirm: { te: 'నిల్వ చేయబడింది!', en: 'Saved!', kn: 'ಉಳಿಸಲಾಗಿದೆ!' },
+  todaysPuzzleBackHome: { te: 'హోమ్‌కి వెళ్ళండి', en: 'Back to Home', kn: 'ಹೋಮ್‌ಗೆ ಹೋಗಿ' },
+
   puzzleInstructions: {
     te: 'కింద సూచనల్లో ఉన్న నామాలను అక్షరాల్లో వేలితో గీసి కనుగొనండి',
     en: 'Find the names listed below by tracing them in the grid with your finger',

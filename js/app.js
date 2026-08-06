@@ -1,7 +1,7 @@
 import {
   generateGridReliable, sampleMixedEntries, entryCountForGridSize, randomInt,
   splitAcrossDifficulties, difficultyWeightsForExperience, gridSizeCapForExperience, DIFFICULTIES, LATIN_POOL, KANNADA_POOL,
-  exportDrawQueues, importDrawQueues, isPoolExhausted, MAX_WORD_EXPOSURES,
+  exportDrawQueues, importDrawQueues, isPoolExhausted, MAX_WORD_EXPOSURES, buildTodaysPuzzle,
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
@@ -268,7 +268,32 @@ function languageToggle(onSwitch) {
 // Boot + identity
 // ---------------------------------------------------------------------
 
+// A shared Today's Puzzle link (e.g. from a WhatsApp status) needs to drop
+// straight into the puzzle - the whole point of the "play first, name only
+// if sharing" design (see showTodaysPuzzle et al.) is that someone who
+// taps a status update shouldn't hit the intro screen and name gate before
+// they even see what they were shown. Checked before any of that normal
+// boot sequence runs; everyone else's boot flow is completely unaffected.
+// `lang` (set by the share link itself, see shareTodaysPuzzleResult) picks
+// which language's puzzle to show without touching this device's own
+// stored language preference - setLang() alone is session-only.
+function todaysPuzzleDeepLinkParams() {
+  const params = new URLSearchParams(location.search);
+  if (params.get('today') !== '1') return null;
+  const lang = params.get('lang');
+  return { lang: LANGUAGES.includes(lang) ? lang : null };
+}
+
 async function boot() {
+  const deepLink = todaysPuzzleDeepLinkParams();
+  if (deepLink) {
+    setLang(deepLink.lang || getLanguage());
+    migrateLegacyDataOnce();
+    state.playerName = getPlayerName();
+    state.playerId = getPlayerId();
+    showTodaysPuzzle();
+    return;
+  }
   setLang(getLanguage());
   migrateLegacyDataOnce();
   if (!hasSeenIntro()) {
@@ -434,6 +459,11 @@ function showHome() {
           <div class="stat-label">${t('homeStatJapamLabel')}</div>
         </div>
       </div>` : ''}
+      <button type="button" class="mode-btn new" data-mode="todays-puzzle" style="margin-bottom:20px;">
+        <span class="new-tag">${t('newBadge')}</span>
+        <div class="display">${t('todaysPuzzleTitle')}</div>
+        <div class="sub">${t('todaysPuzzleSub')}</div>
+      </button>
       <p class="tagline" style="text-align:center;">${t('chooseModePrompt')}</p>
       <div class="mode-choice">
         <button type="button" class="mode-btn" data-mode="nama-nidhi">
@@ -455,6 +485,7 @@ function showHome() {
   screen.prepend(topBar());
   screen.querySelector('[data-mode="nama-nidhi"]').addEventListener('click', showNamaGuptaNidhiHub);
   screen.querySelector('[data-mode="likhita-japam"]').addEventListener('click', showJapamNamePicker);
+  screen.querySelector('[data-mode="todays-puzzle"]').addEventListener('click', showTodaysPuzzle);
   screen.querySelector('[data-scoreboard]').addEventListener('click', showScoreboard);
   screen.querySelector('[data-about]').addEventListener('click', () => showIntro(showHome));
   setScreen(screen);
@@ -540,6 +571,268 @@ function cellFontSize(gridSize) {
 
 function generalScopeKey() {
   return `${getLang()}::general`;
+}
+
+// "Today's Puzzle" - a small, fixed puzzle (see grid.js's buildTodaysPuzzle)
+// meant to be shared: the same words and grid layout for every player of a
+// given language on a given calendar day, so a WhatsApp-status result
+// ("I found 5/6 today, beat that") and a shared link both point at the
+// exact same thing the sender saw. Reachable two ways: the Home screen
+// card (showHome, below) for normal players already past the name gate,
+// and a `?today=1[&lang=xx]` URL param checked at boot() that skips the
+// intro/name-gate entirely - state.playerName can be null here in a way
+// it never is anywhere else in the app, so every function below has to
+// tolerate that; only the optional "save to scoreboard" step in
+// showTodaysPuzzleResult actually needs a name.
+const GEM_EMOJI = { easy: '⚪', medium: '🔷', difficult: '💎' };
+
+function getTodaysDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+function formatElapsed(ms) {
+  const totalSeconds = Math.max(0, Math.round(ms / 1000));
+  const mins = Math.floor(totalSeconds / 60);
+  const secs = totalSeconds % 60;
+  return mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
+}
+
+async function showTodaysPuzzle() {
+  const lang = getLang();
+  const pool = await loadEntryPool(lang);
+  const session = buildTodaysPuzzle(pool, { lang, dateStr: getTodaysDateStr(), fillerPool: fillerPool() });
+  renderTodaysPuzzleGame(session);
+}
+
+// Deliberately its own renderer rather than reusing renderGame - the
+// completion path is different enough (no draw-queue/exposure bookkeeping,
+// a result+share screen instead of an auto-recorded "level complete", a
+// possibly-guest player) that sharing renderGame's would mean threading a
+// pile of Today's-Puzzle-only conditionals through code every other mode
+// also depends on. The grid/hints/tracer wiring itself is intentionally
+// the same shape as renderGame/renderCuratedGame.
+function renderTodaysPuzzleGame(session) {
+  const { gridSize } = session;
+  const screen = el(`
+    <div>
+      <h2 style="text-align:center;">${t('todaysPuzzleTitle')}</h2>
+      <p class="tagline" style="text-align:center;">${t('puzzleInstructions')}</p>
+      <div class="grid-frame">
+        <div class="grid" data-grid style="grid-template-columns:repeat(${gridSize}, 1fr); --cell-font-size:${cellFontSize(gridSize)};"></div>
+      </div>
+      <div class="game-toolbar">
+        <button type="button" class="btn btn-secondary" data-show-answer>${t('showAnswerBtn')}</button>
+      </div>
+      <div class="hints-panel">
+        <h3>${t('hintsTitle')}</h3>
+        <div data-hints></div>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar({ backAction: showHome }));
+
+  const gridEl = screen.querySelector('[data-grid]');
+  const hintsEl = screen.querySelector('[data-hints]');
+  const toolbarEl = screen.querySelector('.game-toolbar');
+  const cellEls = [];
+  const startTime = Date.now();
+
+  for (let r = 0; r < gridSize; r++) {
+    const row = [];
+    for (let c = 0; c < gridSize; c++) {
+      const cellEl = el(`<div class="cell" data-r="${r}" data-c="${c}">${session.grid[r][c]}</div>`);
+      gridEl.appendChild(cellEl);
+      row.push(cellEl);
+    }
+    cellEls.push(row);
+  }
+
+  function renderHints() {
+    hintsEl.innerHTML = '';
+    session.placements.forEach((p) => {
+      hintsEl.appendChild(el(`
+        <div class="hint-item ${p.found ? 'found' : 'pending'}">
+          <span class="hint-word">${p.letters.join('')}</span>
+          ${gemBadge(p.entry.difficulty)}
+          <span class="hint-meaning">${p.entry.meaning} <span class="hint-count">${t('syllableCount', p.letters.length)}</span></span>
+        </div>
+      `));
+    });
+  }
+  renderHints();
+
+  let lastSelected = [];
+  function highlightSelection(path) {
+    lastSelected.forEach(({ r, c }) => cellEls[r][c].classList.remove('selected'));
+    path.forEach(({ r, c }) => cellEls[r][c].classList.add('selected'));
+    lastSelected = path;
+  }
+
+  let pointerCell = null;
+  function updateDirectionPointer(path) {
+    if (pointerCell) {
+      pointerCell.classList.remove('direction-pointer');
+      pointerCell.style.removeProperty('--pointer-angle');
+      pointerCell = null;
+    }
+    if (path.length < 2) return;
+    const [a, b] = path;
+    const dr = Math.sign(b.r - a.r);
+    const dc = Math.sign(b.c - a.c);
+    const last = path[path.length - 1];
+    pointerCell = cellEls[last.r][last.c];
+    pointerCell.style.setProperty('--pointer-angle', `${pointerAngleDeg(dr, dc)}deg`);
+    pointerCell.classList.add('direction-pointer');
+  }
+
+  function markFound(placement, viaHint) {
+    placement.found = true;
+    placement.earnedGem = !viaHint;
+    placement.cells.forEach(([r, c]) => {
+      cellEls[r][c].classList.add('found');
+      if (viaHint) cellEls[r][c].classList.add('via-hint');
+    });
+    if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
+    renderHints();
+    checkComplete();
+  }
+
+  function flashWrong(path) {
+    path.forEach(({ r, c }) => cellEls[r][c].classList.add('wrong'));
+    setTimeout(() => path.forEach(({ r, c }) => cellEls[r][c].classList.remove('wrong')), 400);
+  }
+
+  function checkComplete() {
+    if (!session.placements.every((p) => p.found)) return;
+    toolbarEl.innerHTML = '';
+    const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
+    btn.addEventListener('click', () => showTodaysPuzzleResult(session, Date.now() - startTime));
+    toolbarEl.appendChild(btn);
+  }
+
+  attachTracer(gridEl, {
+    onDragStart: (path) => { highlightSelection(path); updateDirectionPointer(path); },
+    onDragUpdate: (path) => { highlightSelection(path); updateDirectionPointer(path); },
+    onDragEnd: (path) => {
+      highlightSelection([]); updateDirectionPointer([]);
+      if (path.length < 2) return;
+      const { forward, reversed } = pathToStrings(path, session.grid);
+      const match = session.placements.find((p) => !p.found && (p.letters.join('') === forward || p.letters.join('') === reversed));
+      if (match) markFound(match);
+      else flashWrong(path);
+    },
+  });
+
+  screen.querySelector('[data-show-answer]').addEventListener('click', () => {
+    const target = session.placements.find((p) => !p.found);
+    if (target) markFound(target, true);
+  });
+
+  setScreen(screen);
+}
+
+function todaysPuzzleGemCounts(session) {
+  const gemCounts = { easy: 0, medium: 0, difficult: 0 };
+  for (const p of session.placements) {
+    if (p.earnedGem) gemCounts[p.entry.difficulty] = (gemCounts[p.entry.difficulty] || 0) + 1;
+  }
+  return gemCounts;
+}
+
+function recordTodaysPuzzleProgress(session, gemCounts) {
+  const progress = {
+    category: 'daily',
+    sub_category: getTodaysDateStr(),
+    level: 1,
+    entries_found: session.placements.length,
+    pearls_found: gemCounts.easy,
+    gems_found: gemCounts.medium,
+    diamonds_found: gemCounts.difficult,
+    language: getLang(),
+  };
+  recordPuzzleProgressLocal(progress, getLang(), state.playerName);
+  if (state.playerId && syncsToBackend()) syncPuzzleProgress(state.playerId, progress);
+}
+
+function shareTodaysPuzzleResult(gemLine, foundCount, total) {
+  const shareUrl = `${APP_URL}?today=1&lang=${getLang()}`;
+  const text = `🪷 ${gemLine || '—'}\n${t('todaysPuzzleShareIntro', foundCount, total)}\n${t('todaysPuzzleShareCta')}`;
+  if (navigator.share) {
+    navigator.share({ text, url: shareUrl }).catch(() => {});
+  } else {
+    window.open(`https://wa.me/?text=${encodeURIComponent(`${text} ${shareUrl}`)}`, '_blank', 'noopener');
+  }
+}
+
+function showTodaysPuzzleResult(session, elapsedMs) {
+  const gemCounts = todaysPuzzleGemCounts(session);
+  const foundCount = gemCounts.easy + gemCounts.medium + gemCounts.difficult;
+  const total = session.placements.length;
+  const gemLine = GEM_EMOJI.easy.repeat(gemCounts.easy) + GEM_EMOJI.medium.repeat(gemCounts.medium) + GEM_EMOJI.difficult.repeat(gemCounts.difficult);
+
+  // Anyone who already has a name (i.e. reached this from Home, not a
+  // guest deep link) gets recorded automatically, same as every other
+  // mode - no reason to make them tap an extra "save" button just
+  // because this mode also happens to support guests.
+  const alreadyNamed = !!state.playerName;
+  if (alreadyNamed) recordTodaysPuzzleProgress(session, gemCounts);
+
+  const screen = el(`
+    <div class="complete-screen">
+      <div class="glow">🪔</div>
+      <h2>${t('todaysPuzzleResultTitle')}</h2>
+      <p style="font-size:1.6rem; letter-spacing:0.08em;">${gemLine || '—'}</p>
+      <p>${t('todaysPuzzleFoundLine', foundCount, total)}</p>
+      <p class="tagline">${t('todaysPuzzleElapsedLabel', formatElapsed(elapsedMs))}</p>
+      <div class="btn-row" style="margin-top:16px;">
+        <button type="button" class="btn btn-primary" data-share-result>${t('todaysPuzzleShareBtn')}</button>
+      </div>
+      ${alreadyNamed ? '' : `
+      <div class="save-score-block" data-save-block style="margin-top:20px;">
+        <p class="tagline">${t('todaysPuzzleSavePrompt')}</p>
+        <input type="text" class="text-input" maxlength="40" placeholder="${t('namePlaceholder')}" data-save-name />
+        <div class="btn-row">
+          <button type="button" class="btn btn-secondary" data-save>${t('todaysPuzzleSaveBtn')}</button>
+        </div>
+      </div>`}
+      <div class="btn-row" style="margin-top:20px;">
+        <button type="button" class="btn btn-secondary" data-home>${t('todaysPuzzleBackHome')}</button>
+      </div>
+    </div>
+  `);
+  screen.prepend(topBar(alreadyNamed ? { backAction: showHome } : {}));
+
+  screen.querySelector('[data-share-result]').addEventListener('click', () => shareTodaysPuzzleResult(gemLine, foundCount, total));
+
+  if (!alreadyNamed) {
+    const saveBlock = screen.querySelector('[data-save-block]');
+    const saveBtn = screen.querySelector('[data-save]');
+    saveBtn.addEventListener('click', async () => {
+      const name = screen.querySelector('[data-save-name]').value.trim();
+      if (!name) return;
+      saveBtn.disabled = true;
+      // Mirrors showNameGate's submit() - a guest saving a result needs the
+      // same ensurePlayer() round-trip to get a real playerId before
+      // recordTodaysPuzzleProgress can sync anywhere, or the save would
+      // silently stay local-only even with a backend configured.
+      let playerId = null;
+      if (syncsToBackend()) {
+        const result = await ensurePlayer(name);
+        playerId = result.id;
+      }
+      state.playerName = name;
+      state.playerId = playerId;
+      setPlayerName(name);
+      setPlayerId(playerId);
+      loadDrawQueuesForCurrentPlayer();
+      recordTodaysPuzzleProgress(session, gemCounts);
+      saveBlock.innerHTML = `<p class="tagline">${t('todaysPuzzleSavedConfirm')}</p>`;
+    });
+  }
+
+  screen.querySelector('[data-home]').addEventListener('click', showHome);
+  setScreen(screen);
 }
 
 async function startNamaGuptaNidhi() {
