@@ -5,7 +5,7 @@ import {
 } from './grid.js';
 import { graphemes } from './segmenter.js';
 import { attachTracer, pathToStrings } from './trace.js';
-import { buildDotTrace, attachDotTracer } from './handwriting.js';
+import { buildDotTrace, attachDotTracer, isJoinedLang, hitRadiusFor } from './handwriting.js';
 import { looksLikeLatin, transliterate } from './transliterate.js';
 import { loadEntryPool, loadLevels, loadStotrams, loadSaiSatcharitra } from './data.js';
 import {
@@ -1759,7 +1759,14 @@ async function renderJapamTrace(session) {
   // dot touched) across the entire content pool (911 words, all three
   // languages): worst case was 99.29%, so 0.99 stays reachable everywhere
   // while requiring close to the whole glyph.
-  const INK_COMPLETE_THRESHOLD = 0.99;
+  //
+  // English's joined cursive font (see handwriting.js's isJoinedLang) adds
+  // thin connecting strokes between letters on top of that - fiddlier to
+  // land a touch on than Telugu/Kannada's separated block letters, so
+  // requiring the same near-total 99% there felt like it demanded tracing
+  // literally every dot. 0.90 keeps the completion feeling reachable
+  // without the pass genuinely finishing on a sloppy trace.
+  const INK_COMPLETE_THRESHOLD = isJoinedLang(getLang()) ? 0.90 : 0.99;
   const totalInkPixels = ink.reduce((sum, v) => sum + v, 0);
   const revealedInk = new Uint8Array(ink.length);
   let revealedInkPixels = 0;
@@ -1840,6 +1847,7 @@ async function renderJapamTrace(session) {
 
   attachDotTracer(canvas, dots, filled, {
     onChange: () => { revealNewlyFilledDots(); draw(); },
+    hitRadius: hitRadiusFor(getLang()),
   });
 }
 

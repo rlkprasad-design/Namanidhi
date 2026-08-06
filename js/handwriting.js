@@ -118,6 +118,23 @@ const isSpace = (ch) => /\s/.test(ch);
 // identical to before this existed.
 const JOINED_LANGS = new Set(['en']);
 
+export function isJoinedLang(lang) {
+  return JOINED_LANGS.has(lang);
+}
+
+// A joined cursive glyph's connecting strokes between letters are thin and
+// close together - noticeably fussier to land a touch precisely on than
+// Telugu/Kannada's separated block letters, where HIT_RADIUS was in fact
+// tightened (from 25 to 12) to fix real cross-talk between visually-close
+// conjunct dots. Loosening that for Telugu/Kannada would reinstate the bug
+// it fixed; English never had that problem (Latin letterforms aren't
+// packed anywhere near that tightly), so it can afford more tolerance -
+// see attachDotTracer's `hitRadius` option, used by app.js's
+// renderJapamTrace.
+export function hitRadiusFor(lang) {
+  return isJoinedLang(lang) ? 16 : HIT_RADIUS;
+}
+
 function tokensFor(word, lang) {
   const letters = graphemes(word);
   if (!JOINED_LANGS.has(lang)) return letters;
@@ -342,7 +359,7 @@ export async function buildDotTrace(word) {
 // made some genuinely-finished traces hard to close out. The caller
 // (see renderJapamTrace in app.js) instead tracks actual ink-pixel
 // coverage from the same touches, which doesn't care about dot order.
-export function attachDotTracer(canvas, dots, filled, { onChange }) {
+export function attachDotTracer(canvas, dots, filled, { onChange, hitRadius = HIT_RADIUS }) {
   let dragging = false;
 
   function pointFromEvent(e) {
@@ -358,7 +375,7 @@ export function attachDotTracer(canvas, dots, filled, { onChange }) {
       if (filled.has(i)) return;
       const dx = d.x - pt.x;
       const dy = d.y - pt.y;
-      if (dx * dx + dy * dy <= HIT_RADIUS * HIT_RADIUS) {
+      if (dx * dx + dy * dy <= hitRadius * hitRadius) {
         filled.add(i);
         changed = true;
       }
