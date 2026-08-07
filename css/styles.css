@@ -157,6 +157,14 @@ h1, h2, h3, .display {
   opacity: 0.8;
   margin-top: 2px;
 }
+.stats-strip .stats-note {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--gold-light);
+  opacity: 0.65;
+  margin: 2px 0 0;
+}
 
 /* Buttons ---------------------------------------------------------- */
 
