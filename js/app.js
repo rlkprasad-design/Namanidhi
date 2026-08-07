@@ -458,6 +458,7 @@ function showHome() {
           <div class="stat-number" data-stat-japam-number></div>
           <div class="stat-label">${t('homeStatJapamLabel')}</div>
         </div>
+        <p class="stats-note">${t('homeStatsAllLanguagesNote')}</p>
       </div>` : ''}
       <button type="button" class="mode-btn new" data-mode="todays-puzzle" style="margin-bottom:20px;">
         <span class="new-tag">${t('newBadge')}</span>
