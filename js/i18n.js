@@ -95,9 +95,9 @@ const STRINGS = {
   homeStatMembersLabel: { te: 'బృందంలో సభ్యులు', en: 'Members in our network', kn: 'ಬಳಗದಲ್ಲಿ ಸದಸ್ಯರು' },
   homeStatJapamLabel: { te: 'అందరూ కలిసి రాసిన నామాలు', en: 'Names written together', kn: 'ಎಲ್ಲರೂ ಸೇರಿ ಬರೆದ ಹೆಸರುಗಳು' },
   homeStatsAllLanguagesNote: {
-    te: 'మూడు భాషల్లో అందరూ కలిపి',
-    en: 'Across Telugu, English, and Kannada combined',
-    kn: 'ತೆಲುಗು, ಇಂಗ್ಲಿಷ್, ಕನ್ನಡ ಮೂರರಲ್ಲೂ ಒಟ್ಟಿಗೆ',
+    te: 'అన్ని భాషల్లో అందరూ కలిపి',
+    en: 'Across all languages combined',
+    kn: 'ಎಲ್ಲಾ ಭಾಷೆಗಳ ಸಂಯೋಜಿತ',
   },
   namaGuptaNidhiTitle: { te: 'నామ గుప్త నిధి', en: 'Nāma Gupta Nidhi', kn: 'ನಾಮ ಗುಪ್ತ ನಿಧಿ' },
   namaGuptaNidhiSub: { te: 'పజిల్ ఆడండి, స్తోత్రాలను పరీక్షించుకోండి', en: 'Play word puzzles, test your stotram recall', kn: 'ಪದ ಪಜಲ್ ಆಡಿ, ಸ್ತೋತ್ರಗಳ ನೆನಪನ್ನು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ' },
