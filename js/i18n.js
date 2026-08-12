@@ -250,6 +250,12 @@ const STRINGS = {
     en: 'Trace the dots with your finger',
     kn: 'ಚುಕ್ಕೆಗಳನ್ನು ಅನುಸರಿಸುತ್ತಾ ಬೆರಳಿನಿಂದ ಬರೆಯಿರಿ',
   },
+  japamTraceLoadError: {
+    te: 'ఇది సిద్ధం చేయడంలో సమస్య వచ్చింది. మళ్ళీ ప్రయత్నించండి.',
+    en: "Couldn't get this ready to write. Please try again.",
+    kn: 'ಇದನ್ನು ಸಿದ್ಧಪಡಿಸುವಲ್ಲಿ ಸಮಸ್ಯೆ ಆಯಿತು. ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
+  },
+  japamTraceRetryBtn: { te: 'మళ్ళీ ప్రయత్నించండి', en: 'Try again', kn: 'ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ' },
   japamLandscapeHint: {
     te: '📱 ఫోన్‌ను అడ్డంగా (ల్యాండ్‌స్కేప్) తిప్పితే రాయడం మరింత సులభంగా ఉంటుంది',
     en: '📱 Turning your phone sideways (landscape) makes writing easier',
