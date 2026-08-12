@@ -96,10 +96,32 @@ function fontStackFor(lang) {
   return FONT_STACK_BY_LANG[lang] || DEFAULT_FONT_STACK;
 }
 
+// How long to wait for a webfont fetch before giving up and rendering
+// with whatever's available - Telugu/Kannada's fonts were already being
+// loaded here for months with no issue, but English's (Playwrite US
+// Trad, added for cursive tracing) is a genuinely new network dependency
+// this path never had before. document.fonts.load() rejects on a real
+// failure (offline, blocked request, CSP) and this device/browser might
+// just be slow - either way, a stuck or failed font fetch used to leave
+// buildDotTrace's caller (renderJapamTrace in app.js) hanging on an
+// unresolved await forever, which left the trace canvas - the first,
+// most prominent thing on the whole Likhita Japam screen - permanently
+// blank while everything rendered before it (title, buttons) looked
+// fine. Falling back to the system font after a timeout, or on an
+// outright rejection, means the word still traces - just not in cursive
+// until the font happens to load - rather than the screen breaking.
+const FONT_LOAD_TIMEOUT_MS = 3000;
+
 async function ensureFontReady(lang) {
   const name = FONT_NAME_BY_LANG[lang];
-  if (name && document.fonts && document.fonts.load) {
-    await document.fonts.load(`${FONT_WEIGHT} ${FONT_PX}px "${name}"`);
+  if (!name || !document.fonts || !document.fonts.load) return;
+  try {
+    await Promise.race([
+      document.fonts.load(`${FONT_WEIGHT} ${FONT_PX}px "${name}"`),
+      new Promise((resolve) => setTimeout(resolve, FONT_LOAD_TIMEOUT_MS)),
+    ]);
+  } catch (err) {
+    console.warn(`"${name}" failed to load - tracing with the fallback font instead:`, err);
   }
 }
 
