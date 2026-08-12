@@ -1723,7 +1723,25 @@ async function renderJapamTrace(session) {
 
   const canvas = screen.querySelector('[data-canvas]');
   const frame = screen.querySelector('.japam-surface-frame');
-  const { dots, width, height, baselineY, ink } = await buildDotTrace(session.word);
+  let trace;
+  try {
+    trace = await buildDotTrace(session.word);
+  } catch (err) {
+    // Everything above this (title, buttons, exit) already rendered fine -
+    // only the trace surface itself depends on this. A failure here (a
+    // stuck/rejected webfont fetch used to be the main one; ensureFontReady
+    // in handwriting.js now times out and falls back instead of throwing,
+    // but this stays as a last-resort net for anything else) used to leave
+    // that surface silently blank forever instead of showing anything.
+    console.warn('buildDotTrace failed:', err);
+    frame.innerHTML = `
+      <p class="tagline" style="text-align:center; padding: 24px 12px;">${t('japamTraceLoadError')}</p>
+      <div class="btn-row"><button type="button" class="btn btn-secondary" data-retry>${t('japamTraceRetryBtn')}</button></div>
+    `;
+    frame.querySelector('[data-retry]').addEventListener('click', () => renderJapamTrace(session));
+    return;
+  }
+  const { dots, width, height, baselineY, ink } = trace;
   canvas.width = width;
   canvas.height = height;
   fitJapamCanvas(canvas, frame);
