@@ -34,7 +34,7 @@ const root = document.getElementById('app');
 // i18n.js's STRINGS table. Keyed by language rather than an en/else
 // ternary so adding a language is a new map entry, not a new branch.
 const JAPAM_NAMES_BY_LANG = {
-  te: [{ word: 'శ్రీరామ్', label: 'శ్రీరామ్' }, { word: 'సాయిరామ్', label: 'సాయిరామ్' }],
+  te: [{ word: 'శ్రీ రామ', label: 'శ్రీ రామ' }, { word: 'సాయిరాం', label: 'సాయిరాం' }],
   en: [{ word: 'Shriram', label: 'Shriram' }, { word: 'Sairam', label: 'Sairam' }],
   kn: [{ word: 'ಶ್ರೀರಾಮ್', label: 'ಶ್ರೀರಾಮ್' }, { word: 'ಸಾಯಿರಾಮ್', label: 'ಸಾಯಿರಾಮ್' }],
 };
