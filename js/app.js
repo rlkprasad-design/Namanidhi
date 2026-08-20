@@ -34,7 +34,7 @@ const root = document.getElementById('app');
 // i18n.js's STRINGS table. Keyed by language rather than an en/else
 // ternary so adding a language is a new map entry, not a new branch.
 const JAPAM_NAMES_BY_LANG = {
-  te: [{ word: 'శ్రీరామ్', label: 'శ్రీరామ్' }, { word: 'సాయిరామ్', label: 'సాయిరామ్' }],
+  te: [{ word: 'శ్రీ రామ', label: 'శ్రీ రామ' }, { word: 'సాయిరాం', label: 'సాయిరాం' }],
   en: [{ word: 'Shriram', label: 'Shriram' }, { word: 'Sairam', label: 'Sairam' }],
   kn: [{ word: 'ಶ್ರೀರಾಮ್', label: 'ಶ್ರೀರಾಮ್' }, { word: 'ಸಾಯಿರಾಮ್', label: 'ಸಾಯಿರಾಮ್' }],
 };
@@ -1575,19 +1575,6 @@ function wireRecordButton(slot, word) {
   render();
 }
 
-// A custom-typed name is worth keeping the moment someone submits it,
-// not only once they finish a full trace repetition - most players try
-// a name once or twice and move on, and onJapamSuccess below only ever
-// fires for a *completed* trace, so relying on that alone would quietly
-// drop every custom name that was typed but never fully traced.
-// session_type: 'custom' and count: 0 keep this out of any "japam
-// completed" totals; it's purely a record of which name was chosen.
-function recordCustomJapamChoice(word) {
-  const entry = { name_traced: word, count: 0, session_type: 'custom', language: getLang() };
-  recordJapamLocal(entry, getLang(), state.playerName);
-  if (state.playerId && syncsToBackend()) syncJapamLog(state.playerId, entry);
-}
-
 function showJapamNamePicker() {
   const screen = el(`
     <div>
@@ -1600,6 +1587,7 @@ function showJapamNamePicker() {
         <input type="text" class="text-input" maxlength="60" placeholder="${t('japamCustomPlaceholder')}" data-custom-word />
         <div class="btn-row">
           <button type="button" class="btn btn-primary" data-custom-start>${t('beginBtn')}</button>
+          <div class="record-slot-inline" data-custom-record-slot></div>
         </div>
       </div>
     </div>
@@ -1636,11 +1624,31 @@ function showJapamNamePicker() {
     // other language (English, Kannada) traces the typed text as-is
     // rather than attempting a translation this app doesn't actually have.
     const word = getLang() === 'te' && looksLikeLatin(typed) ? transliterate(typed) : typed;
-    recordCustomJapamChoice(word);
     startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
   };
   screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);
   customInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') startCustom(); });
+
+  // The suggested-name cards can each have a voice recording attached
+  // (see wireRecordButton) - a custom-typed name deserves the same, so
+  // players aren't limited to recording only the two defaults. Recordings
+  // are keyed by the exact word text, so the mic control has to be
+  // re-wired to whatever's currently typed rather than wired once; wiring
+  // on every keystroke would mean an IndexedDB lookup per keystroke, so
+  // this waits for a short pause in typing instead. Blank input hides the
+  // control entirely - there's nothing to attach a recording to yet.
+  const customRecordSlot = screen.querySelector('[data-custom-record-slot]');
+  let customRecordDebounce = null;
+  const updateCustomRecordSlot = () => {
+    const typed = customInput.value.trim();
+    if (!typed) { customRecordSlot.innerHTML = ''; return; }
+    wireRecordButton(customRecordSlot, typed);
+  };
+  customInput.addEventListener('input', () => {
+    clearTimeout(customRecordDebounce);
+    customRecordDebounce = setTimeout(updateCustomRecordSlot, 400);
+  });
+  customInput.addEventListener('blur', updateCustomRecordSlot);
 
   setScreen(screen);
 
