@@ -248,6 +248,14 @@ h1, h2, h3, .display {
   display: flex;
   gap: 6px;
 }
+/* Same record/play/delete control as .record-slot, but used outside a
+   .card (the custom-word block has no positioned ancestor to anchor an
+   absolutely-positioned corner badge to), so it sits inline instead. */
+.record-slot-inline {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
 .record-btn, .record-delete-btn {
   width: 30px;
   height: 30px;
