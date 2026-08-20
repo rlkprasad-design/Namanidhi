@@ -1,0 +1,1590 @@
+[
+  {
+    "id": "rama-raksha",
+    "title": "శ్రీ రామ రక్షా స్తోత్రం",
+    "status": "active",
+    "gridSizeMin": 5,
+    "gridSizeMax": 7,
+    "fillerMode": "curated",
+    "about": "బుధకౌశిక మహర్షిచే రచించబడిన ఈ స్తోత్రం శ్రీరాముని నామాలను స్మరిస్తూ రక్షణ కోరుకునే ఒక ప్రసిద్ధ స్తోత్రం. ఇందులోని కవచ భాగంలో శరీరంలోని ఒక్కో భాగాన్ని శ్రీరాముని ఒక్కో నామం రక్షిస్తుందని పేర్కొనబడింది. నిత్యం పఠించేవారికి భయం తొలగి, మనశ్శాంతి కలుగుతుందని నమ్మకం.",
+    "entries": [
+      {
+        "word": "రాముడు",
+        "difficulty": "easy",
+        "meaning": "స్తోత్రమంతటా స్తుతింపబడే ప్రధాన నామం; కవచంలో యావత్ శరీరాన్ని రక్షించు నామం"
+      },
+      {
+        "word": "సీతా",
+        "difficulty": "easy",
+        "meaning": "శ్రీరాముని దేవేరి, జానకి"
+      },
+      {
+        "word": "రాఘవుడు",
+        "difficulty": "easy",
+        "meaning": "శిరస్సును రక్షించు నామం"
+      },
+      {
+        "word": "దాశరథి",
+        "difficulty": "easy",
+        "meaning": "అయోధ్యా ప్రభువు కుమారుడు"
+      },
+      {
+        "word": "సీతాపతి",
+        "difficulty": "easy",
+        "meaning": "కవచంలో చేతులను రక్షించు నామం"
+      },
+      {
+        "word": "సుగ్రీవుడు",
+        "difficulty": "easy",
+        "meaning": "వానర రాజు, రాముని మిత్రుడు"
+      },
+      {
+        "word": "శత్రుఘ్నుడు",
+        "difficulty": "easy",
+        "meaning": "దశరథుని నాలుగవ కుమారుడుు"
+      },
+      {
+        "word": "బుధకౌశిక",
+        "difficulty": "easy",
+        "meaning": "ఈ స్తోత్రాన్ని రచించిన మహర్షి పేరు"
+      },
+      {
+        "word": "హనుమంతుడు",
+        "difficulty": "easy",
+        "meaning": "రామభక్తుడు; స్తోత్ర న్యాసంలో 'కీలకం'గా పేర్కొనబడినవాడు"
+      },
+      {
+        "word": "లక్ష్మణుడు",
+        "difficulty": "easy",
+        "meaning": "సుమిత్రాపుత్రుడు"
+      },
+      {
+        "word": "జానకి",
+        "difficulty": "easy",
+        "meaning": "జనక మహారాజు పుత్రిక, సీత"
+      },
+      {
+        "word": "కౌసల్యేయుడు",
+        "difficulty": "medium",
+        "meaning": "దశరథుని ప్రథమ దేవేరి కుమారుడు; కవచంలో కళ్ళను రక్షించు నామం"
+      },
+      {
+        "word": "జానకీవల్లభుడు",
+        "difficulty": "medium",
+        "meaning": "వైదేహికి ప్రాణనాథుడు"
+      },
+      {
+        "word": "రఘునందనుడు",
+        "difficulty": "medium",
+        "meaning": "రఘువంశమునకు ఆనందకారకుడు"
+      },
+      {
+        "word": "రణకర్కశుడు",
+        "difficulty": "medium",
+        "meaning": "యుద్ధమునందు కఠినుడు"
+      },
+      {
+        "word": "దశరథాత్మజుడు",
+        "difficulty": "medium",
+        "meaning": "కవచంలో నుదురును రక్షించు నామం"
+      },
+      {
+        "word": "భరతవందితుడు",
+        "difficulty": "medium",
+        "meaning": "కవచంలో కంఠమును రక్షించు నామం"
+      },
+      {
+        "word": "రఘూత్తముడు",
+        "difficulty": "medium",
+        "meaning": "కవచంలో తొడలను రక్షించు నామం"
+      },
+      {
+        "word": "సేతుకృత్",
+        "difficulty": "medium",
+        "meaning": "కవచంలో మోకాళ్ళను రక్షించు నామం"
+      },
+      {
+        "word": "మఖత్రాతా",
+        "difficulty": "medium",
+        "meaning": "కవచంలో ముక్కును రక్షించు నామం"
+      },
+      {
+        "word": "విద్యానిధి",
+        "difficulty": "medium",
+        "meaning": "కవచంలో నాలుకను రక్షించు నామం"
+      },
+      {
+        "word": "దివ్యాయుధుడు",
+        "difficulty": "medium",
+        "meaning": "కవచంలో భుజస్కంధములను రక్షించు నామం"
+      },
+      {
+        "word": "సుగ్రీవేశుడు",
+        "difficulty": "medium",
+        "meaning": "కవచంలో నడుమును రక్షించు నామం"
+      },
+      {
+        "word": "కోసలేంద్రుడు",
+        "difficulty": "medium",
+        "meaning": "అయోధ్యా సామ్రాజ్యాధిపతి"
+      },
+      {
+        "word": "విభీషణుడు",
+        "difficulty": "medium",
+        "meaning": "రావణుని తమ్ముడు, రామునికి శరణాగతుడైన లంకా రాజు"
+      },
+      {
+        "word": "వజ్రపంజరము",
+        "difficulty": "medium",
+        "meaning": "రామరక్షా కవచానికి మరో పేరు - వజ్రములతో నిర్మించిన కవచం"
+      },
+      {
+        "word": "అనుష్టుప్",
+        "difficulty": "medium",
+        "meaning": "రామరక్షా స్తోత్రం రచించబడిన ఛందస్సు పేరు"
+      },
+      {
+        "word": "రామభద్రుడు",
+        "difficulty": "medium",
+        "meaning": "శుభకరుడైన రాముడు అని అర్థం గల నామం"
+      },
+      {
+        "word": "శతకోటి",
+        "difficulty": "medium",
+        "meaning": "'రాఘవుని చరితం ఎన్ని కోట్ల విస్తీర్ణం కలదని సూచించు సంఖ్యానామం"
+      },
+      {
+        "word": "విశ్వామిత్రప్రియుడు",
+        "difficulty": "difficult",
+        "meaning": "గాధిపుత్ర మహర్షికి ప్రియశిష్యుడు; కవచంలో చెవులను రక్షించు నామం"
+      },
+      {
+        "word": "సౌమిత్రివత్సలుడు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో ముఖమును రక్షించు నామం"
+      },
+      {
+        "word": "భగ్నేశకార్ముకుడు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో బాహువులను రక్షించు నామం"
+      },
+      {
+        "word": "జామదగ్న్యజిత్",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో హృదయమును రక్షించు నామం"
+      },
+      {
+        "word": "ఖరధ్వంసీ",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో మధ్యభాగమును రక్షించు నామం"
+      },
+      {
+        "word": "జాంబవదాశ్రయుడు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో నాభిని రక్షించు నామం"
+      },
+      {
+        "word": "హనుమత్ప్రభువు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో తొడకీళ్ళను రక్షించు నామం"
+      },
+      {
+        "word": "దశముఖాంతకుడు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో పిక్కలను రక్షించు నామం"
+      },
+      {
+        "word": "విభీషణశ్రీదుడు",
+        "difficulty": "difficult",
+        "meaning": "కవచంలో పాదములను రక్షించు నామం"
+      },
+      {
+        "word": "అశ్వమేధము",
+        "difficulty": "difficult",
+        "meaning": "రామరక్షను పఠించిన ఫలము ఈ యాగఫలముతో సమానం"
+      }
+    ]
+  },
+  {
+    "id": "lakshmi-ashtottaram",
+    "title": "శ్రీ లక్ష్మీ అష్టోత్తరం",
+    "status": "active",
+    "gridSizeMin": 5,
+    "gridSizeMax": 9,
+    "fillerMode": "curated",
+    "about": "శ్రీ మహాలక్ష్మీదేవి అష్టోత్తర శతనామావళిలోని నామాలు. సిరిసంపదలు, ఐశ్వర్యం, శుభం కలుగజేసే ఈ నామాలను భక్తితో స్మరించడం పరమ పవిత్రంగా భావిస్తారు.",
+    "entries": [
+      {
+        "word": "లక్ష్మి",
+        "difficulty": "easy",
+        "meaning": "అష్టోత్తరంలో స్వయంగా వచ్చే ప్రధాన నామం, ఐశ్వర్యదేవత"
+      },
+      {
+        "word": "కమల",
+        "difficulty": "easy",
+        "meaning": "పద్మము"
+      },
+      {
+        "word": "ఇందిర",
+        "difficulty": "easy",
+        "meaning": "ఐశ్వర్యమునకు అధిదేవత"
+      },
+      {
+        "word": "రమా",
+        "difficulty": "easy",
+        "meaning": "ఆనందము కలిగించునామె"
+      },
+      {
+        "word": "చంద్ర",
+        "difficulty": "easy",
+        "meaning": "నక్షత్రరాజు వలె ప్రకాశించునామె"
+      },
+      {
+        "word": "దేవి",
+        "difficulty": "easy",
+        "meaning": "దేవత"
+      },
+      {
+        "word": "శుభ",
+        "difficulty": "easy",
+        "meaning": "మేలును కలిగించునామె"
+      },
+      {
+        "word": "శాంతా",
+        "difficulty": "easy",
+        "meaning": "నిదానత్వమునకు ప్రతిరూపమైనామె"
+      },
+      {
+        "word": "జయా",
+        "difficulty": "easy",
+        "meaning": "సఫలత్వమును ప్రసాదించునామె"
+      },
+      {
+        "word": "మంగళా",
+        "difficulty": "easy",
+        "meaning": "శుభకరమైనామె"
+      },
+      {
+        "word": "వరలక్ష్మి",
+        "difficulty": "easy",
+        "meaning": "వరములను ప్రసాదించు లక్ష్మీదేవి"
+      },
+      {
+        "word": "మహాకాళి",
+        "difficulty": "easy",
+        "meaning": "ఉగ్రశక్తి రూపములో పూజింపబడు తల్లి"
+      },
+      {
+        "word": "నవదుర్గా",
+        "difficulty": "easy",
+        "meaning": "తొమ్మిది రూపములలో పూజింపబడు శక్తిస్వరూపిణి"
+      },
+      {
+        "word": "భువనేశ్వరి",
+        "difficulty": "easy",
+        "meaning": "సర్వలోకములకు అధినేత్రి"
+      },
+      {
+        "word": "ప్రకృతి",
+        "difficulty": "medium",
+        "meaning": "సమస్త సృష్టికి మూలకారణమైనామె"
+      },
+      {
+        "word": "విద్యా",
+        "difficulty": "medium",
+        "meaning": "జ్ఞానస్వరూపిణి"
+      },
+      {
+        "word": "శ్రద్ధా",
+        "difficulty": "medium",
+        "meaning": "నమ్మకభావమునకు అధిదేవత"
+      },
+      {
+        "word": "విభూతి",
+        "difficulty": "medium",
+        "meaning": "ఐశ్వర్యస్వరూపిణి"
+      },
+      {
+        "word": "సురభి",
+        "difficulty": "medium",
+        "meaning": "కామధేనుస్వరూపిణి"
+      },
+      {
+        "word": "స్వాహా",
+        "difficulty": "medium",
+        "meaning": "యజ్ఞములలో హవిస్సును అందించు దేవత"
+      },
+      {
+        "word": "స్వధా",
+        "difficulty": "medium",
+        "meaning": "పితృదేవతలకు అర్పణ స్వరూపిణి"
+      },
+      {
+        "word": "సుధా",
+        "difficulty": "medium",
+        "meaning": "అమృతస్వరూపిణి"
+      },
+      {
+        "word": "ధన్యా",
+        "difficulty": "medium",
+        "meaning": "కృతార్థత్వమును ప్రసాదించునామె"
+      },
+      {
+        "word": "హిరణ్మయి",
+        "difficulty": "medium",
+        "meaning": "బంగారు కాంతి గలామె"
+      },
+      {
+        "word": "అదితి",
+        "difficulty": "medium",
+        "meaning": "దేవతలకు తల్లియైనామె"
+      },
+      {
+        "word": "దితి",
+        "difficulty": "medium",
+        "meaning": "కశ్యపుని పత్నులలో ఒకామె"
+      },
+      {
+        "word": "దీప్తా",
+        "difficulty": "medium",
+        "meaning": "ప్రకాశవంతురాలు"
+      },
+      {
+        "word": "వసుధా",
+        "difficulty": "medium",
+        "meaning": "భూదేవి స్వరూపిణి"
+      },
+      {
+        "word": "కాంతా",
+        "difficulty": "medium",
+        "meaning": "మనోహరశోభ గలామె"
+      },
+      {
+        "word": "కామాక్షి",
+        "difficulty": "medium",
+        "meaning": "కోరికలను తీర్చు కన్నులు గలామె"
+      },
+      {
+        "word": "బుద్ధి",
+        "difficulty": "medium",
+        "meaning": "వివేకమునకు అధిదేవత"
+      },
+      {
+        "word": "అనఘా",
+        "difficulty": "medium",
+        "meaning": "పాపరహితురాలు"
+      },
+      {
+        "word": "హరివల్లభా",
+        "difficulty": "medium",
+        "meaning": "విష్ణుమూర్తికి ప్రియురాలు"
+      },
+      {
+        "word": "అశోకా",
+        "difficulty": "medium",
+        "meaning": "దుఃఖము లేనిదిగా కీర్తింపబడు తల్లి"
+      },
+      {
+        "word": "అమృతా",
+        "difficulty": "medium",
+        "meaning": "సుధాస్వరూపిణి"
+      },
+      {
+        "word": "ధర్మనిలయా",
+        "difficulty": "medium",
+        "meaning": "సదాచారమునకు కేంద్రమైనామె"
+      },
+      {
+        "word": "కరుణా",
+        "difficulty": "medium",
+        "meaning": "దయాదాక్షిణ్యములకు ప్రతిరూపమైనామె"
+      },
+      {
+        "word": "పద్మప్రియా",
+        "difficulty": "medium",
+        "meaning": "పద్మములన్నా మక్కువ గలామె"
+      },
+      {
+        "word": "పద్మహస్తా",
+        "difficulty": "medium",
+        "meaning": "చేతిలో పద్మము గలామె"
+      },
+      {
+        "word": "పద్మాక్షి",
+        "difficulty": "medium",
+        "meaning": "పద్మముల వంటి కన్నులు గలామె"
+      },
+      {
+        "word": "పద్మముఖి",
+        "difficulty": "medium",
+        "meaning": "పద్మము వలె ప్రకాశించు వదనము గలామె"
+      },
+      {
+        "word": "పద్మిని",
+        "difficulty": "medium",
+        "meaning": "పద్మములతో కూడినామె"
+      },
+      {
+        "word": "ప్రభా",
+        "difficulty": "medium",
+        "meaning": "కాంతిస్వరూపిణి"
+      },
+      {
+        "word": "చతుర్భుజా",
+        "difficulty": "medium",
+        "meaning": "నాలుగు కరములు గలామె"
+      },
+      {
+        "word": "ఇందుశీతలా",
+        "difficulty": "medium",
+        "meaning": "చంద్రుని వలె చల్లదనము గలామె"
+      },
+      {
+        "word": "పుష్టి",
+        "difficulty": "medium",
+        "meaning": "బలసంపదను ప్రసాదించునామె"
+      },
+      {
+        "word": "శివా",
+        "difficulty": "medium",
+        "meaning": "మంగళస్వరూపిణి"
+      },
+      {
+        "word": "విమలా",
+        "difficulty": "medium",
+        "meaning": "నిర్మలురాలు"
+      },
+      {
+        "word": "తుష్టి",
+        "difficulty": "medium",
+        "meaning": "సంతృప్తిని ప్రసాదించునామె"
+      },
+      {
+        "word": "వసుంధరా",
+        "difficulty": "medium",
+        "meaning": "భూదేవి స్వరూపిణి"
+      },
+      {
+        "word": "హరిణి",
+        "difficulty": "medium",
+        "meaning": "లేడి వంటి చూపు గలామె"
+      },
+      {
+        "word": "సిద్ధి",
+        "difficulty": "medium",
+        "meaning": "కార్యసాఫల్యమును ప్రసాదించునామె"
+      },
+      {
+        "word": "వసుప్రదా",
+        "difficulty": "medium",
+        "meaning": "ధనమును ప్రసాదించునామె"
+      },
+      {
+        "word": "సర్వభూతహితప్రదా",
+        "difficulty": "difficult",
+        "meaning": "సమస్త ప్రాణులకు మేలు చేకూర్చునామె"
+      },
+      {
+        "word": "లోకశోకవినాశిని",
+        "difficulty": "difficult",
+        "meaning": "లోకముల దుఃఖమును పోగొట్టునామె"
+      },
+      {
+        "word": "పద్మసుందరి",
+        "difficulty": "difficult",
+        "meaning": "పద్మము వలె అందమైనామె"
+      },
+      {
+        "word": "పద్మోద్భవా",
+        "difficulty": "difficult",
+        "meaning": "పద్మము నుండి ఆవిర్భవించినామె"
+      },
+      {
+        "word": "పద్మనాభప్రియా",
+        "difficulty": "difficult",
+        "meaning": "శ్రీమహావిష్ణువునకు ప్రియురాలు"
+      },
+      {
+        "word": "పద్మమాలాధరా",
+        "difficulty": "difficult",
+        "meaning": "పద్మముల హారము అలంకరించుకొనునామె"
+      },
+      {
+        "word": "పద్మగంధిని",
+        "difficulty": "difficult",
+        "meaning": "పద్మము వంటి పరిమళము గలామె"
+      },
+      {
+        "word": "పుణ్యగంధా",
+        "difficulty": "difficult",
+        "meaning": "పవిత్రమైన పరిమళము గలామె"
+      },
+      {
+        "word": "సుప్రసన్నా",
+        "difficulty": "difficult",
+        "meaning": "అమిత అనుగ్రహశీలి"
+      },
+      {
+        "word": "ప్రసాదాభిముఖి",
+        "difficulty": "difficult",
+        "meaning": "అనుగ్రహించుటకు ముఖము తిప్పునామె"
+      },
+      {
+        "word": "చంద్రవదనా",
+        "difficulty": "difficult",
+        "meaning": "నిండు వెన్నెల వంటి మోము గలామె"
+      },
+      {
+        "word": "చంద్రసహోదరి",
+        "difficulty": "difficult",
+        "meaning": "వెన్నెలరేడుతో పాటు పాలకడలి నుండి ఉద్భవించినామె"
+      },
+      {
+        "word": "ఆహ్లాదజనని",
+        "difficulty": "difficult",
+        "meaning": "ఆనందమును కలిగించునామె"
+      },
+      {
+        "word": "దారిద్ర్యనాశిని",
+        "difficulty": "difficult",
+        "meaning": "పేదరికమును తొలగించునామె"
+      },
+      {
+        "word": "ప్రీతిపుష్కరిణి",
+        "difficulty": "difficult",
+        "meaning": "అనురాగమును వర్ధిల్లజేయునామె"
+      },
+      {
+        "word": "శుక్లమాల్యాంబరా",
+        "difficulty": "difficult",
+        "meaning": "తెల్లని పూలమాల, వస్త్రములు ధరించునామె"
+      },
+      {
+        "word": "బిల్వనిలయా",
+        "difficulty": "difficult",
+        "meaning": "మారేడు చెట్టు నివాసముగా గలామె"
+      },
+      {
+        "word": "వరారోహా",
+        "difficulty": "difficult",
+        "meaning": "శ్రేష్ఠమైన రూపము గలామె"
+      },
+      {
+        "word": "యశస్విని",
+        "difficulty": "difficult",
+        "meaning": "కీర్తిమంతురాలు"
+      },
+      {
+        "word": "ఉదారాంగా",
+        "difficulty": "difficult",
+        "meaning": "విశాలమైన దేహము గలామె"
+      },
+      {
+        "word": "హేమమాలిని",
+        "difficulty": "difficult",
+        "meaning": "బంగారు మాలలు ధరించునామె"
+      },
+      {
+        "word": "ధనధాన్యకరి",
+        "difficulty": "difficult",
+        "meaning": "సిరిసంపదలు, పంటలు ప్రసాదించు తల్లి"
+      },
+      {
+        "word": "స్త్రైణసౌమ్యా",
+        "difficulty": "difficult",
+        "meaning": "ఆడువారికి సహజమైన మృదుత్వము గలామె"
+      },
+      {
+        "word": "శుభప్రదా",
+        "difficulty": "difficult",
+        "meaning": "మేలును ప్రసాదించునామె"
+      },
+      {
+        "word": "హిరణ్యప్రాకారా",
+        "difficulty": "difficult",
+        "meaning": "బంగారు ప్రాకారము (కోట గోడ) గలామె"
+      },
+      {
+        "word": "సముద్రతనయా",
+        "difficulty": "difficult",
+        "meaning": "పాలకడలి మథనమున ఆవిర్భవించినామె"
+      },
+      {
+        "word": "విష్ణుపత్ని",
+        "difficulty": "difficult",
+        "meaning": "క్షీరసాగరశయనుని ఇల్లాలు"
+      },
+      {
+        "word": "ప్రసన్నాక్షి",
+        "difficulty": "difficult",
+        "meaning": "ఆనందభరితమైన కన్నులు గలామె"
+      },
+      {
+        "word": "నారాయణసమాశ్రితా",
+        "difficulty": "difficult",
+        "meaning": "క్షీరసాగర శయనుడైన విష్ణువును కొలుచునామె"
+      },
+      {
+        "word": "సర్వోపద్రవవారిణి",
+        "difficulty": "difficult",
+        "meaning": "సకల ఆపదలను పోగొట్టునామె"
+      },
+      {
+        "word": "బ్రహ్మవిష్ణుశివాత్మికా",
+        "difficulty": "difficult",
+        "meaning": "త్రిమూర్తులలో అంతర్లీనమైయున్న శక్తి తత్త్వము"
+      },
+      {
+        "word": "త్రికాలజ్ఞానసంపన్నా",
+        "difficulty": "difficult",
+        "meaning": "భూత భవిష్యత్ వర్తమానములు తెలిసినామె"
+      }
+    ]
+  },
+  {
+    "id": "vishnu-sahasranamam",
+    "title": "శ్రీ విష్ణు సహస్రనామం",
+    "status": "active",
+    "draft_entries": [
+      {
+        "word": "విశ్వం",
+        "difficulty": "easy",
+        "meaning": "విశ్వమంతా తానే అయినవాడు"
+      },
+      {
+        "word": "ఆదిత్యుడు",
+        "difficulty": "easy",
+        "meaning": "సూర్యమండలమధ్యలో ప్రకాశించువాడు"
+      },
+      {
+        "word": "గరుడధ్వజుడు",
+        "difficulty": "easy",
+        "meaning": "గరుడ చిహ్నముగల పతాక కలవాడు"
+      },
+      {
+        "word": "వషట్కారుడు",
+        "difficulty": "difficult",
+        "meaning": "వేదస్వరూపుడు"
+      },
+      {
+        "word": "భూతభవ్యభవత్ప్రభువు",
+        "difficulty": "difficult",
+        "meaning": "భూత భవిష్యత్ వర్తమానములకు ప్రభువు"
+      },
+      {
+        "word": "భూతకృత్తు",
+        "difficulty": "medium",
+        "meaning": "జీవులను సృష్టించినవాడు"
+      },
+      {
+        "word": "భూతభృత్తు",
+        "difficulty": "medium",
+        "meaning": "జీవులను పోషించువాడు"
+      },
+      {
+        "word": "భూతాత్మ",
+        "difficulty": "medium",
+        "meaning": "సర్వ జీవులలో అంతర్యామిగా ఉండువాడు"
+      },
+      {
+        "word": "భూతభావనుడు",
+        "difficulty": "medium",
+        "meaning": "జీవులు జన్మించి పెరుగుటకు కారణమైనవాడు"
+      },
+      {
+        "word": "ముక్తానాం పరమాగతిః",
+        "difficulty": "difficult",
+        "meaning": "మోక్షము పొందినవారికి పరమగమ్యమైనవాడు"
+      },
+      {
+        "word": "మధువు",
+        "difficulty": "medium",
+        "meaning": "భక్తులకు మధురమైనవాడు"
+      },
+      {
+        "word": "మహోత్సాహుడు",
+        "difficulty": "medium",
+        "meaning": "ఉత్సాహవంతుడు"
+      },
+      {
+        "word": "మహాబుద్ధి",
+        "difficulty": "medium",
+        "meaning": "బుద్ధిమంతులలో శ్రేష్ఠుడు"
+      },
+      {
+        "word": "మహావీర్యుడు",
+        "difficulty": "medium",
+        "meaning": "సృష్టిస్థితిలయలు చేయగల శక్తిమంతుడు"
+      },
+      {
+        "word": "వృషపర్వుడు",
+        "difficulty": "difficult",
+        "meaning": "ధర్మమనే మెట్లద్వారా చేరదగినవాడు"
+      },
+      {
+        "word": "వృషోదరుడు",
+        "difficulty": "difficult",
+        "meaning": "ధర్మమును తన ఉదరమున ధరించినవాడు"
+      },
+      {
+        "word": "అసంఖ్యేయుడు",
+        "difficulty": "difficult",
+        "meaning": "లెక్కకు అందని గుణములు కలవాడు"
+      },
+      {
+        "word": "అప్రమేయాత్మ",
+        "difficulty": "difficult",
+        "meaning": "కొలవశక్యము కాని స్వరూపము కలవాడు"
+      },
+      {
+        "word": "విశిష్టుడు",
+        "difficulty": "medium",
+        "meaning": "అందరికంటే అధికుడు"
+      },
+      {
+        "word": "నివృత్తాత్మ",
+        "difficulty": "difficult",
+        "meaning": "సంసారబంధములకు అతీతుడు"
+      },
+      {
+        "word": "సంవృతుడు",
+        "difficulty": "difficult",
+        "meaning": "అజ్ఞానులకు కానరానివాడు"
+      },
+      {
+        "word": "యుగావర్తుడు",
+        "difficulty": "difficult",
+        "meaning": "యుగములను నడిపించువాడు"
+      },
+      {
+        "word": "నైకమాయుడు",
+        "difficulty": "difficult",
+        "meaning": "అనేక రూపములు ధరించువాడు"
+      },
+      {
+        "word": "మహాశనుడు",
+        "difficulty": "difficult",
+        "meaning": "సమస్తమును తనయందు లయం చేసుకొనువాడు"
+      },
+      {
+        "word": "అదృశ్యుడు",
+        "difficulty": "medium",
+        "meaning": "కంటికి కానరానివాడు"
+      },
+      {
+        "word": "వ్యక్తరూపుడు",
+        "difficulty": "medium",
+        "meaning": "భక్తుల హృదయాలలో స్పష్టముగా గోచరించువాడు"
+      },
+      {
+        "word": "సహస్రజిత్తు",
+        "difficulty": "difficult",
+        "meaning": "వేలకొలది శత్రువులను జయించినవాడు"
+      },
+      {
+        "word": "అనంతజిత్తు",
+        "difficulty": "difficult",
+        "meaning": "ఎల్లప్పుడూ జయించువాడు"
+      },
+      {
+        "word": "పద్మగర్భుడు",
+        "difficulty": "medium",
+        "meaning": "పద్మము నుండి బ్రహ్మను సృష్టించినవాడు"
+      },
+      {
+        "word": "శరీరభృత్తు",
+        "difficulty": "medium",
+        "meaning": "ప్రాణుల శరీరములను పోషించువాడు"
+      },
+      {
+        "word": "మహార్ధి",
+        "difficulty": "medium",
+        "meaning": "గొప్ప ఐశ్వర్యము కలవాడు"
+      },
+      {
+        "word": "వృద్ధాత్మ",
+        "difficulty": "difficult",
+        "meaning": "సృష్టికి పూర్వమే ఉన్నవాడు"
+      },
+      {
+        "word": "మహాక్షుడు",
+        "difficulty": "medium",
+        "meaning": "విశాలమైన నేత్రములు కలవాడు"
+      },
+      {
+        "word": "అతులుడు",
+        "difficulty": "medium",
+        "meaning": "సాటిలేనివాడు"
+      },
+      {
+        "word": "విరతుడు",
+        "difficulty": "difficult",
+        "meaning": "విషయవాంఛలు లేనివాడు"
+      },
+      {
+        "word": "నేయుడు",
+        "difficulty": "difficult",
+        "meaning": "జ్ఞానము ద్వారా జీవులను నడిపించువాడు"
+      },
+      {
+        "word": "మహాకోశుడు",
+        "difficulty": "difficult",
+        "meaning": "పంచకోశములచే ఆవరించినవాడు"
+      },
+      {
+        "word": "మహాభాగుడు",
+        "difficulty": "medium",
+        "meaning": "గొప్ప భోగము కలవాడు"
+      },
+      {
+        "word": "అనిర్విణ్ణుడు",
+        "difficulty": "difficult",
+        "meaning": "వేదన లేనివాడు"
+      },
+      {
+        "word": "మహామఖుడు",
+        "difficulty": "difficult",
+        "meaning": "యజ్ఞస్వరూపుడు"
+      },
+      {
+        "word": "మహార్హుడు",
+        "difficulty": "medium",
+        "meaning": "విశేష పూజకు తగినవాడు"
+      },
+      {
+        "word": "జితమిత్రుడు",
+        "difficulty": "medium",
+        "meaning": "శత్రువులను జయించినవాడు"
+      },
+      {
+        "word": "ప్రమోదనుడు",
+        "difficulty": "medium",
+        "meaning": "సదా ఆనందముతో ఉండువాడు"
+      },
+      {
+        "word": "నందనుడు",
+        "difficulty": "medium",
+        "meaning": "అందరికీ ఆనందము కలిగించువాడు"
+      },
+      {
+        "word": "విష్ణువు",
+        "difficulty": "easy",
+        "meaning": "విశ్వమంతటా వ్యాపించి ఉన్నవాడు"
+      },
+      {
+        "word": "నారాయణుడు",
+        "difficulty": "easy",
+        "meaning": "సమస్త జీవులకు ఆశ్రయమైనవాడు"
+      },
+      {
+        "word": "వాసుదేవుడు",
+        "difficulty": "easy",
+        "meaning": "సర్వమును తనయందు కలిగియున్న దేవుడు"
+      },
+      {
+        "word": "ప్రద్యుమ్నుడు",
+        "difficulty": "medium",
+        "meaning": "అమితమైన తేజస్సు, సంపద కలవాడు"
+      },
+      {
+        "word": "అనిరుద్ధుడు",
+        "difficulty": "medium",
+        "meaning": "ఎవరిచేతా అడ్డగింపబడనివాడు"
+      },
+      {
+        "word": "పురుషోత్తముడు",
+        "difficulty": "easy",
+        "meaning": "పురుషులలో అత్యుత్తముడు"
+      },
+      {
+        "word": "అచ్యుతుడు",
+        "difficulty": "easy",
+        "meaning": "తన స్వభావము నుండి ఎన్నడూ చ్యుతి పొందనివాడు"
+      },
+      {
+        "word": "జనార్దనుడు",
+        "difficulty": "easy",
+        "meaning": "దుష్టులను శిక్షించి జనులను కాపాడువాడు"
+      },
+      {
+        "word": "ఉపేంద్రుడు",
+        "difficulty": "medium",
+        "meaning": "ఇంద్రుని తమ్ముడుగా అవతరించినవాడు"
+      },
+      {
+        "word": "వామనుడు",
+        "difficulty": "easy",
+        "meaning": "పొట్టి బ్రహ్మచారి రూపమున వచ్చినవాడు"
+      },
+      {
+        "word": "త్రివిక్రముడు",
+        "difficulty": "easy",
+        "meaning": "మూడు అడుగులతో ముల్లోకములను కొలిచినవాడు"
+      },
+      {
+        "word": "హరి",
+        "difficulty": "easy",
+        "meaning": "భక్తుల పాపములను హరించువాడు"
+      },
+      {
+        "word": "గోవిందుడు",
+        "difficulty": "easy",
+        "meaning": "గోవులను, వేదవాక్కులను తెలిసినవాడు"
+      },
+      {
+        "word": "దామోదరుడు",
+        "difficulty": "easy",
+        "meaning": "యశోద తాడుతో ఉదరము బంధించిన బాలలీల కలవాడు"
+      },
+      {
+        "word": "మాధవుడు",
+        "difficulty": "easy",
+        "meaning": "లక్ష్మీదేవికి పతి అయినవాడు"
+      },
+      {
+        "word": "కేశవుడు",
+        "difficulty": "medium",
+        "meaning": "బ్రహ్మ విష్ణు రుద్రులకు మూలమైనవాడు"
+      },
+      {
+        "word": "హృషీకేశుడు",
+        "difficulty": "medium",
+        "meaning": "ఇంద్రియములకు ప్రభువు"
+      },
+      {
+        "word": "పద్మనాభుడు",
+        "difficulty": "easy",
+        "meaning": "నాభికమలమున బ్రహ్మను కలిగినవాడు"
+      },
+      {
+        "word": "శ్రీధరుడు",
+        "difficulty": "easy",
+        "meaning": "శ్రీదేవిని వక్షస్థలమున ధరించినవాడు"
+      },
+      {
+        "word": "అనంతుడు",
+        "difficulty": "easy",
+        "meaning": "తుది లేనివాడు"
+      },
+      {
+        "word": "ఈశ్వరుడు",
+        "difficulty": "easy",
+        "meaning": "సర్వమునకు అధిపతి"
+      },
+      {
+        "word": "సర్వేశ్వరుడు",
+        "difficulty": "medium",
+        "meaning": "అందరికీ ప్రభువైనవాడు"
+      },
+      {
+        "word": "సర్వజ్ఞుడు",
+        "difficulty": "medium",
+        "meaning": "సమస్తమూ తెలిసినవాడు"
+      },
+      {
+        "word": "విశ్వకర్మ",
+        "difficulty": "medium",
+        "meaning": "విశ్వమును నిర్మించినవాడు"
+      },
+      {
+        "word": "విభుడు",
+        "difficulty": "medium",
+        "meaning": "అన్నిచోట్లా వ్యాపించి ఉన్నవాడు"
+      },
+      {
+        "word": "దమనుడు",
+        "difficulty": "difficult",
+        "meaning": "దుష్టులను అణచువాడు"
+      },
+      {
+        "word": "సత్యుడు",
+        "difficulty": "easy",
+        "meaning": "సత్యస్వరూపుడు"
+      },
+      {
+        "word": "సత్యపరాక్రముడు",
+        "difficulty": "difficult",
+        "meaning": "సత్యమే పరాక్రమముగా కలవాడు"
+      },
+      {
+        "word": "అనిమిషుడు",
+        "difficulty": "difficult",
+        "meaning": "రెప్పవాల్చక సదా జాగరూకుడై ఉండువాడు"
+      },
+      {
+        "word": "జగత్పతి",
+        "difficulty": "medium",
+        "meaning": "జగత్తుకు ప్రభువైనవాడు"
+      },
+      {
+        "word": "పరమేష్ఠి",
+        "difficulty": "difficult",
+        "meaning": "అత్యున్నత స్థానమున ఉండువాడు"
+      },
+      {
+        "word": "ఉగ్రుడు",
+        "difficulty": "difficult",
+        "meaning": "భయంకర తేజస్సు కలవాడు"
+      },
+      {
+        "word": "దక్షుడు",
+        "difficulty": "medium",
+        "meaning": "సమస్త కార్యములయందు నేర్పరి"
+      },
+      {
+        "word": "స్థవిష్ఠుడు",
+        "difficulty": "difficult",
+        "meaning": "అతి స్థూలమైన రూపము కలవాడు"
+      },
+      {
+        "word": "శాశ్వతుడు",
+        "difficulty": "easy",
+        "meaning": "ఎల్లప్పుడూ ఉండువాడు"
+      },
+      {
+        "word": "కృష్ణుడు",
+        "difficulty": "easy",
+        "meaning": "నలుపు వర్ణమైనను సర్వాకర్షక తేజస్సు కలవాడు"
+      },
+      {
+        "word": "లోహితాక్షుడు",
+        "difficulty": "difficult",
+        "meaning": "ఎర్రని కన్నులు కలవాడు"
+      },
+      {
+        "word": "పవిత్రుడు",
+        "difficulty": "medium",
+        "meaning": "పరమ పరిశుద్ధమైనవాడు"
+      },
+      {
+        "word": "ఈశానుడు",
+        "difficulty": "medium",
+        "meaning": "సర్వమునకు నియామకుడు"
+      },
+      {
+        "word": "ప్రాణదుడు",
+        "difficulty": "difficult",
+        "meaning": "ప్రాణమునిచ్చువాడు"
+      },
+      {
+        "word": "ప్రాణుడు",
+        "difficulty": "medium",
+        "meaning": "ప్రాణస్వరూపుడు"
+      },
+      {
+        "word": "జ్యేష్ఠుడు",
+        "difficulty": "medium",
+        "meaning": "అందరికంటే పెద్దవాడు"
+      },
+      {
+        "word": "శ్రేష్ఠుడు",
+        "difficulty": "medium",
+        "meaning": "అందరికంటే ఉత్తముడు"
+      },
+      {
+        "word": "ప్రజాపతి",
+        "difficulty": "medium",
+        "meaning": "ప్రజలందరికి పతి"
+      },
+      {
+        "word": "హిరణ్యగర్భుడు",
+        "difficulty": "difficult",
+        "meaning": "బంగారు అండము నుండి సృష్టిని ఆరంభించినవాడు"
+      },
+      {
+        "word": "మధుసూదనుడు",
+        "difficulty": "medium",
+        "meaning": "మధు అను రాక్షసుని సంహరించినవాడు"
+      },
+      {
+        "word": "విక్రముడు",
+        "difficulty": "medium",
+        "meaning": "పరాక్రమవంతుడు"
+      },
+      {
+        "word": "ధన్వి",
+        "difficulty": "difficult",
+        "meaning": "శారంగము అను ధనుస్సు ధరించినవాడు"
+      },
+      {
+        "word": "మేధావి",
+        "difficulty": "medium",
+        "meaning": "గొప్ప బుద్ధిశక్తి కలవాడు"
+      },
+      {
+        "word": "అనుత్తముడు",
+        "difficulty": "difficult",
+        "meaning": "తనకు మించినవారు లేనివాడు"
+      },
+      {
+        "word": "దురాధర్షుడు",
+        "difficulty": "difficult",
+        "meaning": "ఎవరిచేతా జయింపశక్యము కానివాడు"
+      },
+      {
+        "word": "కృతజ్ఞుడు",
+        "difficulty": "medium",
+        "meaning": "చేసిన కొంచెము మేలునైనా గుర్తుంచుకొనువాడు"
+      },
+      {
+        "word": "ఆత్మవంతుడు",
+        "difficulty": "difficult",
+        "meaning": "తనయందే స్థితి కలిగినవాడు"
+      },
+      {
+        "word": "సురేశుడు",
+        "difficulty": "medium",
+        "meaning": "దేవతలకు ప్రభువు"
+      },
+      {
+        "word": "శరణం",
+        "difficulty": "medium",
+        "meaning": "శరణుజొచ్చినవారికి రక్షకుడు"
+      },
+      {
+        "word": "విశ్వరేతసుడు",
+        "difficulty": "difficult",
+        "meaning": "విశ్వసృష్టికి బీజమైనవాడు"
+      },
+      {
+        "word": "వ్యాళుడు",
+        "difficulty": "difficult",
+        "meaning": "ఆదిశేషుని పాన్పుపై శయనించువాడు"
+      },
+      {
+        "word": "సురారిఘ్నుడు",
+        "difficulty": "difficult",
+        "meaning": "దేవతల శత్రువులను సంహరించువాడు"
+      },
+      {
+        "word": "నక్షత్రనేమి",
+        "difficulty": "difficult",
+        "meaning": "నక్షత్రమండలమునకు ఆధారచక్రమైనవాడు"
+      },
+      {
+        "word": "సుధన్వ",
+        "difficulty": "difficult",
+        "meaning": "శారంగము అను దివ్య ధనుస్సు కలవాడు"
+      },
+      {
+        "word": "వరాహుడు",
+        "difficulty": "easy",
+        "meaning": "వరాహ రూపమున భూమిని ఉద్ధరించినవాడు"
+      },
+      {
+        "word": "మత్స్యుడు",
+        "difficulty": "easy",
+        "meaning": "మత్స్య రూపమున వేదములను రక్షించినవాడు"
+      },
+      {
+        "word": "కూర్ముడు",
+        "difficulty": "easy",
+        "meaning": "కూర్మ రూపమున మందర పర్వతమును మోసినవాడు"
+      },
+      {
+        "word": "నృసింహుడు",
+        "difficulty": "easy",
+        "meaning": "నరసింహ రూపమున హిరణ్యకశిపుని సంహరించినవాడు"
+      },
+      {
+        "word": "బలరాముడు",
+        "difficulty": "easy",
+        "meaning": "బలమునకు, సౌందర్యమునకు ఆటపట్టైనవాడు"
+      },
+      {
+        "word": "పరశురాముడు",
+        "difficulty": "easy",
+        "meaning": "గండ్రగొడ్డలిని ధరించి క్షత్రియులను శిక్షించినవాడు"
+      },
+      {
+        "word": "శ్రీరాముడు",
+        "difficulty": "easy",
+        "meaning": "సీతాదేవితో అయోధ్యను పాలించినవాడు"
+      },
+      {
+        "word": "బుద్ధుడు",
+        "difficulty": "medium",
+        "meaning": "అహింసాతత్త్వమును బోధించిన అవతారము"
+      },
+      {
+        "word": "కల్కి",
+        "difficulty": "medium",
+        "meaning": "కలియుగాంతమున అధర్మమును అంతమొందించు రాబోవు అవతారము"
+      },
+      {
+        "word": "శంఖభృత్తు",
+        "difficulty": "medium",
+        "meaning": "పాంచజన్యము అను శంఖము ధరించినవాడు"
+      },
+      {
+        "word": "గదాధరుడు",
+        "difficulty": "medium",
+        "meaning": "కౌమోదకి అను గదను ధరించినవాడు"
+      },
+      {
+        "word": "చక్రపాణి",
+        "difficulty": "easy",
+        "meaning": "సుదర్శన చక్రమును చేత ధరించినవాడు"
+      },
+      {
+        "word": "శార్ఙ్గపాణి",
+        "difficulty": "difficult",
+        "meaning": "శారంగము అను ధనుస్సును ధరించినవాడు"
+      },
+      {
+        "word": "పీతాంబరుడు",
+        "difficulty": "easy",
+        "meaning": "పసుపు వర్ణపు వస్త్రము ధరించినవాడు"
+      },
+      {
+        "word": "వనమాలి",
+        "difficulty": "medium",
+        "meaning": "వైజయంతి అను వనమాలను ధరించినవాడు"
+      },
+      {
+        "word": "శ్రీవత్సధారి",
+        "difficulty": "difficult",
+        "meaning": "వక్షస్థలమున శ్రీవత్సము అను చిహ్నము కలవాడు"
+      },
+      {
+        "word": "కౌస్తుభధారి",
+        "difficulty": "medium",
+        "meaning": "కౌస్తుభమణిని వక్షస్థలమున ధరించినవాడు"
+      },
+      {
+        "word": "లక్ష్మీపతి",
+        "difficulty": "easy",
+        "meaning": "లక్ష్మీదేవికి పతియైనవాడు"
+      },
+      {
+        "word": "భూమిపతి",
+        "difficulty": "medium",
+        "meaning": "భూదేవికి పతియైనవాడు"
+      },
+      {
+        "word": "రమానాథుడు",
+        "difficulty": "medium",
+        "meaning": "రమాదేవి (లక్ష్మి)కి నాథుడైనవాడు"
+      },
+      {
+        "word": "దేవదేవుడు",
+        "difficulty": "medium",
+        "meaning": "దేవతలకే దేవుడైనవాడు"
+      },
+      {
+        "word": "దేవకీనందనుడు",
+        "difficulty": "easy",
+        "meaning": "దేవకీదేవి కుమారుడుగా జన్మించినవాడు"
+      },
+      {
+        "word": "యశోదానందనుడు",
+        "difficulty": "easy",
+        "meaning": "యశోదాదేవి పెంచిన ముద్దుబిడ్డ"
+      },
+      {
+        "word": "నందగోపప్రియుడు",
+        "difficulty": "difficult",
+        "meaning": "నందగోపునికి ప్రియమైనవాడు"
+      },
+      {
+        "word": "గోపాలుడు",
+        "difficulty": "easy",
+        "meaning": "గోవులను, గోపబాలురను పాలించువాడు"
+      },
+      {
+        "word": "గోపీజనవల్లభుడు",
+        "difficulty": "medium",
+        "meaning": "గోపికలకు అత్యంత ప్రియమైనవాడు"
+      },
+      {
+        "word": "వేణుగోపాలుడు",
+        "difficulty": "easy",
+        "meaning": "వేణువును ఊదుచు గోవులను మేపువాడు"
+      },
+      {
+        "word": "రుక్మిణీవల్లభుడు",
+        "difficulty": "medium",
+        "meaning": "రుక్మిణీదేవికి ప్రియమైనవాడు"
+      },
+      {
+        "word": "పార్థసారథి",
+        "difficulty": "easy",
+        "meaning": "అర్జునునికి రథసారథ్యము వహించినవాడు"
+      },
+      {
+        "word": "గీతాచార్యుడు",
+        "difficulty": "easy",
+        "meaning": "భగవద్గీతను బోధించిన గురువు"
+      },
+      {
+        "word": "యోగీశ్వరుడు",
+        "difficulty": "medium",
+        "meaning": "యోగులకు అధిపతి"
+      },
+      {
+        "word": "యోగపతి",
+        "difficulty": "medium",
+        "meaning": "యోగమునకు ప్రభువైనవాడు"
+      },
+      {
+        "word": "ధ్యానగమ్యుడు",
+        "difficulty": "difficult",
+        "meaning": "ధ్యానము ద్వారా చేరదగినవాడు"
+      },
+      {
+        "word": "విష్టరశ్రవసుడు",
+        "difficulty": "difficult",
+        "meaning": "సర్వత్రా వ్యాపించిన కీర్తి కలవాడు"
+      },
+      {
+        "word": "అమృతవపుడు",
+        "difficulty": "difficult",
+        "meaning": "అమృతమయమైన దివ్యరూపము కలవాడు"
+      },
+      {
+        "word": "సర్వదర్శనుడు",
+        "difficulty": "medium",
+        "meaning": "సమస్తమును చూచువాడు"
+      },
+      {
+        "word": "అనిర్దేశ్యవపుడు",
+        "difficulty": "difficult",
+        "meaning": "వర్ణింపశక్యము కాని రూపము కలవాడు"
+      },
+      {
+        "word": "విశ్వమూర్తి",
+        "difficulty": "medium",
+        "meaning": "విశ్వమే తన స్వరూపముగా కలవాడు"
+      },
+      {
+        "word": "మహామూర్తి",
+        "difficulty": "difficult",
+        "meaning": "గొప్ప దివ్యస్వరూపము కలవాడు"
+      },
+      {
+        "word": "దీప్తమూర్తి",
+        "difficulty": "difficult",
+        "meaning": "ప్రకాశవంతమైన స్వరూపము కలవాడు"
+      },
+      {
+        "word": "అమూర్తిమాన్",
+        "difficulty": "difficult",
+        "meaning": "నిరాకార స్వరూపుడు"
+      },
+      {
+        "word": "అనేకమూర్తి",
+        "difficulty": "medium",
+        "meaning": "అనేక రూపములు ధరించువాడు"
+      },
+      {
+        "word": "శుభాంగుడు",
+        "difficulty": "medium",
+        "meaning": "మంగళకరమైన అవయవములు కలవాడు"
+      },
+      {
+        "word": "శుచిశ్రవుడు",
+        "difficulty": "difficult",
+        "meaning": "పవిత్రమైన కీర్తి కలవాడు"
+      },
+      {
+        "word": "పుణ్యశ్రవణకీర్తనుడు",
+        "difficulty": "difficult",
+        "meaning": "వినుటయు, కీర్తించుటయు పుణ్యప్రదమైనవాడు"
+      },
+      {
+        "word": "పుణ్యుడు",
+        "difficulty": "medium",
+        "meaning": "పరమ పవిత్రుడు"
+      },
+      {
+        "word": "అనామయుడు",
+        "difficulty": "difficult",
+        "meaning": "వ్యాధులు, దోషములు లేనివాడు"
+      },
+      {
+        "word": "వీరహా",
+        "difficulty": "difficult",
+        "meaning": "వీరులను (దుష్టులను) సంహరించువాడు"
+      },
+      {
+        "word": "రక్షణుడు",
+        "difficulty": "medium",
+        "meaning": "భక్తులను రక్షించువాడు"
+      },
+      {
+        "word": "శరణాగతవత్సలుడు",
+        "difficulty": "easy",
+        "meaning": "శరణువేడినవారి యెడ వాత్సల్యము కలవాడు"
+      },
+      {
+        "word": "భక్తవత్సలుడు",
+        "difficulty": "easy",
+        "meaning": "భక్తులయెడ ప్రేమానురాగము కలవాడు"
+      },
+      {
+        "word": "దీనబంధువు",
+        "difficulty": "easy",
+        "meaning": "దీనులకు బంధువైనవాడు"
+      },
+      {
+        "word": "కరుణాసాగరుడు",
+        "difficulty": "easy",
+        "meaning": "కరుణకు సముద్రమువంటివాడు"
+      },
+      {
+        "word": "పరమదయాళువు",
+        "difficulty": "easy",
+        "meaning": "అత్యంత దయగలవాడు"
+      },
+      {
+        "word": "దుఃఖహారి",
+        "difficulty": "medium",
+        "meaning": "భక్తుల దుఃఖములను తొలగించువాడు"
+      },
+      {
+        "word": "భవరోగవైద్యుడు",
+        "difficulty": "difficult",
+        "meaning": "సంసారమనే రోగమునకు వైద్యుడైనవాడు"
+      },
+      {
+        "word": "భవతారకుడు",
+        "difficulty": "medium",
+        "meaning": "సంసారసాగరమును దాటించువాడు"
+      },
+      {
+        "word": "మోక్షదాయకుడు",
+        "difficulty": "medium",
+        "meaning": "మోక్షమును ప్రసాదించువాడు"
+      },
+      {
+        "word": "ముకుందుడు",
+        "difficulty": "easy",
+        "meaning": "మోక్షమును ఇచ్చువాడు"
+      },
+      {
+        "word": "సచ్చిదానందుడు",
+        "difficulty": "medium",
+        "meaning": "సత్, చిత్, ఆనంద స్వరూపుడు"
+      },
+      {
+        "word": "పరబ్రహ్మ",
+        "difficulty": "medium",
+        "meaning": "సర్వోత్కృష్టమైన బ్రహ్మతత్త్వము"
+      },
+      {
+        "word": "పరమాత్మ",
+        "difficulty": "easy",
+        "meaning": "సర్వ జీవులలోని అంతరాత్మ"
+      },
+      {
+        "word": "పరంజ్యోతి",
+        "difficulty": "medium",
+        "meaning": "సర్వోత్కృష్టమైన వెలుగు స్వరూపుడు"
+      },
+      {
+        "word": "అఖిలాండకోటిబ్రహ్మాండనాయకుడు",
+        "difficulty": "difficult",
+        "meaning": "కోట్లాది బ్రహ్మాండములకు అధిపతి"
+      }
+    ]
+  },
+  {
+    "id": "shiva-sahasranamam",
+    "title": "శ్రీ శివ సహస్రనామం",
+    "status": "soon",
+    "draft_entries": [
+      {
+        "word": "స్థిరుడు",
+        "difficulty": "easy",
+        "meaning": "అన్నికాలములందు నిలకడగా ఉండువాడు"
+      },
+      {
+        "word": "ప్రభువు",
+        "difficulty": "easy",
+        "meaning": "సమస్తమునకు అధిపతి"
+      },
+      {
+        "word": "వరదుడు",
+        "difficulty": "easy",
+        "meaning": "వరములు ఇచ్చువాడు"
+      },
+      {
+        "word": "తపస్వి",
+        "difficulty": "easy",
+        "meaning": "తపస్సు చేయువాడు"
+      },
+      {
+        "word": "త్రినేత్రుడు",
+        "difficulty": "easy",
+        "meaning": "మూడు కన్నులు కలవాడు"
+      },
+      {
+        "word": "స్థాణువు",
+        "difficulty": "medium",
+        "meaning": "చలనము లేక అంతటా వ్యాపించినవాడు"
+      },
+      {
+        "word": "ప్రవరుడు",
+        "difficulty": "medium",
+        "meaning": "సర్వశ్రేష్ఠుడు"
+      },
+      {
+        "word": "అభివాద్యుడు",
+        "difficulty": "medium",
+        "meaning": "నమస్కరింపదగినవాడు"
+      },
+      {
+        "word": "మహారూపుడు",
+        "difficulty": "medium",
+        "meaning": "గొప్ప ఆకారము కలవాడు"
+      },
+      {
+        "word": "సర్వాత్మ",
+        "difficulty": "difficult",
+        "meaning": "సమస్త ఆత్మలు తానే అయినవాడు"
+      },
+      {
+        "word": "అర్దనుడు",
+        "difficulty": "difficult",
+        "meaning": "భక్తులను తనలో ఐక్యం చేసుకొనువాడు"
+      },
+      {
+        "word": "అక్షుడు",
+        "difficulty": "difficult",
+        "meaning": "సృష్టిచక్రమునకు ఇరుసు వంటివాడు"
+      },
+      {
+        "word": "రథయోగి",
+        "difficulty": "difficult",
+        "meaning": "రథమును కూర్చువాడు"
+      },
+      {
+        "word": "శ్వేతపింగళుడు",
+        "difficulty": "difficult",
+        "meaning": "శరీరంలో సగం తెలుపు, సగం ఎరుపు రంగు కలవాడు (అర్ధనారీశ్వర రూపం)"
+      }
+    ]
+  },
+  {
+    "id": "lalita-sahasranamam",
+    "title": "శ్రీ లలితా సహస్రనామం",
+    "status": "soon",
+    "draft_entries": [
+      {
+        "word": "మూలాధారైక నిలయ",
+        "difficulty": "difficult",
+        "meaning": "మూలాధార చక్రమే నివాసముగా గలది"
+      },
+      {
+        "word": "సహస్రారాంబుజారూఢ",
+        "difficulty": "difficult",
+        "meaning": "వెయ్యి రేకుల పద్మమును అధిష్ఠించినది"
+      },
+      {
+        "word": "సుధాసారాభివర్షిణి",
+        "difficulty": "difficult",
+        "meaning": "అమృతధారను కురిపించునది"
+      }
+    ]
+  }
+]
