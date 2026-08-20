@@ -34,9 +34,9 @@ const root = document.getElementById('app');
 // i18n.js's STRINGS table. Keyed by language rather than an en/else
 // ternary so adding a language is a new map entry, not a new branch.
 const JAPAM_NAMES_BY_LANG = {
-  te: [{ word: 'శ్రీరామ', label: 'శ్రీరామ' }, { word: 'గోవింద', label: 'గోవింద' }],
-  en: [{ word: 'Sri Rama', label: 'Sri Rama' }, { word: 'Govinda', label: 'Govinda' }],
-  kn: [{ word: 'ಶ್ರೀರಾಮ', label: 'ಶ್ರೀರಾಮ' }, { word: 'ಗೋವಿಂದ', label: 'ಗೋವಿಂದ' }],
+  te: [{ word: 'శ్రీరామ్', label: 'శ్రీరామ్' }, { word: 'సాయిరామ్', label: 'సాయిరామ్' }],
+  en: [{ word: 'Shriram', label: 'Shriram' }, { word: 'Sairam', label: 'Sairam' }],
+  kn: [{ word: 'ಶ್ರೀರಾಮ್', label: 'ಶ್ರೀರಾಮ್' }, { word: 'ಸಾಯಿರಾಮ್', label: 'ಸಾಯಿರಾಮ್' }],
 };
 function japamNames() {
   return JAPAM_NAMES_BY_LANG[getLang()] || JAPAM_NAMES_BY_LANG[DEFAULT_LANGUAGE];
@@ -1575,6 +1575,19 @@ function wireRecordButton(slot, word) {
   render();
 }
 
+// A custom-typed name is worth keeping the moment someone submits it,
+// not only once they finish a full trace repetition - most players try
+// a name once or twice and move on, and onJapamSuccess below only ever
+// fires for a *completed* trace, so relying on that alone would quietly
+// drop every custom name that was typed but never fully traced.
+// session_type: 'custom' and count: 0 keep this out of any "japam
+// completed" totals; it's purely a record of which name was chosen.
+function recordCustomJapamChoice(word) {
+  const entry = { name_traced: word, count: 0, session_type: 'custom', language: getLang() };
+  recordJapamLocal(entry, getLang(), state.playerName);
+  if (state.playerId && syncsToBackend()) syncJapamLog(state.playerId, entry);
+}
+
 function showJapamNamePicker() {
   const screen = el(`
     <div>
@@ -1623,6 +1636,7 @@ function showJapamNamePicker() {
     // other language (English, Kannada) traces the typed text as-is
     // rather than attempting a translation this app doesn't actually have.
     const word = getLang() === 'te' && looksLikeLatin(typed) ? transliterate(typed) : typed;
+    recordCustomJapamChoice(word);
     startJapamSession({ mode: 'standalone', word, target: null, onExit: showHome });
   };
   screen.querySelector('[data-custom-start]').addEventListener('click', startCustom);
@@ -1837,7 +1851,17 @@ async function renderJapamTrace(session) {
     // the measured ink percentage - an unambiguous, purely geometric
     // signal that can't be blocked by any particular font's rendering.
     const allDotsTouched = filled.size >= dots.length;
-    if (!completed && (allDotsTouched || (totalInkPixels > 0 && revealedInkPixels / totalInkPixels >= INK_COMPLETE_THRESHOLD))) {
+    // Ink coverage alone can cross the threshold before the word's last
+    // dot is ever touched: each touch reveals a 16px disk but dots sit
+    // only 12px apart, so neighbouring reveals overlap and the *last*
+    // dot in the trace typically adds little new ink (its surroundings
+    // were already exposed by the dot before it). That let a trace read
+    // as "done" while the last letter had never actually been attempted.
+    // Dots are ordered left-to-right by stroke (see buildDotTrace), so
+    // requiring the final dot specifically closes that gap without
+    // otherwise changing how forgiving the coverage threshold is.
+    const lastDotTouched = dots.length === 0 || filled.has(dots.length - 1);
+    if (!completed && lastDotTouched && (allDotsTouched || (totalInkPixels > 0 && revealedInkPixels / totalInkPixels >= INK_COMPLETE_THRESHOLD))) {
       completed = true;
       onJapamSuccess(session);
     }
