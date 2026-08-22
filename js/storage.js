@@ -24,6 +24,8 @@ const DRAW_QUEUES_KEY = 'namanidhi.drawQueues';
 const STOTRAM_DRAW_QUEUES_KEY = 'namanidhi.stotramDrawQueues';
 const WORD_EXPOSURE_KEY = 'namanidhi.wordExposure';
 const LEGACY_MIGRATED_KEY = 'namanidhi.legacyDataMigrated';
+const GENERAL_DIFFICULTY_FILTER_KEY = 'namanidhi.generalDifficultyFilter';
+const TODAYS_PUZZLE_COMPLETION_KEY = 'namanidhi.todaysPuzzleCompletion';
 
 function playerScopedKey(baseKey, playerName) {
   return `${baseKey}.${playerName || '_default'}`;
@@ -146,6 +148,50 @@ export function recordWordExposures(words, scopeKey, playerName) {
   for (const word of words) scoped[word] = (scoped[word] || 0) + 1;
   store[scopeKey] = scoped;
   localStorage.setItem(playerScopedKey(WORD_EXPOSURE_KEY, playerName), JSON.stringify(store));
+}
+
+// Which difficulty tiers (see grid.js's DIFFICULTIES) the Puranas/general
+// pool draws from - defaults to all three (today's always-mixed behavior)
+// until a player explicitly narrows it via the checkboxes on that mode's
+// card. Scoped per player, not per language, since "I only want Diamond"
+// is a preference about the player, not the script they're reading in.
+export function getGeneralDifficultyFilter(playerName) {
+  try {
+    const list = JSON.parse(localStorage.getItem(playerScopedKey(GENERAL_DIFFICULTY_FILTER_KEY, playerName)) || '[]');
+    return Array.isArray(list) && list.length ? list : ['easy', 'medium', 'difficult'];
+  } catch {
+    return ['easy', 'medium', 'difficult'];
+  }
+}
+
+export function setGeneralDifficultyFilter(tiers, playerName) {
+  localStorage.setItem(playerScopedKey(GENERAL_DIFFICULTY_FILTER_KEY, playerName), JSON.stringify(tiers));
+}
+
+// Marks Today's Puzzle as already played for this player+language+day, so
+// reopening it later the same day shows the result they already got
+// instead of handing them a second, fresh attempt at what's meant to be
+// one shared daily puzzle. Scoped per player like the rest of this file -
+// a guest who plays before naming themselves is scoped under the shared
+// '_default' bucket (see playerScopedKey), same as every other guest-safe
+// key here; if they later attach a name and reload the same day, they get
+// a fresh attempt under their own name - an accepted, rare edge case
+// rather than something worth a device-wide (cross-player) lock.
+function todaysPuzzleCompletionKey(lang, playerName) {
+  const base = lang === 'te' ? TODAYS_PUZZLE_COMPLETION_KEY : `${TODAYS_PUZZLE_COMPLETION_KEY}.${lang}`;
+  return playerScopedKey(base, playerName);
+}
+
+export function getTodaysPuzzleCompletion(lang, playerName) {
+  try {
+    return JSON.parse(localStorage.getItem(todaysPuzzleCompletionKey(lang, playerName)) || 'null');
+  } catch {
+    return null;
+  }
+}
+
+export function setTodaysPuzzleCompletion(lang, playerName, completion) {
+  localStorage.setItem(todaysPuzzleCompletionKey(lang, playerName), JSON.stringify(completion));
 }
 
 function readLog(key) {

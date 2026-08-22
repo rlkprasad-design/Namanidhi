@@ -106,6 +106,7 @@ const STRINGS = {
   chooseSubModePrompt: { te: 'ఏ పజిల్ ఆడాలనుకుంటున్నారు?', en: 'Which puzzle would you like to play?', kn: 'ಯಾವ ಪಜಲ್ ಆಡಬಯಸುತ್ತೀರಿ?' },
   generalModeTitle: { te: 'పురాణాలు', en: 'Puranas', kn: 'ಪುರಾಣಗಳು' },
   generalModeSub: { te: 'అన్ని నామాల నుండి కలగలిపిన పజిల్', en: 'A mixed puzzle drawn from all names', kn: 'ಎಲ್ಲಾ ಹೆಸರುಗಳಿಂದ ಆಯ್ದ ಮಿಶ್ರ ಪಜಲ್' },
+  generalDifficultyLabel: { te: 'స్థాయి:', en: 'Level:', kn: 'ಹಂತ:' },
   stotraParikshaTitle: { te: 'స్తోత్ర పరీక్ష', en: 'Stotra Pariksha', kn: 'ಸ್ತೋತ್ರ ಪರೀಕ್ಷೆ' },
   stotraParikshaSub: { te: 'మీ అవగాహనను పరీక్షించుకోండి', en: 'Test how well you know a stotram', kn: 'ಒಂದು ಸ್ತೋತ್ರ ನಿಮಗೆ ಎಷ್ಟು ಗೊತ್ತಿದೆ ಎಂದು ಪರೀಕ್ಷಿಸಿಕೊಳ್ಳಿ' },
   saiSatcharitraTitle: { te: 'శ్రీ సాయి సచ్చరిత్ర', en: 'Sri Sai Satcharitra', kn: 'ಶ್ರೀ ಸಾಯಿ ಸಚ್ಚರಿತ್ರೆ' },
@@ -125,6 +126,11 @@ const STRINGS = {
     kn: 'ಚಿಕ್ಕ ಪಜಲ್ - ಪ್ರತಿದಿನ ಹೊಸದು, ನಿಮ್ಮ ಫಲಿತಾಂಶ ಹಂಚಿಕೊಳ್ಳಿ',
   },
   todaysPuzzleResultTitle: { te: 'నేటి ఫలితం', en: "Today's result", kn: 'ಇಂದಿನ ಫಲಿತಾಂಶ' },
+  todaysPuzzleAlreadyPlayedNote: {
+    te: 'మీరు ఈరోజు నేటి పజిల్ ఇప్పటికే ఆడారు - మీ ఫలితం ఇది. రేపు మళ్ళీ రండి!',
+    en: "You've already played today's puzzle - here's your result. Come back tomorrow!",
+    kn: 'ನೀವು ಇಂದಿನ ಪಜಲ್ ಈಗಾಗಲೇ ಆಡಿದ್ದೀರಿ - ಇದು ನಿಮ್ಮ ಫಲಿತಾಂಶ. ನಾಳೆ ಮತ್ತೆ ಬನ್ನಿ!',
+  },
   todaysPuzzleFoundLine: {
     te: (found, total) => `${total}లో ${found} పేర్లు కనుగొన్నారు`,
     en: (found, total) => `You found ${found} of ${total} names`,

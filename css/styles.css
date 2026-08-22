@@ -313,6 +313,8 @@ h1, h2, h3, .display {
   gap: 20px;
 }
 .mode-btn {
+  display: block;
+  width: 100%;
   padding: 32px 20px;
   border-radius: 24px;
   border: 3px solid var(--gold);
@@ -325,6 +327,31 @@ h1, h2, h3, .display {
 .mode-btn .display { font-size: 1.6rem; margin-bottom: 6px; color: var(--gold-light); }
 .mode-btn .sub { color: var(--cream); opacity: 0.85; }
 .mode-btn.new { box-shadow: 0 0 0 6px rgba(201, 150, 46, 0.22), 0 12px 30px rgba(0, 0, 0, 0.35); }
+.difficulty-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(240, 210, 139, 0.25);
+  font-size: 0.85rem;
+  cursor: default;
+}
+.difficulty-filter-label { color: var(--gold-light); font-weight: 700; }
+.difficulty-filter label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.difficulty-filter input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
 .mode-btn .new-tag {
   display: inline-block;
   background: var(--gold-light);
