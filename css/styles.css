@@ -499,6 +499,52 @@ h1, h2, h3, .display {
 .cell.found.via-hint { background: var(--gold); color: var(--deep-maroon); }
 .cell.wrong { background: var(--wrong); color: #fff; }
 
+/* A found word's letters "clap" away rather than just sitting highlighted
+   forever - see clapAwayFoundWord/celebrateGridClear in app.js. --clap-delay
+   staggers each letter of a word (or, at puzzle completion, every leftover
+   cell) so the disappearance reads as a quick ripple rather than a single
+   flat instant. .cleared is the resting end state once the animation
+   finishes - kept separate from .clearing so re-adding classes elsewhere
+   can never accidentally replay the keyframe on an already-empty cell. */
+.cell.clearing {
+  animation: cell-clap-out 0.4s ease-in forwards;
+  animation-delay: var(--clap-delay, 0s);
+}
+.cell.cleared {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes cell-clap-out {
+  0% { transform: scale(1); opacity: 1; }
+  40% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* The finishing flourish once every word AND every leftover filler letter
+   has cleared - see celebrateGridClear. Sized off --cell-font-size (same
+   reasoning as .gem-pop above) so it scales with the grid rather than a
+   fixed size that would look tiny on a big grid or oversized on a small
+   one. */
+.namaste-finale {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.4);
+  font-size: calc(var(--cell-font-size, 1.5rem) * 4);
+  opacity: 0;
+  pointer-events: none;
+  animation: namaste-in 0.6s ease-out 0.5s forwards;
+}
+@keyframes namaste-in {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  60% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cell.clearing { animation: none; opacity: 0; }
+  .namaste-finale { animation: none; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
 /* Celebratory pop of the gem just earned - rises and fades from the
    middle of the found word (see popGemFeedback in app.js). Appended to
    .grid itself (not the found .cell) and positioned with an inline
