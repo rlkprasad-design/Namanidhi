@@ -129,6 +129,71 @@ function popGemFeedback(gridEl, cellEls, cells, difficulty) {
   pop.addEventListener('animationend', () => pop.remove());
 }
 
+// A grid can legitimately have two different words share one cell (see
+// grid.js's generateGrid comment - "allowing entries to legitimately
+// cross/share a cell"), so a cell can only actually clear away once
+// EVERY placement that uses it has been found - clearing it the moment
+// the first of those words is found would blank a letter a still-unfound
+// word needs. This counts, per cell, how many placements touch it;
+// clapAwayFoundWord below counts down from that as words are found.
+function buildCellOwnerCounts(placements, gridSize) {
+  const counts = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
+  placements.forEach((p) => p.cells.forEach(([r, c]) => { counts[r][c] += 1; }));
+  return counts;
+}
+
+// Stagger between each letter of a found word "clapping" away, so the
+// disappearance reads as a quick ripple along the word rather than every
+// letter vanishing in one flat instant.
+const CLAP_STAGGER_MS = 35;
+
+function clearCell(cellEl, delayMs) {
+  if (!cellEl || cellEl.classList.contains('clearing') || cellEl.classList.contains('cleared')) return;
+  cellEl.style.setProperty('--clap-delay', `${delayMs}ms`);
+  cellEl.classList.add('clearing');
+  cellEl.addEventListener('animationend', () => {
+    cellEl.textContent = '';
+    cellEl.classList.remove('clearing');
+    cellEl.classList.add('cleared');
+  }, { once: true });
+}
+
+// Declutters a just-found word's letters (see the module doc above on
+// why a cell only clears once nothing else still needs it) - the empty
+// space left behind is the whole point, not just the animation itself.
+function clapAwayFoundWord(cellEls, placement, ownerCounts, clearedCounts) {
+  placement.cells.forEach(([r, c], i) => {
+    clearedCounts[r][c] += 1;
+    if (clearedCounts[r][c] < ownerCounts[r][c]) return;
+    clearCell(cellEls[r][c], i * CLAP_STAGGER_MS);
+  });
+}
+
+// The finishing flourish once every word - and every leftover filler/
+// noise letter - is cleared: the whole grid empties out and a namaste
+// symbol takes its place. Delays (rather than a fixed per-cell stagger,
+// which at 784 cells for the largest grid would take half a minute) are
+// small and random so a grid of any size finishes clearing in well under
+// a second regardless of how many cells it has.
+const GRID_CLEAR_MAX_DELAY_MS = 300;
+// How long the "Continue" button waits before appearing once every word
+// is found, so the grid-clear animation (see celebrateGridClear) and the
+// namaste symbol actually get seen instead of being instantly covered by
+// the next screen's controls.
+const GRID_CLEAR_SETTLE_MS = 700;
+
+function celebrateGridClear(gridEl, cellEls, gridSize) {
+  for (let r = 0; r < gridSize; r++) {
+    for (let c = 0; c < gridSize; c++) {
+      clearCell(cellEls[r][c], Math.random() * GRID_CLEAR_MAX_DELAY_MS);
+    }
+  }
+  const namaste = document.createElement('div');
+  namaste.className = 'namaste-finale';
+  namaste.textContent = '🙏';
+  gridEl.appendChild(namaste);
+}
+
 // One-tap "this word/meaning looks off" report from a hint row - see
 // wireFlagButtons. Only shown when there's a backend to actually record
 // it in (see syncsToBackend's callers below); flagging into nothing would
@@ -691,6 +756,8 @@ function renderTodaysPuzzleGame(session) {
     }
     cellEls.push(row);
   }
+  const cellOwnerCounts = buildCellOwnerCounts(session.placements, gridSize);
+  const cellClearedCounts = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
 
   function renderHints() {
     hintsEl.innerHTML = '';
@@ -738,6 +805,7 @@ function renderTodaysPuzzleGame(session) {
       if (viaHint) cellEls[r][c].classList.add('via-hint');
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
+    clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
     renderHints();
     checkComplete();
   }
@@ -749,10 +817,13 @@ function renderTodaysPuzzleGame(session) {
 
   function checkComplete() {
     if (!session.placements.every((p) => p.found)) return;
+    celebrateGridClear(gridEl, cellEls, gridSize);
     toolbarEl.innerHTML = '';
-    const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
-    btn.addEventListener('click', () => showTodaysPuzzleResult(session, Date.now() - startTime));
-    toolbarEl.appendChild(btn);
+    setTimeout(() => {
+      const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
+      btn.addEventListener('click', () => showTodaysPuzzleResult(session, Date.now() - startTime));
+      toolbarEl.appendChild(btn);
+    }, GRID_CLEAR_SETTLE_MS);
   }
 
   attachTracer(gridEl, {
@@ -1027,6 +1098,8 @@ function renderGame(session) {
     }
     cellEls.push(row);
   }
+  const cellOwnerCounts = buildCellOwnerCounts(session.placements, gridSize);
+  const cellClearedCounts = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
 
   function renderHints() {
     hintsEl.innerHTML = '';
@@ -1081,6 +1154,7 @@ function renderGame(session) {
       if (viaHint) cellEls[r][c].classList.add('via-hint');
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
+    clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
     renderHints();
     checkLevelComplete();
   }
@@ -1095,10 +1169,13 @@ function renderGame(session) {
   function checkLevelComplete() {
     if (!session.placements.every((p) => p.found)) return;
     recordLevelProgress(session);
+    celebrateGridClear(gridEl, cellEls, gridSize);
     toolbarEl.innerHTML = '';
-    const continueBtn = el(`<button type="button" class="btn btn-primary" data-level-continue>${t('continueLevelBtn')}</button>`);
-    continueBtn.addEventListener('click', () => showLevelComplete(level));
-    toolbarEl.appendChild(continueBtn);
+    setTimeout(() => {
+      const continueBtn = el(`<button type="button" class="btn btn-primary" data-level-continue>${t('continueLevelBtn')}</button>`);
+      continueBtn.addEventListener('click', () => showLevelComplete(level));
+      toolbarEl.appendChild(continueBtn);
+    }, GRID_CLEAR_SETTLE_MS);
   }
 
   attachTracer(gridEl, {
@@ -1452,6 +1529,8 @@ function renderCuratedGame(session, kind) {
     }
     cellEls.push(row);
   }
+  const cellOwnerCounts = buildCellOwnerCounts(session.placements, gridSize);
+  const cellClearedCounts = Array.from({ length: gridSize }, () => Array(gridSize).fill(0));
 
   function renderHints() {
     hintsEl.innerHTML = '';
@@ -1501,6 +1580,7 @@ function renderCuratedGame(session, kind) {
       if (viaHint) cellEls[r][c].classList.add('via-hint');
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
+    clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
     renderHints();
     checkComplete();
   }
@@ -1513,10 +1593,13 @@ function renderCuratedGame(session, kind) {
   function checkComplete() {
     if (!session.placements.every((p) => p.found)) return;
     recordCuratedProgress(session, kind);
+    celebrateGridClear(gridEl, cellEls, gridSize);
     toolbarEl.innerHTML = '';
-    const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
-    btn.addEventListener('click', () => showCuratedComplete(collection, kind));
-    toolbarEl.appendChild(btn);
+    setTimeout(() => {
+      const btn = el(`<button type="button" class="btn btn-primary" data-continue>${t('continueLevelBtn')}</button>`);
+      btn.addEventListener('click', () => showCuratedComplete(collection, kind));
+      toolbarEl.appendChild(btn);
+    }, GRID_CLEAR_SETTLE_MS);
   }
 
   attachTracer(gridEl, {
