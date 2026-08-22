@@ -18,6 +18,8 @@ import {
   getPersistedStotramDrawQueues, setPersistedStotramDrawQueues,
   getWordExposureCounts, recordWordExposures,
   migrateLegacyDataOnce,
+  getGeneralDifficultyFilter, setGeneralDifficultyFilter,
+  getTodaysPuzzleCompletion, setTodaysPuzzleCompletion,
 } from './storage.js';
 import {
   isBackendConfigured, ensurePlayer, syncPuzzleProgress, syncJapamLog,
@@ -520,15 +522,22 @@ function showHome() {
 // puzzles. This hub is the shared entry point; Likhita Japam is the only
 // other independent top-level mode from Home.
 function showNamaGuptaNidhiHub() {
+  const selectedTiers = getGeneralDifficultyFilter(state.playerName);
   const screen = el(`
     <div>
       <h2 style="text-align:center;">${t('namaGuptaNidhiTitle')}</h2>
       <p class="tagline" style="text-align:center;">${t('chooseSubModePrompt')}</p>
       <div class="mode-choice">
-        <button type="button" class="mode-btn" data-sub-mode="general">
+        <div class="mode-btn" role="button" tabindex="0" data-sub-mode="general">
           <div class="display">${t('generalModeTitle')}</div>
           <div class="sub">${t('generalModeSub')}</div>
-        </button>
+          <div class="difficulty-filter" data-difficulty-filter>
+            <span class="difficulty-filter-label">${t('generalDifficultyLabel')}</span>
+            <label><input type="checkbox" value="easy" ${selectedTiers.includes('easy') ? 'checked' : ''} /> ${t('gemEasy')}</label>
+            <label><input type="checkbox" value="medium" ${selectedTiers.includes('medium') ? 'checked' : ''} /> ${t('gemMedium')}</label>
+            <label><input type="checkbox" value="difficult" ${selectedTiers.includes('difficult') ? 'checked' : ''} /> ${t('gemDifficult')}</label>
+          </div>
+        </div>
         <button type="button" class="mode-btn" data-sub-mode="stotra-pariksha">
           <div class="display">${t('stotraParikshaTitle')}</div>
           <div class="sub">${t('stotraParikshaSub')}</div>
@@ -541,18 +550,44 @@ function showNamaGuptaNidhiHub() {
     </div>
   `);
   screen.prepend(topBar({ backAction: showHome }));
-  screen.querySelector('[data-sub-mode="general"]').addEventListener('click', startNamaGuptaNidhi);
+
+  const generalCard = screen.querySelector('[data-sub-mode="general"]');
+  const startGeneral = () => startNamaGuptaNidhi();
+  generalCard.addEventListener('click', startGeneral);
+  generalCard.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startGeneral(); }
+  });
+
+  // The filter row sits inside the (non-<button>, role="button") general
+  // card so it's reachable without a second tap, same reasoning as the
+  // Japam picker's nested record buttons (see wireRecordButton) - clicks/
+  // keystrokes on it must not also bubble up and start a puzzle.
+  const filterRow = generalCard.querySelector('[data-difficulty-filter]');
+  filterRow.addEventListener('click', (e) => e.stopPropagation());
+  filterRow.addEventListener('keydown', (e) => e.stopPropagation());
+  const filterCheckboxes = [...filterRow.querySelectorAll('input[type="checkbox"]')];
+  filterCheckboxes.forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const selected = filterCheckboxes.filter((c) => c.checked).map((c) => c.value);
+      if (selected.length === 0) { cb.checked = true; return; } // at least one tier must stay selected
+      setGeneralDifficultyFilter(selected, state.playerName);
+    });
+  });
+
   screen.querySelector('[data-sub-mode="stotra-pariksha"]').addEventListener('click', showStotramList);
   screen.querySelector('[data-sub-mode="sai-satcharitra"]').addEventListener('click', startSaiSatcharitra);
   setScreen(screen);
 }
 
 // ---------------------------------------------------------------------
-// Nama Gupta Nidhi (general): straight into a puzzle, no category or
-// difficulty picker. Every puzzle mixes entries from all content packs
-// AND all three difficulty tiers together - the hint line is the only
+// Nama Gupta Nidhi (general): straight into a puzzle, no category picker.
+// Every puzzle mixes entries from all content packs together, and - by
+// default - all three difficulty tiers too; the hint line is the only
 // clue to what each hidden word is, and to what it's worth (ముత్యం/
-// రత్నం/వజ్రం, i.e. pearl/gem/diamond).
+// రత్నం/వజ్రం, i.e. pearl/gem/diamond). A player can narrow that mix to
+// specific tiers via the checkboxes on this mode's card (see
+// showNamaGuptaNidhiHub/maskDifficultyWeights) - deliberately only here,
+// not in Stotra Pariksha or Sai Satcharitra, which stay mixed as before.
 // ---------------------------------------------------------------------
 
 // Degrees to rotate a "points right" arrow glyph so it points along
@@ -600,6 +635,15 @@ function formatElapsed(ms) {
 
 async function showTodaysPuzzle() {
   const lang = getLang();
+  // Today's Puzzle is meant to be the one shared daily challenge, not
+  // something replayable for a better score - reopening it the same day
+  // shows the result already earned instead of handing out a second,
+  // fresh attempt.
+  const completion = getTodaysPuzzleCompletion(lang, state.playerName);
+  if (completion && completion.dateStr === getTodaysDateStr()) {
+    showTodaysPuzzleReplay(completion);
+    return;
+  }
   const pool = await loadEntryPool(lang);
   const session = buildTodaysPuzzle(pool, { lang, dateStr: getTodaysDateStr(), fillerPool: fillerPool() });
   renderTodaysPuzzleGame(session);
@@ -740,12 +784,12 @@ function todaysPuzzleGemCounts(session) {
   return gemCounts;
 }
 
-function recordTodaysPuzzleProgress(session, gemCounts) {
+function recordTodaysPuzzleProgress(gemCounts, total) {
   const progress = {
     category: 'daily',
     sub_category: getTodaysDateStr(),
     level: 1,
-    entries_found: session.placements.length,
+    entries_found: total,
     pearls_found: gemCounts.easy,
     gems_found: gemCounts.medium,
     diamonds_found: gemCounts.difficult,
@@ -765,23 +809,41 @@ function shareTodaysPuzzleResult(gemLine, foundCount, total) {
   }
 }
 
+// The actual completion of a fresh run: records progress (if named) and
+// remembers it locally (see storage.js's getTodaysPuzzleCompletion) so
+// showTodaysPuzzle() won't hand out a second attempt today, then renders
+// the same result screen a replay later the same day would show.
 function showTodaysPuzzleResult(session, elapsedMs) {
   const gemCounts = todaysPuzzleGemCounts(session);
-  const foundCount = gemCounts.easy + gemCounts.medium + gemCounts.difficult;
   const total = session.placements.length;
-  const gemLine = GEM_EMOJI.easy.repeat(gemCounts.easy) + GEM_EMOJI.medium.repeat(gemCounts.medium) + GEM_EMOJI.difficult.repeat(gemCounts.difficult);
 
   // Anyone who already has a name (i.e. reached this from Home, not a
   // guest deep link) gets recorded automatically, same as every other
   // mode - no reason to make them tap an extra "save" button just
   // because this mode also happens to support guests.
+  if (state.playerName) recordTodaysPuzzleProgress(gemCounts, total);
+  setTodaysPuzzleCompletion(getLang(), state.playerName, { dateStr: getTodaysDateStr(), gemCounts, total, elapsedMs });
+
+  renderTodaysPuzzleResultScreen(gemCounts, total, elapsedMs, { isReplay: false });
+}
+
+// Reopening Today's Puzzle after already finishing it today - shows
+// exactly what showTodaysPuzzleResult showed the first time, without
+// recording progress again (that already happened on the real run).
+function showTodaysPuzzleReplay(completion) {
+  renderTodaysPuzzleResultScreen(completion.gemCounts, completion.total, completion.elapsedMs, { isReplay: true });
+}
+
+function renderTodaysPuzzleResultScreen(gemCounts, total, elapsedMs, { isReplay }) {
+  const foundCount = gemCounts.easy + gemCounts.medium + gemCounts.difficult;
+  const gemLine = GEM_EMOJI.easy.repeat(gemCounts.easy) + GEM_EMOJI.medium.repeat(gemCounts.medium) + GEM_EMOJI.difficult.repeat(gemCounts.difficult);
   const alreadyNamed = !!state.playerName;
-  if (alreadyNamed) recordTodaysPuzzleProgress(session, gemCounts);
 
   const screen = el(`
     <div class="complete-screen">
       <div class="glow">🪔</div>
       <h2>${t('todaysPuzzleResultTitle')}</h2>
+      ${isReplay ? `<p class="tagline">${t('todaysPuzzleAlreadyPlayedNote')}</p>` : ''}
       <p style="font-size:1.6rem; letter-spacing:0.08em;">${gemLine || '—'}</p>
       <p>${t('todaysPuzzleFoundLine', foundCount, total)}</p>
       <p class="tagline">${t('todaysPuzzleElapsedLabel', formatElapsed(elapsedMs))}</p>
@@ -826,7 +888,7 @@ function showTodaysPuzzleResult(session, elapsedMs) {
       setPlayerName(name);
       setPlayerId(playerId);
       loadDrawQueuesForCurrentPlayer();
-      recordTodaysPuzzleProgress(session, gemCounts);
+      recordTodaysPuzzleProgress(gemCounts, total);
       saveBlock.innerHTML = `<p class="tagline">${t('todaysPuzzleSavedConfirm')}</p>`;
     });
   }
@@ -875,9 +937,40 @@ function renderGeneralSession(level, pool) {
   renderGame(session);
 }
 
+// Zeroes out any tier the player has explicitly excluded via the Puranas
+// card's difficulty checkboxes, then renormalizes what's left back to sum
+// to 1 - an excluded tier never appears, no matter what the experience
+// curve above would otherwise have picked, while tiers left selected keep
+// skewing toward each other the same way they always have (so a newer
+// player who leaves Pearl+Gem checked still leans toward Pearl).
+function maskDifficultyWeights(weights, allowedTiers) {
+  const allowed = new Set(allowedTiers);
+  const masked = {};
+  let total = 0;
+  for (const d of DIFFICULTIES) {
+    masked[d] = allowed.has(d) ? (weights[d] || 0) : 0;
+    total += masked[d];
+  }
+  // A brand-new player's experience curve assigns Difficult a weight of
+  // exactly 0 (see difficultyWeightsForExperience - it only ramps up over
+  // their first 30 puzzles), so "Diamond only" from a new player would
+  // otherwise mask everything down to a 0 total. Falling back to the
+  // *unmasked* weights here would silently ignore their explicit choice
+  // and hand them Pearl/Gem again; splitting evenly across just the
+  // allowed tiers instead keeps the exclusion absolute regardless of how
+  // experienced they are.
+  if (total <= 0) {
+    const even = {};
+    for (const d of DIFFICULTIES) even[d] = allowed.has(d) ? 1 / allowed.size : 0;
+    return even;
+  }
+  for (const d of DIFFICULTIES) masked[d] /= total;
+  return masked;
+}
+
 function buildSession(level, pool) {
   const puzzlesCompleted = getLocalPuzzleTotals(getLang(), state.playerName).puzzlesCompleted;
-  const weights = difficultyWeightsForExperience(puzzlesCompleted);
+  const weights = maskDifficultyWeights(difficultyWeightsForExperience(puzzlesCompleted), getGeneralDifficultyFilter(state.playerName));
   const scopeKey = generalScopeKey();
   const exposure = getWordExposureCounts(scopeKey, state.playerName);
   const { gridSize, entries } = sampleMixedEntries(pool, level, weights, puzzlesCompleted, getLang(), exposure);
