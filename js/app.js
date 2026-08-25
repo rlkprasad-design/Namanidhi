@@ -116,6 +116,17 @@ function gemBadge(difficulty) {
 // grapheme can't spill into its neighbors), which would otherwise clip
 // this animation to invisibility the moment it started rising past the
 // cell's edge.
+//
+// Delayed slightly (GEM_POP_DELAY_MS) rather than starting the instant
+// the word is found: this fires at the same moment as clapAwayFoundWord's
+// letter-clearing animation, and at its full ~10-12x-cell-size scale, the
+// gem burst was covering the grid before the clap on the actual letters
+// had any chance to register - a player reported the clap effect was
+// barely visible, "dominated by the jewel type". The clap now gets a
+// clear head start before the gem arrives, instead of both competing for
+// the same moment.
+const GEM_POP_DELAY_MS = 250;
+
 function popGemFeedback(gridEl, cellEls, cells, difficulty) {
   const [mr, mc] = cells[Math.floor(cells.length / 2)];
   const anchor = cellEls[mr]?.[mc];
@@ -125,6 +136,7 @@ function popGemFeedback(gridEl, cellEls, cells, difficulty) {
   pop.innerHTML = GEM_ICONS[difficulty] || '';
   pop.style.left = `${anchor.offsetLeft + anchor.offsetWidth / 2}px`;
   pop.style.top = `${anchor.offsetTop + anchor.offsetHeight / 2}px`;
+  pop.style.animationDelay = `${GEM_POP_DELAY_MS}ms`;
   gridEl.appendChild(pop);
   pop.addEventListener('animationend', () => pop.remove());
 }
