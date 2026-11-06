@@ -2327,6 +2327,234 @@
       "meaning": "Founder of the Dvaita philosophy",
       "difficulty": "easy",
       "source": "bhakti"
+    },
+    {
+      "word": "VIDURA NITI",
+      "meaning": "Vidura's counsel on ethics and governance to Dhritarashtra",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "SATYAKI",
+      "meaning": "Yadava warrior and kinsman of Krishna who fought for the Pandavas",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ULUKA",
+      "meaning": "Shakuni's son, Duryodhana's messenger before the war",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "BHAGADATTA",
+      "meaning": "King of Pragjyotisha who fought for the Kauravas at Kurukshetra",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "GANDIVA",
+      "meaning": "Arjuna's divine bow",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "AKSHAYAPATRA",
+      "meaning": "The inexhaustible vessel Surya gave Yudhishthira",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "DHAUMYA",
+      "meaning": "The family priest of the Pandavas",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ASHTAVAKRA",
+      "meaning": "The sage born with eight deformities who taught King Janaka",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "GHOSHAYATRA",
+      "meaning": "Duryodhana captured by Gandharvas and rescued by the Pandavas",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "MAYASABHA",
+      "meaning": "The wondrous assembly hall built by Maya at Indraprastha",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "MAYA",
+      "meaning": "The asura architect who built the Mayasabha",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KAUMODAKI",
+      "meaning": "The mace of Vishnu",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PANCHAJANYAM",
+      "meaning": "Krishna's divine conch",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "KAUSTUBHAM",
+      "meaning": "The divine jewel on Vishnu's chest",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "MAINAKA",
+      "meaning": "The mountain that offered Hanuman rest in the ocean",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "CHUDAMANI",
+      "meaning": "The hair jewel Sita gave Hanuman as a token",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "ANGULIYAKAM",
+      "meaning": "The ring Rama sent to Sita through Hanuman",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "SANJIVANI",
+      "meaning": "The life-restoring herb Hanuman brought",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "DRONAGIRI",
+      "meaning": "The mountain Hanuman carried for Sanjivani",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "KALANEMI",
+      "meaning": "The demon who tried to waylay Hanuman disguised as a sage",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "PARNASHALA",
+      "meaning": "Rama's leaf-hut at Panchavati",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "DADHIMUKHA",
+      "meaning": "Sugriva's uncle and guardian of Madhuvana",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "MADHUVANAM",
+      "meaning": "The honey grove of Sugriva that the vanaras feasted in",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "MAHENDRAGIRI",
+      "meaning": "The mountain from which Hanuman leapt over the sea",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "BHASMASURA",
+      "meaning": "The asura who turned himself to ash with Shiva's boon",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "SHANKHACHUDA",
+      "meaning": "Husband of Tulasi, slain by Shiva",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "TULASI DEVI",
+      "meaning": "The sacred basil, beloved of Vishnu",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "JADA BHARATA",
+      "meaning": "The sage-king who was reborn due to attachment to a deer",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "PRIYAVRATA",
+      "meaning": "Son of Svayambhuva Manu",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "UDUPI",
+      "meaning": "Karnataka's Krishna temple town",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "GURUVAYUR",
+      "meaning": "Kerala's famed Krishna temple",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "CHIDAMBARAM",
+      "meaning": "The Nataraja temple in Tamil Nadu",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ARUNACHALAM",
+      "meaning": "The fire-lingam shrine at Tiruvannamalai",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "SOMNATH",
+      "meaning": "The first Jyotirlinga, in Gujarat",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "SRIRANGAM",
+      "meaning": "Ranganatha's island shrine on the Kaveri",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "YADADRI",
+      "meaning": "Narasimha's hill shrine in Telangana",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "SIMHACHALAM",
+      "meaning": "Varaha Narasimha shrine near Visakhapatnam",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ANNAVARAM",
+      "meaning": "Satyanarayana Swamy's shrine",
+      "difficulty": "medium",
+      "source": "kshetram"
     }
   ]
 }

@@ -1676,7 +1676,7 @@
       "difficulty": "easy",
       "source": "purana"
     },
-   {
+    {
       "word": "లక్కఇల్లు",
       "meaning": "దుర్యోధనుడు పాండవులను చంపడానికి కట్టించిన కుట్రపూరిత గృహం",
       "difficulty": "easy",
@@ -2239,6 +2239,462 @@
       "meaning": "ద్వైతాద్వైత సిద్ధాంత స్థాపకుడు",
       "difficulty": "difficult",
       "source": "bhakti"
+    },
+    {
+      "word": "శ్రీకృష్ణరాయబారం",
+      "meaning": "శాంతి కోసం కృష్ణుడు హస్తినాపురానికి వెళ్ళి దుర్యోధనుని కోరిన ఘటన",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సంజయరాయబారం",
+      "meaning": "ధృతరాష్ట్రుని దూతగా సంజయుడు పాండవుల వద్దకు వెళ్ళిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "విదురనీతి",
+      "meaning": "ధృతరాష్ట్రునికి విదురుడు బోధించిన రాజనీతి, ధర్మోపదేశం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సనత్సుజాతీయం",
+      "meaning": "సనత్సుజాత మహర్షి ఉపదేశించిన ఆధ్యాత్మిక జ్ఞానం",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సాత్యకి",
+      "meaning": "కృష్ణుని బంధువు, పాండవుల పక్షాన పోరాడిన యాదవ వీరుడు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఉలూకుడు",
+      "meaning": "యుద్ధానికి ముందు దుర్యోధనుని సందేశం మోసుకెళ్ళిన దూత, శకుని కుమారుడు",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "భగదత్తుడు",
+      "meaning": "ప్రాగ్జ్యోతిష రాజు, కురుక్షేత్రంలో కౌరవుల పక్షాన పోరాడినవాడు",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "గాండీవం",
+      "meaning": "అర్జునుని దివ్య ధనుస్సు",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "పాశుపతాస్త్రం",
+      "meaning": "శివుడు అర్జునునికి అనుగ్రహించిన మహాస్త్రం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "కిరాతార్జునీయం",
+      "meaning": "కిరాతుని రూపంలో శివునితో అర్జునుడు పోరాడిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "అక్షయపాత్ర",
+      "meaning": "సూర్యుడు ధర్మరాజుకు ఇచ్చిన ఎన్నటికీ తరగని అన్నపాత్ర",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "యక్షప్రశ్నలు",
+      "meaning": "సరస్సు వద్ద యక్షుడు ధర్మరాజును అడిగిన ప్రశ్నలు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ధౌమ్యుడు",
+      "meaning": "పాండవుల పురోహితుడు",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "అష్టావక్రుడు",
+      "meaning": "ఎనిమిది వంకరలతో పుట్టిన మహర్షి, జనకునికి జ్ఞానబోధ చేసినవాడు",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఘోషయాత్ర",
+      "meaning": "దుర్యోధనుడు గంధర్వులకు చిక్కి పాండవులచే విడిపించబడిన ఘట్టం",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "మయసభ",
+      "meaning": "మయుడు ఇంద్రప్రస్థంలో నిర్మించిన అద్భుత సభాభవనం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "మయుడు",
+      "meaning": "అసురశిల్పి, మయసభను నిర్మించినవాడు",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఖాండవదహనం",
+      "meaning": "కృష్ణార్జునులు అగ్నికి ఖాండవవనాన్ని ఆహుతి ఇచ్చిన ఘటన",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "రాజసూయయాగం",
+      "meaning": "ధర్మరాజు చక్రవర్తిగా చేసిన మహాయజ్ఞం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "ఏకచక్రపురం",
+      "meaning": "లక్కఇంటి నుండి తప్పించుకున్న పాండవులు బకుని సంహరించిన నగరం",
+      "difficulty": "difficult",
+      "source": "mahabharata"
+    },
+    {
+      "word": "భీష్మప్రతిజ్ఞ",
+      "meaning": "శంతనుని కోసం భీష్ముడు చేసిన బ్రహ్మచర్య దీక్ష",
+      "difficulty": "easy",
+      "source": "mahabharata"
+    },
+    {
+      "word": "స్వర్గారోహణం",
+      "meaning": "పాండవుల అంతిమ యాత్ర, శునకంతో ధర్మరాజు స్వర్గం చేరిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "సుదర్శనచక్రం",
+      "meaning": "విష్ణువు, కృష్ణుని దివ్య చక్రాయుధం",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కౌమోదకి",
+      "meaning": "విష్ణువు ధరించే గద",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "పాంచజన్యం",
+      "meaning": "శ్రీకృష్ణుని దివ్య శంఖం",
+      "difficulty": "medium",
+      "source": "mahabharata"
+    },
+    {
+      "word": "కౌస్తుభం",
+      "meaning": "విష్ణువు వక్షస్థలంపై ప్రకాశించే దివ్యమణి",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "మైనాకుడు",
+      "meaning": "హనుమంతునికి సాగరంలో విశ్రాంతి ఇవ్వబోయిన పర్వతరాజు",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సముద్రలంఘనం",
+      "meaning": "హనుమంతుడు సముద్రాన్ని దాటి లంక చేరిన ఘట్టం",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "చూడామణి",
+      "meaning": "సీత హనుమంతునికి గుర్తుగా ఇచ్చిన శిరోమణి",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "అంగుళీయకం",
+      "meaning": "రాముడు హనుమంతుని ద్వారా సీతకు పంపిన ఉంగరం",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "శింశుపావృక్షం",
+      "meaning": "అశోకవనంలో హనుమంతుడు సీతను కనుగొన్న చెట్టు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "విభీషణశరణాగతి",
+      "meaning": "విభీషణుడు రాముని శరణు కోరిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "లక్ష్మణమూర్ఛ",
+      "meaning": "ఇంద్రజిత్తు శక్తి వల్ల లక్ష్మణుడు స్పృహ కోల్పోయిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "సంజీవని",
+      "meaning": "హనుమంతుడు తెచ్చిన ప్రాణదాయక దివ్యౌషధం",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "ద్రోణగిరి",
+      "meaning": "సంజీవని కోసం హనుమంతుడు మోసుకొచ్చిన పర్వతం",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "కాలనేమి",
+      "meaning": "హనుమంతుని దారి తప్పించబోయిన మాయా సాధువు రాక్షసుడు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "పుష్పకవిమానం",
+      "meaning": "రావణుడు కుబేరుని నుండి తీసుకున్న ఆకాశ రథం",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "శివధనుస్సు",
+      "meaning": "సీతాస్వయంవరంలో రాముడు విరిచిన శివుని విల్లు",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "పర్ణశాల",
+      "meaning": "పంచవటిలో రాముడు నివసించిన ఆకుల కుటీరం",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "భరతమిలాపం",
+      "meaning": "చిత్రకూటంలో భరతుడు రాముని కలిసిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "పాదుకాపట్టాభిషేకం",
+      "meaning": "రాముని పాదుకలను సింహాసనంపై ఉంచి భరతుడు పాలించిన ఘటన",
+      "difficulty": "medium",
+      "source": "ramayana"
+    },
+    {
+      "word": "శ్రీరామపట్టాభిషేకం",
+      "meaning": "అయోధ్యలో శ్రీరాముని రాజ్యాభిషేకం",
+      "difficulty": "easy",
+      "source": "ramayana"
+    },
+    {
+      "word": "సుగ్రీవపట్టాభిషేకం",
+      "meaning": "వాలివధ తర్వాత సుగ్రీవుని కిష్కింధ రాజ్యాభిషేకం",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "దధిముఖుడు",
+      "meaning": "సుగ్రీవుని మేనమామ, మధువనం కాపలాదారు",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "మధువనం",
+      "meaning": "సుగ్రీవుని మధువనాన్ని వానరులు ఆస్వాదించిన తోట",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "మహేంద్రగిరి",
+      "meaning": "హనుమంతుడు సముద్రం దాటడానికి గెంతిన పర్వతం",
+      "difficulty": "difficult",
+      "source": "ramayana"
+    },
+    {
+      "word": "రుక్మిణీకళ్యాణం",
+      "meaning": "శ్రీకృష్ణుడు రుక్మిణిని వివాహం చేసుకున్న ఘట్టం",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "పారిజాతాపహరణం",
+      "meaning": "సత్యభామ కోసం కృష్ణుడు ఇంద్రలోకం నుండి పారిజాతం తెచ్చిన ఘటన",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "కుచేలోపాఖ్యానం",
+      "meaning": "సుదాముడు అటుకులతో కృష్ణుని దర్శించిన కథ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ఉలూఖలబంధనం",
+      "meaning": "యశోద బాలకృష్ణుని రోలుకు కట్టిన ఘట్టం",
+      "difficulty": "medium",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "యమళార్జునభంగం",
+      "meaning": "రోలుతో లాగి కృష్ణుడు ఇరు మద్దిచెట్లను కూల్చిన ఘటన",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "నలకూబరమణిగ్రీవులు",
+      "meaning": "మద్దిచెట్లుగా మారి కృష్ణునిచే శాపవిమోచనం పొందిన కుబేరపుత్రులు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "బ్రహ్మమోహనం",
+      "meaning": "బాలకృష్ణుని గోపబాలకులను బ్రహ్మ దాచిన ఘట్టం",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "భస్మాసురుడు",
+      "meaning": "శివుని వరంతో తన తలపైనే చేయి పెట్టి భస్మమైన అసురుడు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "శంఖచూడుడు",
+      "meaning": "తులసిభర్త, శివునిచే సంహరించబడిన అసురుడు",
+      "difficulty": "difficult",
+      "source": "purana"
+    },
+    {
+      "word": "తులసీదేవి",
+      "meaning": "విష్ణుప్రియ, పవిత్ర తులసి మొక్క రూపం",
+      "difficulty": "easy",
+      "source": "purana"
+    },
+    {
+      "word": "జడభరతుడు",
+      "meaning": "జింకపై మమకారంతో జన్మ కోల్పోయిన మహారాజు, జ్ఞాని",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ప్రియవ్రతుడు",
+      "meaning": "స్వాయంభువ మనువు కుమారుడు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "నృగమహారాజు",
+      "meaning": "ఊసరవెల్లిగా మారి కృష్ణునిచే విముక్తి పొందిన రాజు",
+      "difficulty": "difficult",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "ధ్రువచరిత్ర",
+      "meaning": "ధ్రువుడు తపస్సుతో ధ్రువపదం పొందిన కథ",
+      "difficulty": "easy",
+      "source": "bhagavatam"
+    },
+    {
+      "word": "నరనారాయణులు",
+      "meaning": "బదరికాశ్రమంలో తపస్సు చేసిన విష్ణు స్వరూపాలు",
+      "difficulty": "medium",
+      "source": "purana"
+    },
+    {
+      "word": "శబరిమల",
+      "meaning": "అయ్యప్ప స్వామి క్షేత్రం, కేరళ",
+      "difficulty": "easy",
+      "source": "kshetram"
+    },
+    {
+      "word": "ఉడుపి",
+      "meaning": "కృష్ణ మఠం గల కర్ణాటక క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "గురువాయూర్",
+      "meaning": "కేరళలోని ప్రసిద్ధ శ్రీకృష్ణ క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "చిదంబరం",
+      "meaning": "నటరాజ స్వామి ఆలయం, తమిళనాడు",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "అరుణాచలం",
+      "meaning": "తిరువణ్ణామలై అగ్నిలింగ క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "కాంచీపురం",
+      "meaning": "మోక్షదాయక సప్తపురులలో ఒకటి, కామాక్షి క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "మధురమీనాక్షి",
+      "meaning": "మదురైలోని మీనాక్షి సుందరేశ్వరుల ఆలయం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "కేదారనాథ్",
+      "meaning": "హిమాలయాల్లోని జ్యోతిర్లింగ క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "సోమనాథ్",
+      "meaning": "గుజరాత్‌లోని మొదటి జ్యోతిర్లింగం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "ఉజ్జయిని",
+      "meaning": "మహాకాళేశ్వర జ్యోతిర్లింగ క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "బదరీనాథ్",
+      "meaning": "హిమాలయాల్లో విష్ణుమూర్తి క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "శ్రీరంగం",
+      "meaning": "కావేరి ద్వీపంలో రంగనాథుని క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "యాదాద్రి",
+      "meaning": "నరసింహస్వామి క్షేత్రం, తెలంగాణ",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "సింహాచలం",
+      "meaning": "విశాఖ సమీపంలో వరాహ నరసింహ క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
+    },
+    {
+      "word": "అన్నవరం",
+      "meaning": "సత్యనారాయణ స్వామి క్షేత్రం",
+      "difficulty": "medium",
+      "source": "kshetram"
     }
   ]
 }
