@@ -1,0 +1,218 @@
+[
+  {
+    "id": "rama-raksha",
+    "title": "ಶ್ರೀ ರಾಮ ರಕ್ಷಾ ಸ್ತೋತ್ರಂ",
+    "status": "active",
+    "gridSizeMin": 5,
+    "gridSizeMax": 9,
+    "fillerMode": "curated",
+    "about": "ಋಷಿ ಬುಧಕೌಶಿಕರಿಂದ ರಚಿತವಾದ ಈ ಸ್ತೋತ್ರ ರಕ್ಷಣೆಗಾಗಿ ರಾಮನ ನಾಮಗಳನ್ನು ಆವಾಹಿಸುತ್ತದೆ. ಇದರ ಕವಚ ಭಾಗದಲ್ಲಿ ದೇಹದ ಪ್ರತಿಯೊಂದು ಭಾಗಕ್ಕೂ ರಾಮನ ಬೇರೆ ಬೇರೆ ನಾಮವನ್ನು ಹೆಸರಿಸಲಾಗಿದೆ. ಪ್ರತಿದಿನ ಪಠಣ ಭಯವನ್ನು ಹೋಗಲಾಡಿಸಿ ಮನಶ್ಶಾಂತಿ ತರುತ್ತದೆ ಎಂಬ ನಂಬಿಕೆ ಇದೆ.",
+    "entries": [
+      {
+        "word": "ರಾಮ",
+        "difficulty": "easy",
+        "meaning": "ಇಡೀ ಸ್ತೋತ್ರದ ಕೇಂದ್ರ ನಾಮ; ಕವಚದಲ್ಲಿ ಇಡೀ ದೇಹವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಸೀತಾ",
+        "difficulty": "easy",
+        "meaning": "ರಾಮನ ಪತ್ನಿ, ಜಾನಕಿ"
+      },
+      {
+        "word": "ರಾಘವ",
+        "difficulty": "easy",
+        "meaning": "ಕವಚದಲ್ಲಿ ತಲೆಯನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ದಾಶರಥಿ",
+        "difficulty": "easy",
+        "meaning": "ಅಯೋಧ್ಯೆಯ ರಾಜನ ಮಗ"
+      },
+      {
+        "word": "ಸೀತಾಪತಿ",
+        "difficulty": "easy",
+        "meaning": "ಕವಚದಲ್ಲಿ ಕೈಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಸುಗ್ರೀವ",
+        "difficulty": "easy",
+        "meaning": "ವಾನರ ರಾಜ, ರಾಮನ ಮಿತ್ರ"
+      },
+      {
+        "word": "ಶತ್ರುಘ್ನ",
+        "difficulty": "easy",
+        "meaning": "ದಶರಥನ ನಾಲ್ಕನೇ ಮಗ, ರಾಮನ ಸಹೋದರ"
+      },
+      {
+        "word": "ಬುಧಕೌಶಿಕ",
+        "difficulty": "easy",
+        "meaning": "ಈ ಸ್ತೋತ್ರವನ್ನು ರಚಿಸಿದ ಋಷಿ"
+      },
+      {
+        "word": "ಹನುಮಂತ",
+        "difficulty": "easy",
+        "meaning": "ರಾಮಭಕ್ತ; ಸ್ತೋತ್ರದ 'ಕೀಲಕ' (ಬೀಗದ ಕೈ) ಎಂದು ಕರೆಯಲ್ಪಟ್ಟವನು"
+      },
+      {
+        "word": "ಲಕ್ಷ್ಮಣ",
+        "difficulty": "easy",
+        "meaning": "ಸುಮಿತ್ರೆಯ ಮಗ"
+      },
+      {
+        "word": "ಜಾನಕಿ",
+        "difficulty": "easy",
+        "meaning": "ಜನಕ ರಾಜನ ಮಗಳು, ಸೀತೆ"
+      },
+      {
+        "word": "ಕೌಸಲೇಯ",
+        "difficulty": "medium",
+        "meaning": "ದಶರಥನ ಮೊದಲ ರಾಣಿಯ ಮಗ; ಕವಚದಲ್ಲಿ ಕಣ್ಣುಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಜಾನಕೀವಲ್ಲಭ",
+        "difficulty": "medium",
+        "meaning": "ವೈದೇಹಿಯ ಪ್ರಿಯಕರ"
+      },
+      {
+        "word": "ರಘುನಂದನ",
+        "difficulty": "medium",
+        "meaning": "ರಘುವಂಶದ ಆನಂದ"
+      },
+      {
+        "word": "ರಣಕರ್ಕಶ",
+        "difficulty": "medium",
+        "meaning": "ಯುದ್ಧದಲ್ಲಿ ಉಗ್ರನಾದವನು"
+      },
+      {
+        "word": "ದಶರಥಾತ್ಮಜ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಹಣೆಯನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಭರತವಂದಿತ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಗಂಟಲನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ರಘೂತ್ತಮ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ತೊಡೆಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಸೇತುಕೃತ್",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಮೊಣಕಾಲುಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಮಖತ್ರಾತ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಮೂಗನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ವಿದ್ಯಾನಿಧಿ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ನಾಲಗೆಯನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ದಿವ್ಯಾಯುಧ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಭುಜಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಸುಗ್ರೀವೇಶ",
+        "difficulty": "medium",
+        "meaning": "ಕವಚದಲ್ಲಿ ಸೊಂಟವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಕೋಸಲೇಂದ್ರ",
+        "difficulty": "medium",
+        "meaning": "ಅಯೋಧ್ಯಾ ಸಾಮ್ರಾಜ್ಯದ ಒಡೆಯ"
+      },
+      {
+        "word": "ವಿಭೀಷಣ",
+        "difficulty": "medium",
+        "meaning": "ರಾವಣನ ಸಹೋದರ, ರಾಮನ ಆಶ್ರಯ ಪಡೆದ ಲಂಕಾ ರಾಜ"
+      },
+      {
+        "word": "ವಜ್ರಪಂಜರ",
+        "difficulty": "medium",
+        "meaning": "ರಾಮ ರಕ್ಷಾ ಕವಚದ ಇನ್ನೊಂದು ಹೆಸರು - ವಜ್ರದಿಂದ ಮಾಡಲ್ಪಟ್ಟದ್ದು"
+      },
+      {
+        "word": "ಅನುಷ್ಟುಪ್",
+        "difficulty": "medium",
+        "meaning": "ಈ ಸ್ತೋತ್ರ ರಚಿಸಲ್ಪಟ್ಟ ಛಂದಸ್ಸು"
+      },
+      {
+        "word": "ರಾಮಭದ್ರ",
+        "difficulty": "medium",
+        "meaning": "ಮಂಗಳಕರ, ಸೌಮ್ಯ ರಾಮ"
+      },
+      {
+        "word": "ಶತಕೋಟಿ",
+        "difficulty": "medium",
+        "meaning": "ರಾಘವನ ಕಥೆ ನೂರು ಕೋಟಿ ಶ್ಲೋಕಗಳಷ್ಟಿದೆ ಎಂಬ ಸಂಖ್ಯಾ-ನಾಮ"
+      },
+      {
+        "word": "ವಿಶ್ವಾಮಿತ್ರಪ್ರಿಯ",
+        "difficulty": "difficult",
+        "meaning": "ಗಾಧಿಪುತ್ರ ಋಷಿಯ ಪ್ರೀತಿಯ ಶಿಷ್ಯ; ಕವಚದಲ್ಲಿ ಕಿವಿಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಸೌಮಿತ್ರಿವತ್ಸಲ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಮುಖವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಭಗ್ನೇಶಕಾರ್ಮುಕ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ತೋಳುಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಜಾಮದಗ್ನ್ಯಜಿತ್",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಹೃದಯವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಖರಧ್ವಂಸಿ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಹೊಟ್ಟೆಯ ಭಾಗವನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಜಾಂಬವದಾಶ್ರಯ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಹೊಕ್ಕಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಹನುಮತ್ಪ್ರಭು",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಮೊಣಕಾಲಿನ ಕೀಲುಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ದಶಮುಖಾಂತಕ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಪಿಂಡಿಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ವಿಭೀಷಣಾಶ್ರಿದ",
+        "difficulty": "difficult",
+        "meaning": "ಕವಚದಲ್ಲಿ ಪಾದಗಳನ್ನು ರಕ್ಷಿಸುತ್ತದೆ"
+      },
+      {
+        "word": "ಅಶ್ವಮೇಧ",
+        "difficulty": "difficult",
+        "meaning": "ಫಲಶ್ರುತಿಯ ಪ್ರಕಾರ ಈ ಸ್ತೋತ್ರ ಪಠಣಕ್ಕೆ ಸಮಾನ ಪುಣ್ಯ"
+      }
+    ]
+  },
+  {
+    "id": "lakshmi-ashtottaram",
+    "title": "ಶ್ರೀ ಲಕ್ಷ್ಮೀ ಅಷ್ಟೋತ್ತರಂ",
+    "status": "soon"
+  },
+  {
+    "id": "vishnu-sahasranamam",
+    "title": "ಶ್ರೀ ವಿಷ್ಣು ಸಹಸ್ರನಾಮಂ",
+    "status": "soon"
+  }
+]
