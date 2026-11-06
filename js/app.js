@@ -181,6 +181,21 @@ function clapAwayFoundWord(cellEls, placement, ownerCounts, clearedCounts) {
   });
 }
 
+// Decoy cleanup: once a word is found, every leftover filler cell (owned by
+// no placement) that shows one of that word's letters fades too. Filler
+// cells are never part of any word, so removing them can never break an
+// unfound word; cells owned by a placement (ownerCounts > 0) are skipped.
+function clearSpentDecoys(cellEls, ownerCounts, gridSize, foundPlacement) {
+  const foundLetters = new Set(foundPlacement.letters);
+  for (let r = 0; r < gridSize; r++) {
+    for (let c = 0; c < gridSize; c++) {
+      if (ownerCounts[r][c] > 0) continue;
+      const cellEl = cellEls[r][c];
+      if (foundLetters.has(cellEl.textContent)) clearCell(cellEl, Math.random() * 250);
+    }
+  }
+}
+
 // The finishing flourish once every word - and every leftover filler/
 // noise letter - is cleared: the whole grid empties out and a namaste
 // symbol takes its place. Delays (rather than a fixed per-cell stagger,
@@ -818,6 +833,7 @@ function renderTodaysPuzzleGame(session) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkComplete();
   }
@@ -1167,6 +1183,7 @@ function renderGame(session) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkLevelComplete();
   }
@@ -1593,6 +1610,7 @@ function renderCuratedGame(session, kind) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkComplete();
   }
