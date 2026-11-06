@@ -181,6 +181,24 @@ function clapAwayFoundWord(cellEls, placement, ownerCounts, clearedCounts) {
   });
 }
 
+// Filler letters that can no longer help: once a word is found, any
+// leftover noise cell (owned by no placement) showing one of that word's
+// letters fades too, but only if no still-unfound word uses that letter.
+// Cells that belong to an unfound word are never touched (ownerCounts > 0).
+function clearSpentDecoys(cellEls, placements, ownerCounts, gridSize, foundPlacement) {
+  const lettersLeft = new Set();
+  placements.forEach((p) => { if (!p.found) p.letters.forEach((l) => lettersLeft.add(l)); });
+  const foundLetters = new Set(foundPlacement.letters);
+  for (let r = 0; r < gridSize; r++) {
+    for (let c = 0; c < gridSize; c++) {
+      if (ownerCounts[r][c] > 0) continue;
+      const cellEl = cellEls[r][c];
+      const letter = cellEl.textContent;
+      if (foundLetters.has(letter) && !lettersLeft.has(letter)) clearCell(cellEl, Math.random() * 250);
+    }
+  }
+}
+
 // The finishing flourish once every word - and every leftover filler/
 // noise letter - is cleared: the whole grid empties out and a namaste
 // symbol takes its place. Delays (rather than a fixed per-cell stagger,
@@ -818,6 +836,7 @@ function renderTodaysPuzzleGame(session) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, session.placements, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkComplete();
   }
@@ -1167,6 +1186,7 @@ function renderGame(session) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, session.placements, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkLevelComplete();
   }
@@ -1593,6 +1613,7 @@ function renderCuratedGame(session, kind) {
     });
     if (placement.earnedGem) popGemFeedback(gridEl, cellEls, placement.cells, placement.entry.difficulty);
     clapAwayFoundWord(cellEls, placement, cellOwnerCounts, cellClearedCounts);
+    clearSpentDecoys(cellEls, session.placements, cellOwnerCounts, gridSize, placement);
     renderHints();
     checkComplete();
   }
