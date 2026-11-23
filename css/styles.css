@@ -131,6 +131,16 @@ h1, h2, h3, .display {
   font-size: 0.95rem;
 }
 
+.dedication {
+  color: var(--gold-light);
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.5;
+  text-align: center;
+  margin: 6px auto 14px;
+  max-width: 34ch;
+}
+
 .stats-strip {
   display: grid;
   grid-template-columns: 1fr 1fr;
