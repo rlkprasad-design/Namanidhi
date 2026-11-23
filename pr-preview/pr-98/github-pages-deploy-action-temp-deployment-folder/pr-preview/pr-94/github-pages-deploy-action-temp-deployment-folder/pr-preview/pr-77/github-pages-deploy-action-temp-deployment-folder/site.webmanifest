@@ -1,0 +1,13 @@
+{
+  "name": "నామ నిధి",
+  "short_name": "నామ నిధి",
+  "description": "నామాల్లో దాగిన రత్నాలు — a word-search and handwriting-tracing devotional game",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#4e1219",
+  "theme_color": "#4e1219",
+  "icons": [
+    { "src": "icons/aum-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "icons/aum-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
