@@ -432,6 +432,7 @@ async function continueBoot() {
 function showIntro(onContinue) {
   const screen = el(`
     <div class="intro-screen">
+      <p class="dedication">${t('dedication')}</p>
       <h1 class="display" style="text-align:center;">${t('introTitle')}</h1>
       <p>${t('introBody1')}</p>
       <p>${t('introBody2')}</p>
@@ -541,6 +542,7 @@ function showHome() {
         <img src="icons/aum-180.png" alt="" class="home-logo" width="88" height="88" />
         <h1 class="display">${t('appTitle')}</h1>
         <p class="tagline">${t('appTagline')}</p>
+        <p class="dedication">${t('dedication')}</p>
       </div>
       ${syncsToBackend() ? `
       <div class="stats-strip" data-stats hidden>

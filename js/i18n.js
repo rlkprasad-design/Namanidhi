@@ -69,6 +69,11 @@ const STRINGS = {
   continueBtn: { te: 'ప్రారంభించండి', en: 'Continue', kn: 'ಮುಂದುವರಿಸಿ' },
 
   appTitle: { te: 'నామ నిధి', en: 'Nāma Nidhi', kn: 'ನಾಮ ನಿಧಿ' },
+  dedication: {
+    te: 'భగవాన్ శ్రీ సత్యసాయి బాబా వారి పాదపద్మములకు ప్రేమపూర్వకంగా సమర్పితం',
+    en: 'Lovingly dedicated to the lotus feet of Bhagawan Sri Sathya Sai Baba',
+    kn: 'ಭಗವಾನ್ ಶ್ರೀ ಸತ್ಯಸಾಯಿ ಬಾಬಾ ಅವರ ಪಾದಕಮಲಗಳಿಗೆ ಪ್ರೀತಿಯಿಂದ ಸಮರ್ಪಿತ',
+  },
   appTagline: { te: 'నామాల్లో దాగిన రత్నాలు', en: 'Gems hidden in names', kn: 'ಹೆಸರುಗಳಲ್ಲಿ ಅಡಗಿರುವ ರತ್ನಗಳು' },
   nameGatePrompt: { te: 'ఆడటానికి మీ పేరు లేదా ముద్దుపేరు రాయండి', en: 'Enter your name or nickname to play', kn: 'ಆಡಲು ನಿಮ್ಮ ಹೆಸರು ಅಥವಾ ಅಡ್ಡಹೆಸರನ್ನು ಬರೆಯಿರಿ' },
   namePlaceholder: { te: 'మీ పేరు', en: 'Your name', kn: 'ನಿಮ್ಮ ಹೆಸರು' },
